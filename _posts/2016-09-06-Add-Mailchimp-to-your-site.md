@@ -1,9 +1,11 @@
 ---
+date: 2016-09-06T00:00:00.000Z
 published: true
 title: Add Mailchimp to your site
 Description: Short step by step guide on how we add Mailchimp to our sites
-date: 2016-09-06T00:00:00.000Z
 description: Short step by step guide on how we add Mailchimp to our sites
+category:
+  - dev
 ---
 
 * Create an account

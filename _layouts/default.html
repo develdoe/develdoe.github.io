@@ -1,0 +1,13 @@
+{% include head.html %}
+
+{% include top_navigation.html %}
+
+{% include header.html %}
+
+{% include main_navigation.html %}
+
+<section id="wrapper"  class="{% if page.profile %}home{% endif %}">
+{{ content }}
+</section>
+
+<style>/*dev  #wrapper{background:yellow;} */</style>

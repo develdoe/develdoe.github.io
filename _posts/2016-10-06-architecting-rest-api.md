@@ -4,6 +4,7 @@ published: true
 title: Architecting REST API
 category:
   - dev
+  - node
 ---
 It is extremely important to understand a REST-based architecture, meaning how the system will look if you’re basing all of your services in the REST style. But it is equally important to know what the internal architecture of those REST services will look like before you start working.
 

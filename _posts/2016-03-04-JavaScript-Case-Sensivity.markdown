@@ -1,8 +1,10 @@
 ---
-title:  "JavaScript Case Sensitivity"
-date:   2016-03-04 10:18:00
+date: 2016-03-04T10:18:00.000Z
+title: JavaScript Case Sensitivity
 description: JavaScript and case-sensitivity.
-
+published: true
+category:
+  - js
 ---
 
 

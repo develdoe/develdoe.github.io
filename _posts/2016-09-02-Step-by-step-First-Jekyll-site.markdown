@@ -1,7 +1,12 @@
 ---
-title:  "Github page and Jekyll"
-description: This short step by step guide will show you the steps to create a jekyll site at github
-date: 2016-09-02 08:18:00
+date: 2016-09-02T08:18:00.000Z
+title: Github page and Jekyll
+description: >-
+  This short step by step guide will show you the steps to create a jekyll site
+  at github
+published: true
+category:
+  - jek
 ---
 
 * Create a new account at github

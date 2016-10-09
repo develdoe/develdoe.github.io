@@ -1,8 +1,12 @@
 ---
-title:  "Client Side JavaScript"
-date:   2016-03-02 10:18:00
-description: This article shows you how to embed JS in an HTML document and goes through some other client-side JS examples.
-
+date: 2016-03-02T10:18:00.000Z
+title: Client Side JavaScript
+description: >-
+  This article shows you how to embed JS in an HTML document and goes through
+  some other client-side JS examples.
+published: true
+category:
+  - js
 ---
 
 

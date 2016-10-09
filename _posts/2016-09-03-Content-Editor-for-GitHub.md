@@ -1,11 +1,13 @@
 ---
+date: 2016-09-03T08:18:00.000Z
 published: true
 title: Content Editor for GitHub
 description: >-
   Prose is a content editor for GitHub-hosted Jekyll sites. Together with GitHub
   Pages’ native Jekyll support, it makes editing content on a Jekyll site
   simple.
-date: 2016-09-03T08:18:00.000Z
+category:
+  - jek
 ---
 * Log on to github
 * Go to Prose.io

@@ -1,11 +1,13 @@
 ---
+date: 2016-08-31T10:18:00.000Z
 title: Planning a new project
 description: >-
   Planning is crucial in the early stages of starting a new project. Even though
   a good plan can't account for the unexpected, it can provide us with broad
   milestones.
-date: 2016-08-31T10:18:00.000Z
 published: true
+category:
+  - dev
 ---
 
 Planning is crucial in the early stages of starting a new project. Even though a good plan can't account for

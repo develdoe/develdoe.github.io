@@ -1,8 +1,11 @@
 ---
+date: 2016-09-05T09:18:00.000Z
 title: Github Pages - Custom Domain
 description: This article explains how you customize the domain name of your GitHub Page
-date: 2016-09-05T09:18:00.000Z
 published: true
+category:
+  - dev
+  - jek
 ---
 
 * Register a domain name  

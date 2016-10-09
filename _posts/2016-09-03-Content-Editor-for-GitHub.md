@@ -12,8 +12,6 @@ category:
 Prose is a content editor for GitHub, designed to be used with Jekyll. It provide you with an interface for CRUD operations.
 
 * Go to: http://Prose.io
-* Navigate to where you save your posts
-* Click "New file"
-* YAML Title, Description and so on belongs in the metadata selection
-
-**Don't forget to add the post folder to you gitignore file**
+* Authenticate on Github
+* Go to _post directory
+* Do some CRUD operation

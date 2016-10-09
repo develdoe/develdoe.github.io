@@ -4,7 +4,6 @@ published: true
 title: API Design
 category:
   - dev
-  - node
 ---
 ## Great API's
 Years of experience of dealing with different kinds of APIs have left the developer community with a pretty good sense of the need-to-have features of any good API. 

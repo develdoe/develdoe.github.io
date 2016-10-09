@@ -9,6 +9,8 @@ description: >-
 category:
   - jek
 ---
+Prose is a content editor for GitHub, designed to be used with Jekyll. It provide you with an interface for CRUD operations.
+
 * Log on to github
 * Go to Prose.io
 * Navigate to where you save your posts

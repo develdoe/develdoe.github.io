@@ -108,7 +108,8 @@ The current iteration of the pattern removed the relationship between the model 
 
 This final images shows you the final architecture for your REST API:
 
-![rest]({{site.baseurl}}/_drafts/rest.png)
+![rest.png]({{site.baseurl}}/img/posts/rest.png)
+
 
 **Steps 5 and 6 have been added to our architecture.** 
 
@@ -120,7 +121,8 @@ With our RESTful API, the representations are strictly related to the resources 
 
 The diagram in below might not have changed a lot, but the change in the view box into a view layer represents the generalization of that code, which initially implied that there would be one specific view code for every resource.
 
-![rest2.png]({{site.baseurl}}/_drafts/rest2.png)
+![rest2.png]({{site.baseurl}}/img/posts/rest2.png)
+
 
 ### Alternatives to MVC
 
@@ -138,11 +140,13 @@ Let’s look at an example. Think of a user reading a blog post and the related 
 
 With MVC, the request is done to the BlogPosts controller, since that is the main resource being requested; afterward, that controller loads the proper blog post model and using that model’s ID, it loads the related comments models. Right there, there is an unwanted coupling between the BlogPosts controller and the comments model. You can see this in the diagram in bolow.
 
-![HMVCproblem.png]({{site.baseurl}}/_drafts/HMVCproblem.png)
+![HMVCproblem.png]({{site.baseurl}}/img/posts/HMVCproblem.png)
+
 
 Figure above shows the coupling that you need to get rid of. So let’s look at what this would look like using HMVC:
 
-![HMVCsolution.png]({{site.baseurl}}/_drafts/HMVCsolution.png)
+![HMVCsolution.png]({{site.baseurl}}/img/posts/HMVCsolution.png)
+
 
 This architecture it is cleaner and easier to extend. Now in step 3, you’re sending a request to an entirely new MVC component, one in charge of dealing with comments. That component will in turn interact with the corresponding model and with the generic view layer to return the representation of the comments. The representation is received by the BlogPost controller, which attaches it to the data obtained from the BlogPost model and sends everything back into the view layer.
 
@@ -210,7 +214,7 @@ With this idea, you can abstract further code from the controllers just by movin
 
 Let’s take a look at the final architecture of our API:
 
-![finalArchREST.png]({{site.baseurl}}/_drafts/finalArchREST.png)
+
 
 
 ## Summary

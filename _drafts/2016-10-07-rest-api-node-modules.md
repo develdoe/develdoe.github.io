@@ -238,7 +238,7 @@ To finalize the process, just enter the folder and install the dependencies; thi
 
 Let’s now take a look at what it takes to set up a route in Express.js:
 
-```
+```javascript
 //...
 var app = express()
 //...
@@ -251,7 +251,7 @@ All that you need to remember when setting up a route is the following: app.VERB
 
 Take a look at the following example:
 
-```
+```javascript
 app.route('/users/:id')
    .all(checkAuthentication)
    .all(loadUSerData)
@@ -267,7 +267,7 @@ In the preceding code, there are several interesting things happening:
 
 Express provides its own flavor of named parameters, but there are other things you can do. For instance, you can use regular expressions:
 
-```
+```javascript
 router.get(/^\/commit\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
   var from = req.params[0];
   var to = req.params[1] || 'HEAD';
@@ -278,7 +278,7 @@ router.get(/^\/commit\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
 The preceding code matches both '/commit/5bc2ab' and '/commit/5bc2ab..57ba31', and you can see that getting the parameter inside the handler’s code is simple too.
 You can also set a callback function to do some processing when a specific named parameter is received:
 
-```
+```javascript
 var router = express.Router()
 
 router.param('user_id', function(req, res, next, id) {
@@ -305,7 +305,7 @@ If there is an error on the user_id callback function, then the route’s handle
 I already covered the basics for this type of function earlier, but you never saw how to use it with Express.js. You can do it in two ways: set up a global middleware or a route-specific one.
 For a global middleware:
 
-```
+```javascript
 app.use(function(req, res, next) {
    //your code here will be executed on every request
    next() //remember to call next unless you want the chain to end here.
@@ -314,7 +314,7 @@ app.use(function(req, res, next) {
 
 For a route-specific middleware, you do this:
 
-```
+```javascript
 app.use('/books', function(req, res, next){
         //this function will only be called on this path
         next() //always important to call next unless you don't want the process' flow to
@@ -324,7 +324,7 @@ continue.
 
 You can even set up a route-specific stack of middleware, just by doing this:
 
-```
+```javascript
 app.use('/books', function(req, res, next){
 //this function will only be called on this path
 next() //always important to call next unless you don't want the process' flow to continue.
@@ -339,9 +339,127 @@ reaching the actual handler
 #### Restify
 
 
-
+|||
+|:-------|---------------------------------------:|
+|Category|Request/Response handler, Routes handler, Middleware|
+|Description|Restify is a framework specifically design for building REST APIs. It borrows heavily from Express.js (specifically, versions prior to 4.0) because Express is considered the standard when it comes to building web apps.|
+|Home page URL|http://mcavage.me/node-restify/|
+|Installation| `npm install restify`|
 
 ##### Code Examples
+
+Restify borrows a lot of its features from Express, so I’ll focus on the things that it adds.
+
+Initialization is simpler than with Express. The following code is all you need to start up a server:
+
+```javascript
+var restify = require('restify');
+var server = restify.createServer({
+   name: 'MyApp',
+});
+server.listen(8080);
+```
+
+The createServer method provides some helpful options that will simplify your job in the future. Table 5-5 lists some of Restify’s options.
+
+|Option|Description|
+|:-|-:|
+|certificate|For building HTTPS servers, pass in the path to the certificate here.|
+|key|For building HTTPS servers, pass in the path to the key file here.|
+|log|Optionally, you can pass in an instance of a logger. It needs to be an instance of node-bunyan.2|
+|name|The name of the API. Used to set the server response header; by default it is “restify”.|
+|version|A default version for all routes.|
+|formatters|A group of content formatters used for content-negotiation.|
+
+In the most basic ways, routes are handled just like Express, you can either pass in the path template and the route handler, or you can pass in a regular expression and the handler.
+In a more advanced way, Restify provides some goodies that Express doesn’t. The following subsections provide some examples.
+
+##### Naming Routes
+
+You can set up names for specific routes, which will in turn, allow you to jump from one handler to others using that attribute. Let’s look at how to set up the names first:
+
+```javascript
+server.get('/foo/:id', function (req, res, next) { next('foo2');
+});
+server.get({
+    name: 'foo2',
+    path: '/foo/:id'
+}, function (req, res, next) {
+   res.send(200);
+   next();
+});
+```
+
+This code is setting up two different handlers for the same path, but Restify will only execute the first handler it finds, so the second one will never get executed unless the next statement is called with the name of the second route.
+
+Naming is also used to reference routes when rendering the response, which allows for an interesting feature, hypermedia on the response. To be honest, the solution proposed by Restify is a bit basic and it doesn’t really provide a good mechanism for automatically adding hypermedia for self-discovery, but it is more than most other frameworks do. Here is how it works:
+
+```javascript
+var restify = require("restify")
+
+var server = restify.createServer()
+server.get({
+    name: 'country-cities',
+    path: '/country/:id/cities'
+}, function(req, res, next) {
+      res.send('cities')
+})
+server.get('/country/:id', function(req, res, next) {
+  res.send({
+    name: "Uruguay",
+    cities: server.router.render('country-cities', {id: "uruguay"})
+    })
+})
+
+server.listen(3000)
+```
+
+##### Versioning Routes
+
+Restify provides support for a global version number, as you saw earlier, but it also provides the ability to have different versions on a per-route basis. And, it also provides support for the Accept-version header to pick the right route.
+
+**If the header is missing, and more than one version for the same route is available, Restify will pick the first one defined in the code.**
+
+```javascript
+function respV1(req, res, next) {
+  res.send("This is version 1.0.2")
+}
+function respV2(req, res, next) {
+  res.send("This is version 2.1.3")
+}
+var myPath = "/my/route"
+server.get({path: myPath, version: "1.0.2"},  respV1)
+server.get({path: myPath, version: "2.1.3"},  respV2)
+```
+
+Now, when hitting the path with different values for Accept-version, the information in the table below is what you get:
+
+|Version Used|Response|Description|
+|:-|-|-:|
+||This is version 1.0.2|No version was used, so by default, the server is picking the first one defined.|
+|~1|This is version 1.0.2|Version 1.x.x was selected, so that is what the server responds with.|
+|~3|`{"code": "InvalidVersion","message": "GET /my/route supports versions: 1.0.2, 2.1.3"}`|An error message is returned when an unsupported version is requested.|
+
+##### Content Negotiation
+
+Another interesting feature that Restify provides is support for content negotiation. All you need to do to implement this feature is provide the right content formatters during initialization, like this:
+
+```javascript
+restify.createServer({
+  formatters: {
+    'application/foo; q=0.9': function formatFoo(req, res, body) {
+      if (body instanceof Error)
+        return body.stack;
+      if (Buffer.isBuffer(body))
+        return body.toString('base64');
+      return util.inspect(body);
+    }
+  }
+})
+```
+
+**By default, Restify comes bundled with formatters for application/json, text/plain, and application/ octect-stream.**
+
 #### Vatican.js
 ##### Code Examples
 #### swagger-node-express

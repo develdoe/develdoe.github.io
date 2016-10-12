@@ -216,9 +216,136 @@ function getAuthor(req, reply) {
 
 
 #### Express.js
+
+|||
+|:-------|---------------------------------------:|
+|Category|Request/Response handler, Routes handler, Middleware|
+|Description|Express is a full-fledged web framework providing small and robust tools for HTTP servers, making it a great candidate for all kinds of web applications, including RESTful APIs.|
+|Home page URL|http://expressjs.com|
+|Installation| `npm install –g express-generator`|
+
+##### Code Examples
+
+Express.js is sometimes considered the de facto solution when it comes to building a web application in Node.js. That being said, it doesn’t mean Express.js should be the only choice or that it is right choice for every project.
+
+In version 4 it provides a generator. To initialize the entire project, you have to use the following line of code:
+
+`$express ./express-test`
+
+The framework generates a lot of folders and files, but in general, it’s the structure for a generic web application, one that has views, styles, JavaScript files, and other web app–related resources. This is not for us since we’re building a RESTful API. You’ll want to remove those folders (views and public, more specifically).
+
+To finalize the process, just enter the folder and install the dependencies; this will leave you with a working web application. Check the app.js file if you’re curious about what it takes to initialize the framework.
+
+Let’s now take a look at what it takes to set up a route in Express.js:
+
+```
+//...
+var app = express()
+//...
+app.get('/', function(req, res) {
+  console.log("Hello world!")
+})
+```
+
+All that you need to remember when setting up a route is the following: app.VERB(URL-TEMPLATE, HANDLER-FUNCTION). The handler function will receive three parameters: the request object, the response object, and the next function. The last parameter is only useful when you set up more than one handler for the same route and method combination, that way you can chain the methods like they are middleware.
+
+Take a look at the following example:
+
+```
+app.route('/users/:id')
+   .all(checkAuthentication)
+   .all(loadUSerData)
+   .get(returnDataHandler)
+   .put(updateUserHandler)
+```
+
+In the preceding code, there are several interesting things happening:
+
+* A named parameter is used for the ID of the user.
+* Two middleware functions are set up for every verb hitting the '/users/:id' route.
+* It’s setting up a handler for the GET method hitting the URL, and at the same time, it’s setting up a handler for when the verb is PUT—all in the same line of code.
+
+Express provides its own flavor of named parameters, but there are other things you can do. For instance, you can use regular expressions:
+
+```
+router.get(/^\/commit\/(\w+)(?:\.\.(\w+))?$/, function(req, res){
+  var from = req.params[0];
+  var to = req.params[1] || 'HEAD';
+  res.send('commit range ' + from + '..' + to);
+});
+```
+
+The preceding code matches both '/commit/5bc2ab' and '/commit/5bc2ab..57ba31', and you can see that getting the parameter inside the handler’s code is simple too.
+You can also set a callback function to do some processing when a specific named parameter is received:
+
+```
+var router = express.Router()
+
+router.param('user_id', function(req, res, next, id) {
+   loadUser(id, function(err, usr) {
+      if(err) {
+         next(new Error("There was an error loading the user's information")) //this will
+call erorr handler
+      } else {
+         req.user = usr
+         next() 
+      }
+  })
+})
+
+//then on the route definition
+
+app.get('/users/:user_id', function(req, res) {
+    //req.user is already defined and can be used
+})
+```
+
+If there is an error on the user_id callback function, then the route’s handler will never be called, because the first error handler will be called instead.
+
+I already covered the basics for this type of function earlier, but you never saw how to use it with Express.js. You can do it in two ways: set up a global middleware or a route-specific one.
+For a global middleware:
+
+```
+app.use(function(req, res, next) {
+   //your code here will be executed on every request
+   next() //remember to call next unless you want the chain to end here.
+})
+```
+
+For a route-specific middleware, you do this:
+
+```
+app.use('/books', function(req, res, next){
+        //this function will only be called on this path
+        next() //always important to call next unless you don't want the process' flow to
+continue. 
+})
+```
+
+You can even set up a route-specific stack of middleware, just by doing this:
+
+```
+app.use('/books', function(req, res, next){
+//this function will only be called on this path
+next() //always important to call next unless you don't want the process' flow to continue.
+}, function(req, res, next) {
+    //as long as you keep calling next, the framework will keep advancing in the chain until
+reaching the actual handler
+     next()
+})
+```
+
+
 #### Restify
+
+
+
+
+##### Code Examples
 #### Vatican.js
+##### Code Examples
 #### swagger-node-express
+##### Code Examples
 #### I/ODocs
 #### Halson
 #### HAL

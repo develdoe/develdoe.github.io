@@ -158,7 +158,8 @@ The Model–View–ViewModel pattern was created by Microsoft in 2005 as a way t
 
 Just like with MVC, the Model in this architecture concentrates the business logic, while the ViewModel acts as a mediator between the Model and the View, exposing the data from the first one. It also contains most of the view logic, allowing the ViewLayer to only focus on displaying information, leaving all dynamic behavior to the ViewModel.
 
-![Model–View–ViewModel.png]({{site.baseurl}}/_drafts/Model–View–ViewModel.png)
+![Model–View–ViewModel.png]({{site.baseurl}}/img/posts/Model–View–ViewModel.png)
+
 
 These days, the pattern has been adopted by others outside Microsoft, like the ZK framework in
 Java and KnockoutJS, AngularJS, Vue.js, and other frameworks in JavaScript (since MVVM is a pattern specializing in UI development, it makes sense that UI frameworks written in JavaScript are big adopters of this pattern).

@@ -66,4 +66,3 @@ Based on the resources in the table above, let’s create a new table that lists
 |/books/:id/authors||GET|Returns the author(s) of a specific book.|
 |/books/:id/reviews||GET|Returns user reviews for a specific book.|
 |
-

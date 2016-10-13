@@ -787,6 +787,42 @@ Unlike with Swagger, this documentation system is not meant to be integrated int
 
 #### Halson
 
+|||
+|:-|-:|
+|Category|Hypermedia on the response|
+|Description|Halson is a module that helps create HAL-compliant JSON objects, which you’ll then be able to use as part of the response in your API.|
+|Home page URL|http://github.com/seznam/halson|
+|Installation|`npm install halson`|
+
+##### Code Examples
+
+The API provided by this module is quite straightforward, and if you’ve read about the standard, you should have no problem figuring out how to use it. Here is the example from the readme:
+
+```javascript
+var halson = require('halson');
+var embed = halson({
+        title: "joyent / node",
+        description: "evented I/O for v8 javascript"
+    })
+    .addLink('self', '/joyent/node')
+    .addLink('author', {
+        href: '/joyent',
+        title: 'Joyent'
+    });
+var resource = halson({
+        title: "Juraj Hájovský",
+        username: "hajovsky",
+        emails: [
+             "juraj.hajovsky@example.com",
+             "hajovsky@example.com"
+        ]
+    })
+    .addLink('self', '/hajovsky')
+    .addEmbed('starred', embed);
+console.log(JSON.stringify(resource));
+```
+
+All you need to know is how to add links and what an embedded object is.
 
 
 #### HAL

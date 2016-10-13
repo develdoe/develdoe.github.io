@@ -3,6 +3,9 @@ destination: ../site
 name: Develdoe, This is my journal
 description: Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.
 
+# Switches
+fontawesome: true
+
 meta_description: "Your New Jekyll Site, Blogging about stuffs"
 
 aboutPage: false
@@ -16,7 +19,7 @@ paginate: 50
 paginate_path: "page:num"
 
 
-baseurl: /
+baseurl:
 domain_name: 'http://develdoe.com'
 google_analytics: 'UA-XXXXXXXX-X'
 disqus: true
@@ -67,6 +70,7 @@ prose:
         - LICENSE
         - README.md
         - .gitignore
+        - img
     media: 'img/posts'
     metadata:
         _posts:

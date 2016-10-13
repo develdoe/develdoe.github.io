@@ -19,7 +19,7 @@ paginate: 50
 paginate_path: "page:num"
 
 
-baseurl:
+baseurl: /
 domain_name: 'http://develdoe.com'
 google_analytics: 'UA-XXXXXXXX-X'
 disqus: true

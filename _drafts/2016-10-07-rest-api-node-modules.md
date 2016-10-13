@@ -461,7 +461,98 @@ restify.createServer({
 **By default, Restify comes bundled with formatters for application/json, text/plain, and application/ octect-stream.**
 
 #### Vatican.js
+
+|||
+|:-|-:|
+|Category|Request/Response handler, Middleware, Routes handling|
+|Description|Vatican.js is another attempt of a framework designed to create RESTful APIs. It doesn’t follow the Express/Restify path. Its focus is more on the MVP stage of the API, but it provides an interesting alternative.|
+|Home page URL|http://www.vaticanjs.info|
+|Installation|`npm install –g vatican`|
+
 ##### Code Examples
+
+After installation, Vatican.js provides a command-line script to create the project and add resources and resource handlers to it. So to get the project started:
+
+```bash
+$ vatican new test_project
+```
+
+The main file (index.js) has the following content:
+
+```javascript
+var Vatican = require("vatican")
+
+//Use all default settings
+var app = new Vatican()
+app.dbStart(function() {
+    console.log("Db connection stablished...")
+    //Start the server
+    app.start() 
+})
+```
+
+Vatican comes with MongoDB integration, so the dbStart method is actually a reference to the connection to the NoSQL storage. By default, the server is assumed to be in localhost and the database name used is vatican-project.
+
+The default port for Vatican is 8753, but just like all defaults in Vatican, it can be overwritten during the instantiation stage. These are the options that can be passed in to the constructor, as shown in the table below:
+
+|Option|Description|
+|port|Port of the HTTP server.|
+|handlers|Path to the folder where all handlers are stored. By default it’s ./handlers.|
+|db|Object with two attributes: host and dbname.|
+|cors|This is either a Boolean indicating whether CORS is supported by the API, or an object indicating each of the supported headers.|
+
+Setting up a route in Vatican is also a bit different than the others, the command-line script provides the ability to autogenerate the code for the entity/model file and the controller/handler file, which also includes basic code for the CRUD operations. To autogenerate the code:
+
+```bash
+$ vatican g Books -a title:string description:string copies:int -m newBook:post listBooks:get removeBook:delete
+```
+
+It basically means that Vatican creates both the handler file and the entity. If you check the handler’s file, you’ll notice how all the actions already have their code. That’s because Vatican was able to guess the meaning of the actions provided in the command line by using their name:
+
+* newBook: Using “new” assumes you’re creating a new instance of the resource.
+* listBooks: Using “list” assumes you want to generate a list of items.
+* removeBook: Using “remove” assumes you’re trying to remove a resource.
+
+Variations of those words are also valid, and Vatican will use them to guess the code. You can now go ahead and start the server, the endpoints will work and save information to the database.
+
+One final comment on resource generation is about routing. Vatican auto creates them for you. Inside the handler file, you’ll notice annotations in the form of the following:
+
+```javascript
+@endpoint (url: /books method: post)
+BooksHdlr.prototype.newBook = function(req, res, next) {
+var data = req.params.body
+//...maybe do validation here?
+this.model.create(data, function(err, obj) {
+    if(err) return next(err)
+    res.send(obj)
+})
+}
+```
+
+The annotation above the method’s definition is not standard JavaScript, but Vatican is able to parse it and turn it into data during boot up. That means that with Vatican there is no routes file; each route is defined above its associated method, and if you want to get a full list of routes for your system, you can use the following command line:
+
+```bash
+$ vatican list
+```
+
+**The annotations can be commented out with a single line to avoid your editor/linter from complaining about the construct; even then, Vatican.js will be able to parse it.**
+
+Finally, Vatican also fits inside the middleware category, and that’s because even though it’s not based on Connect or Express, it does support Connect-based middleware. The only difference is the method name that uses it.
+
+```
+vatican.preprocess(middlewareFunction) //generic middleware for all routes
+vatican.preprocess(middelwareFunction, ['login', 'authentication']) //middleware for two
+routes: login and authentication.
+```
+
+To set the name of a route, you can add that parameter in the annotation, like this:
+
+```javascript
+@endpoint(url: /path method: get name: login)
+```
+
+
+
 #### swagger-node-express
 ##### Code Examples
 #### I/ODocs

@@ -826,6 +826,148 @@ All you need to know is how to add links and what an embedded object is.
 
 
 #### HAL
+
+|||
+|:-|-:|
+|Category|Hypermedia on the response|
+|Description|HAL is an alternative to HALSON. It provides a simpler interface but the same underlying functionality: abstracting the HAL+JSON format and giving the developer an easy way to use it.|
+|Home page URL|https://www.npmjs.com/package/hal|
+|Installation|`npm install hal`|
+
+##### Code Examples
+
+The API of this module is simpler than the one provided by HALSON and it also provides XML encoding (remember that even though you’re not focusing on XML, it can be a possible second representation for your resources).
+
+Let’s look at a simple example:
+
+```javascript
+var hal = require('hal');
+var books = new hal.Resource({name: "Books list"}, "/books")
+var listOfBooks = [
+  new hal.Resource({id: 1, title: "Harry Potter and the Philosopher's stone", copies: 3}, "/
+books/1"),
+  new hal.Resource({id: 2, title: "Harry Potter and the Chamber of Secrets", copies: 5}, "/
+books/2"),
+  new hal.Resource({id: 3, title: "Harry Potter and the Prisoner of Azkaban", copies: 6}, "/
+books/3"),
+  new hal.Resource({id: 4, title: "Harry Potter and the Goblet of Fire", copies: 1}, "/
+books/4"),
+  new hal.Resource({id: 5, title: "Harry Potter and the Order of the Phoenix", copies: 8},
+"/books/5"),
+  new hal.Resource({id: 6, title: "Harry Potter and the Half-blood Prince", copies: 2}, "/
+books/6"),
+  new hal.Resource({id: 7, title: "Harry Potter and the Deathly Hollows", copies: 7},"/
+books/7")
+]
+books.embed('books', listOfBooks)
+console.log(JSON.stringify(books.toJSON()))
+```
+
+
 #### JSON-Gate
+
+|||
+|:-|-:|
+|Category|Request/Response validation|
+|Description|This module validates the structure and content of a JSON object against a predefined schema that follows the JSON Schema format.|
+|Home page URL|https://www.npmjs.com/package/json-gate|
+|Installation|`npm install json-gate`|
+
+##### Code Examples
+
+The usage of this module is quite simple. First, you need to define the schema against which your objects will be validated. This can be done directly with the createSchema method or (recommended) in a separate file, and then passed to the validator. After the schema has been added, you can proceed to validate as many objects as you need:
+
+```javascript
+var createSchema = require('json-gate').createSchema;
+var schema = createSchema({
+    type: 'object',
+    properties: {
+        title: {
+               type: 'string',
+               minLength: 1,
+               maxLength: 64,
+               required: true
+		}, copies: {
+               type: 'integer',
+               maximum: 20,
+               default: 1
+		}, isbn: {
+               type: 'integer',
+               required: true
+        }
+    },
+    additionalProperties: false
+});
+var invalidInput = {
+    title: "This is a valid long title for a book, it might not be the best choice!",
+    copies: "3"
+}
+try {
+   schema.validate(invalidInput);
+} catch(err) {
+    return console.log(err)
+}
+```
+
+The preceding code will output the following error:
+
+```bash
+[Error: JSON object property 'title': length is 71 when it should be at most 64]
+```
+
+There are two things to note here:
+
+* On one hand, the error message is very “human friendly.” All the error messages reported by JSON-Gate are like this, so it’s easy to understand what you did wrong.
+* On the other hand, as you probably noticed, the invalidInput object has two errors in its format; the validation stops at the first error, so correcting multiple problems might be slow because you’ll have to correct them one at a time.
+
+If you’re not into catching exceptions (and why should you in Node.js?), there is an alternative to the validate method, which is passing in a second argument—a callback function with two arguments: the error object and the original input object.
+
+
 #### TV4
+
+|||
+|:-|-:|
+|Category|Request/Response validation|
+|Description|This module provides validation against version 4 of the JSON Schema.|
+|Home page URL|https://www.npmjs.com/package/tv4|
+|Installation|`npm install tv4`|
+
+##### Code Examples
+
+The main difference between this validator and JSON-Gate is that this one is specific for version 4 of the JSON Schema draft. It also allows you to collect multiple errors during validation and to reference other schemas, so you can reuse parts of the schema in different sections.
+
+Let’s look at some examples:
+
+```javascript
+var validator = require("tv4")
+var schema ={
+    "title": "Example Schema",
+    "type": "object",
+    "properties": {
+        "firstName": {
+             "type": "string"
+        },
+        "lastName": {
+             "type": "string"
+        },
+        "age": {
+             "description": "Age in years",
+             "type": "integer",
+             "minimum": 0
+} },
+    "required": ["firstName", "lastName"]
+}
+var invalidInput = {
+    firstName: 42,
+age: "100"
+}
+var results = validator.validateMultiple(invalidInput, schema)
+console.log(results)
+```
+
+The output is much bigger than the one from JSON-Gate and it needs a bit of parsing before being able to use it, but it also provides quite a lot of information aside from the simple error message.
+
+
 ## Summary
+
+This article covered a lot of modules that will help you create the perfect API architecture. You saw at least two modules for every category on options for picking the tools for the job.

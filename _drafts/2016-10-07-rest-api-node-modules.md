@@ -680,7 +680,110 @@ app.listen("3000")
 
 #### I/ODocs
 
+|||
+|:-|-:|
+|Category|Up-to-date documentation|
+|Description|I/O Docs is a live documentation system designed for RESTful APIs. By defining the API using the JSON Schema, I/O Docs generates a web interface to try out the API.|
+|Home page URL|https://github.com/mashery/iodocs|
+|Installation|`$ git clonehttp://github.com/mashery/iodocs.git $ cd iodocs $ npm install`|
 
+##### Code Examples
+
+After installation is done, the only thing left to do to test the application is create a configuration file; there is a config.json.sample file you can use as a starting point.
+To start up the documentation server, use one of the following commands:
+
+```bash
+$ npm start       #for *nix and OSX systems
+C:\your-project-folder> npm startwin        #for Windows systems
+```
+
+After that, use your browser to go to http://localhost:3000 to start testing the documentation system. 
+
+If you want to set up your own API, there are a few things to do:
+
+1. Add your API to the list of documented APIs inside public/data/apiconfig.json like this:
+
+```javascript
+{
+"klout": {
+        "name": "Klout v2 API"
+    },
+    "egnyte": {
+        "name": "Egnyte API"
+    },
+    "usatoday": {
+        "name": "USA TODAY Census API"
+    },
+    "foursquare": {
+        "name": "Foursquare (OAuth 2.0 Auth Code)"
+}, "rdio": {
+        "name": "Rdio Beta (OAuth 2.0 Client Credentials)"
+    },
+ 	"rdio2": {
+        "name": "Rdio Beta (OAuth 2.0 Implicit Grant)"
+    },
+    "requestbin": {
+        "name": "Requestb.in"
+    },
+    "bookstore": {
+        "name": "Dummy Bookstore API"
+    }
+}
+```
+
+2. Create a new file called bookstore.json and store it inside the public/data folder. This new JSON file will contain the description of your API and the methods in it; something like this:
+
+```javascript
+{
+    "name": "Dummy Bookstore API",
+    "description": "Simple bookstore API",
+    "protocol": "rest",
+    "basePath": "http://api.mybookstore.com",
+    "publicPath": "/v1",
+    "auth": {
+        "key": {
+               "param": "key"
+} },
+    "headers": {
+        "Accept": "application/json",
+        "Foo": "bar"
+    },
+    "resources": {
+        "Books": {
+          "methods": {
+             "listBooks": {
+                "name": "List of books",
+                "path": "/books",
+                "httpMethod": "GET",
+                "description": "Returns the list of books in stock",
+                "parameters": {
+                   "sortBy": {
+                        "type": "string",
+                        "required": false,
+                        "default": "title",
+                        "description": "Sort the results by title or ISBN code"
+} }
+             },
+                "showBook": {
+                   "name": "Show book",
+                   "path": "/books/{bookId}",
+                   "httpMethod": "GET",
+                   "description": "Returns the data of one specific book",
+				   "parameters": {
+                  	"bookId": {
+                      "type": "string",
+                      "required": true,
+                      "default": "",
+                      "description": "The ID of the specific book"
+			} }
+		} }
+	} }
+}
+```
+
+3. Start up the documentation server and point your web browser to it. 
+
+Unlike with Swagger, this documentation system is not meant to be integrated into your project, so autogenerating the JSON code might be a bit more difficult.
 
 #### Halson
 #### HAL

@@ -1,6 +1,6 @@
 ---
 date: '2016-10-07 06:28 +0200'
-published: false
+published: true
 title: REST API Node Modules
 category:
   - node

@@ -28,3 +28,42 @@ The goal is to grow as a business, by not only opening new stores across the cou
 The new system lives in the cloud, with all stores connected directly to it. The bond is stronger now, since everything is done automatically and every piece of information is available to all stores. Also, this new API-based system allows for the easy development of new ways to interact with potential customers, including mobile apps and dynamic web sites.
 
 ## The Specifications
+
+Now that we know the current situation of the chain and the goal of our system, we need to start writing some hard specs. These will determine the way the system evolves and help with planning the development by giving us a better idea of the size of the project. Specifications also help us spot any design errors before we start with the implementation.
+
+**We will not spend much time on the process of writing the system’s specs, since that subject is beyond the scope of this book. We’ll just lay down the specs and note anything that might be extremely relevant, the rest will be left to your understanding of this process.**
+
+To provide everything mentioned, the system needs to have the following features:
+
+* Cross-store book search/listing capabilities.
+* Storage: This code is in charge of providing the information to all other entities, as well as talking directly to the data storage system that you choose.
+* Sales: This feature is dedicated to allow for both in-store and online sales.
+* User reviews of books: This will provide a much-needed layer of interaction between the stores and the potential clients.
+* Authentication: For store employees and for customers.
+
+The table belo describes the resources that we’ll be dealing with in this implementation:
+
+|Resource|Properties|Description|
+|:-------|----------|----------:|
+|Books|Title, Authors, ISBN Code, Stores, Genre, Description, Reviews, Price|This is the main entity; it has all the properties required to identify a book and to locate it in a specific store.|
+|Authors|Name, Description, Books, Website, Image/Avatar|This resource is highly related to a book’s resource because it lists the author of every book in a store.|
+|Stores|Name, Address, State, Phone numbers, Employees|Basic information about each store, including the address, employees, and so forth.|
+|Employees|First name, Last name, Birthdate, Address, Phone numbers, Email, HireDate, EmployeeNumber, Store|Employee information, contact data, and other internal properties that may come in handy for an admin type of user.|
+|Clients|Name, Address, Phone number, Email|Basic contact information about a client.|
+|BookSales|Date, Books, Store, Employee, Client, TotalAmount|The record of a book sale. It can be related to a store sale or an online sale.|
+|ClientReviews|Client, Book, ReviewText, Stars|The resource in which client reviews about a book is saved. The client can enter a short free-text review and a number between 0 and 5 to represent stars.|
+
+*Even though it’s not listed in the table above, all resources will have some database-related attributes, such as id, created_at, and updated_at, which you’ll use throughout the code.*
+
+Based on the resources in the table above, let’s create a new table that lists the endpoints needed for each resource. The table below helps define the functionalities that each resource will have associated to it.
+
+|Endpoint|Attributes|Method|Description|
+|:-------|----------|------|----------:|
+|/books|q: Optional search term. genre: Optional filtering by book genre. Defaults to “all”.|GET|Lists and searches all books. If the q parameter is present, it’s used as a free-text search; otherwise, the endpoint can be used to return lists of books by genre.|
+|/books||POST|Creates a new book and saves it in the database.|
+|/books/:id||GET|Returns information about a specific book.|
+|/books/:id||PUT|Updates the information on a book.|
+|/books/:id/authors||GET|Returns the author(s) of a specific book.|
+|/books/:id/reviews||GET|Returns user reviews for a specific book.|
+|
+

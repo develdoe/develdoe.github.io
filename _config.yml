@@ -21,7 +21,7 @@ paginate_path: "page:num"
 
 baseurl: /
 domain_name: 'http://develdoe.com'
-google_analytics: 'UA-XXXXXXXX-X'
+google_analytics: 
 disqus: true
 disqus_shortname: 'develdoe-com'
 

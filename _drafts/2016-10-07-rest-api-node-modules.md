@@ -701,7 +701,7 @@ After that, use your browser to go to http://localhost:3000 to start testing the
 
 If you want to set up your own API, there are a few things to do:
 
-1. Add your API to the list of documented APIs inside public/data/apiconfig.json like this:
+* Add your API to the list of documented APIs inside public/data/apiconfig.json like this:
 
 ```javascript
 {
@@ -731,7 +731,7 @@ If you want to set up your own API, there are a few things to do:
 }
 ```
 
-2. Create a new file called bookstore.json and store it inside the public/data folder. This new JSON file will contain the description of your API and the methods in it; something like this:
+* Create a new file called bookstore.json and store it inside the public/data folder. This new JSON file will contain the description of your API and the methods in it; something like this:
 
 ```javascript
 {
@@ -781,7 +781,7 @@ If you want to set up your own API, there are a few things to do:
 }
 ```
 
-3. Start up the documentation server and point your web browser to it. 
+* Start up the documentation server and point your web browser to it. 
 
 Unlike with Swagger, this documentation system is not meant to be integrated into your project, so autogenerating the JSON code might be a bit more difficult.
 

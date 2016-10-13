@@ -81,7 +81,13 @@ h2 {
 #wrapper.home {
 	max-width: 600px;
 	margin: 0 auto;
-	padding: 20px 40px 20px 40px;
+	padding: 0px 40px 20px 40px;
+}
+
+@media(max-width:414px){
+	#wrapper.home {
+		padding: 20px 40px 20px 40px;
+	}
 }
 
 .home #avatar {

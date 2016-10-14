@@ -88,3 +88,12 @@ Based on the resources in the table above, let’s create a new table that lists
 |/booksales|start_date: Filters records that were created after this date. end_date: Optional; filters records that were created before this date. store_id: Optional; filters records by store.|GET|Returns a list of sales. The results can be filtered by time range or by store.|
 |/booksales||POST|Records a new book sale.|
 |/clientreviews||POST|Saves a new client review of a book.|
+
+*Even though they’re not specified, all endpoints that deal with listing resources will accept the following attributes: page (starting at 0, the page number to return); perpage (the number of items per page to return); and a special attribute called sort, which contains the field name by which to sort the results and the order in the following format: [FIELD_NAME]_[ASC|DESC] (e.g., title_asc).*
+
+The table above gives us a pretty good idea of the size of the project. With it we’re able to estimate the amount of work that we have ahead of us.
+
+The authentication scheme will be simple. As discussed in previuos articles, we’ll use the stateless alternative by signing every request with a MAC (message authentication code). The server will re-create that code to verify that the request is actually valid. This means there will not be a signing process embedded into our system, that can be done by the client. No need to worry about that for now.
+
+**Since it’s not part of the scope of this article, the API will not handle charging for the book sales. This means that we’ll assume that the book sale was done outside of our system, and that another system will post the results into our API to keep a record of it. In a production system, this is a good way to handle this functionality inside the API itself, thus providing a complete solution.**
+

@@ -1,6 +1,6 @@
 ---
 date: 2016-03-03T10:18:00.000Z
-title: JavaScript Charset
+title: JavaScript - Charset
 description: JavaScript and charset.
 published: true
 category:

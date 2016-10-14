@@ -9,7 +9,6 @@ category:
 A literal is a data value that appears directly in a program.
 
 ```javascript
- */
 12		// The number twelve
 1.2		// The number one point two
 "Hello World"	// A string of text

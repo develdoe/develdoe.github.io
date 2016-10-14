@@ -1,7 +1,7 @@
 ---
 date: '2016-10-14 20:44 +0200'
 published: true
-title: JS - Whitespace Line breaks and Format control characters
+title: JavaScript - Whitespace Line breaks and Format control characters
 category:
   - js
 ---

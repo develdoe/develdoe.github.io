@@ -1,6 +1,6 @@
 ---
 date: 2016-03-01T10:18:00.000Z
-title: Core JavaScript
+title: 'JavaScript - Core '
 description: >-
   This article goes through the JavaScript language and shows you things like
   comments, semicolon, the unicode character set, types, values, and variables.

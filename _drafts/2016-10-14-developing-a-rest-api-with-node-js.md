@@ -126,3 +126,10 @@ BaseController.prototype.writeHAL = function(res, obj){
 
 module.exports = BaseController
 ```
+
+Every controller extends this object, gaining access to the methods shown earlier. We’ll use basic prototypical inheritance, as you’ll see in a bit when we start listing the other controllers’ code. As for this one, let’s quickly go over the methods it exposes:
+
+* **setUpActions**: This method is called upon instantiation of the controller; it is meant to add the actual routes to the HTTP server. This method is called during the initialization sequence for all controllers exported by the index.js file.
+* **addAction**: This method defines an action, which consists of the specs for that action and the actual function code. The specs are used by Swagger to create the documentation, but they’re also used by our code to set up the route; so there are bits inside the JSON spec that are also meant for the server, such as the path and method attributes.
+• RESTError: This is a simple wrapper method around all the error methods provided by Restify.1 It provides the benefit of cleaner code.
+• writeHAL: Every model defined (as you’ll see next) has a toHAL method, and the writeHAL methods take care of calling it for every model we’re trying to render. It basically centralizes the logic that deals with collections or simple objects, depending on what we’re trying to render.

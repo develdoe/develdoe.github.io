@@ -27,7 +27,7 @@ The goal is to grow as a business, by not only opening new stores across the cou
 
 The new system lives in the cloud, with all stores connected directly to it. The bond is stronger now, since everything is done automatically and every piece of information is available to all stores. Also, this new API-based system allows for the easy development of new ways to interact with potential customers, including mobile apps and dynamic web sites.
 
-## The Specifications
+### The Specifications
 
 Now that we know the current situation of the chain and the goal of our system, we need to start writing some hard specs. These will determine the way the system evolves and help with planning the development by giving us a better idea of the size of the project. Specifications also help us spot any design errors before we start with the implementation.
 
@@ -97,3 +97,17 @@ The authentication scheme will be simple. As discussed in previuos articles, we�
 
 **Since it’s not part of the scope of this article, the API will not handle charging for the book sales. This means that we’ll assume that the book sale was done outside of our system, and that another system will post the results into our API to keep a record of it. In a production system, this is a good way to handle this functionality inside the API itself, thus providing a complete solution.**
 
+#### Keeping Track of Stock per Store
+
+#### UML Diagram
+
+#### Choosing a Database Storage System
+##### Fast Integration
+##### Easy-to-Change Schemas
+##### Ability to Handle Entity Relations
+##### Seamless Integration Between Our Models and the Database Entities
+##### And the Winner Is...
+
+#### Choosing the Right Modules for the Job
+
+## Summary

@@ -1,6 +1,6 @@
 ---
 date: '2016-10-14 11:52 +0200'
-published: false
+published: true
 title: Node Hello World App
 category:
   - node

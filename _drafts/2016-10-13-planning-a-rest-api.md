@@ -65,4 +65,26 @@ Based on the resources in the table above, let’s create a new table that lists
 |/books/:id||PUT|Updates the information on a book.|
 |/books/:id/authors||GET|Returns the author(s) of a specific book.|
 |/books/:id/reviews||GET|Returns user reviews for a specific book.|
-|
+|/authors|genre: Optional; defaults to “all”. q: Optional search term.|GET|Returns a list of authors. If genre is present, it’s used to filter by the type of book published. If q is present, it’s used to do a free- text search on the author’s information.|
+|/authors||POST|Adds a new author.|
+|/authors/:id||PUT|Updates the data on a specific author.|
+|/authors/:id||GET|Returns the data on a specific author.|
+|/authors/:id/books||GET|Returns a list of books written by a specific author.|
+|/stores|state: Optional; filters the list of stores by state name.|GET|Returns the list of stores.|
+|/stores||POST|Adds a new store to the system.|
+|/stores/:id||GET|Returns the data on a specific store.|
+|/stores/:id/books|q: Optional; does a ull-text search of books within a specific store.|GET|Returns a list of books that are in stock at a specific store. If the attribute q is used, it performs a full-text search on those books.|
+|/stores/:id/employees||GET|Returns a list of the employees working at a specific store.|
+|/stores/:id/booksales||GET|Returns a list of the sales at a specific store.|
+|/stores/:id||PUT|Updates the information about a specific store.|
+|/employees||GET|Returns a full list of the employees working across all stores.|
+|/employees||POST|Adds a new employee to the system.|
+|/employees/:id||GET|Returns the data on a specific employee.|
+|/employees/:id||PUT|Updates the data on a specific employee.|
+|/clients||GET|Lists clients ordered alphabetically by name.|
+|/clients||POST|Adds a new client to the system.|
+|/clients/:id||GET|Returns the data on a specific client.|
+|/clients/:id||PUT|Updates the data on a specific client.|
+|/booksales|start_date: Filters records that were created after this date. end_date: Optional; filters records that were created before this date. store_id: Optional; filters records by store.|GET|Returns a list of sales. The results can be filtered by time range or by store.|
+|/booksales||POST|Records a new book sale.|
+|/clientreviews||POST|Saves a new client review of a book.|

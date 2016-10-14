@@ -34,4 +34,95 @@ We'll use the MVC pattern, this means we'll be having the following elements in 
 * **Models**: Holds the main logic of the API. Since in our simple case that logic is basically querying the database, these will be the models used by Mongoose. This will simplify our architecture. Also, Mongoose provides different mechanisms to add extra behaviors to our models (things like setting instance methods or post-action hooks).
 * **View**: The view will be embedded inside the model’s code in the form of a method that translates the specifics of one model into a HAL + JSON that can be returned back to the client.
 
+## Folder Structure
 
+![folder_Struct.png]({{site.baseurl}}/img/posts/folder_Struct.png)
+
+* **controllers**: This folder contains the code for our controllers. It also has an index.js file to handle exporting the contents of the rest of them. There is also a base controller here, which contains all the generic methods that all controllers should have; so every new controller can extend this and inherit said methods.
+* **lib**: This folder contains the miscellaneous code not big enough to have its own folder, but required across several different places in our project; for instance, database access, helper functions, the config files, and so forth.
+* **models**: Inside this folder are the model files. Normally when working with Mongoose, a model’s file has the schema definition, and you return the instantiation of that schema as your model. In our case, the actual definition is somewhere else, so this code handles loading that external definition, adding the extra behavior specific to each model, and then returning it.
+* **request_schemas**: Inside this folder are the JSON Schemas used to validate the different requests.
+* **schemas**: These are the JSON Schemas of the models, used for the Swagger module to define the UI for testing and for the Mongoose model’s definition. We will have to add some code to translate from the first one to the latter, since they don’t use the same format.
+* **swagger-ui**: This folder contains the contents of the Swagger UI project. We’ll need to do some minor adjustments to the index.html file to make it work as we expect it.
+
+
+## Source Code
+
+Here I’ll list the entire code for the project, including some basic description of the code if required. I’ll go folder by folder.
+
+### controllers
+
+/controllers/index.js
+```javascript
+module.exports = {
+           BookSales: require("./booksales"),
+           Stores: require("./stores"),
+           Employees: require("./employees"),
+           ClientReviews: require("./clientreviews"),
+           Clients: require("./clients"),
+           Books: require("./books"),
+           Authors: require("./authors")
+}
+```
+
+This file is used to export each controller. Using this technique lets us import the entire folder as a module: `var controllers = require("/controllers")`
+
+/controllers/basecontroller.js
+```javascript
+var
+    _ =         require("underscore"),
+    restify =   require("restify"),
+    colors =    require("colors"),
+    halson =    require("halson")
+
+function BaseController(){
+    this.actions = []
+    this.server = null
+}
+
+BaseController.prototype.setUpActions = function(app,sw){
+    this.server = app
+    _.each(this.actions, function(act){
+        var method = act['spec']['method']
+        console.log("setting up auto-doc for (", method, ") - ", act['spec']['nickname'])
+        sw['add' + method](act)
+        app[method.toLowerCase()](act['spec']['path'], act['action'])
+    })
+}
+
+BaseController.prototype.addAction = function(spec, fn){
+    var newAct = {
+        'spec': spec,
+        action: fn
+    }
+    this.actions.push(newAct)
+}
+
+BaseController.prototype.RESTError = function(type, msg){
+    if(restify[type]){
+        return new restify[type](msg.toString())
+    } else {
+        console.log("Type " + type + " of error not found".red)
+    }
+}
+
+
+// Takes care of calling the "toHAL" method on every resource before writing it
+// back to the clients
+BaseController.prototype.writeHAL = function(res, obj){
+    if(Array.isArray(obj)){
+        var newArr = []
+        _.each(obj, function(item, k){
+            item = item.toHAL()
+            newArr.push(item)
+        })
+        obj = halson (newArr)
+    } else {
+        if(obj && obj.toHAL) obj = obj.toHAL()
+        if(!obj)obj = {}
+        res.json(obj)
+    }
+}
+
+module.exports = BaseController
+```

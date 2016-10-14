@@ -21,7 +21,7 @@ paginate_path: "page:num"
 
 baseurl: /
 domain_name: 'http://develdoe.com'
-google_analytics: 
+google_analytics:
 disqus: true
 disqus_shortname: 'develdoe-com'
 
@@ -100,3 +100,5 @@ prose:
                         value: 'jek'
                       - name: 'Node'
                         value: 'node'
+                      - name: 'react'
+                        value: 'react'

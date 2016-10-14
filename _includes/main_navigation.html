@@ -4,6 +4,7 @@
     <li id=dev><i class='fa fa-tags' aria-hidden='true'></i> Development
     <li id=js><i class='fa fa-tags' aria-hidden='true'></i> Javascript
     <li id=node><i class='fa fa-tags' aria-hidden='true'></i> Node
+        <li id=node><i class='fa fa-tags' aria-hidden='true'></i> React
     <li id=jek ><i class='fa fa-tags' aria-hidden='true'></i> Jekyll
 </ul>
 </section>
@@ -18,7 +19,7 @@
  #main-navigation ul li{
      float: left;
      list-style: none;
-     width:25%;
+     width:20%;
      text-align: center;
      text-transform: uppercase;
      font-size: 10px;
@@ -72,6 +73,11 @@ $(document).ready(function(){
     $('#jek').click(function(){
         $("#post-list, #post-list > li").hide()
         $(".jek").show()
+        $("#post-list").delay(300).fadeIn(100)
+    })
+    $('#react').click(function(){
+        $("#post-list, #post-list > li").hide()
+        $(".react").show()
         $("#post-list").delay(300).fadeIn(100)
     })
 })

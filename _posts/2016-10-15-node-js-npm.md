@@ -3,7 +3,7 @@ date: '2016-10-15 14:52 +0200'
 published: true
 title: Node.js - NPM
 category:
-  - js
+  - node
 ---
 npm is the default package manager for the JavaScript runtime environment Node.js and it comes bundle with Node.js.
 

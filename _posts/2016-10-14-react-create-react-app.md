@@ -16,9 +16,9 @@ If you’re getting started with React, use create-react-app to automate the bui
 * Autoprefixed CSS, so you don’t need -webkit or other prefixes.
 * A build script to bundle JS, CSS, and images for production, with sourcemaps.
 
-*The feature set doesn’t support advanced features such as server rendering or CSS modules. The tool is also non-configurable because it is hard to provide a cohesive experience and easy updates across a set of tools when the user can tweak anything.
+*The feature set doesn’t support advanced features such as server rendering or CSS modules. The tool is also non-configurable because it is hard to provide a cohesive experience and easy updates across a set of tools when the user can tweak anything.*
 
-You don’t have to use this. Historically it has been easy to gradually adopt React. However many people create new single-page React apps from scratch every day. We’ve heard loud and clear that this process can be error-prone and tedious, especially if this is your first JavaScript build stack. This project is an attempt to figure out a good way to start developing React apps.*
+*You don’t have to use this. Historically it has been easy to gradually adopt React. However many people create new single-page React apps from scratch every day. We’ve heard loud and clear that this process can be error-prone and tedious, especially if this is your first JavaScript build stack. This project is an attempt to figure out a good way to start developing React apps.*
 
 ## Philosophy
 

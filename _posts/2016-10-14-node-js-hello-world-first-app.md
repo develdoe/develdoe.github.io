@@ -15,7 +15,7 @@ A Node.js application consists of the following three vital components:
 We use the require directive to load the http module and store the returned HTTP instance into an http variable:
 
 ```javascript
-var http = require("http");
+const http = require("http");
 ```
 
 ## Create Server
@@ -25,19 +25,19 @@ We call createServer() method to create a server instance and then we bind it to
 Pass it a anonymous function with request and response params and write a implementation that always return "Hello World".
 
 ```javascript
-var http = require("http")
+const
+    http = require("http"),
+    hostname = '127.0.0.1',
+    port = 3000,
+    server = http.createServer(function(req,res){
+        res.statusCode = 200
+        res.setHeader('Content-Type','text/plain')
+        res.end('Hello World\n')
+    })
 
-http.createServer(function (request, response) {
-
-   // Send the HTTP header, Status: 200 and Content Type: text/plain
-   response.writeHead(200, {'Content-Type': 'text/plain'})
-   
-   // Send the response body as "Hello World"
-   response.end('Hello World\n')
-}).listen(8081)
-
-// Print server and port to the console
-console.log('Server running at http://127.0.0.1:8081/')
+server.listen(port, hostname, function(){
+    console.log('Sever running at http://'+hostname+':'+port)
+})
 ```
 
 Save the file as app.js

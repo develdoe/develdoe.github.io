@@ -52,7 +52,8 @@ Here I’ll list the entire code for the project, including some basic descripti
 
 ### controllers
 
-/controllers/index.js
+*/controllers/index.js*
+
 ```javascript
 module.exports = {
            BookSales: require("./booksales"),
@@ -67,7 +68,8 @@ module.exports = {
 
 This file is used to export each controller. Using this technique lets us import the entire folder as a module: `var controllers = require("/controllers")`
 
-/controllers/basecontroller.js
+*/controllers/basecontroller.js*
+
 ```javascript
 var
     _ =         require("underscore"),
@@ -131,5 +133,186 @@ Every controller extends this object, gaining access to the methods shown earlie
 
 * **setUpActions**: This method is called upon instantiation of the controller; it is meant to add the actual routes to the HTTP server. This method is called during the initialization sequence for all controllers exported by the index.js file.
 * **addAction**: This method defines an action, which consists of the specs for that action and the actual function code. The specs are used by Swagger to create the documentation, but they’re also used by our code to set up the route; so there are bits inside the JSON spec that are also meant for the server, such as the path and method attributes.
-• RESTError: This is a simple wrapper method around all the error methods provided by Restify.1 It provides the benefit of cleaner code.
-• writeHAL: Every model defined (as you’ll see next) has a toHAL method, and the writeHAL methods take care of calling it for every model we’re trying to render. It basically centralizes the logic that deals with collections or simple objects, depending on what we’re trying to render.
+* **RESTError**: This is a simple wrapper method around all the error methods provided by Restify. It provides the benefit of cleaner code.
+* **writeHAL**: Every model defined (as you’ll see next) has a toHAL method, and the writeHAL methods take care of calling it for every model we’re trying to render. It basically centralizes the logic that deals with collections or simple objects, depending on what we’re trying to render.
+
+
+*/controllers/books.js*
+
+```javascript
+var
+    BaseController = require("./basecontroller"),
+    _ = require("underscore"),
+    swagger = require("swagger-node-restify")
+
+function Books(){}
+
+Books.prototype = new BaseController()
+
+module.exports = function(lib){
+    var controller = new Books()
+
+    // Helper function for the POST action
+    function mergeStores(list1, list2){
+        var stores1 = {}
+        var stores2 = {}
+        _.each(list1, function(st){ if(st.store) stores1[st.store] = st.copies })
+        _.each(list2, function(st){ if(st.store) stores2[st.store] = st.copies })
+        var stores = _.extend(stores1, stores2)
+        return _.map(stores, function(v,k){ return {store: k, copies: v} })
+    }
+
+    controller.addAction({
+        'path': '/books',
+        'method': 'GET',
+        'summary': 'Returns the list of books',
+        'params': [
+                    swagger.queryParam('q','Search term','string'),
+                    swagger.queryParam('genre','Filter by genre','string')],
+        'responseClass':'Book',
+        'nickname':'getBooks'
+    }, function(req,res,next){
+        var criteria = {}
+        if(req.params.q){
+            var expr = new RegExp('.*' + req.param.q + '.*')
+            criteria.$or = [
+                {title:expr},
+                {isbn_code:expr},
+                {description:expr}
+            ]
+        }
+        if(req.params.genre){
+            criteria.genre = req.params.genre
+        }
+        lib.db.model('Book')
+            .find(criteria)
+            .populate('stores.store')
+            .exec(function(err,books){
+                if(err) return next(err)
+                controller.writeHAL(res, books)
+            })
+    })
+
+    controller.addAction({
+        'path': '/books/{id}',
+        'method': 'GET',
+        'params': [swagger.pathParam('id','The id of the book','int')],
+        'summary': 'Returns the full data of a book',
+        'nickname': 'getBook',
+    }, function(req,res,next){
+        var id = req.params.id
+        if(id){
+            lib.db.model("Book")
+                .findOne({id:id})
+                .populate('authors')
+                .populate('stores')
+                .populate('reviews')
+                .exec(function(err, book){
+                    if(err) return next(controller.RESTError('InternalServerError', err))
+                    if(!book) return next(controller.RESTError('ResourceNotFoundError', 'Book not found'))
+                    controller.writeHAL(res,book)
+                })
+
+        } else { next(controller.RESTError('InvalidArgumentError', 'Missing book id')) }
+    })
+    controller.addAction({
+        'path': '/books',
+        'method': 'POST',
+        'params': [swagger.bodyParam('book','JSON representation of the new book','string')],
+        'summary': 'Adds a new book into the collection',
+        'nickname': 'newBook'
+    }, function(res,req,next){
+        var bookData = req.body
+        if(bookData){
+            isbn = bookData.isbn_code
+            lib.db.model("Book")
+                .findOne({isbn_code:isbn})
+                .exec(function(err, bookModel){
+                    if(!bookModel) = lib.db.model("Book")(bookData)
+                    else bookModel.stores = mergeStores(bookModel.stores,bookData.stores)
+                    bookModel.save(function(err,book){
+                        if(err) return next(controller.RESTError('InternalServerError',err))
+                        controller.writeHAL(res,book)
+                    })
+                })
+        } else { next(controller.RESTError('InvalidArgumentError','Missing content of book')) }
+    })
+    controller.addAction({
+        'path': '/books/{id}/authors',
+        'method': 'GET',
+        'params': [swagger.pathParam('id','The ID of the book','int')],
+        'summary': 'Returns the list of authors of one specific book',
+        'nickname': 'getAuthors'
+    }, function(req,res,next){
+        var id = req.params.id
+        if(id){
+            lib.db.model("Book")
+                .findOne({_id:id})
+                .populate('authors')
+                .exec(function(err,book){
+                    if(err) return next(controller.RESTError('InternalServerError',err))
+                    if(!book) return next(controller.RESTError('ResourceNotFoundError','Book not found'))
+                    controller.writeHAL(res,book.authors)
+                })
+        } else { next(controller.RESTError('InvalidArgumentError', 'Missing book id')) }
+    })
+    controller.addAction({
+        'path': '/books/{id}/reviews',
+        'method':'GET',
+        'params': [ swagger.pathParam('id', 'The Id of the book','int') ],
+        'summary': 'Returns the list of reviews of one specific book',
+        'nickname': 'getBooksReviews'
+    }, function(req,res,next){
+        var id = req.params.id
+        if(id){
+            lib.db.model("Book")
+                .findOne({_id: id})
+                .populate('reviews')
+                .exec(function(err, book) {
+                    if(err) return next(controller.RESTError('InternalServerError', err))
+                    if(!book) return next(controller.RESTError('ResourceNotFoundError', 'Book not found'))
+                    controller.writeHAL(res, book.reviews)
+                })
+        } else { next(controller.RESTError('InvalidArgumentError', 'Missing book id')) }
+    })
+    controller.addAction({
+        'path': '/books/{id}',
+        'method': 'PUT',
+        'params': [
+                    swagger.pathParam('id', 'The Id of the book to update','string'),
+                    swagger.bodyParam('book', 'The data to change on the book','string')
+        ],
+        'summary': 'Updates the information of one specific book',
+        'nickname': 'updateBook'
+    }, function(req,res,next){
+        var data = req.body
+        var id = req.params.id
+        if(id) {
+            lib.db.model("Book")
+            .findOne({_id: id})
+            .exec(function(err, book) {
+                if(err) return next(controller.RESTError('InternalServerError', err))
+                if(!book) return next(controller.RESTError('ResourceNotFoundError','Book not found'))
+                book = _.extend(book, data)
+                book.save(function(err, data) {
+                    if(err) return next(controller.RESTError('InternalServerError', err))
+                    controller.writeHAL(res, data.toJSON())
+                })
+            })
+        } else { next(controller.RESTError('InvalidArgumentError', 'Invalid id received')) }
+    })
+    return controller
+}
+```
+
+The code for this controller are the basic mechanics defined for this particular project on how to declare a controller and its actions. 
+
+We also have a special case for the POST action, which checks the ISBN of a new book to see if it is in stock at another store. If an ISBN already exists, the book is merged to all relevant stores; otherwise, a new record is created.
+
+In theory, we’re creating a new function that inherits from the BaseController, which gives us the ability to add custom behavior on a specific controller. Reality is going to prove that we don’t really need such liberties, however. And we could very well do the same by instantiating the BaseController directly on every other controller file.
+
+The controller files are required during initialization of the API, and when that happens, the lib object is passed to them, like so:
+
+```javascript
+var controller = require("/controllers/books.js")(lib)
+```

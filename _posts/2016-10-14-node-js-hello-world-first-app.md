@@ -44,7 +44,7 @@ server.listen(port, hostname, function(){
 Save the file as app.js and then execute the main.js to start the server as follows:
 
 ```bash
-$ node main.js
+$ node app.js
 ```
 
 Make a request at http://127.0.0.1:8081/ in any browser.

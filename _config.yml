@@ -100,5 +100,5 @@ prose:
                         value: 'jek'
                       - name: 'Node'
                         value: 'node'
-                      - name: 'react'
+                      - name: 'React'
                         value: 'react'

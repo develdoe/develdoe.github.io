@@ -12,6 +12,7 @@ A Node.js application consists of the following three vital components:
 * **Read request and response** − The server will read the HTTP request by a client.
 
 ## Import Module
+
 We use the require directive to load the http module and store the returned HTTP instance into an http variable:
 
 ```javascript
@@ -20,9 +21,9 @@ const http = require("http");
 
 ## Create Server
 
-We call createServer() method to create a server instance and then we bind it to a  port using the listen() method. 
+We call createServer() method to create a server instance. Pass it a anonymous function with request and response params and write a implementation that always return "Hello World".
 
-Pass it a anonymous function with request and response params and write a implementation that always return "Hello World".
+Last we bind the server instans to a port using the listen() method. 
 
 ```javascript
 const
@@ -40,14 +41,10 @@ server.listen(port, hostname, function(){
 })
 ```
 
-Save the file as app.js
-
-##  Request & Response
-
-Now execute the main.js to start the server as follows:
+Save the file as app.js and then execute the main.js to start the server as follows:
 
 ```bash
 $ node main.js
 ```
 
-Make a request to http://127.0.0.1:8081/ in any browser and observe the result.
+Make a request at http://127.0.0.1:8081/ in any browser.

@@ -6,6 +6,7 @@ category:
   - node
 ---
 *This article covers the difference between blocking and non-blocking calls in Node.js. The original article can be found at https://github.com/nodejs/node/blob/master/doc/topics/blocking-vs-non-blocking.md. Here I am attempting to mimplify and clarify the article.*
+
 ## Blocking
 
 Blocking is when the execution of additional JavaScript in the Node.js process must wait until a non-JavaScript operation completes, this happens because the event loop is unable to continue running JavaScript while a blocking operation is occurring.

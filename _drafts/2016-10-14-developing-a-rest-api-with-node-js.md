@@ -324,3 +324,200 @@ Here are some other interesting bits from the code:
 * The update action is not actually using the update method from Mongoose, but instead loads the model using the extend method from the underscore, and finally calls the save method on the model. This is done for one simple reason: the update method doesn’t trigger any post hooks on the models, but the save method does, so if we wanted to add behavior to react to an update on the model, this would be the way to go about it.
 
 */controllers/stores.js*
+
+```javascript
+var
+    BaseController = require("./basecontroller"),
+    _ = require("underscore"),
+    swagger = require("swagger-node-restify")
+
+function Stores(){}
+
+Stores.prototype = new BaseController()
+
+
+module.exports = function(lib){
+
+
+    var controller = new Stores()
+
+
+    controller.addAction({
+        'path':'/stores',
+        'method':'GET',
+        'summary':'Returns the list of stores',
+        'params': [swagger.queryParam('state','Filter the list of stores by state','string')],
+        'responseClass':'Store',
+        'nickname':'getStores',
+    }, (req,res,next) => {
+        var criteria = {}
+        if(req.params.state) criteria.state = new RegExp(req.params.state, 'i')
+        lib.db.model('Store')
+            .find(criteria)
+            .exec((err,list)=>{
+                if(err) return next(controller.RESTError('InternalServerError', err))
+                controller.writeHAL(res, list)
+            })
+
+    })
+
+    controller.addAction({
+        'path': '/stores/{id}',
+        'method': 'GET',
+        'summary':'Returns the data of a store',
+        'params': [swagger.queryParam('id','The id of the store','string')],
+        'responseClass':'Store',
+        'nickname':'getStore',
+    }, (req,res,next) => {
+        var id = req.params.id
+        if(id){
+            lib.db.model('Store')
+                .findOne({_id:id})
+                .populate('employees')
+                .exec((err,data) => {
+                    if(err) return next(controller.RESTError('InternalServerError',err))
+                    if(!data) return next(controller.RESTError('ResourceNotFoundError','Store not found'))
+                    controller.writeHAL(res,data)
+                })
+        } else { next(controller.RESTError('InvalidArgumentError','Invalid id')) }
+    })
+
+    controller.addAction({
+        'path': '/stores/{id}/books',
+        'method': 'GET',
+        'summary':'Returns the list of books of a store',
+        'params': [
+            swagger.queryParam('id','The id of the store','string'),
+            swagger.queryParam('q', 'Search parameter for the books','string'),
+            swagger.queryParam('genre','Filter results by genre','string')
+        ],
+        'responseClass':'Book',
+        'nickname':'getStoreBooks',
+    }, (req,res,next) => {
+        var id = req.params.id
+        if(id){
+            var criteria = {stores:id}
+            if(req.params.q){
+                var expr = new RegExp('.*'+req.params.q+'.*','i')
+                criteria.$or = [
+                    {title:expr},
+                    {isbn_code:expr},
+                    {description:expr}
+                ]
+            }
+            if(req.params.genre) criteria.genre = req.params.genre
+            lib.db.model('Book')
+                .find(criteria)
+                .populate('authors')
+                .exec((err,data) => {
+                    if(err) return next(controller.RESTError('InternalServerError',err))
+                    controller.writeHAL(res,data)
+                })
+        } else { next(controller.RESTError('InvalidArgumentError','Invalid id'))}
+    })
+
+    controller.addAction({
+        'path':'/stores/{id}/employees',
+        'method': 'GET',
+        'summary':'Returns the list of employees working on a store',
+        'params': [swagger.queryParam('id','The id of the store','string')],
+        'responseClass':'Employee',
+        'nickname':'getStoreEmployees',
+    }, (req,res,next) => {
+        var id = req.params.id
+        if(id){
+            lib.db.model('Store')
+                .findOne({_id:id})
+                .populate('employees')
+                .exec((err,data) => {
+                    if(err) return next(controller.RESTError('InternalServerError',err))
+                    if(!data) return next(controller.RESTError('ResourceNotFoundError','Store not found'))
+                    console.log(data)
+                    controller.writeHAL(res,data.employees)
+                })
+        } else { next(controller.RESTError('InvalidArgumentError','Invalid id'))}
+    })
+
+    controller.addAction({
+        'path': '/stores/{id}/booksales',
+        'method':'GET',
+        'summary':'Returns the list of booksales done on a store'
+        'params': [swagger.queryParam('id','The id of the store','string')],
+        'responseClass':'BookSale',
+        'nickname':'getStoresBookSales',
+    }, (req,res,next) => {
+        var id = req.params.id
+        if(id){
+            lib.db.model('Booksale')
+                .find({store:id})
+                .populate('client')
+                .populate('employee')
+                .populate('books')
+                .exec((err,data) => {
+                    if(err) return next(controller.RESTError('InternalServerError',err))
+                    controller.writeHAL(res,data)
+                })
+        } else { next(controller.RESTError('InvalidArgumentError','Invalid id'))}
+    })
+
+    controller.addAction({
+        'path':'/stores',
+        'method':'POST',
+        'summary': 'Adds a new store to the list',
+        'params': [swagger.queryParam('store','The JSON data of the store','string')],
+        'responseClass':'Store',
+        'nickname':'newStore',
+    }, (req,res,next) => {
+        var data = req.body
+        if(data){
+            var newStore = lib.db.model('Store')(data)
+            newStore.save(function(err,store){
+                if(err) return next(controller.RESTError('InternalServerError',err))
+                res.json(controller.toHAL(store))
+            })
+        } else { next(controller.RESTError('InvalidArgumentError','No data received'))}
+    })
+
+    controller.addAction({
+        'path':'/stores/{id}',
+        'method':'PUT',
+        'summary':"Updates a store's information",
+        'params': [
+            swagger.queryParam('id','The id of the store','string'),
+            swagger.queryParam('store','The new information to update','string')
+        ],
+        'responseClass':'Store',
+        'nickname':'updateStore',
+    }, (req,res,next) => {
+        var data = req.body
+        var id = req.params.id
+        if(id){
+            lib.db.model('Store')
+                .findOne({_id:id})
+                .exec((err,store)=>{
+                    if(err) return next(controller.RESTError('InternalServerError',err))
+                    if(!store) return next(controller.RESTError('ResourceNotFoundError','Store not found'))
+                    store = _.extend(store,data)
+                    store.save((err,data)=>{
+                        if(err) return next(controller.RESTError('InternalServerError',err))
+                        res.json(controller.toHAL(data))
+                    })
+                })
+        } else { next(controller.RESTError('InvalidArgumentError','Invalid id'))}
+    })
+
+    return controller
+}
+```
+
+The code for the Stores controller is very similar to that of the Books controller. 
+
+It does, however, have something of notice: the getStoresBookSales action clearly shows what happens when we don’t use a Hierarchical MVC model. I said that this is not a common case, so it would be fine for the purpose of this book, but it shows how separation of concerns is broken in the strictest of senses by acting over the model of another controller, instead of going through that other controller. 
+
+Given the added complexity that mechanism would imply to our code, we’re better off looking the other way for the time being.
+
+Here are the remaining controllers. They don’t particularly show anything new compared to the
+previous ones, so just look at the code and the occasional code comment.
+
+*/controllers/authors.js*
+

@@ -322,3 +322,5 @@ Here are some other interesting bits from the code:
 
 * The getBooks action shows how to do simple regular expression–based filtering with Mongoose.
 * The update action is not actually using the update method from Mongoose, but instead loads the model using the extend method from the underscore, and finally calls the save method on the model. This is done for one simple reason: the update method doesn’t trigger any post hooks on the models, but the save method does, so if we wanted to add behavior to react to an update on the model, this would be the way to go about it.
+
+*/controllers/stores.js*

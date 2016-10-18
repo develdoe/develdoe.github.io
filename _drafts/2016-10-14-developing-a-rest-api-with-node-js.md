@@ -1185,3 +1185,25 @@ module.exports = {
     }
 }
 ```
+
+### models
+
+This folder contains the actual code of each model. The definition of these resources won’t be found in these files because they’re only meant to define behavior. The actual properties are defined in the schemas folder (which, is being used both by the models and Swagger).
+
+*/models/index.js*
+
+```javascript
+module.exports = function(db) {
+    return {
+        "Book": require("./book")(db),
+        "Booksale": require("./booksale")(db),
+        "ClientReview": require("./clientreview")(db),
+        "Client": require("./client")(db),
+        "Employee": require("./employee")(db),
+        "Store": require("./store")(db),
+        "Author": require("./author")(db)
+    }
+}
+```
+
+As in the other folders, the index.js file allows us to require every model at once, and treat this folder like a module itself. The other thing of note here is the passing of the db object to every model, so that they can access the getModelFromSchema function.

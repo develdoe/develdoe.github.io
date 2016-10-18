@@ -1168,3 +1168,20 @@ The other functions are more straightforward:
 
 * **connect**: Connects to the database server and sets up the callbacks for both error and success cases.
 * **model**: Accesses the model from outside. We could just directly access the models using the object models, but it’s always a good idea to provide a wrapper in case you ever need to add extra behaviors (such as checking for errors).
+
+*/lib/config.js*
+
+```javascript
+module.exports = {
+    secretKey: 'this is a secret key, right here',
+    server: {
+        name: 'ComeNRead API',
+        version: '1.0.0',
+        port: 9000
+    },
+    database: {
+        host: 'mongodb://localhost',
+        dbname: 'comenread'
+    }
+}
+```

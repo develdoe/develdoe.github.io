@@ -953,3 +953,218 @@ module.exports = function(lib) {
   return controller
 }
 ```
+
+### lib
+
+The lib folder contains all sorts of helper functions and utilities that were just too small to be put into a separate folder, but important and generic enough to be used in several places of the code.
+
+*/lib/index.js*
+
+```javascript
+var lib = {
+    helpers:            require("./helpers"),
+    config:             require("./config"),
+    controllers:        require("../controllers"),
+    schemas:            require("../schemas"),
+    schemaValidator:    require("./schemaValidator"),
+    db:                 require("./db")
+}
+
+module.exports = lib
+```
+
+This file is supposed to act as the single point of contact between the outside world (the rest of the project) and the inside world (all of the mini-modules grouped within this folder). There is nothing special about it. It just requires everything and exports using predefined keys.
+
+*/lib/helpers.js*
+
+```javascript
+var halson = require("halson"),
+    _ = require("underscore")
+
+module.exports = {
+    makeHAL:        makeHAL,
+    setupRoutes:    setupRoutes,
+    validateKey:    validateKey
+}
+
+function setupRoutes(server,swagger,lib){
+    for(controller in lib.controllers){
+        cont = lib.controllers[controller](lib)
+        cont.setUpActions(server,swagger)
+    }
+}
+
+// Sign in every request and compare it
+// against the key sent by the client, this way
+// we make shure its authentic
+function validateKey(hmacdata,key,lib){
+    // This is for testing the swagger-ui, should be removed after development
+    // to avoid possible security problem
+    if(key == 777) return true
+    var hmac = require("crypto").createHmac("md5",lib.config.secretKey).update(hmacdata).digest("hex")
+    console.log(hmac) // remove this line
+    return hmac == key
+}
+
+function makeHAL(data,links,embed){
+    var obj = halson(data)
+    if(links && links.length > 0) { _.each(links,(lnk)=>{ obj.addLink(lnk.name,{href:lnk.href,title:lnk.title || ''}) }) }
+    if(embed && embed.length > 0) { _.each(embed,(item)=>{ obj.addEmbed(item.name,item.data)}) }
+    return obj
+}
+```
+
+Just as the modules exported by the index.js file are too small to merit their own folder, these functions are too small and particular to merit their own module, so instead they are grouped here, inside the helpers module. The functions are meant to be of use (hence, the name “helpers”) throughout the entire project:
+
+* **setupRoutes**: This function is called from within the project’s main file during boot-up time. It’s meant to initialize all controllers, which in turn adds the actual route’s code to the HTTP server.
+
+* **validateKey**: This function contains the code to validate the request by recalculating the HMAC key. And as mentioned earlier, it contains the exception to the rule, allowing any request to validate if the key sent is 777.
+
+* **makeHAL**: This function turns any type of object into a HAL JSON object ready to be rendered. This particular function is heavily used from within the models’ code.
+
+*/lib/schemaValidator.js*
+
+```javascript
+var tv4 = require("tv4"),
+    formats = require("tv4-formats"),
+    schemas = require("../request_schemas/")
+
+module.exports = {
+    validateRequest: validate
+}
+
+function validate (req) {
+    var res = {valid: true}
+    tv4.addFormat(formats)
+    var schemaKey = req.route ? req.route.path.toString().replace("/", "") : ''
+    var actionKey = req.route.name
+    if(schemas[schemaKey]){
+        var mySchema = schemas[schemaKey][actionKey]
+        var data = null
+        if(mySchema) {
+            switch(mySchema.validate) {
+                case 'params':
+                    data = req.params
+                    break
+            }
+            res = tv4.validateMultiple(data, mySchema.s
+        }
+    }
+    return res
+}
+```
+
+This file has the code that validates any request against a JSON Schema that we define. 
+
+The only function of interest is the validate function, which validates the request object. It also counts on a predefined structure inside the request, which is added by Swagger (the route attribute).
+
+As you might’ve guessed from the preceding code, the validation of a request is optional; not every request is being validated. And right now, only query parameters are validated, but this can be extended by simply adding a new case to the switch statement.
+
+This function works with the premise of “convention over configuration,” which means that if you set up everything “right,” then you don’t have to do much. In our particular case, we’re looking inside the request_ schemas folder to load a set of predefined schemas, which have a very specific format. In that format we find the name of the action (the nickname that we set up) to validate and the portion of the request we want to validate. 
+
+In our particular function, we’re only validating query parameters for things such as invalid formats and so forth. The only request we have set up to validate right now is the BookSales listing action; but if we wanted to add a new validation, it would just be a matter of adding a new schema—no programming required.
+
+*/lib/db.js*
+
+```javascript
+var
+    config = require("./config"),
+    _ = require("underscore"),
+    mongoose = require("mongoose"),
+    Schema = mongoose.Schema
+
+var obj = {
+    cachedModels: {},
+    getModelFromSchema: getModelFromSchema,
+    model: function(mname) {
+        return this.models[mname]
+    }
+    connect: function(cb) {
+        mongoose.connect(config.database.host + "/" + config.database.dbname)
+        this.connection = mongoose.connection
+        this.connection.on('error', cb)
+        this.connection.on('open', cb)
+    }
+}
+
+obj.models = require("../models/")(obj)
+module.exports = obj
+
+function translateComplexType(v, strType) {
+    var tmp = null
+    var type = strType || v['type']
+
+    switch (type) {
+        case 'array':
+            tmp = []
+            if (v['items']['$ref'] != null) {
+                tmp.push({
+                    type: Schema.ObjectId,
+                    ref: v['items']['$ref']
+                })
+            } else {
+                var originalType = v['items']['type']
+                v['items']['type'] = translateTypeToJs(v['items']
+                    ['type'])
+                tmp.push(translateComplexType(v['items'], originalType))
+            }
+            break
+
+        case 'object':
+            tmp = {}
+            var props = v['properties']
+            _.each(props, function(data, k) {
+                if (data['$ref'] != null) {
+                    tmp[k] = {
+                        type: Schema.ObjectId,
+                        ref: data['$ref']
+                    }
+                } else {
+                    tmp[k] = translateTypeToJs(data['type'])
+                }
+            })
+            break
+
+        default:
+            tmp = v
+            tmp['type'] = translateTypeToJs(type)
+            break
+    }
+    return tmp
+}
+
+// Turns the JSON Schema into a Mongoose schema
+function getModelFromSchema(schema) {
+    var data = {
+        name: schema.id,
+        schema: {}
+    }
+    var newSchema = {}
+    var tmp = null
+    _.each(schema.properties, function(v, propName) {
+        if(v['$ref'] != null) {
+            tmp = {
+                type: Schema.ObjectId,
+                ref: v['$ref']
+            }
+        } else { tmp = translateComplexType(v) }
+        newSchema[propName] = tmp
+    })
+    data.schema = new Schema(newSchema)
+    return data
+}
+
+function translateTypeToJs(t) {
+    if(t.indexOf('int') === 0)  t = "number"
+    return eval(t.charAt(0).toUpperCase() + t.substr(1))
+}
+```
+
+This file contains some interesting functions that are used a lot from the models’ code. 
+
+The schemas used with Swagger can potentially be reused to do other things, such
+as defining the models’ schemas. But to do this, we need a function to translate the standard JSON Schema into the nonstandard JSON format required by Mongoose to define a model. This is where the getModelFromSchema function comes into play; its code is meant to go over the structure of the JSON Schema and create a new, simpler JSON structure to be used as a Mongoose Schema.
+The other functions are more straightforward:
+
+* **connect**: Connects to the database server and sets up the callbacks for both error and success cases.
+* **model**: Accesses the model from outside. We could just directly access the models using the object models, but it’s always a good idea to provide a wrapper in case you ever need to add extra behaviors (such as checking for errors).

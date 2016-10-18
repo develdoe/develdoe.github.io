@@ -521,3 +521,149 @@ previous ones, so just look at the code and the occasional code comment.
 
 */controllers/authors.js*
 
+```javascript
+var
+    BaseController = require('./basecontroller'),
+    swagger = require('swagger-node-restify')
+
+function BookSales(){}
+
+BookSales.prototype = new BaseController()
+
+
+module.exports = function(lib){
+
+    var controller = new BookSales()
+
+    controller.addAction({
+        'path':'/authors',
+        'method':'GET',
+        'summary':'Returns the list of authors across all sites',
+        'responsClass':'Author',
+        'nickname':'getAuthors',
+        'params':[swagger.queryParam('q','Search parameter','string')]
+    },(req,res,next)=>{
+        var criteria = {},
+            filterByGenre = false || req.params.genre
+        if(req.params.q){
+            var expr = new RegExp('.*'+req.params.q+'.*','i')
+            criteria.$or = [
+                {name:expr},
+                {description:expr}
+            ]
+        }
+        if(filterByGenre){
+            lib.db.model('Book')
+                .find({genre:filterByGenre})
+                .exec((err,books)=>{
+                    if(err) return next(controller.RESTError('InternalServerError',err))
+                    findAuthors(_.pluck(books,'_id'))
+                })
+        } else { findAuthors() }
+        function findAuthors(bookIds){
+            if(bookIds) criteria.books = {$in:bookIds}
+            lib.db.model('Author')
+                .find(criteria)
+                .exec(function(err, authors) {
+                    if(err) return next(controller.RESTError('InternalServerError',err))
+                    controller.writeHAL(res, authors)
+                }
+        }
+    })
+
+    controller.addAction({
+        'path':'/authors/{id}',
+        'method':'GET',
+        'summary':'Returns all the data from one specific author',
+        'responsClass':'Author',
+        'nickname':'getAuthor'
+    },(req,res,next)=>{
+        var id = req.params.id
+        if(id){
+            lib.db.model('Author')
+                .findOne({_id: id})
+                .exec(function(err, author) {
+                    if(err) return next(controller.RESTError('InternalServerError',err))
+                    if(!author) return next(controller.RESTError('ResourceNotFoundError', 'Author not found'))
+                    controller.writeHAL(res, author)
+                })
+        } else { next(controller.RESTError('InvalidArgumentError', 'Missing author id')) }
+    })
+
+    controller.addAction({
+        'path':'/authors',
+        'method':'POST',
+        'summary':'Adds a new author',
+        'responsClass':'Author',
+        'nickname':'addAuthor',
+        'params':[swagger.bodyParam('author','JSON representation of the data','string')]
+    },(req,res,next)=>{
+        var body = req.body
+        if(body){
+            var newAuthor = lib.db.model('Author')(body)
+            newAuthor.save((err, author)=>{
+                if(err) return next(controller.RESTError('InternalServerError', err))
+                controller.writeHAL(res, author)
+            })
+        } else { next(controller.RESTError('InvalidArgumentError', 'Missing author id')) }
+    })
+
+    controller.addAction({
+        'path':'/authors/{id}',
+        'method':'PUT',
+        'summary':"UPDATES an author's information",
+        'responsClass':'Author',
+        'nickname':'updateAuthor',
+        'params':[
+            swagger.pathParam('id','The id of the author','string'),
+            swagger.pathParam('author','The new information to update','string')
+        ]
+    }, (req,res,next)=>{
+        var data = req.body,
+            id = req.params.id
+        if(id){
+            lib.db.model("Author")
+                .findOne({_id: id})
+                .exec((err, author)=>{
+                    if(err) return next(controller.RESTError('InternalServerError', err))
+                    if(!author) return next(controller.RESTError('ResourceNotFoundError','Author not found'))
+                    author = _.extend(author, data)
+                    author.save((err, data)=>{
+                        if(err) return next(controller.RESTError('InternalServerError', err))
+                        res.json(controller.toHAL(data))
+                    })
+                })
+        } else { next(controller.RESTError('InvalidArgumentError', 'Invalid id received')) }
+
+    })
+
+    controller.addAction({
+        'path':'/authors/{id}/books',
+        'method':'GET',
+        'summary':'Returns the data from all the books of one specific author',
+        'responsClass':'Book',
+        'nickname':'getAuthorsBook',
+        'params':[swagger.pathParam('id','The id of the author','string')]
+    }, (req,res,next)=>{
+        var id = req.params.id
+        if(id){
+            lib.db.model('Author')
+                .findOne({_id: id})
+                .populate('books')
+                .exec((err, author) => {
+                    if(err) return next(controller.RESTError('InternalServerError', err))
+                    if(!author) return next(controller.RESTError('ResourceNotFoundError', 'Author not found'))
+                    controller.writeHAL(res, author.books)
+                })
+        } else { next(controller.RESTError('InvalidArgumentError', 'Missing author id')) }
+    })
+
+    return controller
+}
+```
+
+*/controllers/booksales.js*
+
+```javascript
+
+```

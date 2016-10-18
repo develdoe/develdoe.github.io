@@ -1206,4 +1206,471 @@ module.exports = function(db) {
 }
 ```
 
-As in the other folders, the index.js file allows us to require every model at once, and treat this folder like a module itself. The other thing of note here is the passing of the db object to every model, so that they can access the getModelFromSchema function.
+As in the other folders, the index.js file allows us to require every model at once, and treat this folder like a module itself. 
+
+The other thing of note here is the passing of the db object to every model, so that they can access the getModelFromSchema function.
+
+*/models/author.js*
+
+```javascript
+ var
+     mongoose = require("mongoose"),
+     jsonSelect = require('mongoose-json-select'),
+     helpers = require("../lib/helpers"),
+     _ = require("underscore")
+
+ module.exports = function(db) {
+     var schema = require("../schemas/author.js")
+     var modelDef = db.getModelFromSchema(schema)
+     modelDef.schema.plugin(jsonSelect, '-books')
+     modelDef.schema.methods.toHAL = function() {
+         var halObj = helpers.makeHAL(this.toJSON(), [{
+             name: 'books',
+             'href': '/authors/' + this.id + '/books',
+             'title': 'Books'
+         }])
+         if (this.books.length > 0) {
+             if (this.books[0].toString().length != 24) {
+                 halObj.addEmbed('books', _.map(this.books,
+                     function(e) {
+                         return e.toHAL()
+                     }))
+             }
+         }
+         return halObj
+     }
+     return mongoose.model(modelDef.name, modelDef.schema)
+ }
+```
+
+The code of the Author model shows the basic mechanics of loading the JSON Schema, transforming it into a Mongoose Schema, defining the custom behavior, and finally returning a new model.
+The following defines the main custom behaviors:
+
+* The jsonSelect model allows us to define the attributes to add to or remove
+from the object when turning it into a JSON. We want to remove the embedded objects from the JSON representation, because they will be added to the HAL JSON representation as embedded objects, rather than being part of the main object.
+* The toHAL method takes care of returning the representation of the resource in JSON HAL format.
+* The links associated to the main object are defined manually. We could improve this by further customizing the code for the loading and transformation of the JSON Schemas of the models.
+
+**The code below determine if the model has populated a reference, or if it is simply the id of the referenced object**
+
+```javascript 
+if(this.books[0].toString().length != 24) {
+  //...
+}
+```
+
+The following is the rest of the code inside the models folder, as you can appreciate, the same mechanics are duplicated on every case.
+
+*/models/book.js*
+
+```javascript
+var mongoose = require("mongoose"),
+    jsonSelect = require('mongoose-json-select'),
+    helpers = require("../lib/helpers"),
+    _ = require("underscore")
+
+module.exports = function(db) {
+    var schema = require("../schemas/book.js")
+    var modelDef = db.getModelFromSchema(schema)
+    modelDef.schema.plugin(jsonSelect, '-stores -authors')
+    modelDef.schema.methods.toHAL = function() {
+        var halObj = helpers.makeHAL(this.toJSON(), [{
+            name: 'reviews',
+            href: '/books/' + this.id + '/reviews',
+            title: 'Reviews'
+        }])
+        if(this.stores.length > 0) { if(this.stores[0].store.toString().length != 24) { halObj.addEmbed('stores', _.map(this.stores, function(s) { return { store: s.store.toHAL(), copies: s.copies } }))}}
+        if(this.authors.length > 0) { if(this.authors[0].toString().length != 24) { halObj.addEmbed('authors', this.authors) }}
+        return halObj
+    }
+    return mongoose.model(modelDef.name, modelDef.schema)
+}
+```
+
+*/models/booksale.js*
+
+```javascript
+var mongoose = require("mongoose"),
+    jsonSelect = require('mongoose-json-select'),
+    helpers = require("../lib/helpers"),
+    _ = require("underscore")
+
+module.exports = function(db) {
+    var schema = require("../schemas/booksale.js")
+    var modelDef = db.getModelFromSchema(schema)
+    modelDef.schema.plugin(jsonSelect, '-store -employee -client -books')
+    modelDef.schema.methods.toHAL = function() {
+        var halObj = helpers.makeHAL(this.toJSON())
+        if(this.books.length > 0) { if(this.books[0].toString().length != 24) { halObj.addEmbed('books', _.map(this.books,function(b) { return b.toHAL() }))}}
+        if(this.store.toString().length != 24) halObj.addEmbed('store', this.store.toHAL())
+        if(this.employee.toString().length != 24) halObj.addEmbed('employee', this.employee.toHAL())
+        if(this.client.toString().length != 24) halObj.addEmbed('client', this.client.toHAL())
+        return halObj
+    }
+    return mongoose.model(modelDef.name, modelDef.schema)
+}
+```
+
+*/models/client.js*
+
+```javascript
+var mongoose = require("mongoose"),
+    jsonSelect = require('mongoose-json-select'),
+    helpers = require("../lib/helpers"),
+    _ = require("underscore")
+
+module.exports = function(db) {
+    var schema = require("../schemas/client.js")
+    var modelDef = db.getModelFromSchema(schema)
+    modelDef.schema.methods.toHAL = function() {
+        var halObj = helpers.makeHAL(this.toJSON())
+        return halObj
+    }
+    return mongoose.model(modelDef.name, modelDef.schema)
+}
+```
+
+*/models/clientreview.js*
+
+```javascript
+var mongoose = require("mongoose"),
+    jsonSelect = require('mongoose-json-select'),
+    helpers = require("../lib/helpers"),
+    _ = require("underscore")
+
+
+module.exports = function(db) {
+    var schema = require("../schemas/clientreview.js")
+    var modelDef = db.getModelFromSchema(schema)
+    modelDef.schema.methods.toHAL = function() {
+        var halObj = helpers.makeHAL(this.toJSON())
+        return halObj
+    }
+    modelDef.schema.post('save', function(doc, next) {
+        db.model('Book').update({_id: doc.book}, {$addToSet: {reviews: this.id}}, function(err) { next(err) })
+    })
+    return mongoose.model(modelDef.name, modelDef.schema)
+}
+```
+
+*/models/employee.js*
+
+```javascript
+var mongoose = require("mongoose"),
+    jsonSelect = require('mongoose-json-select'),
+    helpers = require("../lib/helpers"),
+    _ = require("underscore")
+
+module.exports = function(db) {
+    var schema = require("../schemas/employee.js")
+    var modelDef = db.getModelFromSchema(schema)
+    modelDef.schema.methods.toHAL = function() {
+        var halObj = helpers.makeHAL(this.toJSON())
+        return halObj
+    }
+    return mongoose.model(modelDef.name, modelDef.schema)
+}
+```
+
+*/models/store.js*
+
+```javascript
+var mongoose = require("mongoose"),
+    jsonSelect = require("mongoose-json-select"),
+    _ = require("underscore"),
+    helpers = require("../lib/helpers")
+
+
+module.exports = function(db) {
+    var schema = require("../schemas/store.js")
+    var modelDef = db.getModelFromSchema(schema)
+    modelDef.schema.plugin(jsonSelect, '-employees')
+    modelDef.schema.methods.toHAL = function() {
+        var halObj = helpers.makeHAL(this.toJSON(), [{
+            name: 'books',
+            href: '/stores/' + this.id + '/books',
+            title: 'Books'
+        }, {
+            name: 'booksales',
+            href: '/stores/' + this.id + '/booksales',
+            title: 'Book Sales'
+        }])
+        if(this.employees.length > 0) { if(this.employees[0].toString().length != 24) { halObj.addEmbed('employees', _.map(this.employees,function(e) { return e.toHAL() }))}}
+        return halObj
+    }
+    var model = mongoose.model(modelDef.name, modelDef.schema)
+    return model
+}
+```
+
+### request_schemas
+
+This folder contains the JSON Schemas that will be used to validate the requests. 
+
+They need to describe an object and its properties. We should be able to validate against the request object attribute that contains the parameters (normally request.params, but potentially something else, such as request.body).
+
+Due to the type of attributes we defined for our endpoints, there is really only one endpoint that we would want to validate: the getBookSales (GET /booksales) endpoint. It receives two date parameters, and we probably want to validate their format to be 100% certain that the dates are valid.
+
+Again, to provide the simplicity of usage that “convention over configuration” provides, our schema files must follow a very specific format, which is then used by the validator that we saw earlier:
+
+```javascript
+/request_schemas/ [CONTROLLER NAME].js module.exports = {
+    [ENDPOINT NICKNAME]: {
+        validate: [TYPE],
+        schema: [JSON SCHEMA]
+    }
+}
+```
+
+There are several pieces that need to be explained in the preceding code:
+
+* **CONTROLLER NAME**: This means that the file for the schema needs to have the same name as the controller, all lowercase. And since we already did that for our controllers’ files, this mean the schemas for each controller will have to have the same name as each controller’s file.
+* **ENDPOINT NICKNAME**: This should be the nickname given to the action when adding it to the controller (using the addAction method).
+* **TYPE**: The type of object to validate. The only value supported right now is params, which references the query and path parameters received. This could be extended to support other objects.
+* **JSON SCHEMA**: This is where we add the actual JSON Schema defining the request parameters.
+
+Here is the actual code defining the validation for the getBookSales action:
+
+*/request_schemas/booksales.js*
+
+```javascript
+module.exports = {
+    getbooksales: {
+        validate: 'params',
+        schema: {
+            type: "object",
+            properties: {
+                start_date: {
+                    type: 'string',
+                    format: 'date'
+                },
+                end_date: {
+                    type: 'string',
+                    format: 'date'
+                },
+                store_id: {
+                    type: 'string'
+                }
+            }
+        }
+    }
+}
+```
+
+### Schemas
+
+This folder contains the JSON Schema definitions of our resources, which also translate into the Mongoose Schemas when initializing our models.
+
+The level of detail provided in these files is very important, because it also translates into the actual Mongoose model. This means that we could define things such as ranges of values and format patterns, which would be validated by Mongoose when creating the new resources.
+
+For instance, let’s take a look at ClientReview, a schema that makes use of such capability:
+
+*/schemas/clientreview.js*
+
+```javascript
+module.exports = {
+    "id": "ClientReview",
+    "properties": {
+        "client": {
+            "$ref": "Client",
+            "description": "The client who submits the review"
+        },
+        "book": {
+            "$ref": "Book",
+            "description": "The book being reviewed"
+        },
+        "review_text": {
+            "type": "string",
+            "description": "The actual review text"
+        },
+        "stars": {
+            "type": "integer",
+            "description": "The number of stars, from 0 to 5",
+            "min": 0,
+            "max": 5
+        }
+    }
+}
+```
+
+The stars attribute is clearly setting the maximum and minimum values that we can send when saving a new review. If we tried to send an invalid number, then we would get an error.
+
+When defining schemas that reference others, remember to correctly name the reference (the name of each schema is given by the id property). So if you correctly set up the reference, the getModelFromSchema method of the db module will also properly set up the reference in Mongoose (this works both for direct reference and for collections).
+
+Here is the main file for this folder; the index.js works like the index files in the other folders:
+
+*/schemas/index.js*
+
+```javascript
+module.exports = {
+    models: {
+        BookSale: require("./booksale"),
+        Book: require("./book"),
+        Author: require("./author"),
+        Store: require("./store"),
+        Employee: require("./employee"),
+        Client: require("./client"),
+        ClientReview: require("./clientreview")
+    }
+}
+```
+
+The rest of the schemas defined for the project:
+
+*/schemas/author.js*
+
+```javascript
+module.exports = {
+    "id": "Author",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The full name of the author"
+        },
+        "description": {
+            "type": "string",
+            "description": "A small bio of the author"
+        },
+        "books": {
+            "type": "array",
+            "description": "The list of books published on at least one of the stores by this author",
+            "items": {
+                "$ref": "Book"
+            }
+        },
+        "website": {
+            "type": "string",
+            "description": "The Website url of the author"
+        },
+        "avatar": {
+            "type": "string",
+            "description": "The url for the avatar of this author"
+        }
+    }
+}
+```
+
+*/schema/book.js*
+
+```javascript
+module.exports = {
+    "id": "Book",
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "The title of the book"
+        },
+        "authors": {
+            "type":"array",
+            "description":"List of authors of the book",
+            "items": {
+                "$ref": "Author"
+            }
+        },
+        "isbn_code": {
+            "description": "Unique identifier code of the book",
+            "type":"string"
+        },
+        "stores": {
+            "type": "array",
+            "description": "The stores where clients can buy this book",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "store": {
+                        "$ref": "Store",
+                    },
+                    "copies": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        "genre": {
+            "type": "string",
+            "description": "Genre of the book"
+        },
+        "description": {
+            "type": "string",
+            "description": "Description of the book"
+        },
+        "reviews": {
+            "type": "array",
+            "items": {
+                "$ref": "ClientReview"
+            }
+        },
+        "price": {
+            "type": "number",
+            "minimun": 0,
+            "description": "The price of this book"
+        }
+    }
+}
+```
+
+*/schemas/booksales.js*
+
+```javascript
+module.exports = {
+    "id": "BookSale",
+    "properties": {
+        "date": {
+            "type": "date",
+            "description": "Date of the transaction"
+        },
+        "books": {
+            "type": "array",
+            "description": "Books sold",
+            "items": {
+                "$ref": "Book"
+            }
+        },
+        "store": {
+            "type": "object",
+            "description": "The store where this sale took place",
+            "type": "object",
+            "$ref": "Store"
+        },
+        "employee": {
+            "type": "object",
+            "description": "The employee who makes the sale",
+            "$ref": "Employee"
+        },
+        "client": {
+            "type": "object",
+            "description": "The person who gets the books",
+            "$ref": "Client",
+        },
+        "totalAmount": {
+            "type": "integer"
+        }
+    }
+}
+```
+
+*/schemas/client.js*
+
+```javascript
+module.exports = {
+    "id": "Client",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Full name of the client"
+        },
+        "address": {
+            "type": "string",
+            "description": "Address of residence of this client"
+        },
+        "phone_number": {
+            "type": "string",
+            "description": "Contact phone number for the client"
+        },
+        "email": {
+            "type": "string",
+            "description": "Email of the client"
+        }
+    }
+}
+```

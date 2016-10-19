@@ -86,4 +86,8 @@ Navigating:
 
 ## Secure
 
-To secure out API we implement Auth0. Auth0 instantly enables single sign-on and user management services for any application.
+To secure out API we implement Auth0. Auth0 instantly enables single sign-on and user management services for any application. If you don’t already have an Auth0 account, [signup](https://auth0.com/signup?utm_source=scotch.io&utm_medium=sp&utm_campaign=api_authorization) for free. 
+
+When signed in, navigate to Auth0 dashboard an click on the New Client button.
+
+![auth.png]({{site.baseurl}}/img/posts/auth.png)

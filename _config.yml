@@ -28,7 +28,7 @@ disqus_shortname: 'develdoe-com'
 
 # Details for the RSS feed generator
 url:            'http://develdoe.com'
-author:         'John "Devel" Doe'
+author:         'Devel Doe'
 authorTwitter:  'develdoe'
 
 permalink:       /:year/:title/

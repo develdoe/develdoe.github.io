@@ -1,5 +1,5 @@
 ---
-date: '2016-10-21 12:04 +0200'
+date: '2016-10-20 12:04 +0200'
 published: true
 title: React - Starter Pack
 category:
@@ -55,6 +55,3 @@ Then reference it from helloworld.html:
 ```
 
 **Some browsers (Chrome, e.g.) will fail to load the file unless it's served via HTTP.**
-
-
-

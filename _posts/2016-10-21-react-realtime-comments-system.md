@@ -114,7 +114,9 @@ Its use is optional but we've found JSX syntax easier to use than plain JavaScri
 
 #### What's going on
 
-We pass some methods in a JavaScript object to React.createClass() to create a new React component. The most important of these methods is called render which returns a tree of React components that will eventually render to HTML.
+We pass some methods in an object to React.createClass() to create a new React component. 
+
+The most important of these methods is called render which returns a tree of React components that will eventually render to HTML.
 
 The `<div>` tags are not actual DOM nodes; they are instantiations of React div components. You can think of these as markers or pieces of data that React knows how to handle. React is safe. We are not generating HTML strings so XSS protection is the default.
 

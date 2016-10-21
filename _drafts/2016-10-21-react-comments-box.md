@@ -2,6 +2,8 @@
 date: '2016-10-21 12:51 +0200'
 published: true
 title: React - Comments Box
+category:
+  - react
 ---
 This article is a re-write of the orignal article at [facebook.github.io](https://facebook.github.io/react/docs/tutorial.html). I wrote it for learning purposes and made small edits to better the article.
 

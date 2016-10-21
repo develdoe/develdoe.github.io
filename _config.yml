@@ -1,0 +1,106 @@
+destination: ../site
+
+name: Develdoe, This is my journal
+description: Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.
+
+# Switches
+fontawesome: true
+twitter: true
+someting:
+
+meta_description: "Your New Jekyll Site, Blogging about stuffs"
+
+aboutPage: false
+
+markdown: kramdown
+highlighter: rouge
+
+
+gems: [jekyll-paginate]
+paginate: 50
+paginate_path: "page:num"
+
+
+baseurl: /
+domain_name: 'http://develdoe.com'
+google_analytics:
+disqus: true
+disqus_shortname: 'develdoe-com'
+
+# Details for the RSS feed generator
+url:            'http://develdoe.com'
+author:         'John "Devel" Doe'
+authorTwitter:  'develdoe'
+
+permalink:       /:year/:title/
+
+defaults:
+    -
+        scope:
+            path: "" # empty string for all files
+            type: pages
+        values:
+            layout: default
+    -
+        scope:
+            path: "" # empty string for all files
+            type: posts
+        values:
+            layout: post
+    -
+        scope:
+            path: ""
+            type: drafts
+        values:
+            layout: post
+
+
+prose:
+    rooturl: ''
+    siteurl: 'http://develdoe.com'
+    relativeLinks: 'http://develdoe.com/links.jsonp'
+    ignore:
+        - _includes
+        - _layouts
+        - _site
+        - assets
+        - _config.yml
+        - about.md
+        - CNAME
+        - feed.xml
+        - index.html
+        - LICENSE
+        - README.md
+        - .gitignore
+        - img
+    media: 'img/posts'
+    metadata:
+        _posts:
+            - name: 'title'
+              field:
+                  element: 'text'
+                  type: 'text'
+            - name: 'date'
+              field:
+                  element: 'hidden'
+                  value: CURRENT_DATETIME
+            - name: 'published'
+              field:
+                  element: 'checkbox'
+                  label: 'Publicerad'
+                  value: 'true'
+            - name: 'category'
+              field:
+                  element: 'multiselect'
+                  label: 'Kategori'
+                  options:
+                      - name: 'JavaScript'
+                        value: 'js'
+                      - name: 'Development'
+                        value: 'dev'
+                      - name: 'Jekyll'
+                        value: 'jek'
+                      - name: 'Node'
+                        value: 'node'
+                      - name: 'React'
+                        value: 'react'

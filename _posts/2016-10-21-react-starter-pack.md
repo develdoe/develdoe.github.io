@@ -35,7 +35,7 @@ In the root directory, create a helloworld.html with the following contents:
 </html>
 ```
 
-The XML syntax inside of JavaScript is called JSX; check out the [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html) to learn more about it. In order to translate it to vanilla JavaScript we use <script type="text/babel"> and include Babel to actually perform the transformation in the browser. Open the html from a browser and you should already be able to see the greeting!
+The XML syntax inside of JavaScript is called JSX; check out the [JSX syntax](https://facebook.github.io/react/docs/jsx-in-depth.html) to learn more about it. In order to translate it to vanilla JavaScript we use `<script type="text/babel">` and include Babel to actually perform the transformation in the browser. Open the html from a browser and you should already be able to see the greeting!
 
 ## Separate File
 

@@ -23,13 +23,13 @@ It'll also have a few neat features:
 
 ## Running a server
 
-In order to start this tutorial, we're going to require a running server. This will serve purely as an API endpoint which we'll use for getting and saving data. In order to make this as easy as possible, we've created a simple server in a number of scripting languages that does exactly what we need it to do. [Download](https://github.com/reactjs/react-tutorial/archive/master.zip) a zip file containing everything needed to get started.
+In order to start this tutorial, we're going to require a running server. This will serve purely as an API endpoint which we'll use for getting and saving data. You can [download](https://github.com/reactjs/react-tutorial/archive/master.zip) a zip file containing everything needed.
 
 For sake of simplicity, the server we will run uses a JSON file as a database. You would not run this in production but it makes it easy to simulate what you might do when consuming an API. Once you start the server, it will support our API endpoint and it will also serve the static pages we need.
 
 ## Getting started
 
-For this tutorial, we're going to make it as easy as possible. Included in the server package discussed above is an HTML file which we'll work in. Open up public/index.html in your favorite editor. It should look something like this:
+Included in the server package discussed above is an HTML file which we'll work in. Open up public/index.html in your favorite editor. It should look like this:
 
 ```html
 <!-- index.html -->
@@ -55,7 +55,7 @@ For this tutorial, we're going to make it as easy as possible. Included in the s
 </html>
 ```
 
-For the remainder of this tutorial, we'll be writing our JavaScript code in this script tag. We don't have any advanced live-reloading so you'll need to refresh your browser to see updates after saving. Follow your progress by opening http://localhost:3000 in your browser (after starting the server). When you load this for the first time without any changes, you'll see the finished product of what we're going to build. When you're ready to start working, just delete the preceding `<script>` tag and then you can continue.
+Follow your progress by opening http://localhost:3000 in your browser (after starting the server). When you load this for the first time without any changes, you'll see the finished product of what we're going to build. When you're ready to start working, just delete the preceding `<script type="text/babel" src="scripts/example.js"></script>` tag and then you can continue.
 
 ## Component
 

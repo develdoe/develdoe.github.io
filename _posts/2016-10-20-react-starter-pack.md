@@ -45,7 +45,7 @@ Your React JSX code can live in a separate file. Create the following src/hellow
 ReactDOM.render(
   <h1>Hello, world!</h1>,
   document.getElementById('example')
-);
+)
 ```
 
 Then reference it from helloworld.html:

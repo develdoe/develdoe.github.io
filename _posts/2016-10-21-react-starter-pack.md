@@ -7,8 +7,6 @@ category:
 ---
 *This article is a re-write of the orignal article at [facebook.github.io](https://facebook.github.io/react/docs/getting-started.html). I wrote it for learning purposes and made small edits to better the article.*
 
-If you're just getting started, you can download the react starter kit. 
-
 The starter kit includes prebuilt copies of React and React DOM for the browser, as well as a collection of usage examples to help you get started.
 
 Download the [starter kit](https://facebook.github.io/react/downloads/react-15.3.2.zip)

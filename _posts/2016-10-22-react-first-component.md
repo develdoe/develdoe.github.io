@@ -44,3 +44,4 @@ This is called the mountNode, or mount point for our component and acts as the r
 
 While constructing the first conponent, we also got an overview of React'stop-level API, that is, making use of React.createClass, React.createElement and React.render.
 
+

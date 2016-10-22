@@ -15,6 +15,7 @@ There are different ways to include and use the library.
 * There is also its version of add-on. We'll take a look at this later though."
 
 You can simply add it in your header like so:  
+
 ```html
 <script src="http://fb.me/react-0.13.0.js"></script>
 ```

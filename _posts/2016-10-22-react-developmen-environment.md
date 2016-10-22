@@ -9,12 +9,14 @@ category:
 In this short article we are going to set up an environment for developing with React.js
 
 *Make dir*:  
+
 ```bash
 $ mkdir reactEnv
 $ cd reactEnv
 ```
 
 *NPM modules*:
+
 ```bash
 $ npm init
 $ npm install react react-dom --save
@@ -23,11 +25,13 @@ $ npm install babel-loader babel-core babel-preset-es2015 babel-preset-react
 ```
 
 *Files*:
+
 ```
 $ touch index.html App.js main.js webpack.config.js
 ```
 
 */index.html*  
+
 ```html
 <head>
     <meta charset=utf-8>
@@ -40,6 +44,7 @@ $ touch index.html App.js main.js webpack.config.js
 ```
 
 */webpack.config.js*  
+
 ```javascript
 module.exports = {
     entry: './main.js',
@@ -67,6 +72,7 @@ module.exports = {
 ```
 
 */App.js*  
+
 ```javascript
 import React from 'react';
 class App extends React.Component{
@@ -78,6 +84,7 @@ export default App
 ```
 
 */main.js*  
+
 ```javascript
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -86,6 +93,7 @@ ReactDOM.render(<App />,document.getElementById('app'))
 ```
 
 */package.json*  
+
 ```javascript
 {
   "name": "reactenv",

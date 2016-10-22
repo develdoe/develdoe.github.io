@@ -5,7 +5,7 @@ title: React - Requiring the library
 category:
   - react
 ---
-React's homepage is located at http://facebook.github.io/react/. There, we'll also locate the downloads available for us so that we can include them in our project. 
+React's homepage is located at [http://facebook.github.io/react](http://facebook.github.io/react/). There, we'll also locate the downloads available for us so that we can include them in our project. 
 
 There are different ways to include and use the library.
 

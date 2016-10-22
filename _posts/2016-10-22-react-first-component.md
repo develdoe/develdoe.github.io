@@ -4,6 +4,7 @@ published: true
 title: React - First Component
 category:
   - react
+socialImg: socialImgReact.png
 ---
 The entry point to the ReactJS library is the React object and is made available to us in the global JavaScript namespace.
 
@@ -43,5 +44,3 @@ Once done creating the component, it can be displayed using the React.render met
 This is called the mountNode, or mount point for our component and acts as the root node. Instead of passing document.body directly as a container for the component, any other DOM element can be passed.
 
 While constructing the first conponent, we also got an overview of React'stop-level API, that is, making use of React.createClass, React.createElement and React.render.
-
-

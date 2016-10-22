@@ -94,7 +94,7 @@ ReactDOM.render(<App />,document.getElementById('app'))
 
 */package.json*  
 
-```javascript
+```json
 {
   "name": "reactenv",
   "version": "1.0.0",

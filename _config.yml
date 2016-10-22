@@ -79,6 +79,11 @@ prose:
               field:
                   element: 'text'
                   type: 'text'
+            - name: 'socialImg'
+              field:
+                  element: 'text'
+                  label: 'Social image'
+                  type: 'text'
             - name: 'date'
               field:
                   element: 'hidden'

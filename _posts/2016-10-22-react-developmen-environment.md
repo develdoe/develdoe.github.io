@@ -20,8 +20,8 @@ $ cd reactEnv
 ```bash
 $ npm init
 $ npm install react react-dom --save
-$ npm install babel webpack webpack-dev-server -g
-$ npm install babel-loader babel-core babel-preset-es2015 babel-preset-react
+$ npm install babel webpack-dev-server -g
+$ npm install webpack babel-loader babel-core babel-preset-es2015 babel-preset-react
 ```
 
 *Files*:
@@ -111,4 +111,3 @@ ReactDOM.render(<App />,document.getElementById('app'))
   }
 }
 ```
-

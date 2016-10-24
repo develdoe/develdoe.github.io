@@ -9,9 +9,11 @@ category:
   - js
 socialImg: js.png
 ---
+JavaScript is an object-oriented dynamic language with types and operators, standard built-in objects, and methods. 
 
+Its syntax is based on the Java and C languages — so many structures from those languages apply to JavaScript as well. 
 
-This article goes through the JavaScript language and shows you things like comments, semicolon, the unicode character set, types, values, and variables.
+One of the key differences is that JavaScript does not have classes; instead, the class functionality is accomplished by object prototypes (see more about ES6 Classes).The other main difference is that functions are objects, giving functions the capacity to hold executable code and be passed around like any other object.
 
 
 {% highlight js %}

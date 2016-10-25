@@ -23,13 +23,13 @@ Integers can be expressed in:
 1000000
 ```
 
-**octal** is indicated by leading 0 (zero) on an integer literal, or leading 0o (or 0O). Octal integers can include only the digits 0-7.
+**Octal** is indicated by leading 0 (zero) on an integer literal, or leading 0o (or 0O). Octal integers can include only the digits 0-7.
 
 ```javascript
 0377	// 3*64 + 7*8 + 7 = 255 (base-10)
 ```
 
- **hexadecimal** is indicated by leading 0x (or 0X). Hexadecimal integers can include digits (0-9) and the letters a-f and A-F.
+ **Hexadecimal** is indicated by leading 0x (or 0X). Hexadecimal integers can include digits (0-9) and the letters a-f and A-F.
 
 ```javascript
 0xff	  // 15*16 + 15 = 255 (base-10)

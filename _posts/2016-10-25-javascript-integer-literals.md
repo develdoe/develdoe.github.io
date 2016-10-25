@@ -9,6 +9,7 @@ socialImg: js.png
 A literal in programming is simply values you find in source code. 
 
 Integers can be expressed in:
+
 * decimal (base 10) 
 * hexadecimal (base 16) 
 * octal (base 8)

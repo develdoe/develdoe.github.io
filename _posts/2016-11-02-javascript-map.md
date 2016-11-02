@@ -1,6 +1,6 @@
 ---
 date: '2016-11-02 20:57 +0100'
-published: false
+published: true
 title: JavaScript - map
 socialImg: js.png
 category:

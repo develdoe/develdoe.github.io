@@ -20,3 +20,9 @@ $ gatsby develop
 ```
 
 Using a starter can help you get up and running faster. You can find starters at gatsby github [readme](https://github.com/gatsbyjs/gatsby#user-content-gatsby-starters).
+
+Build:
+
+```bash
+$ gatsby build
+```

@@ -14,6 +14,7 @@ $ cd my-test-gatsby-site
 ````
 
 Start:
+
 ```bash
 $ gatsby develop
 ```

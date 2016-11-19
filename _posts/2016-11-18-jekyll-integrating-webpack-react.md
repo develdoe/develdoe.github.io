@@ -61,7 +61,7 @@ New
 ├── package.json
 ├── public
 │ ├── …
-├── src
+├── source
 │ ├── _includes
 │ │ ├── …
 │ ├── _layouts
@@ -87,21 +87,17 @@ New
 └── webpack.config.js
 ```
 
-This requires that you move all of the content you want Jekyll to pick up for the build process to a src directory in the root, including the index.html. Keep the config.yml in the root. You’ll need to let Jekyll know you’re building from src into public:
+## Configuration
 
+_config.yml:
 
 ```yml
 destination: public
-source: src
+source: source
 ```
 
-## package.json
+## Packages
 
-Create:
-
-```bash
-$ touch package.json 
-```
 
 Init:
 
@@ -185,4 +181,3 @@ $ npm install webpack babel-core babel-loader babel-preset-es2015 babel-preset-r
 $ webpack
 $ jekyll serve
 ```
-

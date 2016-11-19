@@ -1,13 +1,13 @@
 ---
 date: '2016-11-18 14:25 +0100'
-published: false
+published: true
 title: Jekyll - Integrating Webpack & React
+category:
+  - jek
 ---
-In this article we'll do a step by step walk through on how to create a basic jekyll-webpack integration.
+This article guides you on the steps to create a basic jekyll-webpack integration that you can use to get React working with Jekyll.
 
-## Integrating Jekyll and Webpack
-
-### Setting up your dev environment
+## Environment
 
 Node:
 
@@ -27,7 +27,7 @@ Jekyll:
 $ gem install jekyll -g
 ```
 
-### Rearrange your project structure
+## Structure
 
 Original:
 
@@ -95,5 +95,94 @@ destination: public
 source: src
 ```
 
-Because you’re building to a public folder, you can use [Pow](http://pow.cx/) to serve the static site at http://your-project-name.dev, which is nice for development.
+## package.json
+
+Create:
+
+```bash
+$ touch package.json 
+```
+
+Init:
+
+```bash
+$ npm init in the root
+```
+
+## Webpack
+
+Create a webpack directory in the root project with an entry.js file, and, remove any Jekyll javascript **files** from your assets directory. 
+
+Create a webpack.config.js in the root:
+
+```js
+module.exports = {
+  // webpack folder’s entry js — excluded from jekll’s build process.
+  entry: './webpack/entry.js',
+  output: {
+    // we’re going to put the generated file in the assets folder so jekyll will grab it.
+    path: 'src/assets/javascripts/',
+    filename: 'bundle.js'
+  },
+  module: {
+  loaders: [
+    {
+      test: /\.jsx?$/,
+      exclude: /(node_modules)/,
+      loader: 'babel', // ‘babel-loader’ is also a legal name to reference
+      query: {
+        presets: ['react', 'es2015']
+      }
+    }
+    ]
+  }
+};
+```
+
+## Ignore
+
+You need to tell both Github and Jekyll to ignore node_modules/.
+
+.gitignore:
+
+```
+.sass-cache
+.jekyll-metadata
+public
+src/assets/bundle.js
+node_modules
+```
+
+_config.yml:
+
+```yml
+exclude: ['node_modules']
+```
+
+## Include
+
+_layouts/default.html:
+
+```html
+<!DOCTYPE html>
+<html>
+ …
+ <body>
+ …
+<script type="text/javascript" src="/assets/javascripts/bundle.js" charset="utf-8"></script>
+</body>
+</html>
+```
+## Dependencies
+
+```bash
+$ npm install webpack babel-core babel-loader babel-preset-es2015 babel-preset-react react react-addons-update react-dom --save-dev
+```
+
+## Run 
+
+```bash
+$ webpack
+$ jekyll serve
+```
 

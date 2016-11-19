@@ -203,6 +203,37 @@ $ npm install react-addons-update --save-dev
 $ npm install react-dom --save-dev
 ```
 
+## Component
+
+Hello.js:
+
+```js
+import React, { Component } from 'react';
+class Hello extends Component {
+ render() {
+ return (
+ <div>Hey, y’all!!</div>
+ )
+ }
+}
+export default Hello
+```
+
+entry.js
+
+```js
+import React, { Component } from 'react';
+import {render} from 'react-dom';
+import Hello from './components/Hello';
+class App extends Component {
+ render() {
+ return (
+ <Hello />
+ )
+ }
+}
+```
+
 ## Run 
 
 ```bash

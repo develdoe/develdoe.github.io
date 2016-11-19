@@ -172,7 +172,35 @@ _layouts/default.html:
 ## Dependencies
 
 ```bash
-$ npm install webpack babel-core babel-loader babel-preset-es2015 babel-preset-react react react-addons-update react-dom --save-dev
+$ npm install webpack --save-dev
+```
+
+```bash
+$ npm install babel-core --save-dev
+```
+
+```bash
+$ npm install babel-loader --save-dev
+```
+
+```bash
+$ npm install babel-preset-es2015 --save-dev
+```
+
+```bash
+$ npm install babel-preset-react --save-dev
+```
+
+```bash
+$ npm install react --save-dev
+```
+
+```bash
+$ npm install react-addons-update --save-dev
+```
+
+```bash
+$ npm install react-dom --save-dev
 ```
 
 ## Run 

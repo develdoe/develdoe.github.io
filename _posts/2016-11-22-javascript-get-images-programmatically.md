@@ -10,5 +10,5 @@ var img = new Image();
 img.onload = function() {
   alert(this.width + 'x' + this.height);
 }
-img.src = 'http://{path to image}';
+img.src = '{path to image}';
 ```

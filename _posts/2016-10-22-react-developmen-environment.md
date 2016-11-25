@@ -65,7 +65,7 @@ app.listen(4000, function(){
 })
 ```
 
-*/index.html*  
+*public/index.html*  
 
 ```html
 <!DOCTYPE html>
@@ -83,7 +83,7 @@ app.listen(4000, function(){
 </html>
 ```
 
-*/public/app.js*
+*public/app.js*
 
 ```js
 function init(){

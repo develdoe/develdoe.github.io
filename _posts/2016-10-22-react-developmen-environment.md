@@ -6,12 +6,18 @@ socialImg: socialImgReact.png
 category:
   - react
 ---
-In this short article we are going to set up an environment for developing with React.js
+In this short article we are going to explore how to create an React environment with npm.
+
+This improves resource management compared to the vary basic approach discussed in [Simple Code Example](http://develdoe.com/2016/react-simple-code-example/).
+
 
 *Make dir*:  
 
 ```bash
 $ mkdir reactEnv
+```
+
+```
 $ cd reactEnv
 ```
 
@@ -19,95 +25,70 @@ $ cd reactEnv
 
 ```bash
 $ npm init
-$ npm install react react-dom --save
-$ npm install babel webpack-dev-server -g
-$ npm install webpack babel-loader babel-core babel-preset-es2015 babel-preset-react
 ```
+
+```bash
+$ npm install -g webpack@1.12.13
+```
+
+```bash
+$ npm install --save react@0.14.7 react-dom@0.14.7
+```
+
+```bash
+$ npm install --save-dev webpack@1.12.13 babel-core@6.5.1 babel-loader@6.2.2 babel-preset-es2015@6.5.0 babel-preset-react@6.5.0
+```
+
+
 
 *Files*:
 
 ```
-$ touch index.html App.js main.js webpack.config.js
+$ mkdir public
+```
+
+```
+$ touch server.js public/index.html public/app.js
+```
+
+*/server.js*
+
+```js
+var express = require('express'),
+    app     = express()
+
+
+app.use(express.static('public'))
+
+app.listen(4000, function(){
+    console.log('Express server is up on port: 4000')
+})
 ```
 
 */index.html*  
 
 ```html
+<!DOCTYPE html>
+<html lang=en>
 <head>
     <meta charset=utf-8>
-    <title>Setup</title>
 </head>
 <body>
+
     <div id=app></div>
-    <script src=index.js></script>
+
+    <script type=text/babel src=bundle.js></script>
+
 </body>
+</html>
 ```
 
-*/webpack.config.js*  
+*/public/app.js*
 
-```javascript
-module.exports = {
-    entry: './main.js',
-    output: {
-        path: './',
-        filename: 'index.js'
-    },
-    devServer: {
-        inline: true,
-        port: 3333
-    },
-    module: {
-        loaders:[
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: 'babel',
-                query:{
-                    presets: ['es2015','react']
-                }
-            }
-        ]
-    }
+```js
+function init(){
+    document.write('from init function')
 }
-```
 
-*/App.js*  
-
-```javascript
-import React from 'react';
-class App extends React.Component{
-    render(){
-        return <div>Helllo</div>
-    }
-}
-export default App
-```
-
-*/main.js*  
-
-```javascript
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App.js'
-ReactDOM.render(<App />,document.getElementById('app'))
-```
-
-*/package.json*  
-
-```json
-{
-  "name": "reactenv",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2"
-  }
-}
+init()
 ```

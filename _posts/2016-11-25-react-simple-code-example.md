@@ -34,7 +34,7 @@ html:
 
 app.jsx:
 
-```js
+```jsx
 var Output = React.createClass({
     render: function(){
         return (

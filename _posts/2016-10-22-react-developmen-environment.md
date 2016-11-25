@@ -44,11 +44,11 @@ $ npm install --save-dev webpack@1.12.13 babel-core@6.5.1 babel-loader@6.2.2 bab
 *Files*:
 
 ```
-$ mkdir public
+$ mkdir public public/components
 ```
 
 ```
-$ touch server.js public/index.html public/app.js
+$ touch server.js public/index.html public/app.js components/CLI.js
 ```
 
 */server.js*
@@ -77,7 +77,7 @@ app.listen(4000, function(){
 
     <div id=app></div>
 
-    <script type=text/babel src=bundle.js></script>
+    <script src=bundle.js></script>
 
 </body>
 </html>
@@ -86,9 +86,18 @@ app.listen(4000, function(){
 *public/app.js*
 
 ```js
-function init(){
+var CLI = require('./components/CLIs')
+
+CLI()
+```
+
+*components/CLI.js*
+
+```js
+function CLI(){
     document.write('from init function')
 }
 
-init()
+module.exports = CLI
 ```
+

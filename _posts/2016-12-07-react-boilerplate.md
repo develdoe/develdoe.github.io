@@ -13,11 +13,11 @@ This improves resource management compared to the vary basic approach discussed 
 *Make dir*:  
 
 ```bash
-$ mkdir reactEnv
+$ mkdir react-boilerplate
 ```
 
 ```
-$ cd reactEnv
+$ cd react-boilerplate
 ```
 
 *NPM modules*:

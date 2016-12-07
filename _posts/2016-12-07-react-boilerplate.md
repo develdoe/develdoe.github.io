@@ -27,15 +27,15 @@ $ npm init
 ```
 
 ```bash
+$ npm install -g reload
+```
+
+```bash
 $ npm install -g webpack@1.12.13
 ```
 
 ```bash
 $ npm install --save react@0.14.7 react-dom@0.14.7
-```
-
-```bash
-$ npm install -g reload
 ```
 
 ```bash

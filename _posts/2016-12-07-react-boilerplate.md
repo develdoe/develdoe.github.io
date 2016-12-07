@@ -10,7 +10,7 @@ In this short article we are going to explore how to setup a React environment w
 This improves resource management compared to the vary basic approach discussed in [Simple Code Example](http://develdoe.com/2016/react-simple-code-example/).
 
 
-*Make dir*:  
+**Make**:  
 
 ```bash
 $ mkdir react-boilerplate
@@ -20,7 +20,7 @@ $ mkdir react-boilerplate
 $ cd react-boilerplate
 ```
 
-*NPM modules*:
+**Modules**:
 
 ```bash
 $ npm init
@@ -44,7 +44,7 @@ $ npm install --save-dev webpack@1.12.13 babel-core@6.5.1 babel-loader@6.2.2 bab
 
 
 
-*Files*:
+**Files**
 
 ```
 $ mkdir public app app/component
@@ -73,7 +73,7 @@ module.exports = {
             {
                 loader: 'babel-loader',
                 query: {
-                    presets: ['react','es2015']
+                    presets: ['react','es2015','stage-0']
                 },
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/
@@ -81,7 +81,6 @@ module.exports = {
         ]
     }
 }
-
 ```
 
 **./public/index.html** 
@@ -105,7 +104,7 @@ module.exports = {
 
 ```
 
-*app/entry.jsx*
+*./app/entry.jsx*
 
 ```js
 var React       = require('react'),

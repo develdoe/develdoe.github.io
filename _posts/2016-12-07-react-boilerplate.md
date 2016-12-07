@@ -10,7 +10,7 @@ In this short article we are going to explore how to setup a React environment w
 This improves resource management compared to the vary basic approach discussed in [Simple Code Example](http://develdoe.com/2016/react-simple-code-example/).
 
 
-**Make**:  
+**Make**  
 
 ```bash
 $ mkdir react-boilerplate
@@ -20,7 +20,7 @@ $ mkdir react-boilerplate
 $ cd react-boilerplate
 ```
 
-**Modules**:
+**Modules**
 
 ```bash
 $ npm init

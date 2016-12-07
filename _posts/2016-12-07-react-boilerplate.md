@@ -5,7 +5,7 @@ title: React - Boilerplate
 category:
   - react
 ---
-In this short article we are going to explore how to setup a React environment with Webpack.
+In this article we are going to explore how to setup a React environment with Webpack and reload.
 
 This improves resource management compared to the vary basic approach discussed in [Simple Code Example](http://develdoe.com/2016/react-simple-code-example/).
 

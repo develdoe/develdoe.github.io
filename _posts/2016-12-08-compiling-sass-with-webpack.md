@@ -10,7 +10,7 @@ Webpack is the Swiss-army knife of Web bundler. It can  handle SASS compilation 
 **Install**
 
 ```bash
-npm install --save-dev sass-loader css-loader style-loader
+npm install --save-dev sass-loader css-loader style-loader node-sass
 ```
 
 **Add a new loader**

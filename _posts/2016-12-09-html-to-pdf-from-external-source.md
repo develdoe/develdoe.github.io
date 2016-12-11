@@ -16,7 +16,7 @@ $ npm install i -S html-pdf requestify
 ```js
 var pdf         = require('html-pdf'),
     requestify = require('requestify'),
-    externalURL = '{external URL}'
+    externalURL = {external URL}
 
 requestify.get(externalURL).then(function(res) {
     console.log('generating...')

@@ -27,9 +27,7 @@ You must have mongo installed:
 
 **server.js**
 
-```bash
-// file: server.js
-
+```js
 // Base Setup
 // =============================================================================
 
@@ -38,11 +36,16 @@ var express     = require('express')
 var app         = express()
 var bodyParser  = require('body-parser')
 
+// Database  -------------------------------
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/db')
 
+var Bear = require('./app/models/bear')
+
+// Middleware  -------------------------------
+
 // body parser will let us get data from a post
-app.use(bodyParser.urlencode({extended:true}))
+app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 
 var port = process.env.PORT || 8080
@@ -51,7 +54,7 @@ var port = process.env.PORT || 8080
 // =============================================================================
 var router = express.Router()
 
-// test our routes. (accessed at GET http://localhost:8080/api)
+// test our routes. (accessed at /api)
 router.get('/',function(req,res){
     res.json({message: 'response from api'})
 })
@@ -66,3 +69,6 @@ app.listen(port)
 console.log('Magic on port: ' + port)
 ```
 
+**/app/models/bear.js**
+
+```js

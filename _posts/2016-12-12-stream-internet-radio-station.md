@@ -37,4 +37,7 @@ cd mp3
 vim playlist.m3u // add files with path
 sudo cp /usr/share/doc/ezstream/examples/ezstream_mp3.xml ~/mp3/ezstream_mp3.xml
 sudo vim /root/ezstream_mp3.xml // edit the xml file for your purps
+sudo chmod 644 ezstream_mp3.xml
+sudo screen -S "stream"
+ezstream -c ezstream_mp3.xml
 ```

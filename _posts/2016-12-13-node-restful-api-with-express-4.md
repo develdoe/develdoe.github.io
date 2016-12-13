@@ -28,25 +28,37 @@ You must have mongo installed:
 **server.js**
 
 ```js
+// file: server.js
+// author: Morgan A Ray @ wimse
+// mail: me@andreeray.se
+// company: wimse
+// web: http:/wimse.se
+// mail: info@wimse.se
+// date: 2016 winter
+// description: server for the radio station
+
 // Base Setup
 // =============================================================================
-
 
 var express     = require('express')
 var app         = express()
 var bodyParser  = require('body-parser')
+var Bear        = require('./app/models/bear')
 
-// Database  -------------------------------
+// Database connection
+// ----------------------------------------------------
+
 var mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/db')
 
-var Bear = require('./app/models/bear')
-
-// Middleware  -------------------------------
-
 // body parser will let us get data from a post
+// ----------------------------------------------------
+
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
+
+// Setup
+// ----------------------------------------------------
 
 var port = process.env.PORT || 8080
 
@@ -54,12 +66,37 @@ var port = process.env.PORT || 8080
 // =============================================================================
 var router = express.Router()
 
-// test our routes. (accessed at /api)
+// middleware
+// ----------------------------------------------------
+
+app.use(function(req,res,next){
+    console.log('hitting the api')
+    next()
+})
+
+// ----------------------------------------------------
+
 router.get('/',function(req,res){
     res.json({message: 'response from api'})
 })
 
-// Register routes -------------------------------
+// /api/bears
+
+router.route('/bears')
+
+    .post(function(req,res){
+            var bear = new Bear()
+            bear.name = req.body.name
+
+            bear.save(function(err){
+                if(err) res.send(err)
+                res.json({message: 'bear created'})
+            })
+    })
+
+
+// Register routes
+// ----------------------------------------------------
 
 app.use('/api', router)
 

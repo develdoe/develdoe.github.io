@@ -34,10 +34,12 @@ You must have mongo installed:
 // =============================================================================
 
 
-var express     = require('express').
-    app         = express(),
-    bodyParser  = require('body-parser');
+var express     = require('express')
+var app         = express()
+var bodyParser  = require('body-parser')
 
+var mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost:27017/db')
 
 // body parser will let us get data from a post
 app.use(bodyParser.urlencode({extended:true}))

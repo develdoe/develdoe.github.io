@@ -29,13 +29,6 @@ You must have mongo installed:
 
 ```js
 // file: server.js
-// author: Morgan A Ray @ wimse
-// mail: me@andreeray.se
-// company: wimse
-// web: http:/wimse.se
-// mail: info@wimse.se
-// date: 2016 winter
-// description: server for the radio station
 
 // Base Setup
 // =============================================================================

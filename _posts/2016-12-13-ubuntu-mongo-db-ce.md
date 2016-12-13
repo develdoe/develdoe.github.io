@@ -41,8 +41,16 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 ```
 
-**Start**
+**Start, Stop, Restart**
 
 ```bash
 sudo service mongod start
+sudo service mongod stop
+sudo service mongod restart
+```
+
+**Verify**
+
+```bash
+vim /var/log/mongodb/mongod.log
 ```

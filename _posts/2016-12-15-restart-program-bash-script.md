@@ -32,11 +32,11 @@ crontab -e
 *The most often that the script can run in cron is every minute.*
 
 ```
-* * * * * ~/launch.sh
+* * * * * {path}/launch.sh
 ```
 
 **Every five minutes would be set up like this:**
 
 ```
-*/5 * * * * ~/launch.sh
+*/5 * * * * {path}/launch.sh
 ```

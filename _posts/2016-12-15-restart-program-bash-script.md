@@ -15,7 +15,7 @@ ps auxw | grep icecast2 | grep -v grep > /dev/null
 
 if [ $? != 0 ]
 then
-        /etc/init.d/apache2 start > /dev/null
+        /etc/init.d/icecast2 start > /dev/null
 fi
 ```
 

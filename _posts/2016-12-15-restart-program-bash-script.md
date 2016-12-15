@@ -11,7 +11,7 @@ vim launch.sh
 ```sh
 #!/bin/sh
 
-ps auxw | grep apache2 | grep -v grep > /dev/null
+ps auxw | grep icecast2 | grep -v grep > /dev/null
 
 if [ $? != 0 ]
 then
@@ -20,7 +20,7 @@ fi
 ```
 
 ```bash
-chmod +x launch.sh
+chmod 0755 launch.sh
 ```
 
 *The cron utility allows us to schedule at what intervals the script should execute.*

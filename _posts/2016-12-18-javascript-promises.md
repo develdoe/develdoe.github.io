@@ -27,8 +27,10 @@ getTempCallback('Gothenburg', function(err,temp){
 ```js
 function getTempPromise(location){
     return new Promise(function(resolve,reject){
-        resolve(79)
-        reject('City not found')
+        setTimeout(function(){
+            resolve(79)
+            reject('City not found')
+        }, 1000)
     })
 }
 

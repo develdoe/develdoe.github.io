@@ -5,38 +5,20 @@ title: JavaScript - Promises
 category:
   - js
 ---
-## The old way
-
 ```js
-function getTempCallback(location,callback){
-    callback(undefined,78) // or callback('City not found')
-}
-
-getTempCallback('Gothenburg', function(err,temp){
-    if(err){
-        console.log('err', err)
-    } else{
-        console.log("success", temp)
-    }
-})
-```
-
-## With Promises
-
-```js
-function getTempPromise(location){
+function addPromise(a,b){
     return new Promise(function(resolve,reject){
-        setTimeout(function(){
-            resolve(79)     // or reject('City not found')
-        }, 1000)
+        if(typeof a === 'number' && typeof b === 'number'){
+            resolve(a+b)
+        } else {
+            reject("these are not two numbers")
+        }
     })
 }
 
-getTempPromise('Gothenburg').then(function(temp){
-    console.log('promise success', temp)
+addPromise(2,2).then(function(temp){
+    console.log('promise success: ', temp)
 }, function(err){
     console.log('promise error', err)
 })
 ```
-
-**Notice how you can't write code that both succed and fails with promise! resolv and reject can only be execute once, and the code above will only show promise success!**

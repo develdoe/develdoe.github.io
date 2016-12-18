@@ -9,8 +9,7 @@ category:
 
 ```js
 function getTempCallback(location,callback){
-    callback(undefined,78)
-    callback('City not found')
+    callback(undefined,78) // or callback('City not found')
 }
 
 getTempCallback('Gothenburg', function(err,temp){
@@ -28,8 +27,7 @@ getTempCallback('Gothenburg', function(err,temp){
 function getTempPromise(location){
     return new Promise(function(resolve,reject){
         setTimeout(function(){
-            resolve(79)
-            reject('City not found')
+            resolve(79)     // or reject('City not found')
         }, 1000)
     })
 }

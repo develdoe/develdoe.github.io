@@ -16,9 +16,15 @@ function addPromise(a,b){
     })
 }
 
-addPromise(2,2).then(function(temp){
-    console.log('promise success: ', temp)
-}, function(err){
-    console.log('promise error', err)
+addPromise(2,2).then(function(response){
+    console.log('promise success: ', response)
+}, function(response){
+    console.log('promise error', response)
+})
+
+addPromise("ray",2).then(function(response){
+    console.log('promise success: ', response)
+}, function(response){
+    console.log('promise error', response)
 })
 ```

@@ -6,6 +6,8 @@ socialImg: react
 category:
   - react
 ---
+There are two types of data that get passed into a component, there are props and there is state. Props get passed in as you initialize a component, while a state is internally maintained and updated. 
+
 ```js
 var Greeter = React.createClass({
 
@@ -52,5 +54,3 @@ function withdraw(account, amount) {
 ```
 
 **React is pretty flexible but it has a single strict rule: All React components must act like pure functions with respect to their props.**
-
-

@@ -53,5 +53,3 @@ var aVar = "aVar"
 
 ReactDOM.render(<Greeter name={aVar}  />, document.getElementById("app"))
 ```
-
-**Note that we are not storing the ref values in variables to optimize the source code. This is just so that it is easier to understand. You should optimize your code base.**

@@ -9,7 +9,6 @@ category:
 There are two types of data that get passed into a component, there are props and there is state. Props get passed in as you initialize a component, while a state is internally maintained and updated. 
 
 ```js
-
 var Greeter = React.createClass({
 
     getDefaultProps: function () {
@@ -29,6 +28,7 @@ var Greeter = React.createClass({
         this.setState({
             name: this.refs.input.value
         })
+        this.refs.input.value = ""
     },
 
     render: function() {

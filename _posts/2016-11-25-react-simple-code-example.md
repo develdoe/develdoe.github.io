@@ -5,6 +5,10 @@ title: React - Simple Code Example
 category:
   - react
 ---
+This article shows you the source code needed to create your vary first, basic, react app. 
+
+Note: that this project is only good for you to try and use to understand a little about react. You should head over to [React - Boilerplate](http://develdoe.com/2016/react-boilerplate/) for a real world application.
+
 
 html:
 

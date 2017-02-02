@@ -129,8 +129,8 @@ Run:
 webpack -w
 ```
 
-Upen new terminal window:
+new terminal window:
 
 ```bash
-reload -b
+node server.js
 ```

@@ -43,7 +43,7 @@ $ npm install --save-dev webpack@1.12.13 babel-core@6.5.1 babel-loader@6.2.2 bab
 **Files**
 
 ```
-$ mkdir public app app/component
+$ mkdir public app app/components
 ```
 
 ```

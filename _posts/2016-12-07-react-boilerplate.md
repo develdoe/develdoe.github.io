@@ -105,7 +105,7 @@ module.exports = {
 
     <div id=app></div>
 
-    <script src=bundle.js></script>
+    <script src=/js/bundle.js></script>
 
 
 ```

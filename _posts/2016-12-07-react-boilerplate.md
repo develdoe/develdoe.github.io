@@ -49,6 +49,21 @@ $ mkdir public app app/components
 ```
 $ touch public/index.html app/entry.jsx webpack.config.js server.js
 ```
+
+**./server.js**
+
+```js
+var express = require('express'),
+    app     = express()
+
+
+app.use(express.static('public'))
+
+app.listen(4000, function(){
+    console.log('Express server is up on port: 4000')
+})
+```
+
 **./webpack.config.js**
 
 ```js

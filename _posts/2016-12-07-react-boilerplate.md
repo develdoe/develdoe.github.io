@@ -27,10 +27,6 @@ $ npm init
 ```
 
 ```bash
-$ npm install -g reload
-```
-
-```bash
 $ npm install -g webpack@1.12.13
 ```
 

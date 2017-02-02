@@ -47,7 +47,7 @@ $ mkdir public app app/components
 ```
 
 ```
-$ touch public/index.html app/entry.jsx webpack.config.js
+$ touch public/index.html app/entry.jsx webpack.config.js server.js
 ```
 **./webpack.config.js**
 

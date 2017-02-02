@@ -31,7 +31,7 @@ $ npm install -g webpack@1.12.13
 ```
 
 ```bash
-$ npm install --save react@0.14.7 react-dom@0.14.7
+$ npm install --save react@0.14.7 react-dom@0.14.7 express
 ```
 
 ```bash

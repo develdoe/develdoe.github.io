@@ -99,19 +99,14 @@ module.exports = {
 ```html
 <!DOCTYPE html>
 <html>
-<head>
+<head> <meta charset=utf-8> </head>
 
-    <meta charset=utf-8>
-
-</head>
 <body>
 
     <div id=app></div>
 
     <script src=bundle.js></script>
 
-</body>
-</html>
 
 ```
 

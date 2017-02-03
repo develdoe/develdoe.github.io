@@ -18,15 +18,15 @@ module.exports = {
     entry: './app/entry.jsx',
     output: {
         path: __dirname,
-        filename: './public/js/bundle.js'
+        filename: './public/bundle.js'
     },
     resolve: {
         root: __dirname,
         alias: {
-            Main    : 'app/component/Main.jsx',
-            Nav     : 'app/component/Nav.jsx',
-            Index   : 'app/component/Index.jsx',
-            About   : 'app/component/About.jsx'
+            Main:  'app/components/Main.jsx',
+            Nav:   'app/components/Nav.jsx',
+            Index: 'app/components/Index.jsx',
+            About: 'app/components/About.jsx'
         },
         extensions: ['','.js','.jsx']
     },
@@ -50,8 +50,11 @@ module.exports = {
 ```js
 var React                                 = require('react'),
     ReactDOM                              = require('react-dom'),
-    {Route,Router,IndexRoute,hashHistory} = require('react-router'),
-    Main = require('Main'), Index = require('Index'), About = require('About')
+    Main 								  = require('Main'), 
+    Index 								  = require('Index'), 
+    About 								  = require('About'),
+    {Route,Router,IndexRoute,hashHistory} = require('react-router')
+    
 
 
 ReactDOM.render(
@@ -68,13 +71,15 @@ ReactDOM.render(
 **Main.jsx**
 
 ```js
-var React = require('react'),
-    Nav   = require('Nav')
+var
+React = require('react'),
+Nav   = require('Nav')
 
-module.exports = React.createClass({
-    render: function(){
+module.exports  = React.createClass({
+    render: function () {
         return (
-            <div className="component main" style={{border:'1px solid red'}}> main component
+            <div className="component" id="main" >
+                <span>main component</span>
                 <Nav/>
                 {this.props.children}
             </div>
@@ -86,15 +91,14 @@ module.exports = React.createClass({
 **Nav.jsx**
 
 ```js
-var React = require('react'),
-    {Link, IndexLink} = require('react-router')
+var
+React = require('react')
 
-module.exports = React.createClass({
-    render: function(){
+module.exports  = React.createClass({
+    render: function () {
         return (
-            <div className="component about" style={{border:'1px solid green'}}>nav component
-                <IndexLink activeClassName="active" to="/">index</IndexLink>
-                <Link activeClassName="active" to="about">about</Link>
+            <div className="component" id="nav">
+                <span>nav component</span>
             </div>
         )
     }
@@ -104,12 +108,15 @@ module.exports = React.createClass({
 **index.jsx**
 
 ```js
-var React = require('react')
+var
+React = require('react')
 
-module.exports = React.createClass({
-    render: function(){
+module.exports  = React.createClass({
+    render: function () {
         return (
-            <div className="component index" style={{border:'1px solid blue'}}>index component</div>
+            <div className="component" id="index">
+                <span>index component</span>
+            </div>
         )
     }
 })
@@ -118,14 +125,16 @@ module.exports = React.createClass({
 **about.jsx**
 
 ```js
-var React = require('react')
+var
+React = require('react')
 
-module.exports = React.createClass({
-    render: function(){
+module.exports  = React.createClass({
+    render: function () {
         return (
-            <div className="component about" style={{border:'1px solid blue'}}>about component</div>
+            <div className="component" id="about">
+                <span>about component</span>
+            </div>
         )
     }
 })
-``` 
-
+```

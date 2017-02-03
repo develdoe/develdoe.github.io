@@ -48,20 +48,20 @@ module.exports = {
 **entry.js**
 
 ```js
-var React                                 = require('react'),
-    ReactDOM                              = require('react-dom'),
-    Main 								  = require('Main'), 
-    Index 								  = require('Index'), 
-    About 								  = require('About'),
-    {Route,Router,IndexRoute,hashHistory} = require('react-router')
-    
+var
+React       = require('react'),
+ReactDOM    = require('react-dom'),
+Main        = require('Main'),
+Index       = require('Index'),
+About       = require('About'),
+{Route, Router, IndexRoute, hashHistory} = require('react-router')
 
 
 ReactDOM.render(
     <Router history={hashHistory}>
         <Route path="/" component={Main}>
-            <Route path="about" component={About}></Route>
             <IndexRoute component={Index}></IndexRoute>
+            <Route path="about" component={About}></Route>
         </Route>
     </Router>,
     document.getElementById('app')

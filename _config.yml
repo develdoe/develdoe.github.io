@@ -22,6 +22,8 @@ url: "http://develdoe.com/"
 twitter_username: develdoe
 github_username:  andreedeveldoeray
 
+permalink:       /:year/:title/
+
 # Build settings
 markdown: kramdown
 highlighter: rouge

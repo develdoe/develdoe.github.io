@@ -34,7 +34,13 @@ $on-laptop:        800px !default;
     @content;
   }
 }
-
+#site_search{
+    float: right;
+}
+#site_search input{
+    min-height: 26px;
+    margin: 15px 0;
+}
 // Import partials.
 @import
   "minima/base",

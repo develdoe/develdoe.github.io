@@ -31,3 +31,85 @@ exclude:
   - Gemfile.lock
 
 port: 2000
+
+defaults:
+    -
+        scope:
+            path: "" # empty string for all files
+            type: pages
+        values:
+            layout: default
+    -
+        scope:
+            path: "" # empty string for all files
+            type: posts
+        values:
+            layout: post
+    -
+        scope:
+            path: ""
+            type: drafts
+        values:
+            layout: post
+
+
+prose:
+    rooturl: ''
+    siteurl: 'http://develdoe.com'
+    relativeLinks: 'http://develdoe.com/links.jsonp'
+    ignore:
+        - _includes
+        - _layouts
+        - _site
+        - assets
+        - _config.yml
+        - about.md
+        - CNAME
+        - feed.xml
+        - index.html
+        - LICENSE
+        - README.md
+        - .gitignore
+        - img
+    media: 'img/posts'
+    metadata:
+        _posts:
+            - name: 'title'
+              field:
+                  element: 'text'
+                  type: 'text'
+            - name: 'socialImg'
+              field:
+                  element: 'text'
+                  label: 'Social image'
+                  type: 'text'
+            - name: 'date'
+              field:
+                  element: 'hidden'
+                  value: CURRENT_DATETIME
+            - name: 'published'
+              field:
+                  element: 'checkbox'
+                  label: 'Publicerad'
+                  value: 'true'
+            - name: 'category'
+              field:
+                  element: 'multiselect'
+                  label: 'Kategori'
+                  options:
+                      - name: 'JavaScript'
+                        value: 'JavaScript'
+                      - name: 'Development'
+                        value: 'Development'
+                      - name: 'Jekyll'
+                        value: 'Jekyll'
+                      - name: 'Node'
+                        value: 'Node'
+                      - name: 'React'
+                        value: 'React'
+                      - name: 'CSS'
+                        value: 'CSS'
+                      - name: 'Linux'
+                        value: 'Linux'
+                      - name: 'OSX'
+                        value: 'OSX'

@@ -63,18 +63,21 @@ html,body,#app,#main{
 html {
   box-sizing: border-box;
 }
-
+#nav{
+	height: 10%;
+}
 .component{
-	padding: 5px;
+	padding: 15px;
 }
 #main{
 	margin: 0;
+	padding: 0;
 }
 a{
 	margin-right: 5px;
 }
 .page{
-	height: 100%;
+	height: 90%;
 }
 
 ```

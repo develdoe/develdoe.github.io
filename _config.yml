@@ -13,7 +13,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Andree "DevelDoe" Ray - this is my journal
+title: WIMSE - Developer
 email: me@develdoe.com
 author: Andree DevelDoe Ray
 description: "Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal."

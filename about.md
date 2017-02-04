@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-{site.description}
+{{site.description}}

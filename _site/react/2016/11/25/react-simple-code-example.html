@@ -1,0 +1,98 @@
+<p>This article shows you the source code needed to create your vary first, basic, react app.</p>
+
+<p>Note: that this project is only good for you to try and use to understand a little about react. You should head over to <a href="http://develdoe.com/2016/react-boilerplate/">React - Boilerplate</a> for a real world application.</p>
+
+<p>html:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">en</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;head&gt;</span>
+
+<span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">utf-8</span><span class="nt">&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">stylesheet</span> <span class="na">href=</span><span class="s">cli.css</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="nt">&lt;/head&gt;</span>
+
+<span class="nt">&lt;body&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">app</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">text/babel</span> <span class="na">src=</span><span class="s">app.jsx</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+</code></pre>
+</div>
+
+<p>app.jsx:</p>
+
+<pre><code class="language-jsx">var Output = React.createClass({
+    render: function(){
+        return (
+            &lt;section&gt;
+                &lt;span&gt;{this.props.output}&lt;/span&gt;
+            &lt;/section&gt;
+        )
+    }
+})
+var Input = React.createClass({
+
+    submit: function(e){
+        e.preventDefault()
+        var state = {}
+        if (this.refs.input.value.length &gt; 0) {
+            state.output  = this.refs.input.value
+            this.refs.input.value = ''
+        }
+        this.props.updateState(state)
+    },
+    render: function(){
+        return (
+            &lt;section&gt;
+                &lt;form onSubmit={this.submit}&gt; &lt;input type="text" ref="input" autoFocus /&gt; &lt;/form&gt;
+            &lt;/section&gt;
+        )
+    }
+})
+var CLI = React.createClass({
+
+    getDefaultProps: function(){
+        return {
+            output: '',
+        }
+    },
+    getInitialState: function(){
+        return {
+            output: this.props.output
+        }
+    },
+    updateState : function(updates) {
+        this.setState(updates)
+    },
+    render: function() {
+        return (
+            &lt;div&gt;
+                &lt;Output output={this.state.output}/&gt;
+                &lt;Input updateState={this.updateState}/&gt;
+            &lt;/div&gt;
+        )
+    }
+})
+
+ReactDOM.render(&lt;CLI/&gt;,document.getElementById('app'))
+</code></pre>
+
+<p>server.js:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express'</span><span class="p">),</span>
+    <span class="nx">app</span>     <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="s1">'public'</span><span class="p">))</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">4000</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Express server is up on port: 4000'</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+</div>

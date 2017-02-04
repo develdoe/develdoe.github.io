@@ -1,0 +1,60 @@
+<p>The table below lists the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">SETTING</th>
+      <th style="text-align: right">OPTIONS AND FLAGS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Regeneration</strong> Enable auto-regeneration of the site when files are modified.</td>
+      <td style="text-align: right">-w, –[no-]watch</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Configuration</strong> Specify config files instead of using _config.yml automatically. Settings in later files override settings in earlier files.</td>
+      <td style="text-align: right">–config FILE1[,FILE2,…]</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Drafts</strong> Process and render draft posts.</td>
+      <td style="text-align: right">show_drafts: BOOL –drafts</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Environment</strong> Use a specific environment value in the build.</td>
+      <td style="text-align: right">JEKYLL_ENV=production</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Future</strong> Publish posts or collection documents with a future date.</td>
+      <td style="text-align: right">future: BOOL –future</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>LSI</strong> Produce an index for related posts.</td>
+      <td style="text-align: right">lsi: BOOL –lsi</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Limit Posts</strong> Limit the number of posts to parse and publish.</td>
+      <td style="text-align: right">limit_posts: NUM –limit_posts NUM</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Force polling</strong> Force watch to use polling.</td>
+      <td style="text-align: right">–force_polling</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Verbose output</strong> Print verbose output.</td>
+      <td style="text-align: right">-V, –verbose</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Silence Output</strong> Silence the normal output from Jekyll during a build</td>
+      <td style="text-align: right">-q, –quiet</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Incremental build</strong> Enable the experimental incremental build feature. Incremental build only re-builds posts and pages that have changed, resulting in significant performance improvements for large sites, but may also break site generation in certain cases.</td>
+      <td style="text-align: right">incremental: BOOL -I, –incremental</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Liquid profiler</strong> Generate a Liquid rendering profile to help you identify performance bottlenecks.</td>
+      <td style="text-align: right">profile: BOOL –profile</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,83 @@
+<p>Jekyll is, at its core, a text transformation engine.</p>
+
+<p>You give it text written in your favorite markup language, be that Markdown, Textile, or just plain HTML, and it churns that through a layout or a series of layout files.</p>
+
+<p>Throughout that process you can tweak how you want the site URLs to look, what data gets displayed in the layout, and more. A static web site is the final product.</p>
+
+<p>A basic Jekyll site looks something like this:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>.
+├── _config.yml
+├── _drafts
+|   ├── begin-with-the-crazy-ideas.md
+|   └── on-simplicity-in-technology.md
+├── _includes
+|   ├── footer.html
+|   └── header.html
+├── _layouts
+|   ├── default.html
+|   └── post.html
+├── _posts
+|   ├── 2007-10-29-why-every-programmer-should-play-nethack.md
+|   └── 2009-04-26-barcamp-boston-4-roundup.md
+├── _data
+|   └── members.yml
+├── _site
+├── .jekyll-metadata
+└── index.html
+</code></pre>
+</div>
+
+<p>An overview of what each of these does:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>FILE / DIRECTORY</th>
+      <th style="text-align: center">DESCRIPTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>_config.yml</td>
+      <td style="text-align: center">Stores configuration data. Many of these options can be specified from the command line executable but it’s easier to specify them here so you don’t have to remember them.</td>
+    </tr>
+    <tr>
+      <td>_drafts</td>
+      <td style="text-align: center">Drafts are unpublished posts. The format of these files is without a date: title.MARKUP.</td>
+    </tr>
+    <tr>
+      <td>_includes</td>
+      <td style="text-align: center">These are the partials that can be mixed and matched by your layouts and posts to facilitate reuse.</td>
+    </tr>
+    <tr>
+      <td>_layouts</td>
+      <td style="text-align: center">These are the templates that wrap posts. Layouts are chosen on a post-by-post basis in the YAML Front Matter</td>
+    </tr>
+    <tr>
+      <td>_posts</td>
+      <td style="text-align: center">Your dynamic content, so to speak. The naming convention of these files is important, and must follow the format: YEAR-MONTH-DAY-title.MARKUP. The permalinks can be customized for each post, but the date and markup language are determined solely by the file name.</td>
+    </tr>
+    <tr>
+      <td>_data</td>
+      <td style="text-align: center">Well-formatted site data should be placed here. The Jekyll engine will autoload all YAML files in this directory (using either the .yml, .yaml, .json or  .csv formats and extensions) and they will be accessible via <code class="highlighter-rouge">site.data</code>. If there’s a file members.yml under the directory, then you can access contents of the file through site.data.members.</td>
+    </tr>
+    <tr>
+      <td>_site</td>
+      <td style="text-align: center">This is where the generated site will be placed (by default) once Jekyll is done transforming it. It’s probably a good idea to add this to your .gitignore file.</td>
+    </tr>
+    <tr>
+      <td>.jekyll-metadata</td>
+      <td style="text-align: center">This helps Jekyll keep track of which files have not been modified since the site was last built, and which files will need to be regenerated on the next build. This file will not be included in the generated site. It’s probably a good idea to add this to your .gitignore file.</td>
+    </tr>
+    <tr>
+      <td>index.html and other HTML, Markdown, Textile files</td>
+      <td style="text-align: center">Provided that the file has a YAML Front Matter section, it will be transformed by Jekyll. The same will happen for any .html, .markdown,  .md, or .textile file in your site’s root directory or directories not listed above.</td>
+    </tr>
+    <tr>
+      <td>Other Files/Folders</td>
+      <td style="text-align: center">Every other directory and file except for those listed above—such as  css and images folders,  favicon.ico files, and so forth—will be copied verbatim to the generated site.</td>
+    </tr>
+  </tbody>
+</table>
+

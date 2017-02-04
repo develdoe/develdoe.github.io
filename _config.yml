@@ -1,116 +1,33 @@
-destination: ../site
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-name: Develdoe, This is my journal
-description: Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+title: develdoe.com
+email: me@develdoe.com
+description: > # Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://develdoe.com/"
+twitter_username: develdoe
+github_username:  andreedeveldoeray
 
-# Switches
-fontawesome: true
-twitter: true
-
-meta_description: "Your New Jekyll Site, Blogging about stuffs"
-
-aboutPage: false
-
+# Build settings
 markdown: kramdown
 highlighter: rouge
+gems:
+  - jekyll-feed
+exclude:
+  - Gemfile
+  - Gemfile.lock
 
-
-gems: [jekyll-paginate]
-paginate: 100
-paginate_path: "page:num"
-
-
-baseurl: /
-domain_name: 'http://develdoe.com'
-google_analytics:
-disqus: true
-disqus_shortname: 'develdoe-com'
-
-# Details for the RSS feed generator
-url:            'http://develdoe.com'
-author:         'Devel Doe'
-authorTwitter:  'develdoe'
-
-permalink:       /:year/:title/
-
-defaults:
-    -
-        scope:
-            path: "" # empty string for all files
-            type: pages
-        values:
-            layout: default
-    -
-        scope:
-            path: "" # empty string for all files
-            type: posts
-        values:
-            layout: post
-    -
-        scope:
-            path: ""
-            type: drafts
-        values:
-            layout: post
-
-
-prose:
-    rooturl: ''
-    siteurl: 'http://develdoe.com'
-    relativeLinks: 'http://develdoe.com/links.jsonp'
-    ignore:
-        - _includes
-        - _layouts
-        - _site
-        - assets
-        - _config.yml
-        - about.md
-        - CNAME
-        - feed.xml
-        - index.html
-        - LICENSE
-        - README.md
-        - .gitignore
-        - img
-    media: 'img/posts'
-    metadata:
-        _posts:
-            - name: 'title'
-              field:
-                  element: 'text'
-                  type: 'text'
-            - name: 'socialImg'
-              field:
-                  element: 'text'
-                  label: 'Social image'
-                  type: 'text'
-            - name: 'date'
-              field:
-                  element: 'hidden'
-                  value: CURRENT_DATETIME
-            - name: 'published'
-              field:
-                  element: 'checkbox'
-                  label: 'Publicerad'
-                  value: 'true'
-            - name: 'category'
-              field:
-                  element: 'multiselect'
-                  label: 'Kategori'
-                  options:
-                      - name: 'JavaScript'
-                        value: 'JavaScript'
-                      - name: 'Development'
-                        value: 'Development'
-                      - name: 'Jekyll'
-                        value: 'Jekyll'
-                      - name: 'Node'
-                        value: 'Node'
-                      - name: 'React'
-                        value: 'React'
-                      - name: 'CSS'
-                        value: 'CSS'
-                      - name: 'Linux'
-                        value: 'Linux'
-                      - name: 'OSX'
-                        value: 'OSX'
+port: 2000

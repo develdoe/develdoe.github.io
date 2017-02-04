@@ -1,0 +1,9 @@
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">event</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Event</span><span class="p">(</span><span class="s1">'build'</span><span class="p">);</span>
+
+<span class="c1">// Listen for the event.</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'build'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span> <span class="kc">false</span><span class="p">);</span>
+
+<span class="c1">// Dispatch the event.</span>
+<span class="nx">elem</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+</code></pre>
+</div>

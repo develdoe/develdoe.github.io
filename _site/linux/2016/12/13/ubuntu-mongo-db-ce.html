@@ -1,0 +1,51 @@
+<p><strong>key</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+</code></pre>
+</div>
+
+<p><strong>Create a list file</strong></p>
+
+<p><em>Ubuntu 12.04</em></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"deb http://repo.mongodb.org/apt/ubuntu precise/mongodb-org/3.4 multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+</code></pre>
+</div>
+
+<p><em>Ubuntu 14.04</em></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+</code></pre>
+</div>
+
+<p><em>Ubuntu 16.04</em></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+</code></pre>
+</div>
+
+<p><strong>Reload local packages</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo apt-get update
+</code></pre>
+</div>
+
+<p><strong>Install</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo apt-get install -y mongodb-org
+</code></pre>
+</div>
+
+<p><strong>Start, Stop, Restart</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>sudo service mongod start
+sudo service mongod stop
+sudo service mongod restart
+</code></pre>
+</div>
+
+<p><strong>Verify</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>vim /var/log/mongodb/mongod.log
+</code></pre>
+</div>

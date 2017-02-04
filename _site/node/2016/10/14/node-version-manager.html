@@ -1,0 +1,101 @@
+<h2 id="installation">Installation</h2>
+
+<p>First you’ll need to make sure your system has a c++ compiler. For OS X, Xcode will work, for Ubuntu, the build-essential and libssl-dev packages work.</p>
+
+<p>On OS X, if you have/had a “system” node installed and want to install modules globally, keep in mind that:</p>
+
+<ul>
+  <li>When using nvm you do not need sudo to globally install a module with npm -g, so instead of doing <code class="highlighter-rouge">sudo npm install -g grunt</code>, do instead <code class="highlighter-rouge">npm install -g grunt</code></li>
+  <li>If you have an ~/.npmrc file, make sure it does not contain any prefix settings.</li>
+  <li>Do not keep your previous “system” node install. This might cause version mismatches.</li>
+</ul>
+
+<p>To install or update nvm:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
+</code></pre>
+</div>
+
+<p>The script clones the nvm repository to ~/.nvm and adds the source line to your profile (~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc).</p>
+
+<p>Note: On OS X, if you get <code class="highlighter-rouge">nvm: command not found</code> after running the install script, your system may not have a [.bash_profile file] where the command is set up. Simply create one with <code class="highlighter-rouge">touch ~/.bash_profile</code> and run the install script again.</p>
+
+<p>To verify that nvm has been installed, do:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">command</span> -v nvm
+</code></pre>
+</div>
+
+<h2 id="usage">Usage</h2>
+
+<p>Install the latest release of node:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nvm install node
+</code></pre>
+</div>
+
+<p>Use the installed version:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nvm use node
+</code></pre>
+</div>
+
+<p>Or run it:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nvm run node --version
+</code></pre>
+</div>
+
+<p>Or, you can run any arbitrary command in a subshell with the desired version of node:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nvm <span class="nb">exec </span>4.2 node --version
+</code></pre>
+</div>
+
+<p>Get the path to the executable to where it was installed:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nvm which 5.0
+</code></pre>
+</div>
+
+<p>In place of a version pointer like “0.10” or “5.0” or “4.2.1”, you can use the following special default aliases with nvm install, nvm use, nvm run, nvm exec, nvm which, etc:</p>
+
+<ul>
+  <li>node: this installs the latest version of node</li>
+  <li>iojs: this installs the latest version of io.js</li>
+  <li>stable: this alias is deprecated, and only truly applies to node v0.12 and earlier. Currently, this is an alias for node.</li>
+  <li>unstable: this alias points to node v0.11 - the last “unstable” node release, since post-1.0, all node versions are stable. (in semver, versions communicate breakage, not stability).</li>
+</ul>
+
+<p>If you want to use the system-installed version of node, you can use the special default alias “system”:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nvm use system
+nvm run system --version
+</code></pre>
+</div>
+
+<p>Listing versions:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nvm ls
+</code></pre>
+</div>
+
+<p>If you want to see what versions are available to install:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nvm ls-remote
+</code></pre>
+</div>
+
+<p>To restore your PATH, you can deactivate it:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nvm deactivate
+</code></pre>
+</div>
+
+<p>To set a default Node version to be used in any new shell, use the alias ‘default’:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>nvm <span class="nb">alias </span>default node
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">nvm use</code> will not, by default, create a “current” symlink. Set $NVM_SYMLINK_CURRENT to “true” to enable this behavior, which is sometimes useful for IDEs. Note that using nvm in multiple shell tabs with this environment variable enabled can cause race conditions.</p>

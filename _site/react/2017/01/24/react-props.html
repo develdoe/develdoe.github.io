@@ -1,0 +1,48 @@
+<p>There are two types of data that get passed into a component, there are props and there is state. Props get passed in as you initialize a component, while a state is internally maintained and updated.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Greeter</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+
+    <span class="na">getDefaultProps</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">name</span><span class="p">:</span>    <span class="s1">'defaultNameProp'</span><span class="p">,</span>
+            <span class="na">message</span><span class="p">:</span> <span class="s1">'defaultMessageProp'</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">message</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="kd">var</span> <span class="nx">lname</span> <span class="o">=</span> <span class="s2">"Ray"</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Greeter</span> <span class="nx">name</span><span class="o">=</span><span class="p">{</span><span class="nx">lname</span><span class="p">}</span>  <span class="sr">/&gt;, document.getElementById</span><span class="se">(</span><span class="sr">"app"</span><span class="se">)</span><span class="err">)
+</span></code></pre>
+</div>
+
+<p><em>Components let you split the UI into independent, reusable pieces, and think about each piece in isolation. Conceptually, components are like JavaScript functions. They accept arbitrary inputs (called “props”) and return React elements describing what should appear on the screen.</em></p>
+
+<p><em>A component, it must never modify its own props. Consider this sum function:</em></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Such functions are called “pure” because they do not attempt to change their inputs, and always return the same result for the same inputs.</p>
+
+<p>In contrast, this function is impure because it changes its own input:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">withdraw</span><span class="p">(</span><span class="nx">account</span><span class="p">,</span> <span class="nx">amount</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">account</span><span class="p">.</span><span class="nx">total</span> <span class="o">-=</span> <span class="nx">amount</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>React is pretty flexible but it has a single strict rule: All React components must act like pure functions with respect to their props.</strong></p>

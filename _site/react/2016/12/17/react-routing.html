@@ -1,0 +1,127 @@
+<p>prerequisite: <a href="http://develdoe.com/2016/react-boilerplate/">basic react app</a></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install --save react-router
+</code></pre>
+</div>
+
+<p><strong>./webpack.config.js</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">entry</span><span class="p">:</span> <span class="s1">'./app/entry.jsx'</span><span class="p">,</span>
+    <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">path</span><span class="p">:</span> <span class="nx">__dirname</span><span class="p">,</span>
+        <span class="na">filename</span><span class="p">:</span> <span class="s1">'./public/bundle.js'</span>
+    <span class="p">},</span>
+    <span class="na">resolve</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">root</span><span class="p">:</span> <span class="nx">__dirname</span><span class="p">,</span>
+        <span class="na">alias</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">Main</span><span class="p">:</span>     <span class="s1">'app/components/Main.jsx'</span><span class="p">,</span>
+            <span class="na">Nav</span><span class="p">:</span>      <span class="s1">'app/components/Nav.jsx'</span><span class="p">,</span>
+            <span class="na">Index</span><span class="p">:</span>    <span class="s1">'app/components/Index.jsx'</span><span class="p">,</span>
+            <span class="na">About</span><span class="p">:</span>    <span class="s1">'app/components/About.jsx'</span><span class="p">,</span>
+            <span class="na">Examples</span><span class="p">:</span> <span class="s1">'app/components/Examples.jsx'</span>
+        <span class="p">},</span>
+        <span class="na">extensions</span><span class="p">:</span> <span class="p">[</span><span class="s1">''</span><span class="p">,</span><span class="s1">'.js'</span><span class="p">,</span><span class="s1">'.jsx'</span><span class="p">]</span>
+    <span class="p">},</span>
+    <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="na">loader</span><span class="p">:</span> <span class="s1">'babel-loader'</span><span class="p">,</span>
+                <span class="na">query</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="s1">'react'</span><span class="p">,</span><span class="s1">'es2015'</span><span class="p">,</span><span class="s1">'stage-0'</span><span class="p">]</span>
+                <span class="p">},</span>
+                <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">jsx</span><span class="se">?</span><span class="sr">$/</span><span class="p">,</span>
+                <span class="na">exclude</span><span class="p">:</span> <span class="sr">/</span><span class="se">(</span><span class="sr">node_modules|bower_components</span><span class="se">)</span><span class="sr">/</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>entry.js</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'react'</span><span class="p">),</span> <span class="nx">ReactDOM</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'react-dom'</span><span class="p">),</span>
+    <span class="nx">Main</span>  <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'Main'</span><span class="p">),</span> <span class="nx">Index</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'Index'</span><span class="p">),</span> <span class="nx">About</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'About'</span><span class="p">),</span> <span class="nx">Examples</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'Examples'</span><span class="p">),</span>
+    <span class="p">{</span><span class="nx">Route</span><span class="p">,</span> <span class="nx">Router</span><span class="p">,</span> <span class="nx">IndexRoute</span><span class="p">,</span> <span class="nx">hashHistory</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'react-router'</span><span class="p">)</span>
+
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">Router</span> <span class="nx">history</span><span class="o">=</span><span class="p">{</span><span class="nx">hashHistory</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="s2">"/"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Main</span><span class="p">}</span><span class="o">&gt;</span>
+            <span class="o">&lt;</span><span class="nx">IndexRoute</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Index</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="s2">"about"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">About</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="nx">Route</span> <span class="nx">path</span><span class="o">=</span><span class="s2">"examples"</span> <span class="nx">component</span><span class="o">=</span><span class="p">{</span><span class="nx">Examples</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/Route</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/Router&gt;</span><span class="err">,
+</span>    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'app'</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre>
+</div>
+
+<p><strong>Main.jsx</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'react'</span><span class="p">),</span> <span class="nx">Nav</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'Nav'</span><span class="p">)</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span>  <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"component"</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"main"</span> <span class="nx">style</span><span class="o">=&gt;</span>
+                <span class="o">&lt;</span><span class="nx">Nav</span><span class="o">/&gt;</span>
+                <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="p">}</span>
+            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p><strong>Nav.jsx</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'react'</span><span class="p">),</span> <span class="p">{</span><span class="nx">Link</span><span class="p">,</span> <span class="nx">IndexLink</span><span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'react-router'</span><span class="p">)</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span>  <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"component"</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"nav"</span> <span class="nx">style</span><span class="o">=&gt;</span>
+                <span class="o">&lt;</span><span class="nx">IndexLink</span> <span class="nx">activeClassName</span><span class="o">=</span><span class="s2">"active"</span> <span class="nx">activeStyle</span><span class="o">=</span> <span class="nx">to</span><span class="o">=</span><span class="s2">"/"</span><span class="o">&gt;</span><span class="nx">Get</span> <span class="nx">Weather</span><span class="o">&lt;</span><span class="sr">/IndexLink</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">activeClassName</span><span class="o">=</span><span class="s2">"active"</span> <span class="nx">activeStyle</span><span class="o">=</span> <span class="nx">to</span><span class="o">=</span><span class="s2">"/about"</span><span class="o">&gt;</span><span class="nx">About</span><span class="o">&lt;</span><span class="sr">/Link</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">Link</span> <span class="nx">activeClassName</span><span class="o">=</span><span class="s2">"active"</span> <span class="nx">activeStyle</span><span class="o">=</span> <span class="nx">to</span><span class="o">=</span><span class="s2">"/examples"</span><span class="o">&gt;</span><span class="nx">Examples</span><span class="o">&lt;</span><span class="sr">/Link</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p><strong>index.jsx</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'react'</span><span class="p">)</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span>  <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"component page"</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"index"</span> <span class="nx">style</span><span class="o">=&gt;</span>
+                <span class="o">&lt;</span><span class="nx">span</span><span class="o">&gt;</span><span class="nx">index</span> <span class="nx">component</span><span class="o">&lt;</span><span class="sr">/span</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p><strong>about.jsx</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">React</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'react'</span><span class="p">)</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span>  <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"component page"</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"about"</span> <span class="nx">style</span><span class="o">=&gt;</span>
+                <span class="o">&lt;</span><span class="nx">span</span><span class="o">&gt;</span><span class="nx">about</span> <span class="nx">component</span><span class="o">&lt;</span><span class="sr">/span</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>

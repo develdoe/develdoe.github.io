@@ -1,0 +1,209 @@
+<p>JavaScript is an object-oriented dynamic language with types and operators, standard built-in objects, and methods.</p>
+
+<p>Its syntax is based on the Java and C languages — so many structures from those languages apply to JavaScript as well.</p>
+
+<p>One of the key differences is that JavaScript does not have classes; instead, the class functionality is accomplished by object prototypes (see more about ES6 Classes).The other main difference is that functions are objects, giving functions the capacity to hold executable code and be passed around like any other object.</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// Anyting following double slashes is an English-Language comment.</span>
+<span class="c1">// Read Comments carfully: they explain tghe JS code.</span>
+
+<span class="c1">// A variable is a symbolic name for a value.</span>
+<span class="c1">// Variables are declared with the var keyword:</span>
+<span class="kd">var</span> <span class="nx">x</span><span class="p">;</span>				<span class="c1">// Declare a variable named x.</span>
+
+<span class="c1">// Values can be assigned to variables with an = sign.</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>				<span class="c1">// Now the variable x has the value 0.</span>
+<span class="nx">x</span>				<span class="c1">// =&gt; 0: A variable evaluates to its value.</span>
+
+<span class="c1">// JS supports several types of values.</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>				<span class="c1">// Numbers.</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>			<span class="c1">// Just one Number for integers and reals.</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="s2">"Hello World"</span><span class="p">;</span>		<span class="c1">// Strings of text in quotation marks.</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="s1">'JavaScript'</span><span class="p">;</span>		<span class="c1">// Single quote marks also delimit strings.</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="nx">trye</span><span class="p">;</span>			<span class="c1">// Boolean value.</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>			<span class="c1">// the other Boolean value.</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>			<span class="c1">// Null is a special value means "no value".</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>			<span class="c1">// Undefined is like null.</span>
+
+<span class="cm">/*
+ * Two inportant types that JS programs manipulate are objects and arrays.
+ */</span>
+
+<span class="c1">// JS's most importat data type is object. An object is an collection of name/value</span>
+<span class="c1">// pair, or a string value map.</span>
+<span class="kd">var</span> <span class="nx">book</span> <span class="o">=</span> <span class="p">{</span>			<span class="c1">// objects are enclosed in curley braces.</span>
+	<span class="na">topic</span><span class="p">:</span> <span class="s2">"JavaScript"</span><span class="p">,</span>	<span class="c1">// The property "topic" has the value "JavaScript".</span>
+	<span class="na">fat</span><span class="p">:</span> <span class="kc">true</span>		<span class="c1">// The propery "true" has the value true.</span>
+<span class="p">};</span>				<span class="c1">// The brace marks the end of the object.</span>
+
+<span class="c1">// Access the property of an object with . or []:</span>
+<span class="nx">book</span><span class="p">.</span><span class="nx">topic</span>			<span class="c1">// =&gt; "JavaScript"</span>
+<span class="nx">book</span><span class="p">[</span><span class="s2">"fat"</span><span class="p">]</span>			<span class="c1">// =&gt; true: another way to access property values.</span>
+<span class="nx">book</span><span class="p">.</span><span class="nx">author</span> <span class="o">=</span> <span class="s2">"Flanagan"</span><span class="p">;</span>	<span class="c1">// Create a new property by assignment.</span>
+<span class="nx">book</span><span class="p">.</span><span class="nx">contents</span> <span class="o">=</span> <span class="p">{};</span>		<span class="c1">// {} is an empty object with no properties.</span>
+
+<span class="c1">// JS also supports arrays (numrically indexed lists) of values:</span>
+<span class="kd">var</span> <span class="nx">primes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">];</span>	<span class="c1">// An array of 4 values, delimited with [ and ].</span>
+<span class="nx">primes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>			<span class="c1">// =&gt; 2: The first element (index 0) of the array.</span>
+<span class="nx">primes</span><span class="p">.</span><span class="nx">length</span>			<span class="c1">// =&gt; 4: how many elements in the array.</span>
+<span class="nx">primes</span><span class="p">[</span><span class="nx">primes</span><span class="p">.</span><span class="nx">length</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>		<span class="c1">// =&gt; 7: the last element of the array</span>
+<span class="nx">primes</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>			<span class="c1">// add a new element by assignment.</span>
+<span class="nx">primes</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>			<span class="c1">// Or alter an existing element by assignment.</span>
+<span class="kd">var</span> <span class="nx">empty</span> <span class="o">=</span> <span class="p">[];</span>			<span class="c1">// [] is an empty array with no elements.</span>
+<span class="nx">empry</span><span class="p">.</span><span class="nx">length</span>			<span class="c1">// =&gt; 0</span>
+
+<span class="c1">// Arrays and objects can hold other arrays and objects:</span>
+<span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="p">[</span>			<span class="c1">// An array with 2 elements.</span>
+	<span class="p">{</span><span class="na">x</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span><span class="mi">0</span><span class="p">},</span>		<span class="c1">// Each element is an object.</span>
+	<span class="p">{</span><span class="na">x</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+<span class="p">];</span>
+
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>			<span class="c1">// An object with 2 properties.</span>
+	<span class="na">trail1</span><span class="p">:</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]],</span>	<span class="c1">// The value of each property is an array</span>
+	<span class="na">trail2</span><span class="p">:</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span>	<span class="c1">// The elements of the arrays is arrays.</span>
+<span class="p">};</span>
+
+<span class="cm">/* The syntax above listing array elements within square braces or mapping object
+ * property names to property values inside curly braces is known as an initializer
+ * expression, and it is just one of the topics in chapter 4, Expressions and Operators.
+ * An expression is a phrase of JS that can be evaluated to produce a value.
+ * The use of . and [] tp refer to the value of an object property or array element is an expression.
+ * =&gt; shows that is is an valuation of an expression.
+ *
+ * One of the nost common ways to form expressions in JS is to use operators like these:
+ */</span>
+<span class="c1">// Oerators act on values (the operands) to produce a new value.</span>
+<span class="c1">// Aritmetic operators are the nost common:</span>
+<span class="mi">3</span> <span class="o">+</span> <span class="mi">2</span> 				<span class="c1">// =&gt; 5: addition</span>
+<span class="mi">3</span> <span class="o">-</span> <span class="mi">2</span>				<span class="c1">// =&gt; 1: subtraction</span>
+<span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span>				<span class="c1">// =&gt; 1.5: division</span>
+<span class="nx">point</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">point</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">x</span>		<span class="c1">// =&gt; 1: more complicated operands also work.</span>
+<span class="s2">"3"</span> <span class="o">+</span> <span class="s2">"2"</span>			<span class="c1">// =&gt;"32": adds numbers, concatinates strings</span>
+
+<span class="c1">// JS defines some shorthand aritmetic operators</span>
+<span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>			<span class="c1">// Defines a variable</span>
+<span class="nx">count</span><span class="o">++</span><span class="p">;</span>			<span class="c1">// Increment the variable</span>
+<span class="nx">count</span><span class="o">--</span><span class="p">;</span>			<span class="c1">// Decrement the variable</span>
+<span class="nx">count</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span>			<span class="c1">// Add 2: same as count = count + 2;</span>
+<span class="nx">count</span> <span class="o">*=</span> <span class="mi">3</span><span class="p">;</span>			<span class="c1">// Multiply by 3: same as count = count * 3;</span>
+<span class="nx">count</span> 				<span class="c1">// =&gt; 6: variable names are expressions, too.</span>
+
+<span class="c1">// Equality and relational operators test whether two values are equal,</span>
+<span class="c1">// unequal, less than, greater than, and so on. They evaluates to true or false.</span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>		<span class="c1">// These = signs are assignemnt, not equality tests.</span>
+<span class="nx">x</span> <span class="o">==</span> <span class="nx">y</span>				<span class="c1">// =&gt; false: equality</span>
+<span class="nx">x</span> <span class="o">!=</span> <span class="nx">y</span>				<span class="c1">// =&gt; true: inequality</span>
+<span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">y</span>				<span class="c1">// =&gt; true: less-than</span>
+<span class="nx">x</span> <span class="o">&gt;=</span> <span class="nx">y</span>				<span class="c1">// =&gt; trye: less-than or equal</span>
+<span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">y</span>				<span class="c1">// =&gt; false: greater-than</span>
+<span class="nx">x</span> <span class="o">&gt;=</span> <span class="nx">Y</span>				<span class="c1">// =&gt; false: greater-than or equal</span>
+<span class="s2">"two"</span> <span class="o">==</span> <span class="s2">"three"</span>		<span class="c1">// =&gt; false: the two strings are different</span>
+<span class="s2">"two"</span> <span class="o">&gt;</span> <span class="s2">"three"</span>			<span class="c1">// =&gt; true: "tw" is alphabetically greater than "th"</span>
+<span class="kc">false</span> <span class="o">==</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="nx">y</span><span class="p">)</span>		<span class="c1">// =&gt; true: false is equal to false</span>
+
+<span class="c1">// Loguical operators combine or invert boolan values</span>
+<span class="p">(</span><span class="nx">x</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">y</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>		<span class="c1">// =&gt; true: both the comparison are true. &amp;&amp; is AND</span>
+<span class="p">(</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span>		<span class="c1">// =&gt; false: neither comparison is true. || is OR</span>
+<span class="o">!</span><span class="p">(</span><span class="nx">x</span> <span class="o">==</span> <span class="nx">y</span><span class="p">)</span>			<span class="c1">// =&gt; true: ! inverts a boolean value</span>
+
+<span class="cm">/* If the phrases of JS is expressions then the full sentences are statements.
+ * In the code above, the lines that end with semicolons are statements. (in the
+ * code below, you'll see multiline statements that do not end with semicolons.)
+ * There is actually a lot of overlap between statements and expressions. Roughly, an
+ * expression is something that computes a value but doesn't do anything: it doesn't
+ * alter the code state in any way. Statements doesn't have a value (that we care about),
+ * but thay do alter the state. The other broad category of statements is control structures,
+ * such as conditionals and loops. Example below, after we cover functions.
+ */</span>
+
+<span class="cm">/* A function is a named parameterized block of JS code that you define once, and can then
+ * invoke over and over again.
+ */</span>
+<span class="c1">// Functions are parameterized block of JS code that we can invoke.</span>
+<span class="kd">function</span> <span class="nx">plus1</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>		<span class="c1">// Defines a function named plus1 with parameter x.</span>
+	<span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>		<span class="c1">// return a value one larger thatn the value passed in.</span>
+<span class="p">};</span>				<span class="c1">// Functions are enclosed in curly braces.</span>
+
+<span class="nx">plua1</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>			<span class="c1">// =&gt; 4: y is 3, so this invocation returns 3 + 1.</span>
+
+<span class="kd">var</span> <span class="nx">square</span> <span class="o">=</span> <span class="nx">funtion</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>	<span class="c1">// Function are values, and can be assigned to vars</span>
+	<span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">x</span><span class="p">;</span>		<span class="c1">// Compute the function's value.</span>
+<span class="p">};</span>				<span class="c1">// Semicolon marks the end of the assignment</span>
+
+<span class="nx">square</span><span class="p">(</span><span class="nx">plus1</span><span class="p">(</span><span class="nx">y</span><span class="p">))</span>		<span class="c1">// =&gt; 16: invoke two functions in one expression.</span>
+
+<span class="c1">// When functions are assigned to the property of an object, we call</span>
+<span class="c1">// them "methods". All JS objects have methods:</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>			<span class="c1">// Create an empty array</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>			<span class="c1">// The push() method adds element to an array.</span>
+<span class="nx">a</span> <span class="nx">reverse</span><span class="p">();</span>			<span class="c1">// Anpther method: revers the order of the elements.</span>
+
+<span class="c1">// We can define our own methods, too. The "this" keyword refers to the object.</span>
+<span class="c1">// on lwhich the method is defined: in this case, the points array from above.</span>
+<span class="nx">points</span><span class="p">.</span><span class="nx">dist</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>	<span class="c1">// Defines a method to compute distances between points</span>
+	<span class="kd">var</span> <span class="nx">p1</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>	<span class="c1">// First element of the array we're invoked on.</span>
+	<span class="kd">var</span> <span class="nx">p2</span> <span class="o">=</span> <span class="k">this</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>	<span class="c1">// Second element of the "this" object.</span>
+	<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">p2</span><span class="p">.</span><span class="nx">x</span> <span class="o">-</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>	<span class="c1">// Difference in X cordinates.</span>
+	<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">p2</span><span class="p">.</span><span class="nx">y</span> <span class="o">-</span> <span class="nx">p1</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>	<span class="c1">// Difference in Y cordinates.</span>
+	<span class="k">return</span> <span class="nb">Math</span><span class="o">-</span><span class="nx">sqrt</span><span class="p">(</span><span class="nx">a</span><span class="o">*</span><span class="nx">a</span> <span class="o">+</span>	<span class="c1">// The Pythagorean theorem</span>
+			<span class="nx">b</span><span class="o">*</span><span class="nx">b</span><span class="p">);</span>	<span class="c1">// Math.sqrt() computes the square root.</span>
+<span class="p">};</span>
+<span class="nx">points</span><span class="p">.</span><span class="nx">dist</span><span class="p">();</span>			<span class="c1">// =&gt; 1.414: distance between our two points</span>
+
+<span class="cm">/*
+ * Function whos bodies demonstrate common JS control structures statements:
+ */</span>
+<span class="c1">// JS statements include conditiional and loops using the syntax of c, c++, and other languages:</span>
+<span class="kd">function</span> <span class="nx">abs</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>		<span class="c1">// A function to compute the absolute value.</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>		<span class="c1">// The if statement...</span>
+		<span class="k">return</span> <span class="nx">x</span><span class="p">;</span>	<span class="c1">// executes this code if the comparison is true.</span>
+	<span class="p">}</span>			<span class="c1">// end of the if clause.</span>
+	<span class="k">else</span> <span class="p">{</span>			<span class="c1">// executes if comparison is false</span>
+		<span class="k">return</span> <span class="o">-</span><span class="nx">x</span><span class="p">;</span>
+	<span class="p">}</span>			<span class="c1">// Curly braces is optional if only 1 statement per clause</span>
+<span class="p">};</span>				<span class="c1">// Note return statement nested inside if/else</span>
+
+<span class="kd">function</span> <span class="nx">factorial</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>		<span class="c1">// A function to compute factorials</span>
+	<span class="kd">var</span> <span class="nx">product</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>	<span class="c1">// Start with the product of 1</span>
+	<span class="k">while</span><span class="p">(</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>		<span class="c1">// Repeat statements in {} while expr in () is true</span>
+		<span class="nx">product</span> <span class="o">*=</span> <span class="nx">n</span><span class="p">;</span>	<span class="c1">// Shortcut for n = n -1</span>
+	<span class="p">}</span>			<span class="c1">// end of loop</span>
+	<span class="k">return</span> <span class="nx">product</span><span class="p">;</span>		<span class="c1">// return the product.</span>
+<span class="p">};</span>
+<span class="nx">factorial</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>			<span class="c1">// =&gt; 24: 1*4*3*2</span>
+
+<span class="kd">function</span> <span class="nx">factorial2</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>	<span class="c1">// Another version using a different loop</span>
+	<span class="kd">var</span> <span class="nx">i</span><span class="p">,</span> <span class="nx">product</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>	<span class="c1">// Start with 1</span>
+	<span class="k">for</span><span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">n</span><span class="p">,</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>	<span class="c1">// Automatically increment i fron 2 up to n</span>
+		<span class="nx">product</span> <span class="o">*=</span><span class="mi">1</span>	<span class="c1">// Do this each time. {} not needed for 1-line loops</span>
+	<span class="k">return</span> <span class="nx">product</span><span class="p">;</span>		<span class="c1">// return fratorial.</span>
+<span class="p">}</span>
+<span class="nx">fractorial</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>			<span class="c1">// =&gt; 120: 1*2*3*4*5</span>
+
+<span class="cm">/*
+ * JS is an object-oriented language, but is quite different than most.
+ * Here is a very simple example that demonstrates how to define a JS class to
+ * represent 2D geometric points. Objects that instances of this class have a
+ * single method named r() that computs the distane of the point from the origin
+ */</span>
+<span class="c1">// Define a consturcor function to initialize a new Point object:</span>
+<span class="kd">function</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>		<span class="c1">// By convention, constructors start with Cap</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>		<span class="c1">// this keyword is the new object being initialized.</span>
+	<span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>		<span class="c1">// Store function arguments as object properties.</span>
+<span class="p">};</span>				<span class="c1">// No return is necessary.</span>
+
+<span class="c1">// Use an constructor functin with keyword "new" to create instances</span>
+<span class="kd">var</span> <span class="nx">p</span> <span class="o">=</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>		<span class="c1">// The geometric point (1,1)</span>
+
+<span class="c1">// Define methods for Point objects by assigning them to the prototype</span>
+<span class="c1">// object associated with the constructor funtion.</span>
+<span class="nx">Point</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">r</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span>	  <span class="c1">// Return the square root of x^2 + y^2</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span>	<span class="o">+</span> <span class="c1">// This is the Point obhect on wich the method ...</span>
+		<span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span>	  <span class="c1">// ... is invoked</span>
+	<span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Now the Point object p (and all future Point objects) inherits the method r()</span>
+<span class="nx">p</span><span class="p">.</span><span class="nx">r</span><span class="p">();</span>				<span class="c1">// =&gt; 1.414...</span></code></pre></figure>
+

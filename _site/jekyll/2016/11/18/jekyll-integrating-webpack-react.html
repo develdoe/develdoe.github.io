@@ -1,0 +1,234 @@
+<p>This article guides you on the steps to create a basic jekyll-webpack integration that you can use to get React working with Jekyll.</p>
+
+<h2 id="environment">Environment</h2>
+
+<p>Node:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo install npm -g
+</code></pre>
+</div>
+
+<p>Webpack:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install webpack -g
+</code></pre>
+</div>
+
+<p>Jekyll:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gem install jekyll -g
+</code></pre>
+</div>
+
+<h2 id="structure">Structure</h2>
+
+<p>Original:</p>
+
+<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">.</span>
+<span class="s">├── _config.yml</span>
+<span class="s">├── _includes</span>
+<span class="s">│ ├── …</span>
+<span class="s">├── _layouts</span>
+<span class="s">│ ├── default.html</span>
+<span class="s">│ ├── page.html</span>
+<span class="s">│ └── post.html</span>
+<span class="s">├── _posts</span>
+<span class="s">│ ├── …</span>
+<span class="s">├── _sass</span>
+<span class="s">│ ├── _base.scss</span>
+<span class="s">│ ├── _layout.scss</span>
+<span class="s">│ └── _syntax-highlighting.scss</span>
+<span class="s">├── about.md</span>
+<span class="s">├── css</span>
+<span class="s">│ └── main.scss</span>
+<span class="s">├── feed.xml</span>
+<span class="s">└── index.html</span>
+</code></pre>
+</div>
+
+<p>New</p>
+
+<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">.</span>
+<span class="s">├── _config.yml</span>
+<span class="s">├── package.json</span>
+<span class="s">├── public</span>
+<span class="s">│ ├── …</span>
+<span class="s">├── source</span>
+<span class="s">│ ├── _includes</span>
+<span class="s">│ │ ├── …</span>
+<span class="s">│ ├── _layouts</span>
+<span class="s">│ │ ├── default.html</span>
+<span class="s">│ │ ├── page.html</span>
+<span class="s">│ │ └── post.html</span>
+<span class="s">│ ├── _posts</span>
+<span class="s">│ │ ├── …</span>
+<span class="s">│ ├── _sass</span>
+<span class="s">│ │ ├── …</span>
+<span class="s">│ ├── about.md</span>
+<span class="s">│ ├── assets</span>
+<span class="s">│ │ ├── css</span>
+<span class="s">│ │ ├── images</span>
+<span class="s">│ │ └── javascripts</span>
+<span class="s">│ │ └── bundle.js</span>
+<span class="s">│ ├── feed.xml</span>
+<span class="s">│ └── index.html</span>
+<span class="s">├── webpack</span>
+<span class="s">│ ├── entry.js</span>
+<span class="s">│ └── components</span>
+<span class="s">│ └── …</span>
+<span class="s">└── webpack.config.js</span>
+</code></pre>
+</div>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>_config.yml:</p>
+
+<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">destination</span><span class="pi">:</span> <span class="s">public</span>
+<span class="s">source</span><span class="pi">:</span> <span class="s">source</span>
+</code></pre>
+</div>
+
+<h2 id="packages">Packages</h2>
+
+<p>Init:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm init <span class="k">in </span>the root
+</code></pre>
+</div>
+
+<h2 id="webpack">Webpack</h2>
+
+<p>Create a webpack directory in the root project with an entry.js file, and, remove any Jekyll javascript <strong>files</strong> from your assets directory.</p>
+
+<p>Create a webpack.config.js in the root:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="c1">// webpack folder’s entry js — excluded from jekll’s build process.</span>
+  <span class="na">entry</span><span class="p">:</span> <span class="s1">'./webpack/entry.js'</span><span class="p">,</span>
+  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// we’re going to put the generated file in the assets folder so jekyll will grab it.</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s1">'src/assets/javascripts/'</span><span class="p">,</span>
+    <span class="na">filename</span><span class="p">:</span> <span class="s1">'bundle.js'</span>
+  <span class="p">},</span>
+  <span class="na">module</span><span class="p">:</span> <span class="p">{</span>
+  <span class="na">loaders</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="na">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.</span><span class="sr">jsx</span><span class="se">?</span><span class="sr">$/</span><span class="p">,</span>
+      <span class="na">exclude</span><span class="p">:</span> <span class="sr">/</span><span class="se">(</span><span class="sr">node_modules</span><span class="se">)</span><span class="sr">/</span><span class="p">,</span>
+      <span class="na">loader</span><span class="p">:</span> <span class="s1">'babel'</span><span class="p">,</span> <span class="c1">// ‘babel-loader’ is also a legal name to reference</span>
+      <span class="na">query</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">presets</span><span class="p">:</span> <span class="p">[</span><span class="s1">'react'</span><span class="p">,</span> <span class="s1">'es2015'</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<h2 id="ignore">Ignore</h2>
+
+<p>You need to tell both Github and Jekyll to ignore node_modules/.</p>
+
+<p>.gitignore:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>.sass-cache
+.jekyll-metadata
+public
+src/assets/bundle.js
+node_modules
+</code></pre>
+</div>
+
+<p>_config.yml:</p>
+
+<div class="language-yml highlighter-rouge"><pre class="highlight"><code><span class="s">exclude</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">node_modules'</span><span class="pi">]</span>
+</code></pre>
+</div>
+
+<h2 id="include">Include</h2>
+
+<p>_layouts/default.html:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+ …
+ <span class="nt">&lt;body&gt;</span>
+ …
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"/assets/javascripts/bundle.js"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre>
+</div>
+<h2 id="dependencies">Dependencies</h2>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install webpack --save-dev
+</code></pre>
+</div>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install babel-core --save-dev
+</code></pre>
+</div>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install babel-loader --save-dev
+</code></pre>
+</div>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install babel-preset-es2015 --save-dev
+</code></pre>
+</div>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install babel-preset-react --save-dev
+</code></pre>
+</div>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install react --save-dev
+</code></pre>
+</div>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install react-addons-update --save-dev
+</code></pre>
+</div>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install react-dom --save-dev
+</code></pre>
+</div>
+
+<h2 id="component">Component</h2>
+
+<p>Hello.js:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="kr">class</span> <span class="nx">Hello</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+ <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+ <span class="k">return</span> <span class="p">(</span>
+ <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Hey</span><span class="p">,</span> <span class="nx">y</span><span class="err">’</span><span class="nx">all</span><span class="o">!!&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span> <span class="p">)</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+<span class="kr">export</span> <span class="k">default</span> <span class="nx">Hello</span>
+</code></pre>
+</div>
+
+<p>entry.js</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">Component</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'react'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="p">{</span><span class="nx">render</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">'react-dom'</span><span class="p">;</span>
+<span class="kr">import</span> <span class="nx">Hello</span> <span class="nx">from</span> <span class="s1">'./components/Hello'</span><span class="p">;</span>
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">Component</span> <span class="p">{</span>
+ <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+ <span class="k">return</span> <span class="p">(</span>
+ <span class="o">&lt;</span><span class="nx">Hello</span> <span class="o">/&gt;</span>
+ <span class="p">)</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h2 id="run">Run</h2>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>webpack
+<span class="gp">$ </span>jekyll serve
+</code></pre>
+</div>

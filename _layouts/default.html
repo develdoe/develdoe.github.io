@@ -1,15 +1,20 @@
-{% include head.html %}
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
-{% include loading.html %}
+  {% include head.html %}
 
-{% include top_navigation.html %}
+  <body>
 
-{% include header.html %}
+    {% include header.html %}
 
-{% include main_navigation.html %}
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
 
-<section id="wrapper"  class="{% if page.profile %}home{% endif %}">
-{{ content }}
-</section>
+    {% include footer.html %}
 
-<style>/*dev  #wrapper{background:yellow;} */</style>
+  </body>
+
+</html>

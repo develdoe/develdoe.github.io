@@ -1,0 +1,50 @@
+<p>By giving the children a “wait” prop, the component if hidden for the duration that was passed down from the parent.</p>
+
+<p>By setting the default state to hidden, React will render the component, but it won’t be visible.</p>
+
+<p>Then, you can set up componentWillMount to call a function to show it after the duration that was passed via props.</p>
+
+<p><strong>The component:</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Hidden</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">getInitialState</span> <span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">({</span><span class="na">hidden</span> <span class="p">:</span> <span class="s2">"hidden"</span><span class="p">});</span>
+    <span class="p">},</span>
+    <span class="na">componentWillMount</span> <span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">that</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="nx">that</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+        <span class="p">},</span> <span class="nx">that</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">wait</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="na">show</span> <span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">hidden</span> <span class="p">:</span> <span class="s2">""</span><span class="p">});</span>
+    <span class="p">},</span>
+    <span class="na">render</span> <span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">hidden</span><span class="p">}</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Hidden</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p><strong>The Parent:</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Parent</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+    <span class="na">render</span> <span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"parent"</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Parent</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">"child-list"</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">Child</span> <span class="nx">wait</span><span class="o">=</span><span class="p">{</span><span class="mi">1000</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>                    <span class="o">&lt;</span><span class="nx">Child</span> <span class="nx">wait</span><span class="o">=</span><span class="p">{</span><span class="mi">3000</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>                    <span class="o">&lt;</span><span class="nx">Child</span> <span class="nx">wait</span><span class="o">=</span><span class="p">{</span><span class="mi">5000</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>

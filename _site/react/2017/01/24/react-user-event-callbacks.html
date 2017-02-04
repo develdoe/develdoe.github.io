@@ -1,0 +1,22 @@
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Greeter</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+
+    <span class="na">handleSubmit</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">refs</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span>
+    <span class="p">},</span>
+
+    <span class="na">render</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+                <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleSubmit</span><span class="p">}</span><span class="o">&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">"text"</span> <span class="nx">ref</span><span class="o">=</span><span class="s2">"input"</span> <span class="o">/&gt;</span>
+                    <span class="o">&lt;</span><span class="nx">button</span><span class="o">&gt;</span><span class="nx">Set</span> <span class="nx">Name</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>                <span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span>            <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Greeter</span> <span class="o">/&gt;</span><span class="p">,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"app"</span><span class="p">))</span>
+</code></pre>
+</div>

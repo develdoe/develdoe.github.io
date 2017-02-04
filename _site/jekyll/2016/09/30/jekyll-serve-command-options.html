@@ -1,0 +1,42 @@
+<p>In addition to the options below, the serve sub-command can accept any of the options for the build sub-command, which are then applied to the site build which occurs right before your site is served.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">SETTING</th>
+      <th style="text-align: right">OPTIONS AND FLAGS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><strong>Local Server Port</strong> Listen on the given port.</td>
+      <td style="text-align: right">port: PORT –port PORT</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Local Server Hostname</strong> Listen at the given hostname.</td>
+      <td style="text-align: right">host: HOSTNAME –host HOSTNAME</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Base URL</strong> Serve the website from the given base URL</td>
+      <td style="text-align: right">baseurl: URL –baseurl URL</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Detach</strong> Detach the server from the terminal</td>
+      <td style="text-align: right">detach: BOOL -B, –detach</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>Skips the initial site build</strong> Skips the initial site build which occurs before the server is started.</td>
+      <td style="text-align: right">–skip-initial-build</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>X.509 (SSL) Private Key</strong> SSL Private Key.</td>
+      <td style="text-align: right">–ssl-key</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><strong>X.509 (SSL) Certificate</strong> SSL Public certificate.</td>
+      <td style="text-align: right">–ssl-cert</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Do not use tabs in configuration files since, this will either lead to parsing errors, or Jekyll will revert to the default settings. Use spaces instead</strong></p>

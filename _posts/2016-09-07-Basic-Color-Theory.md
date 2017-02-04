@@ -11,14 +11,12 @@ There are three basic categories of color theory that are logical and useful :
 * Color harmony
 * The context of how colors are used.
 
-###The Color Wheel
+### The Color Wheel
 
 
 A color circle, based on red, yellow and blue, is traditional in the field of art. Sir Isaac Newton developed the first circular diagram of colors in 1666. Since then, scientists and artists have studied and designed numerous variations of this concept.
 
 ![color wheels](https://oss.adm.ntu.edu.sg/devanshi001/wp-content/uploads/sites/275/2015/10/Screen-Shot-2015-10-25-at-10.17.41-PM-copy.jpg)
-
-![big color wheel](http://homekano.com/wp-content/uploads/2016/05/new-the-ultimate-color-combinations-cheat-sheet-with-regard-to-combination-color-for-green.jpg)
 
 ---
 

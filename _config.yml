@@ -16,7 +16,7 @@
 title: Andree "DevelDoe" Ray - this is my journal
 email: me@develdoe.com
 author: Andree DevelDoe Ray
-description: > # Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.
+description: "Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://develdoe.com/"
 twitter_username: develdoe

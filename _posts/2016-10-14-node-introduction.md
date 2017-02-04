@@ -3,7 +3,7 @@ date: '2016-10-14 14:30 +0200'
 published: true
 title: Node Introduction
 category:
-  - node
+  - Node
 ---
 Node.js is an open source, cross-platform runtime environment for developing server-side and networking applications.
 

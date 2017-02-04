@@ -3,7 +3,7 @@ date: '2016-09-30 11:26 +0200'
 published: true
 title: Jekyll Custom Markdown Processors
 category:
-  - jek
+  - Jekyll
 ---
 If you’re interested in creating a custom markdown processor, you’re in luck! Create a new class in the Jekyll::Converters::Markdown namespace:
 

@@ -3,7 +3,7 @@ date: '2016-11-22 09:37 +0100'
 published: true
 title: JavaScript - Get images programmatically
 category:
-  - js
+  - JavaScript
 ---
 ```js
 var img = new Image();

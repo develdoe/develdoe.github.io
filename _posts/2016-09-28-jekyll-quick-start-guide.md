@@ -3,7 +3,7 @@ date: '2016-09-28 13:38 +0200'
 published: true
 title: Jekyll Quick Start Guide
 category:
-  - jek
+  - Jekyll
 ---
 Here's how to get a boilerplate Jekyll site up and runnin
 

@@ -3,7 +3,7 @@ date: '2016-12-13 14:34 +0100'
 published: true
 title: Node - kill process
 category:
-  - node
+  - Node
 ---
 **find**
 

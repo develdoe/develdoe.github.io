@@ -3,7 +3,7 @@ date: '2016-10-14 20:52 +0200'
 published: true
 title: JavaScript - Comments
 category:
-  - js
+  - JavaScript
 ---
 JS Supports two styles of comments. 
 

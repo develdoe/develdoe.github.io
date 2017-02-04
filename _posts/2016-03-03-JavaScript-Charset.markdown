@@ -4,7 +4,7 @@ title: JavaScript - Charset
 description: JavaScript and charset.
 published: true
 category:
-  - js
+  - JavaScript
 ---
 
 

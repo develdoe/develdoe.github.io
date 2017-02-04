@@ -3,7 +3,7 @@ date: '2016-10-25 15:37 +0200'
 published: true
 title: Javascript - Integer Literals
 category:
-  - js
+  - JavaScript
 socialImg: js.png
 ---
 A literal in programming is simply values you find in source code. 

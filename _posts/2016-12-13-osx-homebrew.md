@@ -2,6 +2,8 @@
 date: '2016-12-13 16:10 +0100'
 published: true
 title: OSX - Homebrew
+category:
+  - OSX
 ---
 
 **Install**

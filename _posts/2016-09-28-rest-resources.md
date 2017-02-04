@@ -3,7 +3,7 @@ date: '2016-09-28 20:37 +0200'
 published: true
 title: REST Resources
 category:
-  - dev
+  - Development
 ---
 The main building blocks of a REST architecture are the resources. Anything that can be named can be a resource (a web page, an image, a person, a weather service report, etc.). 
 

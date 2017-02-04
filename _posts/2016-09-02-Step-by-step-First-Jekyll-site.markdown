@@ -6,7 +6,7 @@ description: >-
   at github
 published: true
 category:
-  - jek
+  - Jekyll
 ---
 
 * Create a new account at github

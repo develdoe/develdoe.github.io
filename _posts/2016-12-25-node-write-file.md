@@ -3,7 +3,7 @@ date: '2016-12-25 13:59 +0100'
 published: true
 title: Node - Write File
 category:
-  - node
+  - Node
 ---
 ```js
 var fs = require('fs');

@@ -3,7 +3,7 @@ date: '2016-10-14 16:34 +0200'
 published: true
 title: 'Node Version Manager '
 category:
-  - node
+  - Node
 ---
 
 ## Installation

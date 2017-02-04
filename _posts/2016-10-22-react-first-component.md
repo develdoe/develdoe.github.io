@@ -3,7 +3,7 @@ date: '2016-10-22 15:30 +0200'
 published: true
 title: React - First Component
 category:
-  - react
+  - React
 socialImg: socialImgReact.png
 ---
 The entry point to the ReactJS library is the React object and is made available to us in the global JavaScript namespace.

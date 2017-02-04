@@ -3,7 +3,7 @@ date: 2016-09-07T00:00:00.000Z
 published: true
 title: Basic Color Theory
 category:
-  - dev
+  - Development
 ---
 There are three basic categories of color theory that are logical and useful : 
 

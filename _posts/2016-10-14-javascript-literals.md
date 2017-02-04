@@ -3,7 +3,7 @@ date: '2016-10-14 20:54 +0200'
 published: true
 title: JavaScript - Literals
 category:
-  - js
+  - JavaScript
 ---
 
 A literal is a data value that appears directly in a program.

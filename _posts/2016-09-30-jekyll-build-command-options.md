@@ -3,7 +3,7 @@ date: '2016-09-30 10:29 +0200'
 published: true
 title: Jekyll Build Command Options
 category:
-  - jek
+  - Jekyll
 ---
 The table below lists the available settings for Jekyll, and the various options (specified in the configuration file) and flags (specified on the command-line) that control them.
 

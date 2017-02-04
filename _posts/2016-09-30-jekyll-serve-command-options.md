@@ -3,7 +3,7 @@ date: '2016-09-30 10:30 +0200'
 published: true
 title: Jekyll Serve Command Options
 category:
-  - jek
+  - Jekyll
 ---
 In addition to the options below, the serve sub-command can accept any of the options for the build sub-command, which are then applied to the site build which occurs right before your site is served.
 

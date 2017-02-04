@@ -3,7 +3,7 @@ date: '2016-12-07 16:13 +0100'
 published: true
 title: React- Delayed rendering of component
 category:
-  - react
+  - React
 ---
 By giving the children a "wait" prop, the component if hidden for the duration that was passed down from the parent. 
 

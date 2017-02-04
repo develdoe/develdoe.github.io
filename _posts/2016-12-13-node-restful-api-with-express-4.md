@@ -2,13 +2,15 @@
 date: '2016-12-13 13:46 +0100'
 published: true
 title: Node - Restful API with Express 4
+category:
+  - Node
 ---
 
 **Prequsite**
 
 You must have mongo installed:
 
-* [Ubuntu - Install and start Monddb](http://develdoe.com/2016/ubuntu-mongo-db-ce/) 
+* [Ubuntu - Install and start Monddb](http://develdoe.com/2016/ubuntu-mongo-db-ce/)
 * [OSX - Install and start Monddb](http://develdoe.com/2016/osx-mongo-db/)
 
 **package.json**

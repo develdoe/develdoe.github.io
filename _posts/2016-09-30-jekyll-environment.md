@@ -3,7 +3,7 @@ date: '2016-09-30 10:32 +0200'
 published: true
 title: 'Jekyll  Environment '
 category:
-  - jek
+  - Jekyll
 ---
 In the build, or serve, arguments, you can specify a Jekyll environment and value. The build will then apply this value in any conditional statements in your content.
 

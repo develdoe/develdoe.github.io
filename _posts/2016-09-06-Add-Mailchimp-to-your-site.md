@@ -5,7 +5,7 @@ title: Add Mailchimp to your site
 Description: Short step by step guide on how we add Mailchimp to our sites
 description: Short step by step guide on how we add Mailchimp to our sites
 category:
-  - dev
+  - Development
 ---
 
 * Create an account

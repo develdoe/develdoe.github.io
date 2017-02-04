@@ -3,8 +3,8 @@ date: '2016-10-05 06:17 +0200'
 published: true
 title: Node.js and REST
 category:
-  - dev
-  - node
+  - Development
+  - Node
 ---
 ## Asynchronous Programming
 

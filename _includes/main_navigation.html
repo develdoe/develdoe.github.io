@@ -1,11 +1,14 @@
 <nav id=main-navigation>
 <section id="wrapper">
 <ul>
-    <li id=dev><i class='fa fa-tags' aria-hidden='true'></i> Development
-    <li id=js><i class='fa fa-tags' aria-hidden='true'></i> Javascript
-    <li id=node><i class='fa fa-tags' aria-hidden='true'></i> Node
-    <li id=react><i class='fa fa-tags' aria-hidden='true'></i> React
-    <li id=jek ><i class='fa fa-tags' aria-hidden='true'></i> Jekyll
+    <li id=Development><i class='fa fa-tags' aria-hidden='true'></i> Development
+    <li id=JavaScript><i class='fa fa-tags' aria-hidden='true'></i> Javascript
+    <li id=Node><i class='fa fa-tags' aria-hidden='true'></i> Node
+    <li id=React><i class='fa fa-tags' aria-hidden='true'></i> React
+    <li id=Jekyll ><i class='fa fa-tags' aria-hidden='true'></i> Jekyll
+    <li id=CSS ><i class='fa fa-tags' aria-hidden='true'></i> CSS
+    <li id=OSX ><i class='fa fa-tags' aria-hidden='true'></i> OSX
+    <li id=Linux ><i class='fa fa-tags' aria-hidden='true'></i> Linux
 </ul>
 </section>
 </nav>
@@ -55,29 +58,44 @@ $(document).ready(function(){
         $("#post-list > li").show()
         $("#post-list").delay(300).fadeIn(100)
     })
-    $('#dev').click(function(){
+    $('#Development').click(function(){
         $("#post-list, #post-list > li").hide()
-        $(".dev").show()
+        $(".Development").show()
         $("#post-list").delay(300).fadeIn(100)
     })
-    $('#js').click(function(){
+    $('#Javascript').click(function(){
         $("#post-list, #post-list > li").hide()
-        $(".js").show()
+        $(".Javascript").show()
         $("#post-list").delay(300).fadeIn(100)
     })
-    $('#node').click(function(){
+    $('#Node').click(function(){
         $("#post-list, #post-list > li").hide()
-        $(".node").show()
+        $(".Node").show()
         $("#post-list").delay(300).fadeIn(100)
     })
-    $('#jek').click(function(){
+    $('#Jekyll').click(function(){
         $("#post-list, #post-list > li").hide()
-        $(".jek").show()
+        $(".Jekyll").show()
         $("#post-list").delay(300).fadeIn(100)
     })
-    $('#react').click(function(){
+    $('#React').click(function(){
         $("#post-list, #post-list > li").hide()
-        $(".react").show()
+        $(".React").show()
+        $("#post-list").delay(300).fadeIn(100)
+    })
+    $('#CSS').click(function(){
+        $("#post-list, #post-list > li").hide()
+        $(".CSS").show()
+        $("#post-list").delay(300).fadeIn(100)
+    })
+    $('#OSX').click(function(){
+        $("#post-list, #post-list > li").hide()
+        $(".OSX").show()
+        $("#post-list").delay(300).fadeIn(100)
+    })
+    $('#Linux').click(function(){
+        $("#post-list, #post-list > li").hide()
+        $(".Linux").show()
         $("#post-list").delay(300).fadeIn(100)
     })
 })

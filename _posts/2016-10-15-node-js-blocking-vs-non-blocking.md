@@ -3,7 +3,7 @@ date: '2016-10-15 18:09 +0200'
 published: true
 title: Node.js - Blocking vs Non-Blocking
 category:
-  - node
+  - Node
 ---
 *This article covers the difference between blocking and non-blocking calls in Node.js. The original article can be found at https://github.com/nodejs/node/blob/master/doc/topics/blocking-vs-non-blocking.md. Here I am attempting to mimplify and clarify the article.*
 

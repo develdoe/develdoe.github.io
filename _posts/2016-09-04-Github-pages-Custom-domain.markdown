@@ -4,8 +4,8 @@ title: Github Pages - Custom Domain
 description: This article explains how you customize the domain name of your GitHub Page
 published: true
 category:
-  - dev
-  - jek
+  - Development
+  - Jekyll
 ---
 
 * Register a domain name  

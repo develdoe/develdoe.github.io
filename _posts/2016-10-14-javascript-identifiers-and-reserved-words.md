@@ -3,7 +3,7 @@ date: '2016-10-14 20:55 +0200'
 published: true
 title: JavaScript - Identifiers and Reserved Words
 category:
-  - js
+  - JavaScript
 ---
 Identifiers are used to name variables and functions and to provide labels for certain loops.
 

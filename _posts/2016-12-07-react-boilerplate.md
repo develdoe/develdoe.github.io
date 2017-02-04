@@ -3,7 +3,7 @@ date: '2016-12-07 16:33 +0100'
 published: true
 title: React - Boilerplate
 category:
-  - react
+  - React
 ---
 In this article we are going to explore how to setup a React environment with Webpack and Reload.
 

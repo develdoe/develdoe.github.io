@@ -3,7 +3,7 @@ date: '2016-10-14 16:32 +0200'
 published: true
 title: Node.js - Hello World first app
 category:
-  - node
+  - Node
 ---
 A Node.js application consists of the following three vital components:
 

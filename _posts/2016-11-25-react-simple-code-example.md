@@ -3,7 +3,7 @@ date: '2016-11-25 15:32 +0100'
 published: true
 title: React - Simple Code Example
 category:
-  - react
+  - React
 ---
 This article shows you the source code needed to create your vary first, basic, react app. 
 

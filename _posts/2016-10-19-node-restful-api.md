@@ -3,7 +3,7 @@ date: '2016-10-19 13:44 +0200'
 published: true
 title: Node - REST API Mockup
 category:
-  - node
+  - Node
 ---
 In this article we'll build an REST API mock to use in development. It's going to be  a step by step guide and I am not going to ramble on about the specifics. Instead its a short and to the point guide on how to get an API backend to use while working on your front-end code of choise.
 

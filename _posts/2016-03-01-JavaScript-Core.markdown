@@ -6,7 +6,7 @@ description: >-
   comments, semicolon, the unicode character set, types, values, and variables.
 published: true
 category:
-  - js
+  - JavaScript
 socialImg: js.png
 ---
 JavaScript is an object-oriented dynamic language with types and operators, standard built-in objects, and methods. 

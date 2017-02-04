@@ -4,7 +4,7 @@ published: true
 title: React - nested component
 socialImg: react
 category:
-  - react
+  - React
 ---
 ```js
 

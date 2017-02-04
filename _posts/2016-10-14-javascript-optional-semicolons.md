@@ -3,7 +3,7 @@ date: '2016-10-14 21:12 +0200'
 published: true
 title: JavaScript - Optional Semicolons
 category:
-  - js
+  - JavaScript
 ---
 Like many programming languages, JS uses semicolon to separate statements. 
 

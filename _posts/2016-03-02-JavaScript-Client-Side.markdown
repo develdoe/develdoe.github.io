@@ -6,7 +6,7 @@ description: >-
   some other client-side JS examples.
 published: true
 category:
-  - js
+  - JavaScript
 ---
 
 

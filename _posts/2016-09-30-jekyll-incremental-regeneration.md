@@ -3,7 +3,7 @@ date: '2016-09-30 11:45 +0200'
 published: true
 title: Jekyll Incremental Regeneration
 category:
-  - jek
+  - Jekyll
 ---
 *Incremental regeneration is still an experimental feature
 While incremental regeneration will work for the most common cases, it will not work correctly in every scenario. Please be extremely cautious when using the feature.*

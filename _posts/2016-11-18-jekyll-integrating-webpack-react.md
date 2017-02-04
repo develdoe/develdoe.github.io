@@ -3,7 +3,7 @@ date: '2016-11-18 14:25 +0100'
 published: true
 title: Jekyll - Integrating Webpack & React
 category:
-  - jek
+  - Jekyll
 ---
 This article guides you on the steps to create a basic jekyll-webpack integration that you can use to get React working with Jekyll.
 

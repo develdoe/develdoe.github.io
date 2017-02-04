@@ -3,7 +3,7 @@ date: '2016-09-28 09:52 +0200'
 published: true
 title: REST Constraints
 category:
-  - dev
+  - Development
 ---
 There are two ways to define a system.
 

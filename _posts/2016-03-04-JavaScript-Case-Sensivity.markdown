@@ -4,7 +4,7 @@ title: JavaScript - Case Sensitivity
 description: JavaScript and case-sensitivity.
 published: true
 category:
-  - js
+  - JavaScript
 ---
 
 

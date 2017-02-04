@@ -3,7 +3,7 @@ date: '2016-10-14 20:49 +0200'
 published: true
 title: JavaScript - Normalization
 category:
-  - js
+  - JavaScript
 ---
 
 Unicode allows more than one way of encoding the same character. 

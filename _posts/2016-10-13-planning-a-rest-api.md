@@ -3,8 +3,8 @@ date: '2016-10-13 17:49 +0200'
 published: true
 title: Planning a REST API
 category:
-  - dev
-  - node
+  - Development
+  - Node
 ---
 The final result of this article will be all the information you need to start the development process of an REST API. This article is going to use a bookstore API, as an example API.
 

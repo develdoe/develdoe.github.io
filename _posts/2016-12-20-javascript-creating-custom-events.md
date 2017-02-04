@@ -3,7 +3,7 @@ date: '2016-12-20 02:57 +0100'
 published: true
 title: JavaScript - Creating custom events
 category:
-  - js
+  - JavaScript
 ---
 ```js
 var event = new Event('build');

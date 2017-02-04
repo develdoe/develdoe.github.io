@@ -3,7 +3,7 @@ date: '2016-09-30 10:55 +0200'
 published: true
 title: Jekyll Front Matter defaults
 category:
-  - jek
+  - Jekyll
 ---
 Using YAML Front Matter is one way that you can specify configuration in the pages and posts for your site. Setting things like a default layout, or customizing the title, or specifying a more precise date/time for the post can all be added to your page or post front matter.
 

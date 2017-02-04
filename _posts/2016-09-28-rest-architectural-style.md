@@ -3,7 +3,7 @@ date: '2016-09-28 09:27 +0200'
 published: true
 title: REST Architectural Style
 category:
-  - dev
+  - Development
 ---
 Just because you can interact with a system using HTTP, and send JSON back and forth, doesn’t mean it’s a RESTful system. REST is a lot more than that.
 

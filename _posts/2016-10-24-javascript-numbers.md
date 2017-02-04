@@ -3,7 +3,7 @@ date: '2016-10-24 13:37 +0200'
 published: true
 title: Javascript - Numbers
 category:
-  - js
+  - JavaScript
 socialImg: js.png
 ---
 Unlike many languages, JS does not make an distinction between integer values and floating point values. 

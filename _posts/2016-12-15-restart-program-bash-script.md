@@ -2,6 +2,8 @@
 date: '2016-12-15 15:55 +0100'
 published: true
 title: Restart Program Bash Script
+category:
+  - Linux
 ---
 
 ```bash

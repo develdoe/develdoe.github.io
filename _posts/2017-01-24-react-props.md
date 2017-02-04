@@ -4,7 +4,7 @@ published: true
 title: React - Props
 socialImg: react
 category:
-  - react
+  - React
 ---
 There are two types of data that get passed into a component, there are props and there is state. Props get passed in as you initialize a component, while a state is internally maintained and updated. 
 

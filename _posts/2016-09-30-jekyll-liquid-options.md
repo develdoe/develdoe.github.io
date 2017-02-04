@@ -3,7 +3,7 @@ date: '2016-09-30 11:09 +0200'
 published: true
 title: Jekyll Liquid Options
 category:
-  - jek
+  - Jekyll
 ---
 
 Liquid’s response to errors can be configured by setting error_mode. The options are

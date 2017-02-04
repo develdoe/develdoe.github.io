@@ -3,7 +3,7 @@ date: '2016-10-14 20:57 +0200'
 published: true
 title: Javascript - Reserved Words
 category:
-  - js
+  - JavaScript
 ---
 JS reservs a number of identifiers as the keyword of the language itself.
 You cannot use these words as identifierss in your programs

@@ -3,7 +3,7 @@ date: '2016-10-14 11:12 +0200'
 published: true
 title: Developing A REST API with Node.js
 category:
-  - node
+  - Node
 ---
 This article will cover the directory structure, through the small design decisions made during development, and finally to the code itself.
 

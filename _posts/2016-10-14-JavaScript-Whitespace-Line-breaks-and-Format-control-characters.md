@@ -3,7 +3,7 @@ date: '2016-10-14 20:44 +0200'
 published: true
 title: JavaScript - Whitespace Line breaks and Format control characters
 category:
-  - js
+  - JavaScript
 ---
 JS ignores spaces that appear between tokens in programs. For the most part JS also ignores line breaks.
 

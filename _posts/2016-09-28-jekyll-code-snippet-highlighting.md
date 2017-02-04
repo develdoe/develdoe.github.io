@@ -3,7 +3,7 @@ date: '2016-09-28 13:57 +0200'
 published: true
 title: Jekyll Code snippet highlighting
 category:
-  - jek
+  - Jekyll
 ---
 Jekyll has built in support for syntax highlighting of over 60 languages thanks to Rouge. Rouge is the default highlighter in Jekyll 3 and above. To use it in Jekyll 2, set highlighter to rouge and ensure the rouge gem is installed properly.
 

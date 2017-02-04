@@ -3,7 +3,7 @@ date: '2016-10-14 20:47 +0200'
 published: true
 title: JavaScript - Unicode Escape Sequences
 category:
-  - js
+  - JavaScript
 ---
 Some computer hardware and software can not display or input the full set of Unicode.
 

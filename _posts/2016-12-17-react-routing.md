@@ -3,7 +3,7 @@ date: '2016-12-17 15:37 +0100'
 published: true
 title: React - Routing
 category:
-  - react
+  - React
 ---
 prerequisite: [basic react app](http://develdoe.com/2016/react-boilerplate/)
 

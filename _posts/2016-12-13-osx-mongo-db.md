@@ -2,6 +2,8 @@
 date: '2016-12-13 16:09 +0100'
 published: true
 title: OSX - Mongo DB
+category:
+  - OSX
 ---
 First you need to install [Homebrew](http://develdoe.com/2016/osx-homebrew/)
 

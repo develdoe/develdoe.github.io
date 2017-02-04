@@ -7,7 +7,7 @@ description: >-
   milestones.
 published: true
 category:
-  - dev
+  - Development
 ---
 
 Planning is crucial in the early stages of starting a new project. Even though a good plan can't account for

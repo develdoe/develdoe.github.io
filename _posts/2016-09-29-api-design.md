@@ -3,7 +3,7 @@ date: '2016-09-29 20:56 +0200'
 published: true
 title: API Design
 category:
-  - dev
+  - Development
 ---
 ## Great API's
 Years of experience of dealing with different kinds of APIs have left the developer community with a pretty good sense of the need-to-have features of any good API. 

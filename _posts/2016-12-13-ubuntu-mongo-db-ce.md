@@ -2,6 +2,8 @@
 date: '2016-12-13 14:49 +0100'
 published: true
 title: 'Ubuntu - Mongo DB CE '
+category:
+  - Linux
 ---
 **key**
 

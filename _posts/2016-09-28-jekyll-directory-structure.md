@@ -3,7 +3,7 @@ date: '2016-09-28 14:40 +0200'
 published: true
 title: Jekyll Directory Structure
 category:
-  - jek
+  - Jekyll
 ---
 Jekyll is, at its core, a text transformation engine. 
 

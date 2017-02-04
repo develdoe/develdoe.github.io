@@ -3,7 +3,7 @@ date: '2016-12-18 12:41 +0100'
 published: true
 title: JavaScript - Promises
 category:
-  - js
+  - JavaScript
 ---
 ```js
 function addPromise(a,b){

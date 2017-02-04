@@ -3,7 +3,7 @@ date: '2016-10-14 20:24 +0200'
 published: true
 title: Node.js REPL (Read–eval–print loop)
 category:
-  - node
+  - Node
 ---
 
 A read–eval–print loop (REPL), also known as an interactive toplevel or language shell, is a simple, interactive computer programming environment that takes single user inputs (i.e. single expressions), evaluates them, and returns the result to the user.

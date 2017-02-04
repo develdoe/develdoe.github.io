@@ -4,7 +4,7 @@ published: true
 title: React - User Event Callbacks
 socialImg: react
 category:
-  - react
+  - React
 ---
 ```js
 var Greeter = React.createClass({

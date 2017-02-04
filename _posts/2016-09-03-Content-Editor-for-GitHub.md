@@ -7,7 +7,7 @@ description: >-
   Pages’ native Jekyll support, it makes editing content on a Jekyll site
   simple.
 category:
-  - jek
+  - Jekyll
 ---
 Prose is a content editor for GitHub, designed to be used with Jekyll. It provide you with an interface for CRUD operations.
 

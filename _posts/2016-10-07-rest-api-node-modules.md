@@ -3,7 +3,7 @@ date: '2016-10-07 06:28 +0200'
 published: true
 title: REST API Node Modules
 category:
-  - node
+  - Node
 ---
 Node modules you will need when building a REST API with node:
 
@@ -50,11 +50,11 @@ This is the name that the pre-processing chain normally gets in the Node.js worl
 //Logs every request into the standard output
 function logRequests(req, res, next) {
    console.log("[", req.method, "]", req.url)
-   next() 
+   next()
 }
 ````
 ```javascript
-//Makes sure that the body of the request is a valid json object, otherwise, 
+//Makes sure that the body of the request is a valid json object, otherwise,
 //it throws an error
 function formatRequestBody(req, res, next)  {
     if(typeof req.body == 'string') {
@@ -64,11 +64,11 @@ function formatRequestBody(req, res, next)  {
        next("invalid data format")
      }
 }
-next() 
+next()
 }
 ```
 
-Both examples are different, but at the same time they share a common function signature. Every middleware function receives three parameters: the request object, the response object, and the next function. 
+Both examples are different, but at the same time they share a common function signature. Every middleware function receives three parameters: the request object, the response object, and the next function.
 
 The most interesting bit here is the last parameter, the next function, calling it is mandatory unless you want to end the processing chain right there. It calls the next middleware in the chain, unless you pass in a value, in which case it’ll call the first error handler it finds and it’ll pass it the parameter (normally an error message or object).
 
@@ -157,7 +157,7 @@ adminSever.route({
         //check credentials...
         //get full list of users...
         //reply(list)
-    } 
+    }
 })
 
 server.start(function() {
@@ -288,7 +288,7 @@ router.param('user_id', function(req, res, next, id) {
 call erorr handler
       } else {
          req.user = usr
-         next() 
+         next()
       }
   })
 })
@@ -318,7 +318,7 @@ For a route-specific middleware, you do this:
 app.use('/books', function(req, res, next){
         //this function will only be called on this path
         next() //always important to call next unless you don't want the process' flow to
-continue. 
+continue.
 })
 ```
 
@@ -487,7 +487,7 @@ var app = new Vatican()
 app.dbStart(function() {
     console.log("Db connection stablished...")
     //Start the server
-    app.start() 
+    app.start()
 })
 ```
 
@@ -697,7 +697,7 @@ $ npm start       #for *nix and OSX systems
 C:\your-project-folder> npm startwin        #for Windows systems
 ```
 
-After that, use your browser to go to http://localhost:3000 to start testing the documentation system. 
+After that, use your browser to go to http://localhost:3000 to start testing the documentation system.
 
 If you want to set up your own API, there are a few things to do:
 
@@ -781,7 +781,7 @@ If you want to set up your own API, there are a few things to do:
 }
 ```
 
-* Start up the documentation server and point your web browser to it. 
+* Start up the documentation server and point your web browser to it.
 
 Unlike with Swagger, this documentation system is not meant to be integrated into your project, so autogenerating the JSON code might be a bit more difficult.
 

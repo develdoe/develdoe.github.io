@@ -3,7 +3,7 @@ date: '2016-12-25 13:41 +0100'
 published: true
 title: Node -  File Uploader
 category:
-  - node
+  - Node
 ---
 **upload.html**
 

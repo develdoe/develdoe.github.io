@@ -3,7 +3,7 @@ date: '2016-09-28 13:46 +0200'
 published: true
 title: Jekyll Installation
 category:
-  - jek
+  - Jekyll
 ---
 When installing Jekyll there are a few requirements you’ll need to make sure your system has before you start.
 

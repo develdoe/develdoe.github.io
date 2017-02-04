@@ -3,7 +3,7 @@ date: '2016-09-28 14:24 +0200'
 published: true
 title: Jekyll Basic Usage
 category:
-  - jek
+  - Jekyll
 ---
 The Jekyll gem makes a jekyll executable available to you in your Terminal window. You can use this command in a number of ways:
 

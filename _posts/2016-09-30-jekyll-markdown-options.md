@@ -3,7 +3,7 @@ date: '2016-09-30 11:11 +0200'
 published: true
 title: Jekyll Markdown Options
 category:
-  - jek
+  - Jekyll
 ---
 The various Markdown renderers supported by Jekyll sometimes have extra options available.
 

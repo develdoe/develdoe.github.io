@@ -1,10 +1,10 @@
 ---
 date: '2016-10-22 16:37 +0200'
 published: true
-title: React - Developmen Environment
+title: React - Developmentelopmen Environment
 socialImg: socialImgReact.png
 category:
-  - react
+  - React
 ---
 In this short article we are going to explore how to setup a React environment with Webpack.
 

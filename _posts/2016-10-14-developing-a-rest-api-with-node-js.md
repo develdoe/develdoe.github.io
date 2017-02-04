@@ -38,7 +38,7 @@ We'll use the MVC pattern, this means we'll be having the following elements in 
 
 ## Folder Structure
 
-![folder_Struct.png]({{site.baseurl}}img/posts/folder_Struct.png)
+![folder_Struct.png]({{site.baseurl}}/img/posts/folder_Struct.png)
 
 * **controllers**: This folder contains the code for our controllers. It also has an index.js file to handle exporting the contents of the rest of them. There is also a base controller here, which contains all the generic methods that all controllers should have; so every new controller can extend this and inherit said methods.
 * **lib**: This folder contains the miscellaneous code not big enough to have its own folder, but required across several different places in our project; for instance, database access, helper functions, the config files, and so forth.
@@ -1885,4 +1885,3 @@ This last section is also very important; those five lines actually handles inst
 ## Summary
 
  You should now have a working version of our API, capable of doing pretty much everything we set up to do in Chapter 6. You should also have a better understanding of how these modules work. Ideally, you’ll consider them for your next project. Of course, there are alternatives like the ones discussed in the article [REST API Node Modules](http://develdoe.com/2016/rest-api-node-modules/).
-

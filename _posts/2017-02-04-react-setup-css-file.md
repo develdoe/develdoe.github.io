@@ -53,6 +53,9 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+*, *:before, *:after {
+ box-sizing: border-box;
+}
 html,body,#app,#main{
 	height: 100%;
 	width: 100%;
@@ -60,12 +63,9 @@ html,body,#app,#main{
 html {
   box-sizing: border-box;
 }
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+
 .component{
 	padding: 5px;
-	margin: 5px;
 }
 #main{
 	margin: 0;
@@ -74,6 +74,7 @@ a{
 	margin-right: 5px;
 }
 .page{
-	height: calc(100% - 40px);
+	height: 100%;
 }
+
 ```

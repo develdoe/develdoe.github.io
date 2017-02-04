@@ -2,6 +2,8 @@
 date: '2017-02-04 02:07 +0100'
 published: true
 title: React - setup css file
+category:
+  - CSS
 ---
 I use this file to bootstrap my react projects. 
 

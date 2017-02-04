@@ -15,6 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: develdoe.com
 email: me@develdoe.com
+author: Andree DevelDoe Ray
 description: > # Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://develdoe.com/"

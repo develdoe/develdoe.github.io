@@ -1,7 +1,7 @@
 ---
 date: '2017-02-04 02:07 +0100'
 published: true
-title: React - setup css file
+title: CSS - setup css file for react projects
 category:
   - CSS
 ---

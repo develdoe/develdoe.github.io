@@ -45,3 +45,5 @@ module.exports = {
     devtool: 'cheep-module-eval-source-map'
 }
 ```
+
+For development, use `cheap-module-eval-source-map`. For production, use `cheap-module-source-map`.

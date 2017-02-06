@@ -5,11 +5,6 @@ title: JavaScript - Shorter Arrow Functions
 category:
   - JavaScript
 ---
-*Note that there is a differance in bindings with normal and arrow functions. Arrow functions take on thier parents "this" binding.*
-
-
-****
-
 ```js
 var names = ["andree","ilona","benedetta"]
 
@@ -22,5 +17,6 @@ names.foreach( (name) => {
 })
 
 name.foreach( (name) => console.log(name) )
-
 ```
+
+*Note that there is a differance in bindings with normal and arrow functions. Arrow functions take on thier parents "this" binding.*

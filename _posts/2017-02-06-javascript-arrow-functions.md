@@ -5,19 +5,38 @@ title: JavaScript - Shorter Arrow Functions & this keyword
 category:
   - JavaScript
 ---
-```js
+**Normal function**
+
+```js 
 var names = ["andree","ilona","benedetta"]
 
 names.foreach(function (name) {
     console.log('foreach 'name)
 })
-
-names.foreach( (name) => {
-    console.log('arrow func foreach ', name)
-})
-
-name.foreach( (name) => console.log(name) )
 ```
+
+**statements arrow function**
+
+```js
+var names = ["andree","ilona","benedetta"]
+
+names.foreach((name) => {
+    console.log('foreach 'name)
+})
+```
+
+**expression arrow function**
+
+```js
+var names = ["andree","ilona","benedetta"]
+
+names.foreach((name) =>  console.log('foreach 'name))
+```
+
+## More...
+
+
+*This touches the concept of scopes and the use of this binging. You can read more about these subject at [JavaScript - this](/2017/javascript-this/) & [JavaScript - Using the bind method](/2017/javascript-using-the-bind-method/) articles.*
 
 There is a differance in bindings with normal and arrow functions. Arrow functions take on thier parents "this" binding.
 
@@ -48,5 +67,3 @@ var person = {
 ```
 
 This workes becouse Arrow functions does not update the "this" keyword. 
-
-For a more indept explenation to "this" and its binding check out [JavaScript - this](/2017/javascript-this/) & [JavaScript - Using the bind method](/2017/javascript-using-the-bind-method/)

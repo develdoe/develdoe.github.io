@@ -245,7 +245,7 @@ var React = require('react'),
     Output = require('Output'),
     api = require('Api')
 
-var ComponentOne  = React.createClass({
+var Home  = React.createClass({
     getInitialState: function () {
         return{
             isLoading: false
@@ -292,15 +292,15 @@ var ComponentOne  = React.createClass({
     }
 })
 
-module.exports = ComponentOne
+module.exports = Home
 ```
 
-**/app/components/ComponentOne/Input.jsx
+**/app/components/home/Input.jsx
 
 ```js
 var React = require('react')
 
-module.exports = React.createClass({
+var Input = React.createClass({
     onFormSubmit: function (e) {
         e.preventDefault()
 
@@ -322,6 +322,7 @@ module.exports = React.createClass({
         )
     }
 })
+module.exports = Input
 ```
 
 **/app/components/ComponentOne/Output.jsx**

@@ -129,3 +129,53 @@ a{
 }
 ```
 
+**/server.js**
+
+```js
+var express = require('express'),
+    app     = express()
+
+app.use(express.static('public'))
+
+app.listen(4000, function(){
+    console.log('Express server is up on port: 4000')
+})
+```
+
+**webpack.config.js**
+
+```js
+module.exports = {
+    entry: './app/entry.jsx',
+    output: {
+        path: __dirname,
+        filename: './public/bundle.js'
+    },
+    resolve: {
+        root: __dirname,
+        alias: {
+            Main:        'app/components/Main',
+            Nav:         'app/components/Nav',
+            ComponentOne: 'app/components/ComponentOne/ComponentOne',
+            Input:       'app/components/ComponentOne/Input',
+            Output:       'app/components/ComponentOne/Output',
+            ComponentTwo:'app/components/ComponentTwo/ComponentTwo',
+            Api:         'app/api/api'
+        },
+        extensions: ['','.js','.jsx']
+    },
+    module: {
+        loaders: [
+            {
+                loader: 'babel-loader',
+                query: {
+                    presets: ['react','es2015','stage-0']
+                },
+                test: /\.jsx?$/,
+                exclude: /(node_modules|bower_components)/
+            }
+        ]
+    },
+    devtool: 'cheep-module-eval-source-map'
+}
+```

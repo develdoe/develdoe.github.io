@@ -156,10 +156,10 @@ module.exports = {
         alias: {
             Main:        'app/components/Main',
             Nav:         'app/components/Nav',
-            ComponentOne: 'app/components/ComponentOne/ComponentOne',
-            Input:       'app/components/ComponentOne/Input',
-            Output:       'app/components/ComponentOne/Output',
-            ComponentTwo:'app/components/ComponentTwo/ComponentTwo',
+            ComponentOne: 'app/components/componentone/ComponentOne',
+            Input:       'app/components/componentone/Input',
+            Output:       'app/components/componentone/Output',
+            ComponentTwo:'app/components/componenttwo/ComponentTwo',
             Api:         'app/api/api'
         },
         extensions: ['','.js','.jsx']
@@ -180,7 +180,7 @@ module.exports = {
 }
 ```
 
-**/app/entry.jsx**
+**/app/Entry.jsx**
 
 ```js
 var React = require('react'),
@@ -238,7 +238,7 @@ var Nav  = (props) => {
 module.exports = Nav
 ```
 
-**/app/components/ComponentOne/ComponentOne.jsx**
+**/app/components/componentone/ComponentOne.jsx**
 
 ```js
 var React = require('react'),

@@ -99,3 +99,33 @@ a{
 }
 ```
 
+**/package.json**
+
+```json
+{
+  "name": "react-routing-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andree DevelDoe Ray",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "express": "^4.14.1",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-router": "^3.0.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.5.1",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.22.0"
+  }
+}
+```
+

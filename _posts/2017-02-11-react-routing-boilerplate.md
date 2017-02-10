@@ -230,7 +230,7 @@ var Nav  = (props) => {
     return (
         <div className="component" id="nav" style={{border: '4px solid green',background:'rgba(0,255,0,0.1)'}}>
             <IndexLink activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/">ComponentOne</IndexLink>
-            <Link activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/componentwo">ComponentTwo</Link>
+            <Link activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/componenttwo">ComponentTwo</Link>
         </div>
     )
 }

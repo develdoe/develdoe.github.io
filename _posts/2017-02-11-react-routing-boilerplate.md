@@ -202,25 +202,7 @@ ReactDOM.render(
 )
 ```
 
-**/app/components/nav.jsx**
-
-```js
-var React = require('react'),
-    {Link, IndexLink} = require('react-router')
-
-var Nav  = (props) => {
-    return (
-        <div className="component" id="nav" style={{border: '4px solid green',background:'rgba(0,255,0,0.1)'}}>
-            <IndexLink activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/">ComponentOne</IndexLink>
-            <Link activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/componentwo">ComponentTwo</Link>
-        </div>
-    )
-}
-
-module.exports = Nav
-```
-
-**/app/components/main.jsx**
+**/app/components/Main.jsx**
 
 ```js
 var React = require('react'),
@@ -238,4 +220,168 @@ var Main = (props) => {
 module.exports = Main
 ```
 
+**/app/components/Nav.jsx**
 
+```js
+var React = require('react'),
+    {Link, IndexLink} = require('react-router')
+
+var Nav  = (props) => {
+    return (
+        <div className="component" id="nav" style={{border: '4px solid green',background:'rgba(0,255,0,0.1)'}}>
+            <IndexLink activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/">ComponentOne</IndexLink>
+            <Link activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/componentwo">ComponentTwo</Link>
+        </div>
+    )
+}
+
+module.exports = Nav
+```
+
+**/app/components/ComponentOne/ComponentOne.jsx**
+
+```js
+var React = require('react'),
+    Input = require('Input'),
+    Output = require('Output'),
+    api = require('Api')
+
+var ComponentOne  = React.createClass({
+    getInitialState: function () {
+        return{
+            isLoading: false
+        }
+    },
+    handleSearch: function (location) {
+        var that = this
+
+        that.setState({
+            isLoading: true
+        })
+
+        api.getTemp(location).then(function (temp) {
+            that.setState({
+                location: location,
+                temp: temp,
+                isLoading: false
+            })
+        }, function (errMessage) {
+            alert(errMessage)
+            that.setState({
+                isLoading: false
+            })
+        })
+    },
+    render: function () {
+        var {isLoading, temp, location} = this.state
+
+        function renderMessage () {
+            if (isLoading) {
+                return <h3>Fetching weather...</h3>
+            } else if (temp && location) {
+                return <Output temp={temp} location={location}/>
+            }
+        }
+
+        return (
+            <div className="component page" id="index" style={{border: '4px solid blue',background:'rgba(0,0,255,0.1)'}}>
+                <span>ComponentOne</span>
+                <Input onSearch={this.handleSearch}/>
+                {renderMessage()}
+            </div>
+        )
+    }
+})
+
+module.exports = ComponentOne
+```
+
+**/app/components/ComponentOne/Input.jsx
+
+```js
+var React = require('react')
+
+module.exports = React.createClass({
+    onFormSubmit: function (e) {
+        e.preventDefault()
+
+        var location = this.refs.location.value
+
+        if (location.length > 0) {
+            this.refs.location.value = ""
+            this.props.onSearch(location)
+        }
+    },
+    render: function () {
+        return(
+            <div className="component" id="weather-form">
+                <form onSubmit={this.onFormSubmit}>
+                    <input type="text" ref="location"/>
+                    <button>Get Weather</button>
+                </form>
+            </div>
+        )
+    }
+})
+```
+
+**/app/components/ComponentOne/Output.jsx**
+
+```js
+var React = require('react')
+
+var Output = ({temp, location}) => {
+    return (
+        <div className="component" id="weather-message" >
+            <span>It is {temp} in {location}</span>
+        </div>
+    )
+}
+
+module.exports = Output
+```
+
+**/app/components/ComponentTwo/ComponentTwo.jsx**
+
+```js
+var React = require('react')
+
+var ComponentTwo = (props) => {
+    return (
+        <div className="component page" id="about" style={{border: '4px solid blue',background:'rgba(0,0,255,0.1)'}}>
+            <span>ComponentTwo</span>
+        </div>
+    )
+}
+
+module.exports = ComponentTwo
+```
+
+---
+
+Finally The API, this examples API goes to open weather and lets you check for temperatures in different cities. 
+
+**/api/api/api.jsx**
+
+```js
+var axios = require('axios')
+
+const API_URL = 'http://api.openweathermap.org/data/2.5/weather?units=metric&appid=48ba5cd6c56d934ef8fa607ba4339f45'
+
+module.exports = {
+    getTemp: function (location) {
+        var encodedLocation = encodeURIComponent(location)
+        var requestUrl = `${API_URL}&q=${encodedLocation}`
+
+        return axios.get(requestUrl).then(function (res) {
+            if (res.data.cod && res.data.message) {
+                throw new Error(res.data.message)
+            } else {
+                return res.data.main.temp
+            }
+        }, function (res) {
+            throw new Error(res.data.message)
+        })
+    }
+}
+```

@@ -179,3 +179,63 @@ module.exports = {
     devtool: 'cheep-module-eval-source-map'
 }
 ```
+
+**/app/entry.jsx**
+
+```js
+var React = require('react'),
+    ReactDOM = require('react-dom'),
+    Main  = require('Main'),
+    ComponentOne = require('ComponentOne'),
+    ComponentTwo = require('ComponentTwo'),
+    {Route, Router, IndexRoute, hashHistory} = require('react-router')
+
+
+ReactDOM.render(
+    <Router history={hashHistory}>
+        <Route path="/" component={Main}>
+            <IndexRoute component={ComponentOne}/>
+            <Route path="componentwo" component={ComponentTwo}/>
+        </Route>
+    </Router>,
+    document.getElementById('app')
+)
+```
+
+**/app/components/nav.jsx**
+
+```js
+var React = require('react'),
+    {Link, IndexLink} = require('react-router')
+
+var Nav  = (props) => {
+    return (
+        <div className="component" id="nav" style={{border: '4px solid green',background:'rgba(0,255,0,0.1)'}}>
+            <IndexLink activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/">ComponentOne</IndexLink>
+            <Link activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/componentwo">ComponentTwo</Link>
+        </div>
+    )
+}
+
+module.exports = Nav
+```
+
+**/app/components/main.jsx**
+
+```js
+var React = require('react'),
+    Nav = require('Nav')
+
+var Main = (props) => {
+    return (
+        <div className="component" id="main" style={{border: '2px solid red'}}>
+            <Nav/>
+            {props.children}
+        </div>
+    )
+}
+
+module.exports = Main
+```
+
+

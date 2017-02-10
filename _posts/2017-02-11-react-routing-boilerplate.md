@@ -228,8 +228,8 @@ var React = require('react'),
 var Nav  = (props) => {
     return (
         <div className="component" id="nav" style={{border: '4px solid green',background:'rgba(0,255,0,0.1)'}}>
-            <IndexLink activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/">ComponentOne</IndexLink>
-            <Link activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/componenttwo">ComponentTwo</Link>
+            <IndexLink activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/">Home</IndexLink>
+            <Link activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/about">About</Link>
         </div>
     )
 }
@@ -237,7 +237,7 @@ var Nav  = (props) => {
 module.exports = Nav
 ```
 
-**/app/components/componentone/ComponentOne.jsx**
+**/app/components/home/Home.jsx**
 
 ```js
 var React = require('react'),

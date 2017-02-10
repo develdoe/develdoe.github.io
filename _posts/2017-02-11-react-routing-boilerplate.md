@@ -154,13 +154,13 @@ module.exports = {
     resolve: {
         root: __dirname,
         alias: {
-            Main:        'app/components/Main',
-            Nav:         'app/components/Nav',
-            ComponentOne: 'app/components/componentone/ComponentOne',
-            Input:       'app/components/componentone/Input',
-            Output:       'app/components/componentone/Output',
-            ComponentTwo:'app/components/componenttwo/ComponentTwo',
-            Api:         'app/api/api'
+            Main:   'app/components/Main',
+            Nav:    'app/components/Nav',
+            Home:   'app/components/home/Home',
+            Input:  'app/components/home/Input',
+            Output: 'app/components/home/Output',
+            about:  'app/components/about/About',
+            Api:    'app/api/api'
         },
         extensions: ['','.js','.jsx']
     },
@@ -186,20 +186,19 @@ module.exports = {
 var React = require('react'),
     ReactDOM = require('react-dom'),
     Main  = require('Main'),
-    ComponentOne = require('ComponentOne'),
-    ComponentTwo = require('ComponentTwo'),
+    Home = require('Home'),
+    About = require('About'),
     {Route, Router, IndexRoute, hashHistory} = require('react-router')
 
 
 ReactDOM.render(
     <Router history={hashHistory}>
         <Route path="/" component={Main}>
-            <IndexRoute component={ComponentOne}/>
-            <Route path="componentwo" component={ComponentTwo}/>
+            <IndexRoute component={Home}/>
+            <Route path="about" component={About}/>
         </Route>
     </Router>,
     document.getElementById('app')
-)
 ```
 
 **/app/components/Main.jsx**

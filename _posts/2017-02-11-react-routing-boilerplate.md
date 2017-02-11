@@ -1,7 +1,7 @@
 ---
 date: '2017-02-11 00:01 +0100'
 published: true
-title: React - Routing Boilerplate
+title: 'React - Complete Boilerplate with Routing '
 category:
   - React
 ---

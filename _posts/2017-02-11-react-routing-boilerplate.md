@@ -160,7 +160,7 @@ module.exports = {
             Input:  'app/components/home/Input',
             Output: 'app/components/home/Output',
             about:  'app/components/about/About',
-            Api:    'app/api/api'
+            Api:    'app/api/Api'
         },
         extensions: ['','.js','.jsx']
     },
@@ -361,7 +361,7 @@ module.exports = About
 
 Finally The API, this examples API goes to open weather and lets you check for temperatures in different cities. 
 
-**/api/api/api.jsx**
+**/api/api/Api.jsx**
 
 ```js
 var axios = require('axios')

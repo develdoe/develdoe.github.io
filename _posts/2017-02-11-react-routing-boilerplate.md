@@ -245,7 +245,7 @@ var React = require('react'),
     Output = require('Output'),
     api = require('Api')
 
-var Home  = (props) => {
+var Home  = React.createClass({
     getInitialState: function () {
         return{
             isLoading: false
@@ -290,7 +290,7 @@ var Home  = (props) => {
             </div>
         )
     }
-}
+})
 
 module.exports = Home
 

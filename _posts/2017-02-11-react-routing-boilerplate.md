@@ -245,7 +245,7 @@ var React = require('react'),
     Output = require('Output'),
     api = require('Api')
 
-var Home  = React.createClass({
+var Home  = (props) => {
     getInitialState: function () {
         return{
             isLoading: false
@@ -283,16 +283,17 @@ var Home  = React.createClass({
         }
 
         return (
-            <div className="component page" id="index" style={% raw %}{{border: '4px solid blue',background:'rgba(0,0,255,0.1)'}}{% endraw %}>
+            <div className="component page" id="index" style={{border: '1px solid blue',background:'rgba(0,0,255,0.1)'}}>
                 <span>Home</span>
                 <Input onSearch={this.handleSearch}/>
                 {renderMessage()}
             </div>
         )
     }
-})
+}
 
 module.exports = Home
+
 ```
 
 **/app/components/home/Input.jsx

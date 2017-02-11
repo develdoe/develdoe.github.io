@@ -301,7 +301,7 @@ module.exports = Home
 ```js
 var React = require('react')
 
-var Input = React.createClass({
+var Input = (props)=>{
     onFormSubmit: function (e) {
         e.preventDefault()
 
@@ -322,7 +322,7 @@ var Input = React.createClass({
             </div>
         )
     }
-})
+}
 module.exports = Input
 ```
 

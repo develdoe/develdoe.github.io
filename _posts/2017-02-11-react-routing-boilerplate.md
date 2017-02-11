@@ -283,7 +283,7 @@ var Home  = (props) => {
         }
 
         return (
-            <div className="component page" id="index" style={{border: '1px solid blue',background:'rgba(0,0,255,0.1)'}}>
+            <div className="component page" id="index" style={{%raw%}}{{border: '1px solid blue',background:'rgba(0,0,255,0.1)'}}{{%endraw%}}>
                 <span>Home</span>
                 <Input onSearch={this.handleSearch}/>
                 {renderMessage()}

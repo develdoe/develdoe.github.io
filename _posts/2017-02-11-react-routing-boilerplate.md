@@ -284,7 +284,7 @@ var Home  = React.createClass({
 
         return (
             <div className="component page" id="index" style={{border: '4px solid blue',background:'rgba(0,0,255,0.1)'}}>
-                <span>ComponentOne</span>
+                <span>Home</span>
                 <Input onSearch={this.handleSearch}/>
                 {renderMessage()}
             </div>
@@ -341,20 +341,20 @@ var Output = ({temp, location}) => {
 module.exports = Output
 ```
 
-**/app/components/ComponentTwo/ComponentTwo.jsx**
+**/app/components/about/About.jsx**
 
 ```js
 var React = require('react')
 
-var ComponentTwo = (props) => {
+var About = (props) => {
     return (
         <div className="component page" id="about" style={{border: '4px solid blue',background:'rgba(0,0,255,0.1)'}}>
-            <span>ComponentTwo</span>
+            <span>About</span>
         </div>
     )
 }
 
-module.exports = ComponentTwo
+module.exports = About
 ```
 
 ---

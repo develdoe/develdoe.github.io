@@ -313,7 +313,7 @@ var Input = React.createClass({
     },
     render: function () {
         return(
-            <div className="component" id="weather-form">
+            <div className="component" id="home-input">
                 <form onSubmit={this.onFormSubmit}>
                     <input type="text" ref="location"/>
                     <button>Get Weather</button>
@@ -325,14 +325,14 @@ var Input = React.createClass({
 module.exports = Input
 ```
 
-**/app/components/ComponentOne/Output.jsx**
+**/app/components/home/Output.jsx**
 
 ```js
 var React = require('react')
 
 var Output = ({temp, location}) => {
     return (
-        <div className="component" id="weather-message" >
+        <div className="component" id="home-output" >
             <span>It is {temp} in {location}</span>
         </div>
     )

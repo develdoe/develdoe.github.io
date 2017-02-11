@@ -316,7 +316,7 @@ var Input = React.createClass({
             <div className="component" id="home-input">
                 <form onSubmit={this.onFormSubmit}>
                     <input type="text" ref="location"/>
-                    <button>Get Weather</button>
+                    <button>Get Input</button>
                 </form>
             </div>
         )

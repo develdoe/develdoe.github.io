@@ -209,7 +209,7 @@ var React = require('react'),
 
 var Main = (props) => {
     return (
-        <div className="component" id="main" style={% {{border: '2px solid red'}} %}>
+        <div className="component" id="main" style={% raw %}{{border: '2px solid red'}}{% endraw %}>
             <Nav/>
             {props.children}
         </div>

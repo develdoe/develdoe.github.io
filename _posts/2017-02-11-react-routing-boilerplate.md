@@ -227,9 +227,9 @@ var React = require('react'),
 
 var Nav  = (props) => {
     return (
-        <div className="component" id="nav" style={{border: '4px solid green',background:'rgba(0,255,0,0.1)'}}>
-            <IndexLink activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/">Home</IndexLink>
-            <Link activeClassName="active" activeStyle={{fontWeight:'bold'}} to="/about">About</Link>
+        <div className="component" id="nav" style={% raw %}{{border: '4px solid green',background:'rgba(0,255,0,0.1)'}}{% endraw %}>
+            <IndexLink activeClassName="active" activeStyle={% raw %}{{fontWeight:'bold'}}{% endraw %} to="/">Home</IndexLink>
+            <Link activeClassName="active" activeStyle={% raw %}{{fontWeight:'bold'}}{% endraw %} to="/about">About</Link>
         </div>
     )
 }
@@ -283,7 +283,7 @@ var Home  = React.createClass({
         }
 
         return (
-            <div className="component page" id="index" style={{border: '4px solid blue',background:'rgba(0,0,255,0.1)'}}>
+            <div className="component page" id="index" style={% raw %}{{border: '4px solid blue',background:'rgba(0,0,255,0.1)'}}{% endraw %}>
                 <span>Home</span>
                 <Input onSearch={this.handleSearch}/>
                 {renderMessage()}

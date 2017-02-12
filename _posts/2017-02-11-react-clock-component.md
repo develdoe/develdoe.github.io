@@ -22,7 +22,7 @@ var Clock = React.createClass({
 
       this.setState({
                time: date.toLocaleTimeString('sv-SE')
-           })
+      })
     },
 
     componentWillMount: function () {

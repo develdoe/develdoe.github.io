@@ -1,7 +1,7 @@
 ---
 date: '2017-02-12 18:47 +0100'
 published: true
-title: ''
+title: JavaScript - Get Locale
 category:
   - JavaScript
 ---

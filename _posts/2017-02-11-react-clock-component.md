@@ -31,7 +31,7 @@ var Clock = React.createClass({
 
     render: function () {
         return (
-            <div className="component" id="clock" style={{border: '1px solid red',background:'rgba(255,0,0,0.5)'}}>
+            <div className="component" id="clock" style={{%raw%}}{{border: '1px solid red',background:'rgba(255,0,0,0.5)'}}{{%endraw%}}>
                 <span>{this.state.time}</span>
             </div>
         )

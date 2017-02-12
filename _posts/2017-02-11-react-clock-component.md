@@ -26,7 +26,6 @@ var Clock = React.createClass({
     },
 
     componentWillMount: function () {
-        this.myTimer()
         setInterval(()=>{ this.myTimer() }, 1000)
     },
 

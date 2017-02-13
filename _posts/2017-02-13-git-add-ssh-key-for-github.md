@@ -11,7 +11,7 @@ category:
 ssh-keygen -t rsa -b 4096 -C '{youremail}'
 ```
 
-**add the new key (use your filename):
+**add the new key (use your filename):**
 
 ```
 ssh-add ~/.ssh/id_rsa

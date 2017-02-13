@@ -8,7 +8,7 @@ category:
 **Open terminal and type:**
 
 ```
-ssh-keygen -t rsa -b 4096 -C '{youremail}'
+ssh-keygen -t rsa -b 4096 -C "{youremail}"
 ```
 
 **add the new key (use your filename):

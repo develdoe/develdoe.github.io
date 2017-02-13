@@ -24,4 +24,10 @@ more ~/.ssh/id_rsa.pub
 more ~/.ssh/id_rsa.pub
 ```
 
-Go to settings at [github](https://github.com/settings/keys) and past the content there...
+**Go to settings at [github](https://github.com/settings/keys) and past the content.**
+
+**Go back to your terminal shell and authenticate**
+
+```
+ssh -T git@github.com
+```

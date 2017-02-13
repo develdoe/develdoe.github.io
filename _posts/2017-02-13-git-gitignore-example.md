@@ -44,3 +44,7 @@ category:
 ehthumbs.db
 Thumbs.db
 ```
+
+# Packages #
+######################
+node_modules

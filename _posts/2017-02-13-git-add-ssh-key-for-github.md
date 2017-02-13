@@ -5,7 +5,7 @@ title: Git - Add SSH key for Github
 category:
   - Development
 ---
-**Open terminal and type:**
+**Open a terminal shell and type:**
 
 ```
 ssh-keygen -t rsa -b 4096 -C '{youremail}'

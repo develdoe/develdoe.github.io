@@ -1,7 +1,7 @@
 ---
 date: '2017-02-14 19:15 +0100'
 published: true
-title: 'Automatic Deployment with Git with a VPS '
+title: 'Automatic Deployment with Git to a VPS '
 category:
   - Development
 ---

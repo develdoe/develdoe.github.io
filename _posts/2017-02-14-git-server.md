@@ -34,7 +34,6 @@ $ cd /srv/git
 $ mkdir project.git
 $ cd project.git
 $ git init --bare --shared
-Initialized empty Git repository in /srv/git/project.git/
 ```
 
 **(OPTIONAL)**

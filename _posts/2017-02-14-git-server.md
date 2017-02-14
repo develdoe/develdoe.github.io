@@ -1,59 +1,50 @@
 ---
 date: '2017-02-14 14:39 +0100'
 published: true
-title: Git - Server
+title: Linux - Setting up a Git Server
 category:
   - Development
 ---
-In order to do any collaboration in Git, you’ll need to have a remote Git repository. 
-
-Although you can technically push changes to and pull changes from individuals' repositories, doing so is discouraged because you can fairly easily confuse what they’re working on if you’re not careful. 
-
-Furthermore, you want your collaborators to be able to access the repository even if your computer is offline.
-
-The preferred method for collaborating with someone is to set up an intermediate repository that you both have access to, and push to and pull from that.
-
-Running a Git server is fairly straightforward. 
-
-First, you choose which protocols you want your server to communicate with. 
-
-A remote repository is generally a bare repository – a Git repository that has no working directory. 
-
-Because the repository is only used as a collaboration point, there is no reason to have a snapshot checked out on disk; it’s just the Git data. 
-
-In the simplest terms, a bare repository is the contents of your project’s .git directory and nothing else.
-
----
-
-Git can use four major protocols to transfer data: Local, HTTP, Secure Shell (SSH) and Git. 
-
-The most basic is the Local protocol, in which the remote repository is in another directory on disk. 
-
-To clone a repository like this or to add one as a remote to an existing project, use the path to the repository as the URL. For example, to clone a local repository, you can run something like this:
-
-```
-git clone /srv/git/project.git
+First, you create a git user and a .ssh directory for that user:
+ 
+ ```
+$ sudo adduser git
+$ su git
+$ cd
+$ mkdir .ssh && chmod 700 .ssh
+$ touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys
 ```
 
-Or 
+Copy the ouput of your ssh key:
 
 ```
-git clone file:///srv/git/project.git
+$ cat /tmp/id_rsa.john.pub
 ```
 
-A common transport protocol for Git when self-hosting is over SSH. This is because SSH access to servers is already set up in most places – and if it isn’t, it’s easy to do. SSH is also an authenticated network protocol; and because it’s ubiquitous, it’s generally easy to set up and use.
-
-To clone a Git repository over SSH, you can specify ssh:// URL like this:
+to the git user’s authorized_keys:
 
 ```
-git clone ssh://user@server/project.git
+$ vim ~/.ssh/authorized_keys
 ```
 
-Or you can use the shorter scp-like syntax for the SSH protocol:
+Now, you can set up an empty repository for them on the server by running git init with the --bare option, which initializes the repository without a working directory:
 
 ```
-git clone user@server:project.git
+$ cd /srv/git
+$ mkdir project.git
+$ cd project.git
+$ git init --bare --shared
+Initialized empty Git repository in /srv/git/project.git/
 ```
 
+Then, you can push the first version of their project into that repository by adding it as a remote and pushing up a branch.  
 
+Let’s use gitserver as the hostname of the server on which you’ve set up your git user and repository. If you’re running it internally, and you set up DNS for gitserver to point to that server, then you can use the commands pretty much as is (assuming that myproject is an existing project with files in it):
 
+```
+$ cd myproject
+$ git init
+$ git add .
+$ git commit -m 'initial commit'
+$ git remote add origin git@gitserver:/srv/git/project.git
+$ git push -u origin master

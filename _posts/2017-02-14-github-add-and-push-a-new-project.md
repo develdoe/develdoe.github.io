@@ -50,3 +50,15 @@ and if you dont add new files, you can commit and add in one command.
 ```
 git commit -a -m 'comment'
 ```
+
+You can check remotes:
+
+```
+git remote -v
+```
+
+and git branch
+
+```
+git branch
+```

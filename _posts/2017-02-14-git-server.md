@@ -48,3 +48,4 @@ $ git add .
 $ git commit -m 'initial commit'
 $ git remote add origin git@gitserver:/srv/git/project.git
 $ git push -u origin master
+```

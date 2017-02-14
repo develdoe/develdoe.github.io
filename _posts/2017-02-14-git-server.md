@@ -37,6 +37,25 @@ $ git init --bare --shared
 Initialized empty Git repository in /srv/git/project.git/
 ```
 
+**(OPTIONAL)**
+Add your key to ssh server conf file.
+
+Edit:
+
+```
+$ vim ~/.ssh/config
+```
+
+Paste:
+
+```
+host github.com
+ HostName github.com
+ IdentityFile ~/.ssh/id_rsa_github
+ User git
+```
+
+
 Then, you can push the first version of their project into that repository by adding it as a remote and pushing up a branch.  
 
 Let’s use gitserver as the hostname of the server on which you’ve set up your git user and repository. If you’re running it internally, and you set up DNS for gitserver to point to that server, then you can use the commands pretty much as is (assuming that myproject is an existing project with files in it):

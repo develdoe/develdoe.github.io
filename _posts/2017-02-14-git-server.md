@@ -18,7 +18,7 @@ $ touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys
 Copy the ouput of your ssh key:
 
 ```
-$ cat /tmp/id_rsa.john.pub
+$ cat /etc/key.pub
 ```
 
 to the git user’s authorized_keys:
@@ -38,6 +38,7 @@ Initialized empty Git repository in /srv/git/project.git/
 ```
 
 **(OPTIONAL)**
+
 Add your key to ssh server conf file.
 
 Edit:

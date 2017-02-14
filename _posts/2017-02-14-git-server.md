@@ -49,9 +49,9 @@ $ vim ~/.ssh/config
 Paste:
 
 ```
-host github.com
- HostName github.com
- IdentityFile ~/.ssh/id_rsa_github
+host example.com
+ HostName example.com
+ IdentityFile ~/.ssh/key
  User git
 ```
 

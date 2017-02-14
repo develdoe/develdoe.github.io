@@ -57,7 +57,7 @@ You can check remotes:
 git remote -v
 ```
 
-and git branch
+and branch
 
 ```
 git branch

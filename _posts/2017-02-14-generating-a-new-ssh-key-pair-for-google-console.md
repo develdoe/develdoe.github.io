@@ -1,7 +1,7 @@
 ---
 date: '2017-02-14 12:38 +0100'
 published: true
-title: Generating a new SSH key-pair for Google Console
+title: SSH key-pair for Google Console
 category:
   - Development
 ---
@@ -29,3 +29,13 @@ Copy the output from the cat command and paste it as a new item in the list of S
 At the bottom of the SSH Keys page, click Save to save your new project-wide SSH key.
 
 The public key is now set to work across all of the instances in your project. Use the ssh command to connect to your instances.
+
+---
+
+In the console, find the external IP for the instance that you want to connect to. Go to the list of your instances.
+
+Use the ssh command to connect to your instance. Specify your username and the external IP address for the instance that you want to connect to. Your username is the Google username that you use to access your project. For this example, the private key is at ~/.ssh/my-ssh-key.
+
+```
+ssh -i ~/.ssh/my-ssh-key [USERNAME]@[IP_ADDRESS]
+```

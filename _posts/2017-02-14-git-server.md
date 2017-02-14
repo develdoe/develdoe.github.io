@@ -7,7 +7,7 @@ category:
 ---
 First, you create a git user and a .ssh directory for that user:
  
- ```
+```
 $ sudo adduser git
 $ su git
 $ cd

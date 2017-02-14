@@ -47,7 +47,7 @@ Edit:
 $ vim ~/.ssh/config
 ```
 
-Paste:
+and add your server, key and user inputs. 
 
 ```
 host example.com

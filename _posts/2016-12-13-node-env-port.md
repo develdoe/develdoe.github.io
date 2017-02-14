@@ -8,23 +8,23 @@ category:
 **Port**
 
 ```bash
-$ PORT=1234 node app.js
+$ PORT=80 node app.js
 ```
 **More permanently**
 
 ```bash
-$ export PORT=1234
+$ export PORT=80
 $ node app.js
 ```
 
 **In Windows**
 
 ```bash
-set PORT=1234
+set PORT=80
 ```
 
 **In Windows PowerShell**
 
 ```bash
-$env:PORT = 1234
+$env:PORT = 80
 ```

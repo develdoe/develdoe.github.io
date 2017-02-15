@@ -29,7 +29,9 @@ When you execute this command, you will have a blank line indicating that everyt
 
 ```
 #!/bin/sh
-git --work-tree=/{pathtosite} --git-dir=/{pathtorepo} checkout -f
+GIT_WORK_TREE=/home/path/to/your/www
+export GIT_WORK_TREE
+git checkout -f
 ```
 
 set the proper permissions using:
@@ -38,4 +40,14 @@ set the proper permissions using:
 chmod +x post-receive
 ```
 
-Done
+---
+
+In order for this to work with changes to your server you need to run your server with Node-Supervisor.
+
+```
+sudo npm install supervisor -g
+```
+
+```
+supervisor /home/path/to/your/www/server.js
+```

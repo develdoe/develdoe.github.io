@@ -5,13 +5,13 @@ title: Foundation - Installment
 category:
   - CSS
 ---
-```
+```js
 app andreeray$ npm install css-loader@0.23.1 script-loader@0.6.1 style-loader@0.13.0 jquery@2.2.1 foundation-sites@6.2.0 --save-dev
 ```
 
 **webpack.config.js**
 
-```
+```js
 var webpack = require('webpack')
 
 module.exports = {
@@ -30,4 +30,12 @@ module.exports = {
         })
     },
     ...
+```
+
+**entry.jsx**
+
+```js
+// Load foundation
+require('style!css!foundation-sites/dist/foundation.min.css')
+$(document).foundation()
 ```

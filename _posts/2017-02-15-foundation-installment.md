@@ -12,7 +12,7 @@ npm install webpack@1.12.13 css-loader@0.23.1 script-loader@0.6.1 style-loader@0
 **webpack.config.js**
 
 ```js
-var webpack = require('webpack');
+var webpack = require('webpack')
 
 module.exports = {
     entry: [

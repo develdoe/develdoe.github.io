@@ -15,20 +15,20 @@ npm install webpack@1.12.13 css-loader@0.23.1 script-loader@0.6.1 style-loader@0
 var webpack = require('webpack')
 
 module.exports = {
-    entry: {
+    entry: [
         'script!jquery/dist/jquery.min.js',
         'script!foundation-sites/dist/foundation.min.js',
         './app/entry.jsx'
-    },
+    ],
     externals: {
         jquery: 'jQuery'
     },
-    plugins: {
+    plugins: [
         new webpack.ProvidePlugin({
             '$': 'jquery',
             'jQuery': 'jquery'
         })
-    },
+    ],
     ...
 ```
 

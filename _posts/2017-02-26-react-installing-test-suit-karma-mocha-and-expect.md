@@ -1,7 +1,7 @@
 ---
 date: '2017-02-26 00:07 +0100'
 published: true
-title: 'React - Installing & Test Suit karma, mocha, and expect '
+title: 'React - Test suit Karma, Mocha, and Expect '
 category:
   - React
 ---

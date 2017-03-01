@@ -6,5 +6,5 @@ category:
   - Node
 ---
 ```bash
-node install node-uuid --save-dev
+npm install node-uuid --save-dev
 ```

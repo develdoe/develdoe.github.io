@@ -19,19 +19,20 @@ function add(a,b)
 **Not Pure**
 
 ```js
+// 1) The same output with the same input
 var a = 3
 function add(b)
 {
     return a + b
 }
-// or
+// 2) Side effects
 var result
 function add (a,b)
 {
     result = a + b
     return result
 }
-// updates the values inside the function
+// 3) Updates the values inside the function
 function add (a,b)
 {
 	return a + b + new Date().getSeconds()

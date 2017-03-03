@@ -2,6 +2,8 @@
 date: '2017-03-03 21:04 +0100'
 published: true
 title: JavaScript - Pure functions
+category:
+  - JavaScript
 ---
 A pure function do not change outside of its function
 

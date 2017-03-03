@@ -5,7 +5,7 @@ title: JavaScript - Pure functions
 category:
   - JavaScript
 ---
-A pure function do not change outside of its function
+A pure functions always give the same output on a specific input and they are not allowed to update the values inside the funciton.
 
 **Pure**
 
@@ -31,9 +31,48 @@ function add (a,b)
     result = a + b
     return result
 }
-// also not pure
+// updates the values inside the function
 function add (a,b)
 {
 	return a + b + new Date().getSeconds()
 }
+```
+
+## Real world example 
+
+This first example changes the value of the original object
+
+```js
+function changeProp(obj)
+{
+
+    // obj.name = 'Ilona'
+    // return obj
+}
+var startingValue = {
+    name: 'andree',
+    age: 25
+}
+var res = changeProp(startingValue)
+console.log(res)
+console.log(startingValue)
+```
+
+This second example is pure, it does not update the original object
+
+```js
+function changeProp(obj)
+{
+    return {
+        ...obj,
+        name: 'Ilona'
+    }
+}
+var startingValue = {
+    name: 'andree',
+    age: 25
+}
+var res = changeProp(startingValue)
+console.log(res)
+console.log(startingValue)
 ```

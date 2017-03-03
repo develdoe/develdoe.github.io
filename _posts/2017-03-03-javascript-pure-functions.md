@@ -5,7 +5,7 @@ title: JavaScript - Pure functions
 category:
   - JavaScript
 ---
-A pure functions always give the same output on a specific input and they are not allowed to update the values inside the funciton.
+A pure functions always give the same output on a specific input, they are not allowed to update object values inside the funciton and no asynchronous calls.
 
 **Pure**
 

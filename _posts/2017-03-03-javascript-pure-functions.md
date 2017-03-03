@@ -46,9 +46,8 @@ This first example changes the value of the original object
 ```js
 function changeProp(obj)
 {
-
-    // obj.name = 'Ilona'
-    // return obj
+    obj.name = 'Ilona'
+    return obj
 }
 var startingValue = {
     name: 'andree',

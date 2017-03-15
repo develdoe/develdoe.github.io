@@ -293,13 +293,6 @@ if (!String.prototype.codePointAt) {
 
 ---
 
-## Accessing as a array
-
-**Accessing a string as an array is unpredictable and you should not do it!**
-
-*If you want to access a string as an array, you should convert it first*
-
----
 
 ## Converting to array
 
@@ -315,4 +308,6 @@ str.split("");           // Split in characters
 ```
 
 If separator is omitted, the returned array will contain the whole string at index 0
+
+**Accessing a string as an array is unpredictable and you should not do it!**
 

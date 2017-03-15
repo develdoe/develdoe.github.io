@@ -309,5 +309,5 @@ str.split("");           // Split in characters
 
 If separator is omitted, the returned array will contain the whole string at index 0
 
-**Accessing a string as an array is unpredictable and you should not do it!**
+**Accessing a string as an array is posible, however,  is unpredictable and you should not do it! Convert the string like above first!**
 

@@ -162,7 +162,7 @@ console.log(str.toLowerCase()) // => cas
 
 ## Merge strings
 
-### concat(a,b,...)
+### concat(separator, str,...)
 
 Joins two or more strings:
 

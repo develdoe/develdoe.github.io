@@ -128,8 +128,6 @@ console.log(str.lastIndexOf("locate")) // => 21
 > JavaScript counts positions from zero.
 0 is the first position in a string, 1 is the second, 2 is the third ...
 
----
-
 ### search
 
 Returns the position
@@ -140,6 +138,61 @@ console.log(str.search("locate") // => 7
 ```
 
 **Note: indexOf and search() are equal, but search can take much more powerfull search values (like regular expressions).**
+
+### localCompare(compareString[, locales[, optoions]])
+
+Returns a number indicating whether a reference string comes before or after or is the same as the giving string in sort order.
+
+*The new `locales` and `options` arguments let application specify the language whose sort order should be used and customize the behavior of the function.*
+
+#### Examples
+
+```js
+// The letter "a" is before "c" yielding a negative value
+'a'.localeCompare('c'); // -2 or -1 (or some other negative value)
+
+// Alphabetically the word "check" comes after "against" yielding a positive value
+'check'.localeCompare('against'); // 2 or 1 (or some other positive value)
+
+// "a" and "a" are equivalent yielding a neutral value of zero
+'a'.localeCompare('a'); // 0
+```
+
+##### Check for browser support for extended arguments
+
+The locales and options arguments are not supported in all browsers yet. To check whether an implementation supports them, use the "i" argument (a requirement that illegal language tags are rejected) and look for a RangeError exception:
+
+```js
+function localeCompareSupportsLocales() {
+  try {
+    'foo'.localeCompare('bar', 'i');
+  } catch (e) {
+    return e.name === 'RangeError';
+  }
+  return false;
+}
+```
+
+##### Using locales
+
+The results provided by localeCompare() vary between languages. In order to get the sort order of the language used in the user interface of your application, make sure to specify that language (and possibly some fallback languages) using the locales argument:
+
+```js
+console.log('ä'.localeCompare('z', 'de')); // a negative value: in German, ä sorts before z
+console.log('ä'.localeCompare('z', 'sv')); // a positive value: in Swedish, ä sorts after z
+```
+
+The results provided by localeCompare() can be customized using the options argument:
+
+```js
+// in German, ä has a as the base letter
+console.log('ä'.localeCompare('a', 'de', { sensitivity: 'base' })); // 0
+
+// in Swedish, ä and a are separate base letters
+console.log('ä'.localeCompare('a', 'sv', { sensitivity: 'base' })); // a positive value
+```
+
+---
 
 ## includes(searchString)
 
@@ -202,6 +255,125 @@ if (!String.prototype.endsWith) {
 }
 ```
 
+### match(regex)
+
+Retrieves the matching when matching is a string against a regex. Returns 
+an array containting the entire match result and any parentheses-captured matched result, null it no match
+
+If he regular expression does not include the g flag, str.match() will return the same result as RegExp.exec(). The returned Array has an extra input property, which contains the original string that was parsed. In addition, it has an index property, which represents the zero-based index of the match in the string.
+
+If the regular expression includes the g flag, the method returns an Array containing all matched substrings rather than match objects. Captured groups are not returned.
+
+#### Use instead
+
+* If you need to know if a string matches a regular expression RegExp, use search().
+* If you only want the first match found, you might want to use RegExp.exec() instead.
+* if you want to obtain capture groups and the global flag is set, you need to use RegExp.exec() instead.
+
+#### Examples
+
+##### Using match()
+
+```js
+var str = 'For more information, see Chapter 3.4.5.1';
+var re = /see (chapter \d+(\.\d)*)/i;
+var found = str.match(re);
+
+console.log(found);
+
+// logs [ 'see Chapter 3.4.5.1',
+//        'Chapter 3.4.5.1',
+//        '.1',
+//        index: 22,
+//        input: 'For more information, see Chapter 3.4.5.1' ]
+
+// 'see Chapter 3.4.5.1' is the whole match.
+// 'Chapter 3.4.5.1' was captured by '(chapter \d+(\.\d)*)'.
+// '.1' was the last value captured by '(\.\d)'.
+// The 'index' property (22) is the zero-based index of the whole match.
+// The 'input' property is the original string that was parsed.
+```
+
+##### Using global and ignore case flags with match()
+
+```js
+var str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+var regexp = /[A-E]/gi;
+var matches_array = str.match(regexp);
+
+console.log(matches_array);
+// ['A', 'B', 'C', 'D', 'E', 'a', 'b', 'c', 'd', 'e']
+```
+
+##### A non-RegExp object as the parameter
+
+When the parameter is a string or a number, it is implicitly converted to a RegExp by using new RegExp(obj). If it is a positive number with a positive sign,the RegExp() method will ignore the positive sign. 
+
+```js
+var str1 = "NaN means not a number. Infinity contains -Infinity and +Infinity in JavaScript.",
+    str2 = "My grandfather is 65 years old and My grandmother is 63 years old.",
+    str3 = "The contract was declared null and void.";
+str1.match("number");   // "number" is a string. returns ["number"]
+str1.match(NaN);        // the type of NaN is the number. returns ["NaN"]
+str1.match(Infinity);   // the type of Infinity is the number. returns ["Infinity"]
+str1.match(+Infinity);  // returns ["Infinity"]
+str1.match(-Infinity);  // returns ["-Infinity"]
+str2.match(65);         // returns ["65"]
+str2.match(+65);        // A number with a positive sign. returns ["65"]
+str3.match(null);       // returns ["null"]
+```
+
+### normalize([form])
+
+Returns the Unicode Normalization Form of a given string (if the value isn't a string, it will be converted to one first).
+
+#### Prameter
+
+form: One of "NFC", "NFD", "NFKC", or "NFKD", specifying the Unicode Normalization Form. If omitted or undefined, "NFC" is used.
+
+* NFC — Normalization Form Canonical Composition.
+* NFD — Normalization Form Canonical Decomposition.
+* NFKC — Normalization Form Compatibility Composition.
+* NFKD — Normalization Form Compatibility Decomposition.
+
+```js
+// Initial string
+
+// U+1E9B: LATIN SMALL LETTER LONG S WITH DOT ABOVE
+// U+0323: COMBINING DOT BELOW
+var str = '\u1E9B\u0323';
+
+
+// Canonically-composed form (NFC)
+
+// U+1E9B: LATIN SMALL LETTER LONG S WITH DOT ABOVE
+// U+0323: COMBINING DOT BELOW
+str.normalize('NFC'); // '\u1E9B\u0323'
+str.normalize();      // same as above
+
+
+// Canonically-decomposed form (NFD)
+
+// U+017F: LATIN SMALL LETTER LONG S
+// U+0323: COMBINING DOT BELOW
+// U+0307: COMBINING DOT ABOVE
+str.normalize('NFD'); // '\u017F\u0323\u0307'
+
+
+// Compatibly-composed (NFKC)
+
+// U+1E69: LATIN SMALL LETTER S WITH DOT BELOW AND DOT ABOVE
+str.normalize('NFKC'); // '\u1E69'
+
+
+// Compatibly-decomposed (NFKD)
+
+// U+0073: LATIN SMALL LETTER S
+// U+0323: COMBINING DOT BELOW
+// U+0307: COMBINING DOT ABOVE
+str.normalize('NFKD'); // '\u0073\u0323\u0307'
+```
+
 ---
 
 ## Extracting
@@ -261,7 +433,7 @@ console.log(str.slice(-4)) // => kiwi
 
 ---
 
-## Replacing
+## Replacing & repeating
 
 ### repace()
 
@@ -280,6 +452,70 @@ console.log(str.replace(/banana/g,"rasberry")) // => apple, rasberry, kiwi
 ```
 
 **Note: replace returns a new string with the new value.**
+
+### repeat(count)
+
+Constructs and returns a new string which contains the specified number of copies of the string on which it was called, concatenated together.
+
+```js
+'abc'.repeat(-1);   // RangeError
+'abc'.repeat(0);    // ''
+'abc'.repeat(1);    // 'abc'
+'abc'.repeat(2);    // 'abcabc'
+'abc'.repeat(3.5);  // 'abcabcabc' (count will be converted to integer)
+'abc'.repeat(1/0);  // RangeError
+
+({ toString: () => 'abc', repeat: String.prototype.repeat }).repeat(2);
+// 'abcabc' (repeat() is a generic method)
+```
+
+#### Polyfill
+
+```js
+if (!String.prototype.repeat) {
+  String.prototype.repeat = function(count) {
+    'use strict';
+    if (this == null) {
+      throw new TypeError('can\'t convert ' + this + ' to object');
+    }
+    var str = '' + this;
+    count = +count;
+    if (count != count) {
+      count = 0;
+    }
+    if (count < 0) {
+      throw new RangeError('repeat count must be non-negative');
+    }
+    if (count == Infinity) {
+      throw new RangeError('repeat count must be less than infinity');
+    }
+    count = Math.floor(count);
+    if (str.length == 0 || count == 0) {
+      return '';
+    }
+    // Ensuring count is a 31-bit integer allows us to heavily optimize the
+    // main part. But anyway, most current (August 2014) browsers can't handle
+    // strings 1 << 28 chars or longer, so:
+    if (str.length * count >= 1 << 28) {
+      throw new RangeError('repeat count must not overflow maximum string size');
+    }
+    var rpt = '';
+    for (;;) {
+      if ((count & 1) == 1) {
+        rpt += str;
+      }
+      count >>>= 1;
+      if (count == 0) {
+        break;
+      }
+      str += str;
+    }
+    // Could we try:
+    // return Array(count + 1).join(this);
+    return rpt;
+  }
+}
+```
 
 ---
 

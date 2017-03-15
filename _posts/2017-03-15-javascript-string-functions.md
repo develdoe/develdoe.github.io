@@ -196,6 +196,68 @@ var str = "HELLO WORLD";
 console.log(str.charAt(0)) // => 72
 ```
 
+### codePointAt(pos) ES2015
+
+returns a non-negative integar that is the Unicode point value
+
+**If there is no element at the specified position, undefined is returned.**
+
+```js
+'ABC'.codePointAt(1);          // => 66
+'\uD800\uDC00'.codePointAt(0); // => 65536
+'XYZ'.codePointAt(42); // => undefined
+```
+
+#### Polyfill
+
+```js
+/*! http://mths.be/codepointat v0.1.0 by @mathias */
+if (!String.prototype.codePointAt) {
+  (function() {
+    'use strict'; // needed to support `apply`/`call` with `undefined`/`null`
+    var codePointAt = function(position) {
+      if (this == null) {
+        throw TypeError();
+      }
+      var string = String(this);
+      var size = string.length;
+      // `ToInteger`
+      var index = position ? Number(position) : 0;
+      if (index != index) { // better `isNaN`
+        index = 0;
+      }
+      // Account for out-of-bounds indices:
+      if (index < 0 || index >= size) {
+        return undefined;
+      }
+      // Get the first code unit
+      var first = string.charCodeAt(index);
+      var second;
+      if ( // check if it’s the start of a surrogate pair
+        first >= 0xD800 && first <= 0xDBFF && // high surrogate
+        size > index + 1 // there is a next code unit
+      ) {
+        second = string.charCodeAt(index + 1);
+        if (second >= 0xDC00 && second <= 0xDFFF) { // low surrogate
+          // http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
+          return (first - 0xD800) * 0x400 + second - 0xDC00 + 0x10000;
+        }
+      }
+      return first;
+    };
+    if (Object.defineProperty) {
+      Object.defineProperty(String.prototype, 'codePointAt', {
+        'value': codePointAt,
+        'configurable': true,
+        'writable': true
+      });
+    } else {
+      String.prototype.codePointAt = codePointAt;
+    }
+  }());
+}
+```
+
 ---
 
 ## Accessing as a array

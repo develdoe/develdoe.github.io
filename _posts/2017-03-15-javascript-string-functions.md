@@ -5,7 +5,7 @@ title: JavaScript - String functions
 category:
   - JavaScript
 ---
-> In JS, strings also have methods and properties besause JS treats primitive values as objects.  
+> JS treats primitive values as objects.  
 
 ## length
 

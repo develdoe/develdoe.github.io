@@ -18,7 +18,7 @@ console.log(str.length) // => 4
 
 ---
 
-## Search for index
+## Search strings
 
 ### indexOf
 
@@ -56,6 +56,39 @@ console.log(str.search("locate") // => 7
 ```
 
 **Note: indexOf and search() are equal, but search can take much more powerfull search values (like regular expressions).**
+
+## includes(searchString)
+
+determines whether one string may be found within another string, returning true or false
+
+```js
+var str = 'To be, or not to be, that is the question.';
+
+console.log(str.includes('To be'));       // true
+console.log(str.includes('question'));    // true
+console.log(str.includes('nonexistent')); // false
+console.log(str.includes('To be', 1));    // false
+console.log(str.includes('TO BE'));       // false
+```
+
+#### Polyfill
+
+```js
+if (!String.prototype.includes) {
+  String.prototype.includes = function(search, start) {
+    'use strict';
+    if (typeof start !== 'number') {
+      start = 0;
+    }
+    
+    if (start + search.length > this.length) {
+      return false;
+    } else {
+      return this.indexOf(search, start) !== -1;
+    }
+  };
+}
+```
 
 ---
 

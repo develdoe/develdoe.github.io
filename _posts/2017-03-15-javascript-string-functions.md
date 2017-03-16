@@ -255,6 +255,30 @@ if (!String.prototype.endsWith) {
 }
 ```
 
+### startsWith(searchString[, posotion])
+
+Determines whether a string begins with the caracter of another string and returns a boolean.
+
+```js
+var str = 'To be, or not to be, that is the question.';
+
+console.log(str.startsWith('To be'));         // true
+console.log(str.startsWith('not to be'));     // false
+console.log(str.startsWith('not to be', 10)); // true
+```
+
+#### Polyfill
+
+```js
+if (!String.prototype.startsWith) {
+    String.prototype.startsWith = function(searchString, position){
+      position = position || 0;
+      return this.substr(position, searchString.length) === searchString;
+  };
+}
+```
+
+
 ### match(regex)
 
 Retrieves the matching when matching is a string against a regex. Returns 

@@ -7,6 +7,25 @@ category:
 ---
 > JS treats primitive values as objects.  
 
+## toString()
+
+Returns a string representing the specific object
+
+```js
+var x = new String('Hello world');
+
+console.log(x.toString()); // logs 'Hello world'
+```
+
+## valueOf()
+
+Same as toString()
+
+```js
+var x = new String('Hello world');
+console.log(x.valueOf()); // Displays 'Hello world'
+```
+
 ## length
 
 Returns the length property:
@@ -14,6 +33,30 @@ Returns the length property:
 ```js
 var str = "adsf"
 console.log(str.length) // => 4
+```
+
+## trim()
+
+Removes whitespace from both ends of a string. Whitespace in this context is all the whitespace characters (space, tab, no-break space, etc.) and all the line terminator characters (LF, CR, etc.) and returns a new string.
+
+```js 
+var orig = '   foo  ';
+console.log(orig.trim()); // 'foo'
+
+// Another example of .trim() removing whitespace from just one side.
+
+var orig = 'foo    ';
+console.log(orig.trim()); //
+```
+
+### polyfill
+
+```js
+if (!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+  };
+}
 ```
 
 ---

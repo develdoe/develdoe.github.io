@@ -15,7 +15,7 @@ Regular expressions are used with the RegExp methods test and exec and with the 
 ### Methods 
 
 |method|desc|
-|-|-|
+|--|--|
 |exec|Executes a search for a matching in a string. It returns an array of information or noull on a missmatch.|
 |test|Tests for a match in a string and returns a boolean|
 |match|Executes a search for a matching in a string and returens rray of information or null.|

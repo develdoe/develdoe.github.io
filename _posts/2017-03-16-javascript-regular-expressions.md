@@ -8,9 +8,20 @@ category:
 
  > A regular expression, regex or regexp (sometimes called a rational expression)is, in theoretical computer science and formal language theory, a sequence of characters that define a search pattern. Usually this pattern is then used by string searching algorithms for "find" or "find and replace" operations on strings (2017, wikipedia).
 
-# Working with regular expressions
+## Working with regular expressions
 
 Regular expressions are used with the RegExp methods test and exec and with the String methods match, replace, search, and split.
+
+### Methods 
+
+|method|desc|
+|-|-|
+|exec|Executes a search for a matching in a string. It returns an array of information or noull on a missmatch.|
+|test|Tests for a match in a string and returns a boolean|
+|match|Executes a search for a matching in a string and returens rray of information or null.|
+|search|Tests for a mach in a string and returns the index of the match or -1.|
+|repleace|Executes a search for match in a string and replaces the substring with a replacement substring.|
+|split|Uses a regular expression or fixed string to break a string into an array of substrings.|
 
 ## Syntax
 

@@ -101,5 +101,5 @@ var shallowCopy = fruits.slice()
 ## Syntax
 
 > [element0, element1, ..., elementN]
-new Array(element0, element1[, ...[, elementN]])
-new Array(arrayLength)
+> new Array(element0, element1[, ...[, elementN]])
+> new Array(arrayLength)

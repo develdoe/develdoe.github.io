@@ -7,6 +7,11 @@ category:
 ---
 
  > A regular expression, regex or regexp (sometimes called a rational expression)is, in theoretical computer science and formal language theory, a sequence of characters that define a search pattern. Usually this pattern is then used by string searching algorithms for "find" or "find and replace" operations on strings (2017, wikipedia).
+ 
+## Syntax
+
+`/pattern/modifiers; `
+
 
 ## Working with regular expressions
 
@@ -20,7 +25,7 @@ When you want to know whether a pattern is found in a string, use the test or se
 |--|--|
 |exec|Executes a search for a matching in a string. It returns an array of information or null on a missmatch.|
 |test|Tests for a match in a string and returns a boolean|
-|match|Executes a search for a matching in a string and returens rray of information or null.|
+|match|Executes a search for a matching in a string and returns array of information or null.|
 |search|Tests for a mach in a string and returns the index of the match or -1.|
 |repleace|Executes a search for match in a string and replaces the substring with a replacement substring.|
 |split|Uses a regular expression or fixed string to break a string into an array of substrings.|
@@ -59,58 +64,75 @@ var myRe = new RegExp('d(b+)d', 'g')
 var myArray = myRe.exec('cdbbdbsbz')
 ```
 
+### Using parenthesized substring matches
 
-## Syntax
-
-`/pattern/modifiers; `
-
-## Example 
-
-```
-var patt = /develdevils/i
-```
 
 ## Modifiers
 
-`i` = Case-insensitive
-`g` = Global match (find all matches rather then stopping after the first)
-`m` = Multiline matching
+|modifier|description|
+|--------|-----------|
+|i|Case-insensitive|
+|g|Global match (find all matches rather then stopping after the first)|
+|m|Multiline matching|
 
 ## Brackets
 
 Brackets are used to find a range of characters. 
 
-`[abc]`  = Find any character between the brackets
-`[^abc]` = Find any character NOT between the brackets
-`[0-9]`  = Find any character between the brackets (digits)
-`[x|y]`  = Find any of the alternatives specified
+|expression|description|
+|--------|-----------|
+|[abc]|Find any character between the brackets|
+|[^abc]|Find any character NOT between the brackets|
+|[0-9]|Find any character between the brackets (digits)|
+|[x|y]|Find any of the alternatives specified|
 
 ## Metacharacters
 
 Metacharacters are characters with spacial meaning.
 
-`.`	    = find a single character, except newline or line terminator
-`\w`    = find a word character
-`\W` 	= find a non-word character
-`\d`	= find a digt
-`\D` 	= find a non-digit character
-`\s`	= Matches a single white space character, space, tab,form feed, line feed. 
-`\S` 	= Matches a single character other than white space
-`\b`    = find a match at the beginning/end of a word
-`\B`    = find a match not at the beginning/end of a word
-`\O`    = find a NUL character
-`\n`    = find a new line character
-`\f`    = find a form feed character
-`\r`    = find a carriage return character
-`\t`    = find a tab char
-`\v`    = find vertical tab char
-`\xxx`  = find the char specified by an octal number
-`\xdd`  = find the character specified by a hexadecimal nuber dd
-`\uxxx` = Find the Unicode character specified by a hexadecimal number xxxx
+|metacharacter|description|
+|--------|-----------|
+|.|find a single character, except newline or line terminator|
+|\w|find a word character|
+|\W|find a non-word character|
+|\d|find a digt|
+|\D|find a non-digit character|
+|\s|Matches a single white space character, space, tab,form feed, line| feed|
+|\S|Matches a single character other than white space|
+|\b|find a match at the beginning/end of a word|
+|\B|find a match not at the beginning/end of a word|
+|\O|find a NUL character|
+|\n|find a new line character|
+|\f|find a form feed character|
+|\r|find a carriage return character|
+|\t|find a tab char|
+|\v|find vertical tab char|
+|\xxx|find the char specified by an octal number|
+|\xdd|find the character specified by a hexadecimal nuber dd|
+|\uxxx|Find the Unicode character specified by a hexadecimal number xxxx|
 
 ## Quantifiers
 
-`n+`    = Match any string that contains at leas one *n*
-`n*`    = Match any string that contains zero and more *n*
-`n?`    = Match any string that contains zero or one occurences of *n*
-`n{X,Y} = 
+|quantifier|description|
+|--------|-----------|
+|n+|Match any string that contains at leas one *n*|
+|n*|Match any string that contains zero and more *n*|
+|n?|Match any string that contains zero or one occurences of *n*|
+|n{X}|Matches any string that contains a sequence of X n's|
+|n{X,Y}|Matches any string that contains a sequence of X to Y n's|
+|n{X,}|Matches any string that contains a sequence of at least X n's|
+|n$|Matches any string with n at the end of it|
+|^n|Matches any string with n at the beginning of it|
+|?=n|Matches any string that is followed by a specific string n|
+|?!n|Matches any string that is not followed by a specific string n|
+
+## RegExp Object Properties
+
+|Property|Description|
+|--------|-----------|
+|constructor|returns the function that created the RegExp objects prototype|
+|global|checks whether the "g" modifier is set|
+|ignoreCase|checks whether the "i" modifier is set|
+|lastIndex|specified the index at which to start the next match|
+|multiline|checks whether the "m" modifier is set|
+|source|return the text of the regEx pattern|

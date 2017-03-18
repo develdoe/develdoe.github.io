@@ -79,14 +79,35 @@ var newstr = str.replace(re, '$2, $1');
 console.log(newstr); // => "Smith, John"
 ```
 
+### Advanced searching with flags
 
-## Modifiers
+Regular expressions have five optional flags that allow for global and case insensitive searching. These flags can be used separately or together in any order, and are included as part of the regular expression.
 
-|modifier|description|
+|flag|description|
 |--------|-----------|
 |i|Case-insensitive|
 |g|Global match (find all matches rather then stopping after the first)|
 |m|Multiline matching|
+|u|unicode; treat pattern as a sequene of unicode code points|
+|y|Perform a "sticky" search that matches starting at the current position in the target string|
+
+```js
+var re = /pattern/flags;
+```
+
+```js
+var re = new RegExp('pattern', 'flags');
+```
+
+*The behavior associated with the 'g' flag is different when the .exec() method is used.  (This should not be a surprise; a given regular expression is expected to have different behavior when used with .match() versus .exec().  The roles of "class" and "argument" get reversed: In the case of .match(), the string class (or data type) owns the method and the regular expression is just an argument, while in the case of .exec(), it is the regular expression that owns the method, with the string being the argument.  Contrast str.match(re) versus re.exec(str).)  The 'g' flag is used with the .exec() method to get iterative progression.*
+
+```js
+var xArray; while(xArray = re.exec(str)) console.log(xArray);
+// produces: 
+// ["fee ", index: 0, input: "fee fi fo fum"]
+// ["fi ", index: 4, input: "fee fi fo fum"]
+// ["fo ", index: 7, input: "fee fi fo fum"]
+```
 
 ## Brackets
 
@@ -149,3 +170,106 @@ Metacharacters are characters with spacial meaning.
 |lastIndex|specified the index at which to start the next match|
 |multiline|checks whether the "m" modifier is set|
 |source|return the text of the regEx pattern|
+
+## Examples
+
+### Changing the order in an input string
+
+The following example illustrates the formation of regular expressions and the use of string.split() and string.replace(). 
+
+* It cleans a roughly formatted input string containing names (first name first) separated by blanks, tabs and exactly one semicolon. 
+* Finally, it reverses the name order (last name first) and sorts the list.
+
+```js
+// The name string contains multiple spaces and tabs,
+// and may have multiple spaces between first and last names.
+var names = 'Harry Trump ;Fred Barney; Helen Rigby ; Bill Abel ; Chris Hand ';
+
+var output = ['---------- Original String\n', names + '\n'];
+
+// Prepare two regular expression patterns and array storage.
+// Split the string into array elements.
+
+// pattern: possible white space then semicolon then possible white space
+var pattern = /\s*;\s*/;
+
+// Break the string into pieces separated by the pattern above and
+// store the pieces in an array called nameList
+var nameList = names.split(pattern);
+
+// new pattern: one or more characters then spaces then characters.
+// Use parentheses to "memorize" portions of the pattern.
+// The memorized portions are referred to later.
+pattern = /(\w+)\s+(\w+)/;
+
+// New array for holding names being processed.
+var bySurnameList = [];
+
+// Display the name array and populate the new array
+// with comma-separated names, last first.
+//
+// The replace method removes anything matching the pattern
+// and replaces it with the memorized string—second memorized portion
+// followed by comma space followed by first memorized portion.
+//
+// The variables $1 and $2 refer to the portions
+// memorized while matching the pattern.
+
+output.push('---------- After Split by Regular Expression');
+
+var i, len;
+for (i = 0, len = nameList.length; i < len; i++) {
+  output.push(nameList[i]);
+  bySurnameList[i] = nameList[i].replace(pattern, '$2, $1');
+}
+
+// Display the new array.
+output.push('---------- Names Reversed');
+for (i = 0, len = bySurnameList.length; i < len; i++) {
+  output.push(bySurnameList[i]);
+}
+
+// Sort by last name, then display the sorted array.
+bySurnameList.sort();
+output.push('---------- Sorted');
+for (i = 0, len = bySurnameList.length; i < len; i++) {
+  output.push(bySurnameList[i]);
+}
+
+output.push('---------- End');
+
+console.log(output.join('\n'));
+```
+
+### Using special characters to verify input
+
+In the following example, the user is expected to enter a phone number. When the user presses the "Check" button, the script checks the validity of the number. If the number is valid (matches the character sequence specified by the regular expression), the script shows a message thanking the user and confirming the number. If the number is invalid, the script informs the user that the phone number is not valid.
+
+```html
+<!DOCTYPE html>
+<html>  
+  <head>  
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">  
+    <meta http-equiv="Content-Script-Type" content="text/javascript">  
+    <script type="text/javascript">  
+      var re = /(?:\d{3}|\(\d{3}\))([-\/\.])\d{3}\1\d{4}/;  
+      function testInfo(phoneInput) {  
+        var OK = re.exec(phoneInput.value);  
+        if (!OK)  
+          window.alert(phoneInput.value + ' isn\'t a phone number with area code!');  
+        else
+          window.alert('Thanks, your phone number is ' + OK[0]);  
+      }  
+    </script>  
+  </head>  
+  <body>  
+    <p>Enter your phone number (with area code) and then click "Check".
+        <br>The expected format is like ###-###-####.</p>
+    <form action="#">  
+      <input id="phone"><button onclick="testInfo(document.getElementById('phone'));">Check</button>
+    </form>  
+  </body>  
+</html>
+```
+
+Within non-capturing parentheses (?: , the regular expression looks for three numeric characters \d{3} OR | a left parenthesis \( followed by three digits \d{3}, followed by a close parenthesis \), (end non-capturing parenthesis )), followed by one dash, forward slash, or decimal point and when found, remember the character ([-\/\.]), followed by three digits \d{3}, followed by the remembered match of a dash, forward slash, or decimal point \1, followed by four digits \d{4}.

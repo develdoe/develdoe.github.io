@@ -12,16 +12,53 @@ category:
 
 Regular expressions are used with the RegExp methods test and exec and with the String methods match, replace, search, and split.
 
+When you want to know whether a pattern is found in a string, use the test or search method; for more information (but slower execution) use the exec or match methods. 
+
 ### Methods 
 
 |method|desc|
 |--|--|
-|exec|Executes a search for a matching in a string. It returns an array of information or noull on a missmatch.|
+|exec|Executes a search for a matching in a string. It returns an array of information or null on a missmatch.|
 |test|Tests for a match in a string and returns a boolean|
 |match|Executes a search for a matching in a string and returens rray of information or null.|
 |search|Tests for a mach in a string and returns the index of the match or -1.|
 |repleace|Executes a search for match in a string and replaces the substring with a replacement substring.|
 |split|Uses a regular expression or fixed string to break a string into an array of substrings.|
+
+If you use exec or match and if the match succeeds, these methods return an array and update properties of the associated regular expression object and also of the predefined regular expression object, RegExp. 
+
+If the match fails, the exec method returns null (which coerces to false).
+
+### Examples 
+
+**Find a match**
+
+```js
+var myRe = /d(b+)d/g
+var myArray = myRe.exec(' cdbbdb sbz')
+console.log(myArray) // => ["dbbd", "bb"]
+```
+
+**If you do not need to access the properties of the regular expression**
+* If you need to use a method like indexOf on the regular expression at a later state, you cannot use this syntax*
+
+```js
+var myArray = /d(b+)d/g.exec('cdbbdbsbz')
+```
+
+**Equivalent**
+
+```js
+var myArray = "cdbbdbsbz".match(/d(b+)d/g)
+```
+
+**construct the regular expression from a string**
+
+```js
+var myRe = new RegExp('d(b+)d', 'g')
+var myArray = myRe.exec('cdbbdbsbz')
+```
+
 
 ## Syntax
 

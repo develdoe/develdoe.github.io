@@ -106,7 +106,28 @@ new Array(element0, element1[, ...[, elementN]])
 new Array(arrayLength)
 ```
 
-## Parameters 
+### Parameters 
 
 **elementN**
-A JavaScript array is initialized with the given elements, except in the case where a single argument is passed to the Array constructor and that argument is a number (see the arrayLength parameter below). Note that this special case only applies to JavaScript arrays created with the Array constructor, not array literals created with the bracket syntax.
+
+A JavaScript array is initialized with the given elements. 
+
+Except in the case where a single argument is passed to the Array constructor and that argument is a number (see the arrayLength parameter below). *Note that this special case only applies to JavaScript arrays created with the Array constructor, not array literals created with the bracket syntax.*
+
+**arrayLength**
+
+If the only argument passed to the Array constructor is an integer between 0 and 232-1 (inclusive), this returns a new JavaScript array with its length property set to that number. *Note: this implies an array of arrayLength empty slots, not slots with actual undefined values.* If the argument is any other number, a RangeError exception is thrown.
+
+## Description
+
+Arrays are list-like objects whose prototype has methods to perform traversal and mutation operations. 
+
+Neither the length of a JavaScript array nor the types of its elements are fixed. 
+
+Since an array's length can change at any time, and data can be stored at non-contiguous locations in the array, JavaScript arrays are not guaranteed to be dense; this depends on how the programmer chooses to use them. 
+
+In general, these are convenient characteristics; but if these features are not desirable for your particular use, you might consider using typed arrays.
+
+Some people think that you [shouldn't use an array as an associative array](www.andrewdupont.net/2006/05/18/javascript-associative-arrays-considered-harmful/). In any case, you can use plain objects instead, although doing so comes with its own caveats. See the post [Lightweight JavaScript dictionaries with arbitrary keys](http://www.less-broken.com/blog/2010/12/lightweight-javascript-dictionaries.html) as an example.
+
+### Accessing array elements

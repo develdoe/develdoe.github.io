@@ -415,3 +415,408 @@ var b = a.shift();
 console.log(a); // [2, 3]
 console.log(b); // 1
 ```
+
+##### Array.prototype.sort()
+
+Sorts the elements of an array in place and returns the array.
+
+###### Syntax
+
+```
+arr.sort()
+arr.sort(compareFunction)
+```
+
+###### Example
+
+```js
+var fruit = ['cherries', 'apples', 'bananas'];
+fruit.sort(); // ['apples', 'bananas', 'cherries']
+
+var scores = [1, 10, 21, 2]; 
+scores.sort(); // [1, 10, 2, 21]
+// Note that 10 comes before 2,
+// because '10' comes before '2' in Unicode code point order.
+
+var things = ['word', 'Word', '1 Word', '2 Words'];
+things.sort(); // ['1 Word', '2 Words', 'Word', 'word']
+// In Unicode, numbers come before upper case letters,
+// which come before lower case letters.
+```
+
+##### Array.prototype.splice()
+
+Adds and/or removes elements from an array.
+
+###### Syntax
+
+```
+array.splice(start)
+array.splice(start, deleteCount)
+array.splice(start, deleteCount, item1, item2, ...)
+```
+
+###### Example
+
+```js
+var myFish = ['angel', 'clown', 'mandarin', 'sturgeon'];
+
+myFish.splice(2, 0, 'drum'); 
+// myFish is ["angel", "clown", "drum", "mandarin", "sturgeon"]
+
+myFish.splice(2, 1); 
+// myFish is ["angel", "clown", "mandarin", "sturgeon"]
+```
+
+##### Array.prototype.unshift()
+
+Adds one or more elements to the front of an array and returns the new length of the array.
+
+###### Syntax
+
+```
+arr.unshift([element1[, ...[, elementN]]])
+```
+
+###### Example
+
+```js
+var a = [1, 2, 3];
+a.unshift(4, 5);
+
+console.log(a); // [4, 5, 1, 2, 3]
+```
+
+#### Accessor methods
+
+These methods do not modify the array and return some representation of the array
+
+##### Array.prototype.concat()
+
+Returns a new array comprised of this array joined with other array(s) and/or value(s).
+
+###### Syntax
+
+```
+var new_array = old_array.concat(value1[, value2[, ...[, valueN]]])
+```
+
+###### Example
+
+```js
+var arr1 = ['a', 'b', 'c'];
+var arr2 = ['d', 'e', 'f'];
+
+var arr3 = arr1.concat(arr2);
+
+// results in a new array [ "a", "b", "c", "d", "e", "f" ]
+```
+
+##### Array.prototype.includes()
+
+Determines whether an array contains a certain element, returning true or false as appropriate.
+
+###### Syntax
+
+```
+arr.includes(searchElement)
+arr.includes(searchElement, fromIndex)
+```
+
+###### Example
+
+```js
+var a = [1, 2, 3];
+a.includes(2); // true 
+a.includes(4); // false
+```
+
+##### Array.prototype.indexOf()
+
+Returns the first (least) index of an element within the array equal to the specified value, or -1 if none is found.
+
+###### Syntax
+
+```
+arr.indexOf(searchElement)
+arr.indexOf(searchElement, fromIndex)
+```
+
+###### Example
+
+```js
+var array = [2, 9, 9];
+array.indexOf(2);     // 0
+array.indexOf(7);     // -1
+array.indexOf(9, 2);  // 2
+array.indexOf(2, -1); // -1
+array.indexOf(2, -3); // 0
+```
+
+##### Array.prototype.join()
+
+Joins all elements of an array into a string.
+
+###### Syntax
+
+```
+arr.join()
+arr.join(separator)
+```
+
+###### Example
+
+```js
+var a = ['Wind', 'Rain', 'Fire'];
+a.join();    // 'Wind,Rain,Fire'
+a.join('-'); // 'Wind-Rain-Fire'
+```
+
+##### Array.prototype.lastIndexOf()
+
+Returns the last (greatest) index of an element within the array equal to the specified value, or -1 if none is found.
+
+###### Syntax
+
+```
+arr.lastIndexOf(searchElement)
+arr.lastIndexOf(searchElement, fromIndex)
+```
+
+###### Example
+
+```js
+var numbers = [2, 5, 9, 2];
+numbers.lastIndexOf(2); // 3
+numbers.lastIndexOf(7); // -1
+```
+
+##### Array.prototype.slice()
+
+Extracts a section of an array and returns a new array.
+
+###### Syntax
+
+```
+arr.slice()
+arr.slice(begin)
+arr.slice(begin, end)
+```
+
+###### Example
+
+```js
+var fruits = ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango'];
+var citrus = fruits.slice(1, 3);
+
+// fruits contains ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango']
+// citrus contains ['Orange','Lemon']
+```
+
+##### Array.prototype.toString()
+
+Returns a string representing the array and its elements. Overrides the Object.prototype.toString() method.
+
+###### Syntax
+
+```
+arr.toString()
+```
+
+###### Example
+
+```js
+var months = ['Jan', 'Feb', 'Mar', 'Apr'];
+months.toString(); // "Jan,Feb,Mar,Apr"
+```
+
+##### Array.prototype.toLocaleString()
+
+Returns a localized string representing the array and its elements. Overrides the Object.prototype.toLocaleString() method.
+
+###### Syntax
+
+```
+arr.toLocaleString();
+arr.toLocaleString(locales);
+arr.toLocaleString(locales, options);
+```
+
+###### Example
+
+```js
+var number = 1337;
+var date = new Date();
+var myArr = [number, date, 'foo'];
+
+var str = myArr.toLocaleString(); 
+
+console.log(str); 
+// logs '1337,6.12.2013 19:37:35,foo'
+// if run in a German (de-DE) locale with timezone Europe/Berlin
+```
+
+#### Iteration methods
+
+Several methods take as arguments functions to be called back while processing the array. When these methods are called, the length of the array is sampled, and any element added beyond this length from within the callback is not visited. Other changes to the array (setting the value of or deleting an element) may affect the results of the operation if the method visits the changed element afterwards. While the specific behavior of these methods in such cases is well-defined, you should not rely upon it so as not to confuse others who might read your code. If you must mutate the array, copy into a new array instead.
+
+##### Array.prototype.entries()
+
+Returns a new Array Iterator object that contains the key/value pairs for each index in the array.
+
+###### Syntax
+
+```
+a.entries()
+```
+
+###### Example
+
+```js
+var a = ['a', 'b', 'c'];
+var iterator = a.entries();
+
+console.log(iterator.next().value); // [0, 'a']
+console.log(iterator.next().value); // [1, 'b']
+console.log(iterator.next().value); // [2, 'c']
+```
+
+##### Array.prototype.every()
+
+Returns true if every element in this array satisfies the provided testing function.
+
+###### Syntax
+
+```
+arr.every(callback[, thisArg])
+```
+
+###### Example
+
+```js
+function isBigEnough(element, index, array) { 
+  return element >= 10; 
+} 
+
+[12, 5, 8, 130, 44].every(isBigEnough);   // false 
+[12, 54, 18, 130, 44].every(isBigEnough); // true
+```
+
+##### Array.prototype.filter()
+
+Creates a new array with all of the elements of this array for which the provided filtering function returns true.
+
+###### Syntax
+
+```
+var newArray = arr.filter(callback[, thisArg])
+```
+
+###### Example
+
+```js
+function isBigEnough(value) {
+  return value >= 10;
+}
+
+var filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
+// filtered is [12, 130, 44]
+```
+
+##### Array.prototype.find()
+
+Returns the found value in the array, if an element in the array satisfies the provided testing function or undefined if not found.
+
+###### Syntax
+
+```
+arr.find(callback[, thisArg])
+```
+
+###### Example
+
+```js
+function isBigEnough(element) {
+  return element >= 15;
+}
+
+[12, 5, 8, 130, 44].find(isBigEnough); // 130
+```
+
+##### Array.prototype.findIndex()
+
+Returns the found index in the array, if an element in the array satisfies the provided testing function or -1 if not found.
+    
+###### Syntax
+
+```
+arr.findIndex(callback[, thisArg])
+```
+
+###### Example
+
+```js
+function isBigEnough(element) {
+  return element >= 15;
+}
+
+[12, 5, 8, 130, 44].findIndex(isBigEnough); // index of 3rd element in the Array is returned, it will result in '3'
+```
+
+##### Array.prototype.forEach()
+
+Returns the found index in the array, if an element in the array satisfies the provided testing function or -1 if not found.
+    
+###### Syntax
+
+```
+arr.forEach(function callback(currentValue, index, array) {
+    //your iterator
+}[, thisArg]);
+```
+
+###### Example
+
+```js
+function logArrayElements(element, index, array) {
+  console.log('a[' + index + '] = ' + element);
+}
+
+// Notice that index 2 is skipped since there is no item at
+// that position in the array.
+[2, 5, , 9].forEach(logArrayElements);
+// logs:
+// a[0] = 2
+// a[1] = 5
+// a[3] = 9
+```
+
+##### Array.prototype.keys()
+
+Returns a new Array Iterator that contains the keys for each index in the array.
+    
+###### Syntax
+
+```
+arr.keys()
+```
+
+###### Example
+
+```js
+var arr = ['a', 'b', 'c'];
+var iterator = arr.keys();
+
+console.log(iterator.next()); // { value: 0, done: false }
+console.log(iterator.next()); // { value: 1, done: false }
+console.log(iterator.next()); // { value: 2, done: false }
+console.log(iterator.next()); // { value: undefined, done: true }
+```
+
+```js
+var arr = ['a', , 'c'];
+var sparseKeys = Object.keys(arr);
+var denseKeys = [...arr.keys()];
+console.log(sparseKeys); // ['0', '2']
+console.log(denseKeys);  // [0, 1, 2]
+```

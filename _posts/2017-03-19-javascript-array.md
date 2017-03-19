@@ -247,3 +247,171 @@ The properties and elements returned from this match are as follows:
 |index|A read-only property that is the zero-based index of the match in the string.|1|
 |[0]|A read-only element that specifies the last matched characters.|dbBd|
 |[1], ...[n]|Read-only elements that specify the parenthesized substring matches, if included in the regular expression. The number of possible parenthesized substrings is unlimited.|[1]: bB[2]: d|
+
+### Properties
+
+#### Array.length
+
+The Array constructor's length property whose value is 1.
+
+#### get Array[@@species]
+
+The constructor function that is used to create derived objects.
+
+#### Array.prototype
+
+Allows the addition of properties to all array objects.
+
+### Methods
+
+#### Array.from()
+
+Creates a new Array instance from an array like or iterable object
+
+#### Array.isArray()
+
+Returns boolean
+
+#### Array.of()
+
+Creates a new Array instance with a variable number of arguments, regardless of number or type of the arguments.
+
+## Array Instances
+
+All Array instances inherits from Array.prototype. The prototype of the Array constructor can be modified to effect all Array instances. 
+
+### Properties
+
+#### Array.prototype.constructor
+
+Specifies the function that creates an object's prototype.
+
+#### Array.prototype.length
+
+Reflects the number of elements in an array.
+
+#### Array.prototype[@@unscopables] 
+
+A symbol containing property names to exclude from a with binding scope.
+
+### Methods
+
+#### Mutator methods
+
+These methods modify the array.
+
+##### Array.prototype.copyWithin()
+
+Copies a sequence of a array elements within the array.
+
+###### Syntax
+
+```
+arr.copyWithin(target)
+arr.copyWithin(target, start)
+arr.copyWithin(target, start, end)
+```
+
+###### Example
+
+```js
+['alpha', 'bravo', 'charlie', 'delta'].copyWithin(2, 0);
+// results in ["alpha", "bravo", "alpha", "bravo"]
+```
+
+##### Array.prototype.fill()
+
+Fills all the elements of an array from a start index to an end index with a static value.
+
+###### Syntax
+
+```
+arr.fill(value)
+arr.fill(value, start)
+arr.fill(value, start, end)
+```
+
+###### Example
+
+```js
+var numbers = [1, 2, 3]
+numbers.fill(1);
+// results in [1, 1, 1]
+```
+
+##### Array.prototype.pop()
+
+Removes the last element from an array and returns that element.
+
+###### Syntax
+
+```
+arr.pop()
+```
+
+###### Example
+
+```js
+var a = [1, 2, 3];
+a.pop();
+console.log(a); // [1, 2]
+```
+
+##### Array.prototype.push()
+
+Adds one or more elements to the end of an array and returns the new length of the array.
+
+###### Syntax
+
+```
+arr.push([element1[, ...[, elementN]]])
+```
+
+###### Example
+
+```js
+var sports = ['soccer', 'baseball'];
+var total = sports.push('football', 'swimming');
+
+console.log(sports); // ['soccer', 'baseball', 'football', 'swimming']
+console.log(total);  // 4
+```
+
+##### Array.prototype.reverse()
+
+Reverses the order of the elements of an array in place — the first becomes the last, and the last becomes the first..
+
+###### Syntax
+
+```
+a.reverse()
+```
+
+###### Example
+
+```js
+var a = ['one', 'two', 'three'];
+a.reverse(); 
+
+console.log(a); // ['three', 'two', 'one']
+```
+
+##### Array.prototype.shift()
+
+Removes the first element from an array and returns that element.
+
+###### Syntax
+
+```
+arr.shift()
+```
+
+###### Example
+
+```js
+var a = [1, 2, 3];
+var b = a.shift();
+
+console.log(a); // [2, 3]
+console.log(b); // 1
+```

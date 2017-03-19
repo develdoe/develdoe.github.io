@@ -131,3 +131,119 @@ In general, these are convenient characteristics; but if these features are not 
 Some people think that you [shouldn't use an array as an associative array](www.andrewdupont.net/2006/05/18/javascript-associative-arrays-considered-harmful/). In any case, you can use plain objects instead, although doing so comes with its own caveats. See the post [Lightweight JavaScript dictionaries with arbitrary keys](http://www.less-broken.com/blog/2010/12/lightweight-javascript-dictionaries.html) as an example.
 
 ### Accessing array elements
+
+JavaScript arrays are zero-indexed: the first element of an array is at index 0, and the last element is at the index equal to the value of the array's length property minus 1.
+
+```js
+var arr = ['this is the first element', 'this is the second element'];
+console.log(arr[0]);              // logs 'this is the first element'
+console.log(arr[1]);              // logs 'this is the second element'
+console.log(arr[arr.length - 1]); // logs 'this is the second element'
+```
+
+Array elements are object properties in the same way that toString is a property, but trying to access an element of an array as follows throws a syntax error, because the property name is not valid:
+
+```js
+console.log(arr.0); // a syntax error
+```
+
+There is nothing special about JavaScript arrays and the properties that cause this. 
+
+JavaScript properties that begin with a digit cannot be referenced with dot notation; and must be accessed using bracket notation. For example, if you had an object with a property named '3d', it can only be referenced using bracket notation. E.g.:
+
+```js 
+var years = [1950, 1960, 1970, 1980, 1990, 2000, 2010];
+console.log(years.0);   // a syntax error
+console.log(years[0]);  // works properly
+```
+
+```js
+renderer.3d.setTexture(model, 'character.png');     // a syntax error
+renderer['3d'].setTexture(model, 'character.png');  // works properly
+```
+
+Note that in the 3d example, '3d' had to be quoted. It's possible to quote the JavaScript array indexes as well (e.g., years['2'] instead of years[2]), although it's not necessary. 
+
+The 2 in years[2] is coerced into a string by the JavaScript engine through an implicit toString conversion. It is for this reason that '2' and '02' would refer to two different slots on the years object and the following example could be true:
+
+```js
+console.log(years['2'] != years['02']);
+```
+
+Similarly, object properties which happen to be reserved words(!) can only be accessed as string literals in bracket notation(but it can be accessed by dot notation in firefox 40.0a2 at least):
+
+```js
+var promise = {
+  'var'  : 'text',
+  'array': [1, 2, 3, 4]
+};
+
+console.log(promise['var']);
+```
+
+### Relationship between length and numerical properties
+
+A JavaScript array's length property and numerical properties are connected.
+
+Several of the built-in array methods (e.g., join, slice, indexOf, etc.) take into account the value of an array's length property when they're called.
+
+Other methods (e.g., push, splice, etc.) also result in updates to an array's length property.
+
+```js
+var fruits = [];
+fruits.push('banana', 'apple', 'peach');
+
+console.log(fruits.length); // 3
+```
+
+When setting a property on a JavaScript array when the property is a valid array index and that index is outside the current bounds of the array, the engine will update the array's length property accordingly:
+
+```js
+fruits[5] = 'mango';
+console.log(fruits[5]); // 'mango'
+console.log(Object.keys(fruits));  // ['0', '1', '2', '5']
+console.log(fruits.length); // 6
+```
+
+Increasing the length:
+
+```js
+fruits.length = 10;
+console.log(Object.keys(fruits)); // ['0', '1', '2', '5']
+console.log(fruits.length); // 10
+```
+
+Decreasing the length property does, however, delete elements.
+
+```js
+fruits.length = 2;
+console.log(Object.keys(fruits)); // ['0', '1']
+console.log(fruits.length); // 2
+```
+
+More on [Array.length](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length).
+
+### Creating an array using the result of a match
+
+The result of a match between a regular expression and a string can create a JavaScript array. 
+
+This array has properties and elements which provide information about the match. Such an array is returned by RegExp.exec, String.match, and String.replace. 
+
+To help explain these properties and elements, look at the following example and then refer to the table below:
+
+```js
+// Match one d followed by one or more b's followed by one d
+// Remember matched b's and the following d
+// Ignore case
+
+var myRe = /d(b+)(d)/i;
+var myArray = myRe.exec('cdbBdbsbz');
+```
+
+The properties and elements returned from this match are as follows:
+
+|Property/Element|Description|Example|
+|input|A read-only property that reflects the original string against which the regular expression was matched.|cdbBdbsbz|
+|index|A read-only property that is the zero-based index of the match in the string.|1|
+|[0]|A read-only element that specifies the last matched characters.|dbBd|
+|[1], ...[n]|Read-only elements that specify the parenthesized substring matches, if included in the regular expression. The number of possible parenthesized substrings is unlimited.|[1]: bB[2]: d|

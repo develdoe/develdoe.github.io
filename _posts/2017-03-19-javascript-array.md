@@ -105,3 +105,8 @@ var shallowCopy = fruits.slice()
 new Array(element0, element1[, ...[, elementN]])
 new Array(arrayLength)
 ```
+
+## Parameters 
+
+**elementN**
+A JavaScript array is initialized with the given elements, except in the case where a single argument is passed to the Array constructor and that argument is a number (see the arrayLength parameter below). Note that this special case only applies to JavaScript arrays created with the Array constructor, not array literals created with the bracket syntax.

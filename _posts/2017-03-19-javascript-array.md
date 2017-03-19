@@ -791,32 +791,249 @@ function logArrayElements(element, index, array) {
 // a[3] = 9
 ```
 
-##### Array.prototype.keys()
+##### Array.prototype.map()
 
-Returns a new Array Iterator that contains the keys for each index in the array.
+Creates a new array with the results of calling a provided function on every element in this array.
     
 ###### Syntax
 
 ```
-arr.keys()
+var new_array = arr.map(callback[, thisArg])
 ```
 
 ###### Example
 
 ```js
-var arr = ['a', 'b', 'c'];
-var iterator = arr.keys();
-
-console.log(iterator.next()); // { value: 0, done: false }
-console.log(iterator.next()); // { value: 1, done: false }
-console.log(iterator.next()); // { value: 2, done: false }
-console.log(iterator.next()); // { value: undefined, done: true }
+var numbers = [1, 4, 9];
+var roots = numbers.map(Math.sqrt);
+// roots is now [1, 2, 3]
+// numbers is still [1, 4, 9]
 ```
 
 ```js
-var arr = ['a', , 'c'];
-var sparseKeys = Object.keys(arr);
-var denseKeys = [...arr.keys()];
-console.log(sparseKeys); // ['0', '2']
-console.log(denseKeys);  // [0, 1, 2]
+var kvArray = [{key: 1, value: 10}, 
+               {key: 2, value: 20}, 
+               {key: 3, value: 30}];
+
+var reformattedArray = kvArray.map(function(obj) { 
+   var rObj = {};
+   rObj[obj.key] = obj.value;
+   return rObj;
+});
+
+// reformattedArray is now [{1: 10}, {2: 20}, {3: 30}], 
+
+// kvArray is still: 
+// [{key: 1, value: 10}, 
+//  {key: 2, value: 20}, 
+//  {key: 3, value: 30}]
+```
+
+##### Array.prototype.reduce()
+
+Apply a function against an accumulator and each value of the array (from left-to-right) as to reduce it to a single value.
+    
+###### Syntax
+
+```
+arr.reduce(callback, [initialValue])
+```
+
+###### Example
+
+```js
+var sum = [0, 1, 2, 3].reduce(function(acc, val) {
+  return acc + val;
+}, 0);
+// sum is 6
+
+var list1 = [[0, 1], [2, 3], [4, 5]];
+var list2 = [0, [1, [2, [3, [4, [5]]]]]];
+
+const flatten = arr => arr.reduce(
+  (acc, val) => acc.concat(
+    Array.isArray(val) ? flatten(val) : val
+  ),
+  []
+);
+flatten(list1); // returns [0, 1, 2, 3, 4, 5]
+flatten(list2); // returns [0, 1, 2, 3, 4, 5]
+```
+
+##### Array.prototype.reduceRight()
+
+Apply a function against an accumulator and each value of the array (from right-to-left) as to reduce it to a single value.
+    
+###### Syntax
+
+```
+arr.reduceRight(callback[, initialValue])
+```
+
+###### Example
+
+```js
+var flattened = [[0, 1], [2, 3], [4, 5]].reduceRight(function(a, b) {
+    return a.concat(b);
+}, []);
+
+// flattened is [4, 5, 2, 3, 0, 1]
+```
+
+##### Array.prototype.some()
+
+Returns true if at least one element in this array satisfies the provided testing function.
+    
+###### Syntax
+
+```
+arr.some(callback[, thisArg])
+```
+
+###### Example
+
+```js
+function isBiggerThan10(element, index, array) {
+  return element > 10;
+}
+
+[2, 5, 8, 1, 4].some(isBiggerThan10);  // false
+[12, 5, 8, 1, 4].some(isBiggerThan10); // true
+```
+
+##### Array.prototype.some()
+
+Returns true if at least one element in this array satisfies the provided testing function.
+    
+###### Syntax
+
+```
+arr.some(callback[, thisArg])
+```
+
+###### Example
+
+```js
+function isBiggerThan10(element, index, array) {
+  return element > 10;
+}
+
+[2, 5, 8, 1, 4].some(isBiggerThan10);  // false
+[12, 5, 8, 1, 4].some(isBiggerThan10); // true
+```
+
+##### Array.prototype.values()
+
+Returns a new Array Iterator object that contains the values for each index in the array.
+    
+###### Syntax
+
+```
+arr.values()
+```
+
+###### Example
+
+```js
+var a = ['w', 'y', 'k', 'o', 'p']; 
+var iterator = a.values();
+
+console.log(iterator.next().value); // w 
+console.log(iterator.next().value); // y 
+console.log(iterator.next().value); // k 
+console.log(iterator.next().value); // o 
+console.log(iterator.next().value); // p
+```
+
+```js
+var arr = ['w', 'y', 'k', 'o', 'p'];
+var iterator = arr.values();
+
+for (let letter of iterator) {
+  console.log(letter);
+}
+```
+
+##### Array.prototype[@@iterator]()
+
+Returns a new Array Iterator object that contains the values for each index in the array.
+    
+###### Syntax
+
+```
+arr[Symbol.iterator]()
+```
+
+###### Example
+
+```js
+var arr = ['w', 'y', 'k', 'o', 'p'];
+var eArr = arr[Symbol.iterator]();
+// your browser must support for..of loop
+// and let-scoped variables in for loops
+for (let letter of eArr) {
+  console.log(letter);
+}
+```
+
+```js
+var arr = ['w', 'y', 'k', 'o', 'p'];
+var eArr = arr[Symbol.iterator]();
+console.log(eArr.next().value); // w
+console.log(eArr.next().value); // y
+console.log(eArr.next().value); // k
+console.log(eArr.next().value); // o
+console.log(eArr.next().value); // p
+```
+
+## Examples
+
+### Creating an array
+
+The following example creates an array, msgArray, with a length of 0, then assigns values to msgArray[0] and msgArray[99], changing the length of the array to 100.
+
+```js
+var msgArray = []
+msgArray[0] = 'Hello'
+msgArray[99] = 'world'
+
+if(msgArray.length === 100) {
+	console.log('The length is 100.)
+}
+```
+
+### Creating a two-dimensional array
+
+The following creates a chess board as a two dimensional array of strings. The first move is made by copying the 'p' in (6,4) to (4,4). The old position (6,4) is made blank.
+
+```js
+var board = [ 
+  ['R','N','B','Q','K','B','N','R'],
+  ['P','P','P','P','P','P','P','P'],
+  [' ',' ',' ',' ',' ',' ',' ',' '],
+  [' ',' ',' ',' ',' ',' ',' ',' '],
+  [' ',' ',' ',' ',' ',' ',' ',' '],
+  [' ',' ',' ',' ',' ',' ',' ',' '],
+  ['p','p','p','p','p','p','p','p'],
+  ['r','n','b','q','k','b','n','r'] ];
+
+console.log(board.join('\n'));
+
+// Move King's Pawn forward 2
+board[4][4] = board[6][4];
+board[6][4] = ' ';
+console.log(board.join('\n'));
+```
+
+### Using an array to tabulate a set of values
+
+```js
+values = [];
+for (var x = 0; x < 10; x++){
+ values.push([
+  2 ** x,
+  2 * x ** 2
+ ])
+};
+console.table(values)
 ```

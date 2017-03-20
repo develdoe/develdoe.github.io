@@ -405,3 +405,94 @@ myNumberType.prototype.valueOf = function() {
 myObj = new myNumberType(4);
 myObj + 3; // 7
 ```
+
+## Methods
+
+When altering the behavior of existing Object.prototype methods, consider injecting code by wrapping your extension before or after the existing logic.  For example, this (untested) code will pre-conditionally execute custom logic before the built-in logic or someone else's extension is executed.
+
+When a function is called, the arguments to the call are held in the array-like "variable" arguments. For example, in the call "myFn(a, b, c)", the arguments within myFn's body will contain 3 array elements corresponding to (a, b, c).  When modifying protoypes with hooks, simply pass this & the arguments (the call state) to the current behavior by calling apply() on the function.  This pattern can be used for any prototype, such as Node.prototype, Function.prototype, etc.
+
+```js
+var current = Object.prototype.valueOf
+
+// Since my property "-prop-value" is cross-cutting and isn't always
+// on the same prototype chain, I want to modify Object.prototype: 
+
+Object.prototype.valueOf = function () {
+  if (this.hasOwnProperty('-prop-value')) {
+    return this['-prop-value']
+  } else {
+    // It doesn't look like one of my objects, so let's fall back on 
+    // the default behavior by reproducing the current behavior as best we can.
+    // The apply behaves like "super" in some other languages.
+    // Even though valueOf() doesn't take arguments, some other hook may.
+    return current.apply(this,arguments)
+  }
+}
+```
+
+Since JavaScript doesn't exactly have sub-class objects, prototype is a useful workaround to make a “base class” object of certain functions that act as objects. For example:
+
+```js 
+var Person = function() {
+  this.canTalk = true;
+};
+
+Person.prototype.greet = function() {
+  if (this.canTalk) {
+    console.log('Hi, I am ' + this.name);
+  }
+};
+
+var Employee = function(name, title) {
+  Person.call(this);
+  this.name = name;
+  this.title = title;
+};
+
+Employee.prototype = Object.create(Person.prototype);
+Employee.prototype.constructor = Employee;
+
+Employee.prototype.greet = function() {
+  if (this.canTalk) {
+    console.log('Hi, I am ' + this.name + ', the ' + this.title);
+  }
+};
+
+var Customer = function(name) {
+  Person.call(this);
+  this.name = name;
+};
+
+Customer.prototype = Object.create(Person.prototype);
+Customer.prototype.constructor = Customer;
+
+var Mime = function(name) {
+  Person.call(this);
+  this.name = name;
+  this.canTalk = false;
+};
+
+Mime.prototype = Object.create(Person.prototype);
+Mime.prototype.constructor = Mime;
+
+var bob = new Employee('Bob', 'Builder');
+var joe = new Customer('Joe');
+var rg = new Employee('Red Green', 'Handyman');
+var mike = new Customer('Mike');
+var mime = new Mime('Mime');
+
+bob.greet();
+// Hi, I am Bob, the Builder
+
+joe.greet();
+// Hi, I am Joe
+
+rg.greet();
+// Hi, I am Red Green, the Handyman
+
+mike.greet();
+// Hi, I am Mike
+
+mime.greet();
+```

@@ -43,3 +43,4 @@ getTempPromise('Stockholm').then(function (temp) {
 }, function (err) {
 	console.log('promise error',err)
 })
+```

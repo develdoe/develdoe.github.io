@@ -2,6 +2,8 @@
 date: '2017-03-20 15:00 +0100'
 published: true
 title: JavaScript - Objects
+category:
+  - JavaScript
 ---
 JavaScript is designed on a simple object-based paradigm. 
 

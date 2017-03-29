@@ -49,8 +49,9 @@ Java är ett programmeringsspråk klassbaserad avsedd för snabb exekvering och 
 I kontrast, JavaScript stiger ned i ande från en linje av mindre, dynamiskt typade språk såsom Hypertalk och dBASE. Dessa skriptspråk ger programmeringsverktyg till en mycket bredare publik på grund av deras lättare syntax, specialiserade inbyggd funktionalitet och minimikrav för att skapa objekt.
 
 **JavaScript jämfört med Java**
+
 |JavaScript|Java|
-|----------|----|
+|---|---|
 |Objektorienterad. Ingen åtskillnad mellan olika typer av objekt. Arv är genom prototypen mekanismen, och egenskaper och metoder kan läggas till alla objekt dynamiskt.|Klass-baserade. Objekt är indelade i klasser och instanser med all arv genom klasshierarkin . Klasser och instanser kan inte ha egenskaper eller metoder tillsatta dynamiskt.|
 |Variablers datatyper är inte deklarerade (dynamisk typning).|Variablel datatyper måste deklareras (statisk typning).|
 |Det går inte att automatiskt skriva till hårddisken.|Kan automatiskt skriva till hårddisken.|

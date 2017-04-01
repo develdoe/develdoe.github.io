@@ -42,5 +42,5 @@ sudo chown -R `id -u` /data/db
 **Run**
 
 ```bash
-mongod --dbpath=/data/db
+mongod
 ```

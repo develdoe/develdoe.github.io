@@ -15,92 +15,73 @@ You must have mongo installed:
 
 **package.json**
 
-```bash
-{
-    "name": "starwaves",
-    "main": "server.js",
-    "dependencies": {
-        "express": "~4.0.0",
-        "mongoose": "~3.6.13",
-        "body-parser": "~1.0.1"
-    }
-}
-```
-
-**server.js**
-
 ```js
-// file: server.js
-
-// Base Setup
-// =============================================================================
+// SETUP
+// ===============================================
 
 var express     = require('express')
 var app         = express()
 var bodyParser  = require('body-parser')
-var Bear        = require('./app/models/bear')
+var mongoose    = require('mongoose')
+var Test        = require('./models/test')
 
-// Database connection
-// ----------------------------------------------------
-
-var mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/db')
-
-// body parser will let us get data from a post
-// ----------------------------------------------------
-
-app.use(bodyParser.urlencoded({extended:true}))
+// configure bodyParser()
+// this will let us get the data from a POST
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-// Setup
-// ----------------------------------------------------
+var port = process.env.PORT || 4000
 
-var port = process.env.PORT || 8080
+// database
+mongoose.connect('mongodb://localhost:27017/restApi')
 
-// Routes
-// =============================================================================
+// ROUTES
+// ================================================
 var router = express.Router()
 
-// middleware
-// ----------------------------------------------------
-
-app.use(function(req,res,next){
-    console.log('hitting the api')
-    next()
+// middleware to use for all requests
+router.use(function(req,res,next){
+    // TODO logging
+    console.log(req.body.name)
+    next()  // go to next
 })
 
-// ----------------------------------------------------
-
-router.get('/',function(req,res){
-    res.json({message: 'response from api'})
+// /api
+router.get('/', function (req,res){
+    res.json({message: 'welcome to the api!'})
 })
 
-// /api/bears
+// /api/tests
+// ------------------------------------------------
+router.route('/tests')
 
-router.route('/bears')
+    .post(function (req,res) {
 
-    .post(function(req,res){
-            var bear = new Bear()
-            bear.name = req.body.name
+        var test = new Test()
+        test.str = req.body.name
+        
+        test.save(function(err){
+            if(err) res.send(err)
+            res.json({message: 'test created'})
+        })
+    })
 
-            bear.save(function(err){
-                if(err) res.send(err)
-                res.json({message: 'bear created'})
-            })
+    .get(function(req,res){
+        Test.find(function (err, tests) {
+            if (err) res.send(err)
+            res.json(tests)
+        })
     })
 
 
-// Register routes
-// ----------------------------------------------------
-
+//  REGISER
+//  ===============================================
+// prefix /api
 app.use('/api', router)
 
-// Boot
-// =============================================================================
+// START
+// ================================================
 app.listen(port)
-console.log('Magic on port: ' + port)
+console.log('Server upp on port', port)
 ```
 
-**/app/models/bear.js**
-
-```js

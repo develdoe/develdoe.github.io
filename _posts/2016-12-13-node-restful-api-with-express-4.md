@@ -10,8 +10,8 @@ category:
 
 You must have mongo installed:
 
-* [Ubuntu - Install and start Monddb](http://develdoe.com/2016/ubuntu-mongo-db-ce/)
-* [OSX - Install and start Monddb](http://develdoe.com/2016/osx-mongo-db/)
+* [Ubuntu - Install and start Monddb](/2016/ubuntu-mongo-db-ce/)
+* [OSX - Install and start Monddb](/2016/osx-mongo-db/)
 
 **package.json**
 

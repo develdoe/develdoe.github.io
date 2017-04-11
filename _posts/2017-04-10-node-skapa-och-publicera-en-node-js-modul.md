@@ -23,11 +23,11 @@ Nästa kommando kommer att be dig om e-post och lösenord, skapa/verifiera anvä
 npm adduser
 ```
 
-## Create a node module
+## Din Modul
 
-En Node NPM module är bara vanilla JS skript, men med CommonJS syntax. 
+En NPM modul är bara vanlig JavaScript, men med en CommonJS syntax. 
 
-Node modulerna körs i sitt eget uttrymme så att vi underviker namnkonflikter i det globala namnuttrymmet. När vi sedan arbetar med modulerna, använder vi oss utav  `require` och `exports`.
+Node modulerna körs i sitt eget uttrymme så att vi underviker konflikter i det globala namnuttrymmet. När vi sedan arbetar med modulerna, använder vi oss utav  `require` och `exports`.
 
 ```js
 var other = require('other_module');
@@ -36,81 +36,54 @@ module.exports = function() {
 }
 ```
 
-Som exempel, skapar vi ett API mot LocalStorage. NPM-modul består av två metoder. En `set`,  tar en array, och skapar en sträng som vi lagrar, Och en `get` metod, som JSON parsar strängen tillbaka till JSON format.
+Som exempel, skapar jag ett API mot LocalStorage. NPM-modulen består av två metoder. En `set`, som tar en array, omvandlar den till en sträng och en `get` metod, som JSON parsar strängen tillbaka.
 
-**Observera att om du kodar med, och planerar att publicera din modul till NPM, måste du ge din modul ett unikt namn, duh... =)**
+**Observera att om du kodar med, och planerar att publicera din modul till NPM, måste du ge din modul ett unikt namn.**
 
-Skapa/klona ett nytt repo på Github och en `package.json`:
+### Setup
+
+Skapa/klona ett nytt repo på Github.
+
+Skapa sedan en `package.json` fil genom att köra:
 
 ```bash
 npm init
 ```
 
-```json
-{
-  "name": "devel-localstorage",
-  "version": "0.0.1",
-  "description": "an API for local storage",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AndreeDeveldoeRay/npm-DevelLocalStorage.git"
-  },
-  "keywords": [
-    "localstorage"
-  ],
-  "author": "Andree \"DevelDoe\" Ray <me@andreeray.se> (http://andreeray.se)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AndreeDeveldoeRay/npm-DevelLocalStorage/issues"
-  },
-  "homepage": "https://github.com/AndreeDeveldoeRay/npm-DevelLocalStorage#readme"
-}
-```
+### Skapa
 
-*Ytterligare detaljer och förklaring av innehållet i package.json filen kan hittas på [npm.org/docs/json.html](https://npmjs.org/doc/json.html)*
-
-Börja med att skapa filen `index.js`, som innehåller vår primära module.
+Vi börjar med vår primära modul.
 
 **index.js**
 
 ```js
-module.exports = {
-    /**
-     * Escape special characters in the given string of html.
-     * @type {Object}
-     * @param {String} html
-     * @return {String}
-     */
-    escape: function (html) {
-        return String(html)
-            .replace(/&/g, '&amp;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-    },
-    /**
-     * Unescape special characters in the given string of html.
-     * @type {Object}
-     * @param {String} html
-     * @return {String}
-     */
-    unescape: function (html) {
-        return String(html)
-            .replace(/&amp;/g, '&')
-            .replace(/&quot;/g, '"')
-            .replace(/&#39;/g, "'")
-            .replace(/&lt;/g, '<')
-            .replace(/&gt;/g, '>')
-    }
-}
+ module.exports = {
+     /**
+      * Takes an array and transforms it to a string for localStorage 
+      * and stores is as 'store'
+      * @param {Array} array
+      */
+     set: function (array) {
+         if (Array.isArray(array)) {
+             localStorage.setItem('store',JSON.stringify(array))
+             return array
+         }
+     },
+     /**
+      * Gets the 'store in localStorage and parses it back to array (JSON)
+      * @return {Array} returns the store as an array if it exist otherwise 
+      * returns an empy array
+      */
+     get: function () {
+         var stringArray = localStorage.getItem('store')
+         var array = []
+         try { array = JSON.parse(stringArray) } catch (e) {}
+         return Array.isArray(array) ? array : []
+     }
+ }
 ```
 
-Installations kommandon ovan skapar också Node moduler i ditt projekt. För att undervika att Node modulerna sparas i ditt repo lägger vi till undantaget i en `.gitignore` fil.
+För att undervika att Node modulerna sparas i ditt repo lägger vi till undantaget i en `.gitignore` fil.
 
 **.gittignore**
 
@@ -139,39 +112,15 @@ var should      = require('chai').should(),
     escape      = escapeXSS.escape,
     unescape    = escapeXSS.unescape
 
-describe('# escape', function() {
+describe('# get', function() {
     it('should convert & into &amp;', function () {
         escape('&').should.equal('&amp;')
     })
-    it('should convert " into &quot;', function () {
-        escape('"').should.equal('&quot;')
-    })
-    it("should convert ' into &#39;", function () {
-        escape("'").should.equal('&#39;')
-    })
-    it('should convert < into &lt;', function () {
-        escape('<').should.equal('&lt;')
-    })
-    it('should convert > into &gt;', function () {
-        escape('>').should.equal('&gt;')
-    })
 })
 
-describe('# unescape', function () {
+describe('# set', function () {
     it('should convert &amp; into &', function () {
         escape('&amp;').should.equal('&')
-    })
-    it('should convert &quot; into "', function () {
-        escape('&quot;').should.equal('"')
-    })
-    it("should convert &#39; into '", function () {
-        escape('&#39;').should.equal("'")
-    })
-    it('should convert &lt; into <', function () {
-        escape('&lt;').should.equal('<')
-    })
-    it('should convert &gt; into >', function () {
-        escape('&gt;').should.equal('>')
     })
 })
 ```

@@ -5,23 +5,10 @@ title: Node - Skapa och publicera en node.js modul
 category:
   - Node
 ---
-> Att skapa en node module ohc publicera den till NPM är en ganska okomplicerad process. Här är en snabb handledning för att snabbt få dig på fötter.
+> Den här artikeln går igenom hur vi skapar och publiserar node moduler till NPM. Jag utgår ifrån att du har och använder node till vardags.
 
-## Vad är NPM?
 
-NPM är ett online-register för öppen källkod för node.js projekt, moduler, resurser, mm. Du hittar NPM på [npmjs.org](http://npmjs.org)
-
-NPM är också den officiella pakethanteraren för node.js och ger ett kommandoradsgränssnitt (CLI) för att interagera med registret. Detta verktyg levereras med node.js och installeras automatiskt. API-dokumentationen hittar du på [npmjs.org/doc/](http://npmjs.org/doc), alternativt kan du helt enkelt köra kommandot `npm` i terminal.
-
-## Installera
-
-Du måste så klart installera node.js och NPM för att skapa moduler. Det finns lite olika sätt att installera npm, tre alternativen:
-
-* Homebrew - `brew install node`
-* Binärt - [nodejs.org](http://nodejs.org)
-* NVM (Node Version Manager) [nvm](https://github.com/creationix/nvm) (rekommenderat) 
-
-## Konfigurera
+## Konfigurera NPM
 
 Börja med att ange namn, email, och länk till din webbplats. När vi sedan köra NPM kommandon vet NPM vilka vi är och kommer att automatiskt fylla i den informationen åt oss.
 
@@ -38,9 +25,9 @@ npm adduser
 
 ## Create a node module
 
-En Node NPM module är bara vanilla JS skript, men med CommonJS syntax. Lyckligtvist är detta verkligen inte komplicerat.
+En Node NPM module är bara vanilla JS skript, men med CommonJS syntax. 
 
-Node moduler körs i sitt eget uttrymme, för att undervika konflikt i det globala namnuttrymmet. Node tillhandahåller vissa "globals" för att hjälpa till med modul interoperabilitet. De 2 primära sakar vi arbetar med är "require" och "exports". Man använder `require` för att ladda in script som du behöver för ditt script och exporterar ditt script med `exports`.
+Node modulerna körs i sitt eget uttrymme så att vi underviker namnkonflikter i det globala namnuttrymmet. När vi sedan arbetar med modulerna, använder vi oss utav  `require` och `exports`.
 
 ```js
 var other = require('other_module');
@@ -49,13 +36,11 @@ module.exports = function() {
 }
 ```
 
-För vår demo, skapar vi en NPM-modul bestårende av ett par metoder för "escaping" och "unescaping" HTML-enheter - något vi ofta behöver göra för att förhindra XSS-attacker vid rendering användargenererat innehåll.
+Som exempel, skapar vi ett API mot LocalStorage. NPM-modul består av två metoder. En `set`,  tar en array, och skapar en sträng som vi lagrar, Och en `get` metod, som JSON parsar strängen tillbaka till JSON format.
 
-**Observera att om du kodar med, och planerar att publicera din modul till NPM, måste du ge din modul ett unikt namn.**
+**Observera att om du kodar med, och planerar att publicera din modul till NPM, måste du ge din modul ett unikt namn, duh... =)**
 
-För att komma igång, skapade jag ett nytt repo på mitt Github konto, samt initerade ett nytt git projekt för det repot. 
-
-Skapa sedan en `package.json` fil genom att köra:
+Skapa/klona ett nytt repo på Github och en `package.json`:
 
 ```bash
 npm init
@@ -283,8 +268,45 @@ npm install git://github.com/brentertz/scapegoat.git
 npm install git://github.com/brentertz/scapegoat.git#0.1.0
 ```
 
+## Update
+
+När du gör ändringar kan du uppdatera paket med NPM version `<update_type>`, där update_type är en av de semantiska typerna versionshanterin, patch, minor, or major:
+
+```
+npm version <update_type>
+npm publish
+```
+
 ## Install
 
 ```
 npm install scapegoat
+```
+
+## Verifiera
+
+För att testa din nya modul kan du skapa ett test projekt:
+
+```
+mkdir testDevelLocalStorage 
+cd testDevelLocalStorage
+npm install devel-localstorage
+```
+
+**index.js**
+
+```js
+ var develescape = require('devel-escape-xss')
+       escape = develescape.escape,
+       unescape = develescape.unescape;
+
+   var html = '<h1>Hello World</h1>',
+       escaped = escape(html),
+       unescaped = unescape(escaped);
+
+   console.log('html', html, 'escaped', escaped, 'unescaped', unescaped);
+```
+
+```
+node index.js
 ```

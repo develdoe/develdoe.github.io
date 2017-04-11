@@ -93,18 +93,6 @@ Börja med att skapa filen `index.js`, som innehåller vår primära module.
 **index.js**
 
 ```js
-/**
- * @Author: Andreee Ray <develdoe>
- * @Date:   2017-04-10T17:51:20+02:00
- * @Email:  me@andreeray.se
- * @Filename: index.js
- * @Last modified by:   develdoe
- * @Last modified time: 2017-04-10T18:00:47+02:00
- *
- * @desc: escaping and unescaping HTML entities – commonly needed utility to prevent XSS attacks when rendering user generated content.
- */
-
-
 module.exports = {
     /**
      * Escape special characters in the given string of html.
@@ -118,7 +106,7 @@ module.exports = {
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;')
             .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt')
+            .replace(/>/g, '&gt;')
     },
     /**
      * Unescape special characters in the given string of html.
@@ -129,7 +117,7 @@ module.exports = {
     unescape: function (html) {
         return String(html)
             .replace(/&amp;/g, '&')
-            .replace(/&quot;/g, '""')
+            .replace(/&quot;/g, '"')
             .replace(/&#39;/g, "'")
             .replace(/&lt;/g, '<')
             .replace(/&gt;/g, '>')
@@ -147,12 +135,16 @@ node_modules
 
 ## Test 
 
+### Installera
+
 Installera Mocha och Chai:
 
 ```bash
 npm install mocha --save-dev
 npm install chai --save-dev
 ```
+
+### Skapa
 
 **/test/index.js**
 
@@ -199,7 +191,7 @@ describe('# unescape', function () {
 })
 ```
 
-När vi sedan ska köra våra tester, kan vi följa Mochas dokumentation och skapa filen Makefile och associera vårt test:
+### Konfigurera 
 
 **Makefile***
 
@@ -209,14 +201,6 @@ test:
 
  .PHONY: test
 ```
-
-Och köra kommandot:
-
-```
-make test
-```
-
-Men vi kan förbättra processen och istället konfigurera NPM att köra våra tester:
 
 **package.json**
 
@@ -228,8 +212,79 @@ Men vi kan förbättra processen och istället konfigurera NPM att köra våra t
 ...
 ```
 
-Och sen köra: 
+### Kör 
 
 ```
 npm test
+```
+
+## README
+
+För att formatera README filen kan man använda sig av markdown, exempelvist: 
+
+```md
+=========
+
+A small library providing utility methods to `escape` and `unescape` HTML entities
+
+## Installation
+
+  npm install scapegoat --save
+
+## Usage
+
+  var scapegoat = require('scapegoat')
+      escape = scapegoat.escape,
+      unescape = scapegoat.unescape;
+
+  var html = '<h1>Hello World</h1>',
+      escaped = escape(html),
+      unescaped = unescape(escaped);
+
+  console.log('html', html, 'escaped', escaped, 'unescaped', unescaped);
+
+## Tests
+
+  npm test
+
+## Contributing
+
+In lieu of a formal styleguide, take care to maintain the existing coding style.
+Add unit tests for any new or changed functionality. Lint and test your code.
+
+## Release History
+
+* 1.0 Initial release
+```
+
+uppdatera version:
+
+```json
+"version": 1.0
+```
+
+Tagga: 
+
+```
+git tag 1.0
+git push origin master --tags
+```
+
+## Publicera
+
+```bash
+npm publish
+```
+
+**Observara att du kan installera packet direkt ifrån Github**
+
+```bash
+npm install git://github.com/brentertz/scapegoat.git
+npm install git://github.com/brentertz/scapegoat.git#0.1.0
+```
+
+## Install
+
+```
+npm install scapegoat
 ```

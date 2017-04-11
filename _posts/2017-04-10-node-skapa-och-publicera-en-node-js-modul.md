@@ -50,6 +50,37 @@ Skapa sedan en `package.json` fil genom att köra:
 npm init
 ```
 
+**package.json**
+
+```json
+{
+  "name": "devel-localstorage",
+  "version": "1.0.0",
+  "description": "A small library providing an API for localStorage",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndreeDeveldoeRay/DevelLocalStorage.git"
+  },
+  "keywords": [
+    "localstorage"
+  ],
+  "author": "Andree \"DevelDoe\" Ray <me@andreeray.se> (http://andreeray.se)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndreeDeveldoeRay/DevelLocalStorage/issues"
+  },
+  "homepage": "https://github.com/AndreeDeveldoeRay/DevelLocalStorage#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
+```
+
 ### Skapa
 
 Vi börjar med vår primära modul.
@@ -98,31 +129,7 @@ node_modules
 Installera Mocha och Chai:
 
 ```bash
-npm install mocha --save-dev
-npm install chai --save-dev
-```
-
-### Skapa
-
-**/test/index.js**
-
-```js
-var should      = require('chai').should(),
-    escapeXSS   = require('..index'),
-    escape      = escapeXSS.escape,
-    unescape    = escapeXSS.unescape
-
-describe('# get', function() {
-    it('should convert & into &amp;', function () {
-        escape('&').should.equal('&amp;')
-    })
-})
-
-describe('# set', function () {
-    it('should convert &amp; into &', function () {
-        escape('&amp;').should.equal('&')
-    })
-})
+npm install karma karma-mocha expect karma-chrome-launcher --save-dev
 ```
 
 ### Konfigurera 
@@ -133,8 +140,10 @@ describe('# set', function () {
 test:
     ./node_modules/.bin/mocha --reporter spec
 
- .PHONY: test
+.PHONY: test
 ```
+
+**Observera att det måste vara tab och inte blanksteg under `test:`**
 
 **package.json**
 
@@ -144,6 +153,28 @@ test:
   "test": "make test"
 },
 ...
+```
+
+### Test
+
+**/test/index.js**
+
+```js
+var should      	= require('chai').should(),
+    localstorage   	= require('..index'),
+    escape      = escapeXSS.escape,
+    unescape    = escapeXSS.unescape
+
+describe('# set', function () {
+    it('should convert array into string and set it in localStorage', function () {
+        escape('&amp;').should.equal('&')
+    })
+})
+describe('# get', function() {
+    it('should convert array into string and return it ;', function () {
+        escape('&').should.equal('&amp;')
+    })
+})
 ```
 
 ### Kör 

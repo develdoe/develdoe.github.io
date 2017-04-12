@@ -134,14 +134,12 @@ Vi börjar med vår primära modul.
 
 ## Usage
 
-  ```js
-      var localstorage = require('devel-localstorage')
+var localstorage = require('devel-localstorage')
 
-      localstorage.set(['devel','doe'])
-      res = localstorage.get()
+localstorage.set(['devel','doe'])
+res = localstorage.get()
 
-      console.log('res:', res);
-  ```
+console.log('res:', res);
 
 ## Contributing
 

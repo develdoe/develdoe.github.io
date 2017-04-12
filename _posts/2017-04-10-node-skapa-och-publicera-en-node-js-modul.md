@@ -25,7 +25,7 @@ npm adduser
 
 ## Din Modul
 
-En NPM modul är bara vanlig JavaScript, men med en CommonJS syntax. 
+En NPM modul är bara vanlig JavaScript med en CommonJS syntaxen. 
 
 Node modulerna körs i sitt eget uttrymme så att vi underviker konflikter i det globala namnuttrymmet. När vi sedan arbetar med modulerna, använder vi oss utav  `require` och `exports`.
 
@@ -36,7 +36,7 @@ module.exports = function() {
 }
 ```
 
-Som exempel, skapar jag ett API mot LocalStorage. NPM-modulen består av två metoder. En `set`, som tar en array, omvandlar den till en sträng och en `get` metod, som JSON parsar strängen tillbaka.
+Som exempel, skapar vi ett API mot LocalStorage. NPM-modulen består av två metoder. En `set`, som tar en array, omvandlar den till en sträng och sedan lagrar strängen i `localStorage`. En `get` metod, som JSON parsar strängen tillbaka och returnerar den på anrop.
 
 **Observera att om du kodar med, och planerar att publicera din modul till NPM, måste du ge din modul ett unikt namn.**
 
@@ -55,11 +55,11 @@ npm init
 ```json
 {
   "name": "devel-localstorage",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A small library providing an API for localStorage",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "karma start"
   },
   "repository": {
     "type": "git",
@@ -73,11 +73,7 @@ npm init
   "bugs": {
     "url": "https://github.com/AndreeDeveldoeRay/DevelLocalStorage/issues"
   },
-  "homepage": "https://github.com/AndreeDeveldoeRay/DevelLocalStorage#readme",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0"
-  }
+  "homepage": "https://github.com/AndreeDeveldoeRay/DevelLocalStorage#readme"
 }
 ```
 
@@ -114,103 +110,38 @@ Vi börjar med vår primära modul.
  }
 ```
 
-För att undervika att Node modulerna sparas i ditt repo lägger vi till undantaget i en `.gitignore` fil.
-
-**.gittignore**
+**README.md**
 
 ```
-node_modules
-```
+<!--
+@Author: Andreee Ray <develdoe>
+@Date:   2017-04-10T17:45:02+02:00
+@Email:  me@andreeray.se
+@Filename: README.md
+@Last modified by:   develdoe
+@Last modified time: 2017-04-11T14:16:50+02:00
+-->
 
-## Test 
 
-### Installera
 
-Installera Mocha och Chai:
-
-```bash
-npm install karma karma-mocha expect karma-chrome-launcher --save-dev
-```
-
-### Konfigurera 
-
-**Makefile***
-
-```
-test:
-    ./node_modules/.bin/mocha --reporter spec
-
-.PHONY: test
-```
-
-**Observera att det måste vara tab och inte blanksteg under `test:`**
-
-**package.json**
-
-```json
-...
-"scripts": {
-  "test": "make test"
-},
-...
-```
-
-### Test
-
-**/test/index.js**
-
-```js
-var should      	= require('chai').should(),
-    localstorage   	= require('..index'),
-    escape      = escapeXSS.escape,
-    unescape    = escapeXSS.unescape
-
-describe('# set', function () {
-    it('should convert array into string and set it in localStorage', function () {
-        escape('&amp;').should.equal('&')
-    })
-})
-describe('# get', function() {
-    it('should convert array into string and return it ;', function () {
-        escape('&').should.equal('&amp;')
-    })
-})
-```
-
-### Kör 
-
-```
-npm test
-```
-
-## README
-
-För att formatera README filen kan man använda sig av markdown, exempelvist: 
-
-```md
 =========
 
-A small library providing utility methods to `escape` and `unescape` HTML entities
+    A small library providing an API for localStorage
 
 ## Installation
 
-  npm install scapegoat --save
+    npm install devel-localstorage --save
 
 ## Usage
 
-  var scapegoat = require('scapegoat')
-      escape = scapegoat.escape,
-      unescape = scapegoat.unescape;
+```js
+    var localstorage = require('devel-localstorage')
 
-  var html = '<h1>Hello World</h1>',
-      escaped = escape(html),
-      unescaped = unescape(escaped);
+    localstorage.set(['devel','doe'])
+    res = localstorage.get()
 
-  console.log('html', html, 'escaped', escaped, 'unescaped', unescaped);
-
-## Tests
-
-  npm test
+    console.log('res:', res);
+```
 
 ## Contributing
 
@@ -222,17 +153,22 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 * 1.0 Initial release
 ```
 
-uppdatera version:
+
+## Uppdatera verions
+
+**package.json**
 
 ```json
-"version": 1.0
+"version": 0.1.0
 ```
 
-Tagga: 
+## Commit
 
 ```
-git tag 1.0
-git push origin master --tags
+git add .
+git commit -m 'initial release - missing test suit'
+git tag 0.1.0
+git push --tags
 ```
 
 ## Publicera
@@ -260,33 +196,11 @@ npm publish
 ## Install
 
 ```
-npm install scapegoat
-```
-
-## Verifiera
-
-För att testa din nya modul kan du skapa ett test projekt:
-
-```
-mkdir testDevelLocalStorage 
-cd testDevelLocalStorage
 npm install devel-localstorage
 ```
 
-**index.js**
+----
 
-```js
- var develescape = require('devel-escape-xss')
-       escape = develescape.escape,
-       unescape = develescape.unescape;
+# Summering
 
-   var html = '<h1>Hello World</h1>',
-       escaped = escape(html),
-       unescaped = unescape(escaped);
-
-   console.log('html', html, 'escaped', escaped, 'unescaped', unescaped);
-```
-
-```
-node index.js
-```
+Vid det här lager bör du se över hur du ska testa ditt packet. Jag uteslöt det här eftersom packetet använders sig av localStorage, som ju är en del av client-side JS. Test sviten blir såpass omfattande att jag har valt att göra en separat artikel för ändamålet. Länkar här så fort den är klar.

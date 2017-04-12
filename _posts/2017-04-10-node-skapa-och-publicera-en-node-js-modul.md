@@ -184,14 +184,10 @@ npm install git://github.com/brentertz/scapegoat.git
 npm install git://github.com/brentertz/scapegoat.git#0.1.0
 ```
 
-## Update
+## Updatera
 
-När du gör ändringar kan du uppdatera paket med NPM version `<update_type>`, där update_type är en av de semantiska typerna versionshanterin, patch, minor, or major:
+Följ kommandon ovan, under "Commit" sektionen, uppdatera `package.json` versions nummer och kör sedan `npm publish` igen.
 
-```
-npm version <update_type>
-npm publish
-```
 
 ## Install
 

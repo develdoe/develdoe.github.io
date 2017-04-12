@@ -25,7 +25,7 @@ npm adduser
 
 ## Din Modul
 
-En NPM modul är bara vanlig JavaScript med en CommonJS syntaxen. 
+En NPM modul är bara vanlig JavaScript som använder sig utav CommonJS syntax. 
 
 Node modulerna körs i sitt eget uttrymme så att vi underviker konflikter i det globala namnuttrymmet. När vi sedan arbetar med modulerna, använder vi oss utav  `require` och `exports`.
 
@@ -134,14 +134,14 @@ Vi börjar med vår primära modul.
 
 ## Usage
 
-```js
+\```js
     var localstorage = require('devel-localstorage')
 
     localstorage.set(['devel','doe'])
     res = localstorage.get()
 
     console.log('res:', res);
-```
+\```
 
 ## Contributing
 
@@ -163,6 +163,7 @@ Du updaterar ditt bibliotek genom att upprepa stegen nedan.
 ```
 git add .
 git commit -m 'initial release'
+git push
 git tag 0.1.0
 git push --tags
 ```

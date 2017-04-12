@@ -174,7 +174,7 @@ Uppdatera versions nummer:
  
 **package.json**
 
-```json
+```js
 "version": 0.1.0
 ```
 

@@ -154,24 +154,30 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 ```
 
 
-## Uppdatera verions
+## Publicera och Uppdatera
 
+Du updaterar ditt bibliotek genom att upprepa stegen nedan.
+
+## Git commit 
+
+```
+git add .
+git commit -m 'initial release'
+git tag 0.1.0
+git push --tags
+```
+
+## NPM 
+
+Uppdatera versions nummer:
+ 
 **package.json**
 
 ```json
 "version": 0.1.0
 ```
 
-## Commit
-
-```
-git add .
-git commit -m 'initial release - missing test suit'
-git tag 0.1.0
-git push --tags
-```
-
-## Publicera
+Publicera:
 
 ```bash
 npm publish
@@ -183,11 +189,6 @@ npm publish
 npm install git://github.com/brentertz/scapegoat.git
 npm install git://github.com/brentertz/scapegoat.git#0.1.0
 ```
-
-## Updatera
-
-Följ kommandon ovan, under "Commit" sektionen, uppdatera `package.json` versions nummer och kör sedan `npm publish` igen.
-
 
 ## Install
 

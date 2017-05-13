@@ -40,7 +40,10 @@ sysctl -w net.ipv4.ip_forward=1
 ```
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 iptables -t filter -D FORWARD -j REJECT --reject-with icmp-host-prohibited
-iptables-save > /etc/sysconfig/iptables
+systemctl disable firewalld
+yum install iptables-services
+systemctl enable iptables
+service iptables save
 ```
 
 ## DHCP

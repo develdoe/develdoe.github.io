@@ -29,10 +29,12 @@ ONBOOT=yes
 
 ## Routing
 
-#### Enable ip forwarding at the kernal lv
+#### /etc/sysctl.conf
 
 ```
-sysctl -w net.ipv4.ip_forward=1
+...
+net.ipv4.ip_forward = 1
+...
 ```
 
 #### Setup Nat (Network Address Translations)

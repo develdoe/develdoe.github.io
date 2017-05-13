@@ -5,11 +5,7 @@ title: Linux - Routing
 category:
   - Linux
 ---
-###### Root permissions
-
-```
-su
-```
+## Configure
 
 ###### Enable ip forwarding at the kernal lv
 
@@ -24,4 +20,3 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 iptables -t filter -D INPUT -j REJECT --reject-with icmp-host-prohibited
 iptables -t filter -D FORWARD -j REJECT --reject-with icmp-host-prohibited
 ```
-

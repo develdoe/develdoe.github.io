@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JavaScript - String functions</title>
+  <meta name="description" content="JS treats primitive values as objects.">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:2000/2017/javascript-string-functions/">
+  <link rel="alternate" type="application/rss+xml" title="WIMSE - Developer" href="/feed.xml">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+
+
+  <body>
+
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div style="padding-bottom: 20px;"><a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> back</a></div>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">JavaScript - String functions</h1>
+    <p class="post-meta"><time datetime="2017-03-15T13:15:00+01:00" itemprop="datePublished">Mar 15, 2017</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <blockquote>
+  <p>JS treats primitive values as objects.</p>
+</blockquote>
+
+<h2 id="tostring">toString()</h2>
+
+<p>Returns a string representing the specific object</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="s1">'Hello world'</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">toString</span><span class="p">());</span> <span class="c1">// logs 'Hello world'</span>
+</code></pre>
+</div>
+
+<h2 id="valueof">valueOf()</h2>
+
+<p>Same as toString()</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="s1">'Hello world'</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">());</span> <span class="c1">// Displays 'Hello world'</span>
+</code></pre>
+</div>
+
+<h2 id="length">length</h2>
+
+<p>Returns the length property:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"adsf"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="c1">// =&gt; 4</span>
+</code></pre>
+</div>
+
+<h2 id="trim">trim()</h2>
+
+<p>Removes whitespace from both ends of a string. Whitespace in this context is all the whitespace characters (space, tab, no-break space, etc.) and all the line terminator characters (LF, CR, etc.) and returns a new string.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">orig</span> <span class="o">=</span> <span class="s1">'   foo  '</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">orig</span><span class="p">.</span><span class="nx">trim</span><span class="p">());</span> <span class="c1">// 'foo'</span>
+
+<span class="c1">// Another example of .trim() removing whitespace from just one side.</span>
+
+<span class="kd">var</span> <span class="nx">orig</span> <span class="o">=</span> <span class="s1">'foo    '</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">orig</span><span class="p">.</span><span class="nx">trim</span><span class="p">());</span> <span class="c1">//</span>
+</code></pre>
+</div>
+
+<h3 id="polyfill">polyfill</h3>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">trim</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">trim</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^</span><span class="se">[\s\u</span><span class="sr">FEFF</span><span class="se">\x</span><span class="sr">A0</span><span class="se">]</span><span class="sr">+|</span><span class="se">[\s\u</span><span class="sr">FEFF</span><span class="se">\x</span><span class="sr">A0</span><span class="se">]</span><span class="sr">+$/g</span><span class="p">,</span> <span class="s1">''</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="extracing-characters">Extracing characters</h2>
+
+<h3 id="charatposition">charAt(position)</h3>
+
+<p>Returns the character at a specified index:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"HELLO WORLD"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">// =&gt; H </span>
+</code></pre>
+</div>
+
+<h3 id="charcodeat">charCodeAt()</h3>
+
+<p>Returns the unicode of the char at specified index:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"HELLO WORLD"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1">// =&gt; 72</span>
+</code></pre>
+</div>
+
+<h3 id="codepointatpos-es2015">codePointAt(pos) ES2015</h3>
+
+<p>Returns a non-negative integar that is the Unicode point value</p>
+
+<p><strong>If there is no element at the specified position, undefined is returned.</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="s1">'ABC'</span><span class="p">.</span><span class="nx">codePointAt</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>          <span class="c1">// =&gt; 66</span>
+<span class="s1">'\uD800\uDC00'</span><span class="p">.</span><span class="nx">codePointAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// =&gt; 65536</span>
+<span class="s1">'XYZ'</span><span class="p">.</span><span class="nx">codePointAt</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span> <span class="c1">// =&gt; undefined</span>
+</code></pre>
+</div>
+
+<h4 id="polyfill-1">Polyfill</h4>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="cm">/*! http://mths.be/codepointat v0.1.0 by @mathias */</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">codePointAt</span><span class="p">)</span> <span class="p">{</span>
+  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="s1">'use strict'</span><span class="p">;</span> <span class="c1">// needed to support `apply`/`call` with `undefined`/`null`</span>
+    <span class="kd">var</span> <span class="nx">codePointAt</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">throw</span> <span class="nx">TypeError</span><span class="p">();</span>
+      <span class="p">}</span>
+      <span class="kd">var</span> <span class="nx">string</span> <span class="o">=</span> <span class="nb">String</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">size</span> <span class="o">=</span> <span class="nx">string</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+      <span class="c1">// `ToInteger`</span>
+      <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">position</span> <span class="p">?</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">!=</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// better `isNaN`</span>
+        <span class="nx">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="c1">// Account for out-of-bounds indices:</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">index</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">index</span> <span class="o">&gt;=</span> <span class="nx">size</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">undefined</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="c1">// Get the first code unit</span>
+      <span class="kd">var</span> <span class="nx">first</span> <span class="o">=</span> <span class="nx">string</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">second</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span> <span class="c1">// check if it’s the start of a surrogate pair</span>
+        <span class="nx">first</span> <span class="o">&gt;=</span> <span class="mh">0xD800</span> <span class="o">&amp;&amp;</span> <span class="nx">first</span> <span class="o">&lt;=</span> <span class="mh">0xDBFF</span> <span class="o">&amp;&amp;</span> <span class="c1">// high surrogate</span>
+        <span class="nx">size</span> <span class="o">&gt;</span> <span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">// there is a next code unit</span>
+      <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">second</span> <span class="o">=</span> <span class="nx">string</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="nx">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">second</span> <span class="o">&gt;=</span> <span class="mh">0xDC00</span> <span class="o">&amp;&amp;</span> <span class="nx">second</span> <span class="o">&lt;=</span> <span class="mh">0xDFFF</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// low surrogate</span>
+          <span class="c1">// http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae</span>
+          <span class="k">return</span> <span class="p">(</span><span class="nx">first</span> <span class="o">-</span> <span class="mh">0xD800</span><span class="p">)</span> <span class="o">*</span> <span class="mh">0x400</span> <span class="o">+</span> <span class="nx">second</span> <span class="o">-</span> <span class="mh">0xDC00</span> <span class="o">+</span> <span class="mh">0x10000</span><span class="p">;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">first</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">,</span> <span class="s1">'codePointAt'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">'value'</span><span class="p">:</span> <span class="nx">codePointAt</span><span class="p">,</span>
+        <span class="s1">'configurable'</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s1">'writable'</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">codePointAt</span> <span class="o">=</span> <span class="nx">codePointAt</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}());</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="search-strings">Search strings</h2>
+
+<h3 id="indexof">indexOf</h3>
+
+<p>Returns the index position of the first occurence of a specific text in a string:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"Please locate where 'locate' occurs"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"locate"</span><span class="p">))</span> <span class="c1">// =&gt; 7</span>
+</code></pre>
+</div>
+
+<h3 id="lastindexof">lastIndexOf</h3>
+
+<p>Returns the index position of the last occurence:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"Please locate where 'locate' occurs"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s2">"locate"</span><span class="p">))</span> <span class="c1">// =&gt; 21</span>
+</code></pre>
+</div>
+
+<p><strong>Note: both indexOf methods return - 1 if the string is not found.</strong></p>
+
+<blockquote>
+  <p>JavaScript counts positions from zero.
+0 is the first position in a string, 1 is the second, 2 is the third …</p>
+</blockquote>
+
+<h3 id="search">search</h3>
+
+<p>Returns the position</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"Please locate where 'locate' occurs"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="s2">"locate"</span><span class="p">)</span> <span class="c1">// =&gt; 7</span>
+</code></pre>
+</div>
+
+<p><strong>Note: indexOf and search() are equal, but search can take much more powerfull search values (like regular expressions).</strong></p>
+
+<h3 id="localcomparecomparestring-locales-optoions">localCompare(compareString[, locales[, optoions]])</h3>
+
+<p>Returns a number indicating whether a reference string comes before or after or is the same as the giving string in sort order.</p>
+
+<p><em>The new <code class="highlighter-rouge">locales</code> and <code class="highlighter-rouge">options</code> arguments let application specify the language whose sort order should be used and customize the behavior of the function.</em></p>
+
+<h4 id="examples">Examples</h4>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="c1">// The letter "a" is before "c" yielding a negative value</span>
+<span class="s1">'a'</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s1">'c'</span><span class="p">);</span> <span class="c1">// -2 or -1 (or some other negative value)</span>
+
+<span class="c1">// Alphabetically the word "check" comes after "against" yielding a positive value</span>
+<span class="s1">'check'</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s1">'against'</span><span class="p">);</span> <span class="c1">// 2 or 1 (or some other positive value)</span>
+
+<span class="c1">// "a" and "a" are equivalent yielding a neutral value of zero</span>
+<span class="s1">'a'</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s1">'a'</span><span class="p">);</span> <span class="c1">// 0</span>
+</code></pre>
+</div>
+
+<h5 id="check-for-browser-support-for-extended-arguments">Check for browser support for extended arguments</h5>
+
+<p>The locales and options arguments are not supported in all browsers yet. To check whether an implementation supports them, use the “i” argument (a requirement that illegal language tags are rejected) and look for a RangeError exception:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">localeCompareSupportsLocales</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="s1">'foo'</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s1">'bar'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">e</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">'RangeError'</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h5 id="using-locales">Using locales</h5>
+
+<p>The results provided by localeCompare() vary between languages. In order to get the sort order of the language used in the user interface of your application, make sure to specify that language (and possibly some fallback languages) using the locales argument:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'ä'</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s1">'z'</span><span class="p">,</span> <span class="s1">'de'</span><span class="p">));</span> <span class="c1">// a negative value: in German, ä sorts before z</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'ä'</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s1">'z'</span><span class="p">,</span> <span class="s1">'sv'</span><span class="p">));</span> <span class="c1">// a positive value: in Swedish, ä sorts after z</span>
+</code></pre>
+</div>
+
+<p>The results provided by localeCompare() can be customized using the options argument:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="c1">// in German, ä has a as the base letter</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'ä'</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'de'</span><span class="p">,</span> <span class="p">{</span> <span class="na">sensitivity</span><span class="p">:</span> <span class="s1">'base'</span> <span class="p">}));</span> <span class="c1">// 0</span>
+
+<span class="c1">// in Swedish, ä and a are separate base letters</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'ä'</span><span class="p">.</span><span class="nx">localeCompare</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'sv'</span><span class="p">,</span> <span class="p">{</span> <span class="na">sensitivity</span><span class="p">:</span> <span class="s1">'base'</span> <span class="p">}));</span> <span class="c1">// a positive value</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="includessearchstring">includes(searchString)</h2>
+
+<p>determines whether one string may be found within another string, returning true or false</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">'To be, or not to be, that is the question.'</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'To be'</span><span class="p">));</span>       <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'question'</span><span class="p">));</span>    <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'nonexistent'</span><span class="p">));</span> <span class="c1">// false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'To be'</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>    <span class="c1">// false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'TO BE'</span><span class="p">));</span>       <span class="c1">// false</span>
+</code></pre>
+</div>
+
+<h4 id="polyfill-2">Polyfill</h4>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">includes</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">includes</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">search</span><span class="p">,</span> <span class="nx">start</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'use strict'</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">start</span> <span class="o">!==</span> <span class="s1">'number'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="nx">start</span> <span class="o">+</span> <span class="nx">search</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">search</span><span class="p">,</span> <span class="nx">start</span><span class="p">)</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="endswithsearchstring-position">endsWith(searchString[, position])</h3>
+
+<p>Deterines wghether a string ends with the character of another string, returns boolean.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">'To be, or not to be, that is the question.'</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">'question.'</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">'to be'</span><span class="p">));</span>     <span class="c1">// false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">(</span><span class="s1">'to be'</span><span class="p">,</span> <span class="mi">19</span><span class="p">));</span> <span class="c1">// true</span>
+</code></pre>
+</div>
+
+<h4 id="polyfill-3">Polyfill</h4>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">endsWith</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">endsWith</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">searchString</span><span class="p">,</span> <span class="nx">position</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">subjectString</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">position</span> <span class="o">!==</span> <span class="s1">'number'</span> <span class="o">||</span> <span class="o">!</span><span class="nb">isFinite</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="o">||</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="o">!==</span> <span class="nx">position</span> <span class="o">||</span> <span class="nx">position</span> <span class="o">&gt;</span> <span class="nx">subjectString</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">position</span> <span class="o">=</span> <span class="nx">subjectString</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nx">position</span> <span class="o">-=</span> <span class="nx">searchString</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">lastIndex</span> <span class="o">=</span> <span class="nx">subjectString</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="nx">searchString</span><span class="p">,</span> <span class="nx">position</span><span class="p">);</span>
+      <span class="k">return</span> <span class="nx">lastIndex</span> <span class="o">!==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">lastIndex</span> <span class="o">===</span> <span class="nx">position</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="startswithsearchstring-posotion">startsWith(searchString[, posotion])</h3>
+
+<p>Determines whether a string begins with the caracter of another string and returns a boolean.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">'To be, or not to be, that is the question.'</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'To be'</span><span class="p">));</span>         <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'not to be'</span><span class="p">));</span>     <span class="c1">// false</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s1">'not to be'</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span> <span class="c1">// true</span>
+</code></pre>
+</div>
+
+<h4 id="polyfill-4">Polyfill</h4>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">startsWith</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">startsWith</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">searchString</span><span class="p">,</span> <span class="nx">position</span><span class="p">){</span>
+      <span class="nx">position</span> <span class="o">=</span> <span class="nx">position</span> <span class="o">||</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="nx">position</span><span class="p">,</span> <span class="nx">searchString</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="o">===</span> <span class="nx">searchString</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="matchregex">match(regex)</h3>
+
+<p>Retrieves the matching when matching is a string against a regex. Returns 
+an array containting the entire match result and any parentheses-captured matched result, null it no match</p>
+
+<p>If he regular expression does not include the g flag, str.match() will return the same result as RegExp.exec(). The returned Array has an extra input property, which contains the original string that was parsed. In addition, it has an index property, which represents the zero-based index of the match in the string.</p>
+
+<p>If the regular expression includes the g flag, the method returns an Array containing all matched substrings rather than match objects. Captured groups are not returned.</p>
+
+<h4 id="use-instead">Use instead</h4>
+
+<ul>
+  <li>If you need to know if a string matches a regular expression RegExp, use search().</li>
+  <li>If you only want the first match found, you might want to use RegExp.exec() instead.</li>
+  <li>if you want to obtain capture groups and the global flag is set, you need to use RegExp.exec() instead.</li>
+</ul>
+
+<h4 id="examples-1">Examples</h4>
+
+<h5 id="using-match">Using match()</h5>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">'For more information, see Chapter 3.4.5.1'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">re</span> <span class="o">=</span> <span class="sr">/see </span><span class="se">(</span><span class="sr">chapter </span><span class="se">\d</span><span class="sr">+</span><span class="se">(\.\d)</span><span class="sr">*</span><span class="se">)</span><span class="sr">/i</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">found</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">re</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">found</span><span class="p">);</span>
+
+<span class="c1">// logs [ 'see Chapter 3.4.5.1',</span>
+<span class="c1">//        'Chapter 3.4.5.1',</span>
+<span class="c1">//        '.1',</span>
+<span class="c1">//        index: 22,</span>
+<span class="c1">//        input: 'For more information, see Chapter 3.4.5.1' ]</span>
+
+<span class="c1">// 'see Chapter 3.4.5.1' is the whole match.</span>
+<span class="c1">// 'Chapter 3.4.5.1' was captured by '(chapter \d+(\.\d)*)'.</span>
+<span class="c1">// '.1' was the last value captured by '(\.\d)'.</span>
+<span class="c1">// The 'index' property (22) is the zero-based index of the whole match.</span>
+<span class="c1">// The 'input' property is the original string that was parsed.</span>
+</code></pre>
+</div>
+
+<h5 id="using-global-and-ignore-case-flags-with-match">Using global and ignore case flags with match()</h5>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">regexp</span> <span class="o">=</span> <span class="sr">/</span><span class="se">[</span><span class="sr">A-E</span><span class="se">]</span><span class="sr">/gi</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">matches_array</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">regexp</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">matches_array</span><span class="p">);</span>
+<span class="c1">// ['A', 'B', 'C', 'D', 'E', 'a', 'b', 'c', 'd', 'e']</span>
+</code></pre>
+</div>
+
+<h5 id="a-non-regexp-object-as-the-parameter">A non-RegExp object as the parameter</h5>
+
+<p>When the parameter is a string or a number, it is implicitly converted to a RegExp by using new RegExp(obj). If it is a positive number with a positive sign,the RegExp() method will ignore the positive sign.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str1</span> <span class="o">=</span> <span class="s2">"NaN means not a number. Infinity contains -Infinity and +Infinity in JavaScript."</span><span class="p">,</span>
+    <span class="nx">str2</span> <span class="o">=</span> <span class="s2">"My grandfather is 65 years old and My grandmother is 63 years old."</span><span class="p">,</span>
+    <span class="nx">str3</span> <span class="o">=</span> <span class="s2">"The contract was declared null and void."</span><span class="p">;</span>
+<span class="nx">str1</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="s2">"number"</span><span class="p">);</span>   <span class="c1">// "number" is a string. returns ["number"]</span>
+<span class="nx">str1</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="kc">NaN</span><span class="p">);</span>        <span class="c1">// the type of NaN is the number. returns ["NaN"]</span>
+<span class="nx">str1</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="kc">Infinity</span><span class="p">);</span>   <span class="c1">// the type of Infinity is the number. returns ["Infinity"]</span>
+<span class="nx">str1</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="o">+</span><span class="kc">Infinity</span><span class="p">);</span>  <span class="c1">// returns ["Infinity"]</span>
+<span class="nx">str1</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="o">-</span><span class="kc">Infinity</span><span class="p">);</span>  <span class="c1">// returns ["-Infinity"]</span>
+<span class="nx">str2</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="mi">65</span><span class="p">);</span>         <span class="c1">// returns ["65"]</span>
+<span class="nx">str2</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="o">+</span><span class="mi">65</span><span class="p">);</span>        <span class="c1">// A number with a positive sign. returns ["65"]</span>
+<span class="nx">str3</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>       <span class="c1">// returns ["null"]</span>
+</code></pre>
+</div>
+
+<h3 id="normalizeform">normalize([form])</h3>
+
+<p>Returns the Unicode Normalization Form of a given string (if the value isn’t a string, it will be converted to one first).</p>
+
+<h4 id="prameter">Prameter</h4>
+
+<p>form: One of “NFC”, “NFD”, “NFKC”, or “NFKD”, specifying the Unicode Normalization Form. If omitted or undefined, “NFC” is used.</p>
+
+<ul>
+  <li>NFC — Normalization Form Canonical Composition.</li>
+  <li>NFD — Normalization Form Canonical Decomposition.</li>
+  <li>NFKC — Normalization Form Compatibility Composition.</li>
+  <li>NFKD — Normalization Form Compatibility Decomposition.</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="c1">// Initial string</span>
+
+<span class="c1">// U+1E9B: LATIN SMALL LETTER LONG S WITH DOT ABOVE</span>
+<span class="c1">// U+0323: COMBINING DOT BELOW</span>
+<span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">'\u1E9B\u0323'</span><span class="p">;</span>
+
+
+<span class="c1">// Canonically-composed form (NFC)</span>
+
+<span class="c1">// U+1E9B: LATIN SMALL LETTER LONG S WITH DOT ABOVE</span>
+<span class="c1">// U+0323: COMBINING DOT BELOW</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">normalize</span><span class="p">(</span><span class="s1">'NFC'</span><span class="p">);</span> <span class="c1">// '\u1E9B\u0323'</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">normalize</span><span class="p">();</span>      <span class="c1">// same as above</span>
+
+
+<span class="c1">// Canonically-decomposed form (NFD)</span>
+
+<span class="c1">// U+017F: LATIN SMALL LETTER LONG S</span>
+<span class="c1">// U+0323: COMBINING DOT BELOW</span>
+<span class="c1">// U+0307: COMBINING DOT ABOVE</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">normalize</span><span class="p">(</span><span class="s1">'NFD'</span><span class="p">);</span> <span class="c1">// '\u017F\u0323\u0307'</span>
+
+
+<span class="c1">// Compatibly-composed (NFKC)</span>
+
+<span class="c1">// U+1E69: LATIN SMALL LETTER S WITH DOT BELOW AND DOT ABOVE</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">normalize</span><span class="p">(</span><span class="s1">'NFKC'</span><span class="p">);</span> <span class="c1">// '\u1E69'</span>
+
+
+<span class="c1">// Compatibly-decomposed (NFKD)</span>
+
+<span class="c1">// U+0073: LATIN SMALL LETTER S</span>
+<span class="c1">// U+0323: COMBINING DOT BELOW</span>
+<span class="c1">// U+0307: COMBINING DOT ABOVE</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">normalize</span><span class="p">(</span><span class="s1">'NFKD'</span><span class="p">);</span> <span class="c1">// '\u0073\u0323\u0307'</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="extracting">Extracting</h2>
+
+<ul>
+  <li>slice(start, end)</li>
+  <li>substring(start, end)</li>
+  <li>substr(start, length)</li>
+</ul>
+
+<h3 id="slicestartend">slice(start,end)</h3>
+
+<p>Returns a extracted part in a new string.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"apple, banana, kiwi"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">13</span><span class="p">))</span> <span class="c1">// =&gt; banana</span>
+</code></pre>
+</div>
+
+<p>If you omit the second param, the method will slice out the rest of the string:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"apple, banana, kiwi"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span> <span class="c1">// =&gt; banana, kiwi</span>
+</code></pre>
+</div>
+
+<p>or the get the last 12 characters:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"apple, banana, kiwi"</span>
+<span class="kd">var</span> <span class="nx">res</span> <span class="o">=</span> <span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">)</span> <span class="c1">// =&gt; banana, kiwi</span>
+</code></pre>
+</div>
+
+<h3 id="substringstart-end">substring(start, end)</h3>
+
+<p>The only differens is that substring cannot use negative indexes.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"apple, banana, kiwi"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">13</span><span class="p">))</span> <span class="c1">// =&gt; banana</span>
+</code></pre>
+</div>
+
+<h3 id="substrstart-length">substr(start, length)</h3>
+
+<p>Similar to slice, only last param dictates lenght of the extraction.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"apple, banana, kiwi"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span> <span class="c1">// =&gt; banana</span>
+</code></pre>
+</div>
+
+<p><strong>Note: if the first start parameter is negative the position is counted from the end of the strin &amp; if the second param is omited the rest is sliced out.</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"apple, banana, kiwi"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">))</span> <span class="c1">// =&gt; kiwi</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="replacing--repeating">Replacing &amp; repeating</h2>
+
+<h3 id="repace">repace()</h3>
+
+<p>Replaces with parameter value:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"apple, banana, kiwi"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">"banana"</span><span class="p">,</span><span class="s2">"rasberry"</span><span class="p">))</span> <span class="c1">// =&gt; apple, rasberry, kiwi</span>
+</code></pre>
+</div>
+
+<p>Can also take Regular Expressions.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"apple, banana, kiwi"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/banana/g</span><span class="p">,</span><span class="s2">"rasberry"</span><span class="p">))</span> <span class="c1">// =&gt; apple, rasberry, kiwi</span>
+</code></pre>
+</div>
+
+<p><strong>Note: replace returns a new string with the new value.</strong></p>
+
+<h3 id="repeatcount">repeat(count)</h3>
+
+<p>Constructs and returns a new string which contains the specified number of copies of the string on which it was called, concatenated together.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="s1">'abc'</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>   <span class="c1">// RangeError</span>
+<span class="s1">'abc'</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>    <span class="c1">// ''</span>
+<span class="s1">'abc'</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>    <span class="c1">// 'abc'</span>
+<span class="s1">'abc'</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>    <span class="c1">// 'abcabc'</span>
+<span class="s1">'abc'</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mf">3.5</span><span class="p">);</span>  <span class="c1">// 'abcabcabc' (count will be converted to integer)</span>
+<span class="s1">'abc'</span><span class="p">.</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span><span class="p">);</span>  <span class="c1">// RangeError</span>
+
+<span class="p">({</span> <span class="na">toString</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="s1">'abc'</span><span class="p">,</span> <span class="na">repeat</span><span class="p">:</span> <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">repeat</span> <span class="p">}).</span><span class="nx">repeat</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="c1">// 'abcabc' (repeat() is a generic method)</span>
+</code></pre>
+</div>
+
+<h4 id="polyfill-5">Polyfill</h4>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">repeat</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">repeat</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">count</span><span class="p">)</span> <span class="p">{</span>
+    <span class="s1">'use strict'</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">TypeError</span><span class="p">(</span><span class="s1">'can\'t convert '</span> <span class="o">+</span> <span class="k">this</span> <span class="o">+</span> <span class="s1">' to object'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s1">''</span> <span class="o">+</span> <span class="k">this</span><span class="p">;</span>
+    <span class="nx">count</span> <span class="o">=</span> <span class="o">+</span><span class="nx">count</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">!=</span> <span class="nx">count</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">RangeError</span><span class="p">(</span><span class="s1">'repeat count must be non-negative'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">==</span> <span class="kc">Infinity</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">RangeError</span><span class="p">(</span><span class="s1">'repeat count must be less than infinity'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">count</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// Ensuring count is a 31-bit integer allows us to heavily optimize the</span>
+    <span class="c1">// main part. But anyway, most current (August 2014) browsers can't handle</span>
+    <span class="c1">// strings 1 &lt;&lt; 28 chars or longer, so:</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">length</span> <span class="o">*</span> <span class="nx">count</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">28</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nx">RangeError</span><span class="p">(</span><span class="s1">'repeat count must not overflow maximum string size'</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="kd">var</span> <span class="nx">rpt</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">((</span><span class="nx">count</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">rpt</span> <span class="o">+=</span> <span class="nx">str</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nx">count</span> <span class="o">&gt;&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="nx">str</span> <span class="o">+=</span> <span class="nx">str</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// Could we try:</span>
+    <span class="c1">// return Array(count + 1).join(this);</span>
+    <span class="k">return</span> <span class="nx">rpt</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="converting">Converting</h2>
+
+<h3 id="touppercase">toUpperCase()</h3>
+
+<p>Converts to upper case:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"case"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">())</span> <span class="c1">// =&gt; CASE</span>
+</code></pre>
+</div>
+
+<h3 id="tolowercase">toLowerCase()</h3>
+
+<p>Converts to lower case:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"CASE"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())</span> <span class="c1">// =&gt; cas</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="merge-strings">Merge strings</h2>
+
+<h3 id="concatseparator-str">concat(separator, str,…)</h3>
+
+<p>Joins two or more strings:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">text1</span> <span class="o">=</span> <span class="s2">"Hello"</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">text2</span> <span class="o">=</span> <span class="s2">"World"</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">text1</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="nx">text2</span><span class="p">))</span> <span class="c1">// =&gt; Hello World</span>
+</code></pre>
+</div>
+
+<p><strong>Note: concat returns a new string with the new value.</strong></p>
+
+<hr />
+
+<h2 id="converting-to-array">Converting to array</h2>
+
+<h3 id="splitchar">split(char)</h3>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="s2">"a,b,c,d,e"</span><span class="p">;</span>   <span class="c1">// String</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">","</span><span class="p">);</span>          <span class="c1">// Split on commas</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">" "</span><span class="p">);</span>          <span class="c1">// Split on spaces</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"|"</span><span class="p">);</span>          <span class="c1">// Split on pipe </span>
+<span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="s2">"Hello"</span><span class="p">;</span>       <span class="c1">// String</span>
+<span class="nx">str</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">""</span><span class="p">);</span>           <span class="c1">// Split in characters </span>
+</code></pre>
+</div>
+
+<p>If separator is omitted, the returned array will contain the whole string at index 0</p>
+
+<p><strong>Accessing a string as an array is posible, however,  is unpredictable and you should not do it! Convert the string like above first!</strong></p>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Andree DevelDoe Ray
+            
+            </li>
+            
+            <li><a href="mailto:me@develdoe.com">me@develdoe.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/andreedeveldoeray"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">andreedeveldoeray</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/develdoe"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">develdoe</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Node.js and REST</title>
+  <meta name="description" content="Asynchronous Programming">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:2000/2016/node-js-and-rest/">
+  <link rel="alternate" type="application/rss+xml" title="WIMSE - Developer" href="/feed.xml">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+
+
+  <body>
+
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div style="padding-bottom: 20px;"><a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> back</a></div>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Node.js and REST</h1>
+    <p class="post-meta"><time datetime="2016-10-05T06:17:00+02:00" itemprop="datePublished">Oct 5, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h2 id="asynchronous-programming">Asynchronous Programming</h2>
+
+<p>Asynchronous programming means that for every asynchronous function that you execute, you can’t expect it to return the results before moving forward with the program’s flow. Instead, you’ll need to provide a callback block/function that will be executed once the asynchronous code finishes.</p>
+
+<p><img src="http://www.techthali.org/wp-content/uploads/2012/07/npm8.png" alt="" /></p>
+
+<p>Above, in the first image, a instruction run in synchronous manner. In order to execute the instruction, you need to wait as long as the instruction takes. In an asynchronous manner you can provide the instruction as a callback to that, allowing you to execute other instruction without waiting for the first one to execuite. The next instruction is executed right after the first one starts the asynchronous “long time running instruction”.</p>
+
+<p>This is a very simple example of the potential benefits of asynchronous programming. Sadly, like with most in this digital world, nothing comes without a price, and the added benefits also come with a nasty trade-off. Developers are trained to think of their code in the sequential way they write it, so debugging a code that is not sequential can be difficult to newcomers.</p>
+
+<p>For instance, below show a piece of code written in a synchronous and an asynchronous manner, respectively:</p>
+
+<p><strong>Synchronous:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"About to read the file..."</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">Fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="s2">"/path/to/file"</span><span class="p">)</span> 
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"File content: "</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><strong>Asynchronous Version of a Simple File Read Operation with a Common Mistake:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"About to read the file..."</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s2">"/path/to/file"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">content</span> <span class="o">=</span> <span class="nx">data</span>
+<span class="p">})</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"File content: "</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>The last peace of code does not print the content of the file since the callback is executed after the last line of code.</p>
+
+<p><strong>Correct Asynchronous File Read Operation:</strong></p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"About to read the file..."</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s2">"/path/to/file"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+   <span class="nx">content</span> <span class="o">=</span> <span class="nx">data</span>
+   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"File content: "</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>You just moved the last line into the callback function, so you’re sure that the content variable is set correctly.</p>
+
+<h3 id="async-advanced">Async Advanced</h3>
+
+<p>Asynchronous programming is not just about making sure that you set up the callback function correctly, it also allows for some interesting flow control patterns that can be used to improve the efficiency of the app.</p>
+
+<p>Let’s look at two distinct and very useful control flow patterns for asynchronous programming: parallel flow and serial flow.</p>
+
+<h4 id="parallel-flow">Parallel Flow</h4>
+
+<p>The idea behind parallel flow is that the program can run a set of nonrelated tasks in parallel, but only call the callback function provided (to gather their collective outputs) after all tasks have finished executing.</p>
+
+<p>Parallel Function:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">//functionX symbols are references to individual functions</span>
+<span class="nx">parallel</span><span class="p">([</span><span class="nx">function1</span><span class="p">,</span> <span class="nx">function2</span><span class="p">,</span> <span class="nx">function3</span><span class="p">,</span> <span class="nx">function4</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">///do something with the combined output once they all finished</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>In order to know when each of the functions passed in the array have finished execution, they’ll have to execute a callback function with the results of their operation. The callback will be the only attribute they receive. Below shows the parallel function.</p>
+
+<p>Implementation:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">parallel</span><span class="p">(</span><span class="nx">funcs</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+     <span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[],</span>
+           <span class="nx">callsToCallback</span> <span class="o">=</span> <span class="mi">0</span>
+     <span class="nx">funcs</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">fn</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// iterate over all functions</span>
+       <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">fn</span><span class="p">(</span><span class="nx">done</span><span class="p">),</span> <span class="mi">200</span><span class="p">)</span> <span class="c1">// and call them with a 200 ms delay</span>
+      <span class="p">})</span>
+    <span class="kd">function</span> <span class="nx">done</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// the functions will call this one when they finish and</span>
+<span class="nx">they</span><span class="err">’</span><span class="nx">ll</span> <span class="nx">pass</span> <span class="nx">the</span> <span class="nx">results</span> <span class="nx">here</span>
+       <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+       <span class="k">if</span><span class="p">(</span><span class="o">++</span><span class="nx">callsToCallback</span> <span class="o">==</span> <span class="nx">funcs</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">callback</span><span class="p">(</span><span class="nx">results</span><span class="p">)</span>
+       <span class="p">}</span>
+<span class="p">}</span> <span class="p">}</span>
+</code></pre>
+</div>
+
+<p>The implementation in above runs a set of functions in a parallel way (since Node.js runs in a single thread, true parallelism is not possible, so this is as close as you can get). This type of control flow is particularly useful when dealing with calls to external services.</p>
+
+<p>Let’s look at a practical example. Assume your API needs to do several operations that, although aren’t related to each other, need to happen before the user can see the results. For instance, load the list of books from the database, query an external service to get news about new books out this week, and log the request into a file.</p>
+
+<p>If you were to execute all of those tasks in a series, waiting for one to finish before the next one can be run, then the user would most probably suffer a delay on the response because the total time needed for the execution is the sum of all individual times.</p>
+
+<p>But if you can execute all of them in parallel, then the total time is actually equal to the time it takes the slowest task to execute. Let’s look at both cases.</p>
+
+<p>SerialFlow:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>
+<span class="c1">//request handling code...</span>
+<span class="c1">//assume "db" is already initialized and provides an interface to the data base db.query("books", {limit:1000, page: 1}, </span>
+
+<span class="kd">function</span><span class="p">(</span><span class="nx">books</span><span class="p">)</span> <span class="p">{</span>
+ <span class="nx">services</span><span class="p">.</span><span class="nx">bookNews</span><span class="p">.</span><span class="nx">getThisWeeksNews</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">news</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">services</span><span class="p">.</span><span class="nx">logging</span><span class="p">.</span><span class="nx">logRequest</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">//nothing returned, but you need to call it so you know the logging finished</span>
+       <span class="nx">response</span><span class="p">.</span><span class="nx">render</span><span class="p">({</span><span class="na">listOfBooks</span><span class="p">:</span> <span class="nx">books</span><span class="p">,</span> <span class="na">bookNews</span><span class="p">:</span> <span class="nx">news</span><span class="p">})</span>
+    <span class="p">})</span> 
+  <span class="p">})</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>Parallel Execution Flow:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="c1">//request handling code... </span>
+<span class="nx">parallel</span><span class="p">([</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span> <span class="nx">db</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="s2">"books"</span><span class="p">,</span> <span class="p">{</span><span class="na">limit</span><span class="p">:</span> <span class="mi">1000</span><span class="p">,</span> <span class="na">page</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">}),</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span> <span class="nx">services</span><span class="p">.</span><span class="nx">bookNews</span><span class="p">.</span><span class="nx">getThisWeeksNews</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">}),</span>
+  <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span> <span class="nx">services</span><span class="p">.</span><span class="nx">logRequest</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">})</span>
+ <span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+     <span class="kd">var</span> <span class="nx">books</span> <span class="o">=</span> <span class="nx">findData</span><span class="p">(</span><span class="err">‘</span><span class="nx">books</span><span class="err">’</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+     <span class="kd">var</span> <span class="nx">news</span> <span class="o">=</span> <span class="nx">findData</span><span class="p">(</span><span class="err">‘</span><span class="nx">news</span><span class="err">’</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+     <span class="nx">response</span><span class="p">.</span><span class="nx">render</span><span class="p">({</span><span class="na">listOfBooks</span><span class="p">:</span> <span class="nx">books</span><span class="p">,</span> <span class="na">bookNews</span><span class="p">:</span> <span class="nx">news</span><span class="p">})</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>Above show how each approach looks. The findData function simply looks into the data array, and based on the structure of the items, returns the desired one (first parameter).</p>
+
+<p>In the implementation of parallel it is needed because you can’t be sure in which order the functions finished and then sent back their results.</p>
+
+<p>Aside from the clear speed boost that the code gets, it’s also easier to read and easier to add new tasks to the parallel flow—just add a new item to the array.</p>
+
+<h4 id="serial-flow">Serial Flow</h4>
+
+<p>The serial flow provides the means to easily specify a list of functions that need to be executed in a particular order. This solution doesn’t provide a speed boost like parallel flow does, but it does provide the ability to write such code and keep it clean, staying away from what is normally known as spaghetti code.</p>
+
+<p>Below shows what you should try to accomplish:</p>
+
+<p>Signature of the Serial Function:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">serial</span><span class="p">([</span>
+ <span class="nx">function1</span><span class="p">,</span> <span class="nx">function2</span><span class="p">,</span> <span class="nx">function3</span>
+<span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+   <span class="c1">//do something with the combined results</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>Below shows what you shouldn’t do.</p>
+
+<p>CommonCaseofNestedCallbacks:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code>  <span class="nx">function1</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">function2</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data2</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">function3</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">data3</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">//do something with all the output</span>
+    <span class="p">}</span> 
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>You can see how the code in above could get out of hand if the number of functions kept growing. So the serial approach helps keep the code organized and readable.</p>
+
+<p>Let’s look at a possible implementation of the serial function.</p>
+
+<p>Implementation of the Serial Function:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">serial</span><span class="p">(</span><span class="nx">functions</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">fn</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span> <span class="c1">//get the first function off the list</span>
+    <span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="nx">fn</span><span class="p">(</span><span class="nx">next</span><span class="p">)</span>
+    <span class="kd">function</span> <span class="nx">next</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="c1">//save the results to be passed into the final callback once you don’t have any more functions to execute.</span>
+        <span class="kd">var</span> <span class="nx">nextFn</span> <span class="o">=</span> <span class="nx">functions</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">nextFn</span><span class="p">)</span> <span class="nx">nextFn</span><span class="p">(</span><span class="nx">next</span><span class="p">)</span>
+        <span class="k">else</span> <span class="nx">done</span><span class="p">(</span><span class="nx">results</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>There are more variations to these functions, like using an error parameter to handle errors automatically, or limiting the number of simultaneous functions in the parallel flow.</p>
+
+<p>All in all, asynchronous programming brings a lot of benefits to implementing APIs. Parallel workflow comes in very handy when dealing with external services, which normally any API would deal with; for instance, database access, other APIs, disk I/O, and so forth.</p>
+
+<p>And at the same time, the serial workflow is useful when implementing things like Express.js. For a fully functional and tested library that thrives on asynchronous programming, please check out async.js.</p>
+
+<h2 id="asynchronous-io">Asynchronous I/O</h2>
+
+<p>A specific case of asynchronous programming relates to a very interesting feature provided by Node.js, asynchronous I/O.</p>
+
+<p>This feature is highly relevant to the internal architecture of Node.js. Node.js doesn’t provide multithreading, it actually works with a single thread that runs an event loop.</p>
+
+<p><img src="http://i.stack.imgur.com/BTm1H.png" alt="" /></p>
+
+<p>In a nutshell, Node.js was designed with the mindset that I/O operations are the actual bottleneck in every operation, not the processing power. So every request received by the node process will work inside the event loop until an I/O operation is found. When that happens, the callback is registered on a separate queue and the main program’s flow continues. Once the I/O operation finishes, the callback is triggered and the code inside it is run.</p>
+
+<h3 id="async-io-vs-sync-io">Async I/O vs. Sync I/O</h3>
+
+<p>Node.js works best using async I/O, I’ve done some very simple benchmarking. I’ve created a simple API with two endpoints:</p>
+
+<ul>
+  <li>/async: This reads a 1.6MB file asynchronously before returning a simple JSON response.</li>
+  <li>/sync: This reads a 1.6MB file synchronously before returning a simple JSON response.</li>
+</ul>
+
+<p>Both endpoints do exactly the same, only in a different manner. The idea is to prove that even in such simple code, the event loop can handle multiple requests better when the underlying code makes use of the asynchronous I/O provided by the platform.</p>
+
+<p>Below is the code of both endpoints, the API was written using Vatican.js.</p>
+
+<p>Async handler:</p>
+
+<pre><code class="language-javascipt">var fs = require("fs")
+module.exports = AsyncHdlr;
+function AsyncHdlr(_model) { this.model = _model }
+//@endpoint (url: /async method: get)
+AsyncHdlr.prototype.index = function(req, res, next) {
+    fs.readFile(__dirname + "/../file.txt", function (err, content) {
+        res.send({
+            success: true
+    }) 
+  })
+}
+</code></pre>
+
+<p>Sync handler:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"fs"</span><span class="p">)</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">SyncHdlr</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">SyncHdlr</span><span class="p">(</span><span class="nx">_model</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="nx">_model</span> <span class="p">}</span>
+<span class="c1">//@endpoint (url: /sync method:get)</span>
+<span class="nx">SyncHdlr</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">__dirname</span> <span class="o">+</span> <span class="s2">"/../file.txt"</span><span class="p">)</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">({</span>
+        <span class="na">success</span><span class="p">:</span> <span class="kc">true</span>
+<span class="p">})</span> <span class="p">}</span>
+
+</code></pre>
+</div>
+
+<p>Results from the Benchmark of the Two Endpoints:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Synchronous Endpoint</th>
+      <th style="text-align: right">Asynchronous Endpoint</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Requests per second: 2411.28 [#/sec.] (mean)</td>
+      <td style="text-align: right">Requests per second: 2960.79 [#/sec.] (mean)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Time per request 41.472 [ms] (mean)</td>
+      <td style="text-align: right">Time per request: 33.775 [ms] (mean)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Time per request: 0.415 [ms] (mean, across all concurrent requests)</td>
+      <td style="text-align: right">Time per request: 0.338 [ms] (mean, across all concurrent requests)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Transfer rate: 214.28 [KBps] received</td>
+      <td style="text-align: right">Transfer rate: 263.12 [KBps] received</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As you can see above, for even the simplest of examples, there are 549 more requests being served by the asynchronous code than in the synchronous code in the same amount of time. Another interesting item is that each request is almost 8 milliseconds faster on the asynchronous endpoint; this might not be a huge number, but considering the nonexistent complexity of the code you’re using, it’s quite relevant.</p>
+
+<h2 id="simplicity">Simplicity</h2>
+
+<p>Node.js (JavaScript) is not a complicated language. It follows the basic principles that similar scripting languages follow (like Ruby, Python, and PHP). Node.js is simple enough for any developer to pick up and start coding in no time, and yet it’s powerful enough to achieve almost anything developers can set their minds to.</p>
+
+<p>JavaScript has gained a lot of traction over the years, but it has also gained a lot of haters, and they have their very valid reasons, a nonstandard object- oriented model, weird usage of the this keyword, a lack of functionality built into the language (it has a lot of libraries dedicated to implementing basic features that come built-in in other languages), and the list goes on. In the end, every tool needs to be chosen based on its strengths. Node.js is a particularly strong option for developing APIs, as you’re about to see.</p>
+
+<p>Node.js adds a certain useful flavor to the language, simplifying a developer’s life when trying to develop back-end code. It not only adds the required utilities to work with I/O (which front-end JavaScript doesn’t have for obvious security reasons), but it also provides stability for all the different flavors of JavaScript that each web browser supports.</p>
+
+<p>One example of this is how easy it is to set up a web server with just a few lines of code:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"http"</span><span class="p">)</span>
+<span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//create the server</span>
+        <span class="c1">//request handler code here</span>
+<span class="p">});</span>
+<span class="nx">http</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">)</span> <span class="c1">//start it up on port 3000</span>
+</code></pre>
+</div>
+
+<p>JavaScript also has the advantage of being the standard front-end language for all commercial web browsers, which means that if you’re a web developer with front-end experience, you have certainly come across JavaScript.</p>
+
+<h3 id="dynamic-typing">Dynamic Typing</h3>
+
+<p>Dynamic typing is a basic characteristic, present in most common languages nowadays, but it’s not less powerful because of that. This little feature allows the developer to not have to think too much when declaring a variable; just give it a name and move on:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">tmp</span> <span class="c1">//declare the variables (just give them names)</span>
+
+<span class="c1">//initialize them with different types</span>
+<span class="nx">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nx">b</span> <span class="o">=</span> <span class="s2">"hello world"</span>
+
+<span class="c1">//now swap the values</span>
+<span class="nx">tmp</span> <span class="o">=</span> <span class="nx">a</span>
+<span class="nx">a</span> <span class="o">=</span> <span class="nx">b</span> <span class="c1">//even with automatic casting, a language like C won’t be able to cast "hello</span>
+<span class="nx">world</span><span class="s2">" into an integer value
+b = tmp
+
+//print values
+console.log(a) //prints "</span><span class="nx">hello</span> <span class="nx">world</span><span class="err">"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="c1">//prints 10</span>
+</code></pre>
+</div>
+
+<h3 id="object-oriented-programming">Object-Oriented Programming</h3>
+
+<p>JavaScript it not an object-oriented language, but it does have support for some of these features. You’ll have enough of them to conceptualize problems and solutions using objects, which is always a very intuitive way of thinking, but at the same time, you’re not dealing with concepts like polymorphism, interfaces, or others that despite helping to structure code, have proven to be dispensable when designing applications.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myObject</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">//JS object notation helps simplify definitions</span>
+        <span class="na">myAttribute</span><span class="p">:</span> <span class="s2">"some value"</span><span class="p">,</span>
+        <span class="na">myMethod</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">param1</span><span class="p">,</span> <span class="nx">param2</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">//does something here</span>
+        <span class="p">}</span> 
+<span class="p">}</span>
+<span class="c1">//And the just... </span>
+<span class="nx">myObject</span><span class="p">.</span><span class="nx">myMethod</span><span class="p">(...)</span>
+</code></pre>
+</div>
+
+<p>Another example:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">aDog</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">//behave like a dog</span>
+        <span class="na">makeNoise</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"woof!"</span><span class="p">);</span>
+        <span class="p">}</span> 
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">aCat</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">//behave like a cat</span>
+        <span class="na">makeNoise</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Meewww!"</span><span class="p">);</span>
+        <span class="p">}</span> 
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">myAnimal</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">//our main object</span>
+        <span class="na">makeNoise</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"cri... cri...."</span><span class="p">)</span> <span class="na">speak</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">makeNoise</span><span class="p">()</span>
+        <span class="p">}</span> 
+<span class="p">}</span>
+<span class="nx">myAnimal</span><span class="p">.</span><span class="nx">speak</span><span class="p">()</span> <span class="c1">//no change, so.. crickets!</span>
+<span class="nx">myAnimal</span><span class="p">.</span><span class="nx">speak</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">aDog</span><span class="p">)</span> <span class="c1">//this will print "woof!"</span>
+
+<span class="c1">//switch behavior</span>
+<span class="nx">myAnimal</span><span class="p">.</span><span class="nx">speak</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">aCat</span><span class="p">)</span> <span class="c1">//this will now print "Meewww!"</span>
+</code></pre>
+</div>
+<p>You were able to encapsulate a simple behavior into an object and pass it into another object to automatically overwrite its default one.¨</p>
+
+<h3 id="prototypal-inheritance">Prototypal Inheritance</h3>
+
+<p>Linked to the one above, the prototypal inheritance feature allows for incredibly easy extension of your objects at any moment of their life cycle; powerful and simple:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Parent</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">parentName</span> <span class="o">=</span> <span class="s2">"Parent"</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">Child</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="p">}</span>
+<span class="nx">Child</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Parent</span><span class="p">()</span>
+<span class="kd">var</span> <span class="nx">childObj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Child</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">childObj</span><span class="p">.</span><span class="nx">parentName</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">childObj</span><span class="p">.</span><span class="nx">sayThanks</span><span class="p">)</span> <span class="c1">//that's undefined so far</span>
+
+<span class="nx">Parent</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">sayThanks</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="c1">//you "teach" the method to the parent</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Thanks!"</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">childObj</span><span class="p">.</span><span class="nx">sayThanks</span><span class="p">())</span> <span class="c1">//the child can say thanks now</span>
+</code></pre>
+</div>
+
+<h3 id="functional-programming-support">Functional Programming Support</h3>
+
+<p>JavaScript is not a functional programming language; but then again, it does have support for some of its features, such as having first-class citizen functions, allowing you to pass them around like parameters, and return closures easily.</p>
+
+<p>This feature makes it possible to work with callbacks, which, as you’ve already seen, is the basis for asynchronous programming. Let’s look at a quick and simple functional programming example:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">adder</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="kd">function</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">x</span><span class="o">+</span><span class="nx">y</span> 
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">add10</span> <span class="o">=</span> <span class="nx">adder</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="c1">//you create a new function that adds 10 to whatever you pass to it. </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add10</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span> <span class="c1">//will output 110</span>
+</code></pre>
+</div>
+
+<p>A more complex example is an implementation of the map function, which allows you to transform the values of an array by passing the array and the transformation function. Let’s first look at how you’d use the map function.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nx">map</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="p">})</span> <span class="c1">//will return [2,4,6, 8]</span>
+<span class="nx">map</span><span class="p">([</span><span class="s2">"h"</span><span class="p">,</span><span class="s2">"e"</span><span class="p">,</span><span class="s2">"l"</span><span class="p">,</span><span class="s2">"l"</span><span class="p">,</span><span class="s2">"o"</span><span class="p">],</span> <span class="nb">String</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">)</span> <span class="c1">//will return ["H","E","L","L","O"]</span>
+</code></pre>
+</div>
+
+<p>Now let’s look at a possible implementation using the functional approach.</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">reduce</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">init</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="nx">init</span>
+        <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nx">init</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">fn</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="p">[</span><span class="nx">value</span><span class="p">]))</span> <span class="c1">//this will allow us to get both the functions that receive the value as parameters and the methods that use it from it’s context (like toUpperCase)</span>
+        <span class="k">return</span> <span class="nx">reduce</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="nx">fn</span><span class="p">,</span> <span class="nx">init</span><span class="p">)</span> <span class="c1">//iterate over the list using it’s tail</span>
+<span class="p">(</span><span class="nx">everything</span> <span class="nx">but</span> <span class="nx">the</span> <span class="nx">first</span> <span class="nx">element</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">map</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">reduce</span><span class="p">(</span><span class="nx">list</span><span class="p">,</span> <span class="nx">fn</span><span class="p">,</span> <span class="p">[])</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="duck-typing">Duck Typing</h3>
+
+<p>The type of a variable is determined by its content and properties, not by a fixed value. So the same variable can change its type during the life cycle of your script. Duck typing is both a very powerful feature and a dangerous feature at the same time:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">foo</span> <span class="o">=</span> <span class="s2">"bar"</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">foo</span><span class="p">)</span> <span class="c1">//will output "string"</span>
+<span class="nx">foo</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">foo</span><span class="p">)</span> <span class="c1">//this will now output "number"</span>
+</code></pre>
+</div>
+
+<h3 id="native-support-for-json">Native Support for JSON</h3>
+
+<p>Since JSON actually spawned from JavaScript. Having native support for the main transport language used nowadays is a big plus:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myJSONProfile</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"first_name"</span><span class="p">:</span> <span class="s2">"Fernando"</span><span class="p">,</span>
+        <span class="s2">"last_name"</span><span class="p">:</span> <span class="s2">"Doglio"</span><span class="p">,</span>
+        <span class="s2">"current_age"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s2">"married"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s2">"phone_numbers"</span><span class="p">:</span> <span class="p">[</span>
+<span class="p">}</span>
+
+<span class="c1">//And you can interact with that JSON without having to parse it or anything</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myJSONProfile</span><span class="p">.</span><span class="nx">first_name</span><span class="p">,</span> <span class="nx">myJSONProfile</span><span class="p">.</span><span class="nx">last_name</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>This particular feature is especially useful in several cases.</p>
+
+<p>For instance, when working with a document-based storage solution (like MongoDB) because the modeling of data ends up being native in both places (your app and the database). Also, when developing an API, you’ve already seen that the transport language of choice these days is JSON, so the ability to format your responses directly with native notation (you could even just output your entities, for that matter) is a very big plus when it comes to ease of use.</p>
+
+<p>The list could be extended, but those are some pretty powerful features that JavaScript and Node.js bring to the table without asking too much of the developer. They are quite easy to understand and use.</p>
+
+<h2 id="node-package-manager">Node Package Manager</h2>
+
+<p>Another point in favor of Node.js is its amazing package manager. As you might know, development in Node is very module dependent, meaning that you’re not going to be developing the entire thing; most likely you’ll be reusing someone else’s code in the form of modules.</p>
+
+<p>This is a very important aspect of Node.js, because this approach allows you to focus on what makes your application unique, and lets the generic code be integrated seamlessly. You don’t have to recode the library for HTTP connectivity, or your route handler on every project (in other words, you don’t have to keep reinventing the wheel). Just set the dependencies of your project into the package.json file, using the best-suited module names, and then npm will take care of going through the whole dependency tree and install everything needed.</p>
+
+<p>The amount of active users and modules available assures you that you’ll find what you need. In the rare occasions when you don’t, you can contribute by uploading that specific module to the registry and help the next developer that comes looking for it.</p>
+
+<p>To start using npm, just visit their site at www.npmjs.org. There you’ll see a list of recently updated packages to get you started, and some of the most popular ones as well.</p>
+
+<p>If want to install it directly, just write the following line into your Linux console:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>curl https://www.npmjs.org/install.sh | sh
+</code></pre>
+</div>
+
+<p>You need to have Node.js installed to use it properly. You can begin installing modules by simply typing:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm install <span class="o">[</span>MODULE_NAME]
+</code></pre>
+</div>
+
+<p>This command downloads the specified module into a local folder called node_modules; so try to run it from within your project’s folder.</p>
+
+<p>You can also use npm to develop your own modules and publish them into the site by using the following:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>npm publish
+</code></pre>
+</div>
+
+<p>The preceding command takes attributes from the package.json file, package the module, and upload everything into npm’s registry.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>This article covered the advantages of Node.js for the common developer, especially how its features improve the performance of I/O–heavy systems such as APIs.</p>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Andree DevelDoe Ray
+            
+            </li>
+            
+            <li><a href="mailto:me@develdoe.com">me@develdoe.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/andreedeveldoeray"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">andreedeveldoeray</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/develdoe"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">develdoe</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

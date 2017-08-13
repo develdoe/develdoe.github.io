@@ -1,3 +1,10 @@
+#site_search {
+  float: right; }
+
+#site_search input {
+  min-height: 26px;
+  margin: 15px 0; }
+
 /**
  * Reset some basic elements
  */
@@ -66,10 +73,10 @@ h1, h2, h3, h4, h5, h6 {
  * Links
  */
 a {
-  color: #2a7ae2;
+  color: #3fbdfc;
   text-decoration: none; }
   a:visited {
-    color: #1756a9; }
+    color: #049eeb; }
   a:hover {
     color: #111;
     text-decoration: underline; }
@@ -92,10 +99,10 @@ blockquote {
  */
 pre,
 code {
-  font-size: 15px;
+  font-size: 12px;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
-  background-color: #eef; }
+  background-color: #fff; }
 
 code {
   padding: 1px 5px; }
@@ -157,7 +164,8 @@ pre {
   line-height: 56px;
   letter-spacing: -1px;
   margin-bottom: 0;
-  float: left; }
+  float: left;
+  color: #fce63f; }
   .site-title, .site-title:visited {
     color: #424242; }
 
@@ -316,7 +324,7 @@ pre {
 .highlight {
   background: #fff; }
   .highlighter-rouge .highlight {
-    background: #eef; }
+    background: #fff; }
   .highlight .c {
     color: #998;
     font-style: italic; }

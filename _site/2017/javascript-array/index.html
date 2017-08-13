@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JavaScript - Array</title>
+  <meta name="description" content="An array is a systematic arrangement of similar objects, usually in rows and columns.">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:2000/2017/javascript-array/">
+  <link rel="alternate" type="application/rss+xml" title="WIMSE - Developer" href="/feed.xml">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+
+
+  <body>
+
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div style="padding-bottom: 20px;"><a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> back</a></div>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">JavaScript - Array</h1>
+    <p class="post-meta"><time datetime="2017-03-19T00:16:00+01:00" itemprop="datePublished">Mar 19, 2017</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <blockquote>
+  <p>An array is a systematic arrangement of similar objects, usually in rows and columns.</p>
+</blockquote>
+
+<p>The JavaScript Array object is a global object that is used in the construction of arrays; which are high-level, list-like objects.</p>
+
+<p><strong>Create an Array</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Apple'</span><span class="p">,</span> <span class="s1">'Banana'</span><span class="p">]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fruits</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="c1">// 2</span>
+</code></pre>
+</div>
+
+<p><strong>Access (index into) an Array item</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">first</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1">// Apple</span>
+<span class="kd">var</span> <span class="nx">last</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">[</span><span class="nx">fruits</span><span class="p">.</span><span class="nx">lenth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="c1">// Banana</span>
+</code></pre>
+</div>
+
+<p><strong>Loop over an Array</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">fruits</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">index</span><span class="p">,</span><span class="nx">array</span><span class="p">){</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span><span class="nx">index</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="c1">// Apple 0</span>
+<span class="c1">// Banana 1</span>
+</code></pre>
+</div>
+
+<p><strong>Add to the end of an Array</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">newLength</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">'Orange'</span><span class="p">)</span>
+<span class="c1">// fruits = ['Apple','Banana','Orange']</span>
+<span class="c1">// newLength = 3</span>
+</code></pre>
+</div>
+
+<p><strong>Remove from the end of an array</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">last</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">pop</span><span class="p">()</span> <span class="c1">// Removes Orange</span>
+<span class="c1">// fruits =  ['Apple','Banana']</span>
+<span class="c1">// last = 'Orange'</span>
+</code></pre>
+</div>
+
+<p><strong>Remove from the front of the Array</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">first</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">shift</span><span class="p">()</span> <span class="c1">// Remove Apple</span>
+<span class="c1">// fruits = ["Banana"]</span>
+<span class="c1">// first = "Apple"</span>
+</code></pre>
+</div>
+
+<p><strong>Find the index of an item in the Array</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">fruits</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">'Mango'</span><span class="p">)</span>
+<span class="c1">// ['Apple','Banana','Mango']</span>
+<span class="kd">var</span> <span class="nx">pos</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s1">'Banana'</span><span class="p">)</span> <span class="c1">// 1</span>
+</code></pre>
+</div>
+
+<p><strong>Remove item by index</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">removed</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">pos</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// this is how to remove an item</span>
+<span class="c1">// fruits = ['Apple','Mango']</span>
+</code></pre>
+</div>
+
+<p><strong>Remove items from index</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">vegetables</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Cabbage'</span><span class="p">,</span> <span class="s1">'Turnip'</span><span class="p">,</span> <span class="s1">'Radish'</span><span class="p">,</span> <span class="s1">'Carrot'</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">vegetables</span><span class="p">);</span> 
+<span class="c1">// ["Cabbage", "Turnip", "Radish", "Carrot"]</span>
+
+<span class="kd">var</span> <span class="nx">pos</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">removedItems</span> <span class="o">=</span> <span class="nx">vegetables</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">pos</span><span class="p">,</span> <span class="nx">n</span><span class="p">);</span> 
+<span class="c1">// this is how to remove items, n defines the number of items to be removed,</span>
+<span class="c1">// from that position(pos) onward to the end of array.</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">vegetables</span><span class="p">);</span> 
+<span class="c1">// ["Cabbage", "Carrot"] (the original array is changed)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">removedItems</span><span class="p">);</span> 
+<span class="c1">// ["Turnip", "Radish"]</span>
+</code></pre>
+</div>
+
+<p><strong>Copy an Array</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">shallowCopy</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">slice</span><span class="p">()</span> 
+</code></pre>
+</div>
+
+<h2 id="syntax">Syntax</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[element0, element1, ..., elementN]
+new Array(element0, element1[, ...[, elementN]])
+new Array(arrayLength)
+</code></pre>
+</div>
+
+<h3 id="parameters">Parameters</h3>
+
+<p><strong>elementN</strong></p>
+
+<p>A JavaScript array is initialized with the given elements.</p>
+
+<p>Except in the case where a single argument is passed to the Array constructor and that argument is a number (see the arrayLength parameter below). <em>Note that this special case only applies to JavaScript arrays created with the Array constructor, not array literals created with the bracket syntax.</em></p>
+
+<p><strong>arrayLength</strong></p>
+
+<p>If the only argument passed to the Array constructor is an integer between 0 and 232-1 (inclusive), this returns a new JavaScript array with its length property set to that number. <em>Note: this implies an array of arrayLength empty slots, not slots with actual undefined values.</em> If the argument is any other number, a RangeError exception is thrown.</p>
+
+<h2 id="description">Description</h2>
+
+<p>Arrays are list-like objects whose prototype has methods to perform traversal and mutation operations.</p>
+
+<p>Neither the length of a JavaScript array nor the types of its elements are fixed.</p>
+
+<p>Since an array’s length can change at any time, and data can be stored at non-contiguous locations in the array, JavaScript arrays are not guaranteed to be dense; this depends on how the programmer chooses to use them.</p>
+
+<p>In general, these are convenient characteristics; but if these features are not desirable for your particular use, you might consider using typed arrays.</p>
+
+<p>Some people think that you <a href="www.andrewdupont.net/2006/05/18/javascript-associative-arrays-considered-harmful/">shouldn’t use an array as an associative array</a>. In any case, you can use plain objects instead, although doing so comes with its own caveats. See the post <a href="http://www.less-broken.com/blog/2010/12/lightweight-javascript-dictionaries.html">Lightweight JavaScript dictionaries with arbitrary keys</a> as an example.</p>
+
+<h3 id="accessing-array-elements">Accessing array elements</h3>
+
+<p>JavaScript arrays are zero-indexed: the first element of an array is at index 0, and the last element is at the index equal to the value of the array’s length property minus 1.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'this is the first element'</span><span class="p">,</span> <span class="s1">'this is the second element'</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>              <span class="c1">// logs 'this is the first element'</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>              <span class="c1">// logs 'this is the second element'</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">[</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span> <span class="c1">// logs 'this is the second element'</span>
+</code></pre>
+</div>
+
+<p>Array elements are object properties in the same way that toString is a property, but trying to access an element of an array as follows throws a syntax error, because the property name is not valid:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// a syntax error</span>
+</code></pre>
+</div>
+
+<p>There is nothing special about JavaScript arrays and the properties that cause this.</p>
+
+<p>JavaScript properties that begin with a digit cannot be referenced with dot notation; and must be accessed using bracket notation. For example, if you had an object with a property named ‘3d’, it can only be referenced using bracket notation. E.g.:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">years</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1950</span><span class="p">,</span> <span class="mi">1960</span><span class="p">,</span> <span class="mi">1970</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">1990</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">2010</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">years</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span>   <span class="c1">// a syntax error</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">years</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>  <span class="c1">// works properly</span>
+</code></pre>
+</div>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">renderer</span><span class="p">.</span><span class="mi">3</span><span class="nx">d</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">model</span><span class="p">,</span> <span class="s1">'character.png'</span><span class="p">);</span>     <span class="c1">// a syntax error</span>
+<span class="nx">renderer</span><span class="p">[</span><span class="s1">'3d'</span><span class="p">].</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">model</span><span class="p">,</span> <span class="s1">'character.png'</span><span class="p">);</span>  <span class="c1">// works properly</span>
+</code></pre>
+</div>
+
+<p>Note that in the 3d example, ‘3d’ had to be quoted. It’s possible to quote the JavaScript array indexes as well (e.g., years[‘2’] instead of years[2]), although it’s not necessary.</p>
+
+<p>The 2 in years[2] is coerced into a string by the JavaScript engine through an implicit toString conversion. It is for this reason that ‘2’ and ‘02’ would refer to two different slots on the years object and the following example could be true:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">years</span><span class="p">[</span><span class="s1">'2'</span><span class="p">]</span> <span class="o">!=</span> <span class="nx">years</span><span class="p">[</span><span class="s1">'02'</span><span class="p">]);</span>
+</code></pre>
+</div>
+
+<p>Similarly, object properties which happen to be reserved words(!) can only be accessed as string literals in bracket notation(but it can be accessed by dot notation in firefox 40.0a2 at least):</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">promise</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">'var'</span>  <span class="p">:</span> <span class="s1">'text'</span><span class="p">,</span>
+  <span class="s1">'array'</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">promise</span><span class="p">[</span><span class="s1">'var'</span><span class="p">]);</span>
+</code></pre>
+</div>
+
+<h3 id="relationship-between-length-and-numerical-properties">Relationship between length and numerical properties</h3>
+
+<p>A JavaScript array’s length property and numerical properties are connected.</p>
+
+<p>Several of the built-in array methods (e.g., join, slice, indexOf, etc.) take into account the value of an array’s length property when they’re called.</p>
+
+<p>Other methods (e.g., push, splice, etc.) also result in updates to an array’s length property.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">fruits</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">'banana'</span><span class="p">,</span> <span class="s1">'apple'</span><span class="p">,</span> <span class="s1">'peach'</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fruits</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// 3</span>
+</code></pre>
+</div>
+
+<p>When setting a property on a JavaScript array when the property is a valid array index and that index is outside the current bounds of the array, the engine will update the array’s length property accordingly:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">fruits</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'mango'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fruits</span><span class="p">[</span><span class="mi">5</span><span class="p">]);</span> <span class="c1">// 'mango'</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">fruits</span><span class="p">));</span>  <span class="c1">// ['0', '1', '2', '5']</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fruits</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// 6</span>
+</code></pre>
+</div>
+
+<p>Increasing the length:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">fruits</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">fruits</span><span class="p">));</span> <span class="c1">// ['0', '1', '2', '5']</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fruits</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// 10</span>
+</code></pre>
+</div>
+
+<p>Decreasing the length property does, however, delete elements.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">fruits</span><span class="p">.</span><span class="nx">length</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">fruits</span><span class="p">));</span> <span class="c1">// ['0', '1']</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fruits</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// 2</span>
+</code></pre>
+</div>
+
+<p>More on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length">Array.length</a>.</p>
+
+<h3 id="creating-an-array-using-the-result-of-a-match">Creating an array using the result of a match</h3>
+
+<p>The result of a match between a regular expression and a string can create a JavaScript array.</p>
+
+<p>This array has properties and elements which provide information about the match. Such an array is returned by RegExp.exec, String.match, and String.replace.</p>
+
+<p>To help explain these properties and elements, look at the following example and then refer to the table below:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="c1">// Match one d followed by one or more b's followed by one d</span>
+<span class="c1">// Remember matched b's and the following d</span>
+<span class="c1">// Ignore case</span>
+
+<span class="kd">var</span> <span class="nx">myRe</span> <span class="o">=</span> <span class="sr">/d</span><span class="se">(</span><span class="sr">b+</span><span class="se">)(</span><span class="sr">d</span><span class="se">)</span><span class="sr">/i</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">myArray</span> <span class="o">=</span> <span class="nx">myRe</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="s1">'cdbBdbsbz'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>The properties and elements returned from this match are as follows:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Property/Element</td>
+      <td>Description</td>
+      <td>Example</td>
+    </tr>
+    <tr>
+      <td>input</td>
+      <td>A read-only property that reflects the original string against which the regular expression was matched.</td>
+      <td>cdbBdbsbz</td>
+    </tr>
+    <tr>
+      <td>index</td>
+      <td>A read-only property that is the zero-based index of the match in the string.</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>[0]</td>
+      <td>A read-only element that specifies the last matched characters.</td>
+      <td>dbBd</td>
+    </tr>
+    <tr>
+      <td>[1], …[n]</td>
+      <td>Read-only elements that specify the parenthesized substring matches, if included in the regular expression. The number of possible parenthesized substrings is unlimited.</td>
+      <td>[1]: bB[2]: d</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="properties">Properties</h3>
+
+<h4 id="arraylength">Array.length</h4>
+
+<p>The Array constructor’s length property whose value is 1.</p>
+
+<h4 id="get-arrayspecies">get Array[@@species]</h4>
+
+<p>The constructor function that is used to create derived objects.</p>
+
+<h4 id="arrayprototype">Array.prototype</h4>
+
+<p>Allows the addition of properties to all array objects.</p>
+
+<h3 id="methods">Methods</h3>
+
+<h4 id="arrayfrom">Array.from()</h4>
+
+<p>Creates a new Array instance from an array like or iterable object</p>
+
+<h4 id="arrayisarray">Array.isArray()</h4>
+
+<p>Returns boolean</p>
+
+<h4 id="arrayof">Array.of()</h4>
+
+<p>Creates a new Array instance with a variable number of arguments, regardless of number or type of the arguments.</p>
+
+<h2 id="array-instances">Array Instances</h2>
+
+<p>All Array instances inherits from Array.prototype. The prototype of the Array constructor can be modified to effect all Array instances.</p>
+
+<h3 id="properties-1">Properties</h3>
+
+<h4 id="arrayprototypeconstructor">Array.prototype.constructor</h4>
+
+<p>Specifies the function that creates an object’s prototype.</p>
+
+<h4 id="arrayprototypelength">Array.prototype.length</h4>
+
+<p>Reflects the number of elements in an array.</p>
+
+<h4 id="arrayprototypeunscopables">Array.prototype[@@unscopables]</h4>
+
+<p>A symbol containing property names to exclude from a with binding scope.</p>
+
+<h3 id="methods-1">Methods</h3>
+
+<h4 id="mutator-methods">Mutator methods</h4>
+
+<p>These methods modify the array.</p>
+
+<h5 id="arrayprototypecopywithin">Array.prototype.copyWithin()</h5>
+
+<p>Copies a sequence of a array elements within the array.</p>
+
+<h6 id="syntax-1">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.copyWithin(target)
+arr.copyWithin(target, start)
+arr.copyWithin(target, start, end)
+</code></pre>
+</div>
+
+<h6 id="example">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="p">[</span><span class="s1">'alpha'</span><span class="p">,</span> <span class="s1">'bravo'</span><span class="p">,</span> <span class="s1">'charlie'</span><span class="p">,</span> <span class="s1">'delta'</span><span class="p">].</span><span class="nx">copyWithin</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="c1">// results in ["alpha", "bravo", "alpha", "bravo"]</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypefill">Array.prototype.fill()</h5>
+
+<p>Fills all the elements of an array from a start index to an end index with a static value.</p>
+
+<h6 id="syntax-2">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.fill(value)
+arr.fill(value, start)
+arr.fill(value, start, end)
+</code></pre>
+</div>
+
+<h6 id="example-1">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="nx">numbers</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="c1">// results in [1, 1, 1]</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypepop">Array.prototype.pop()</h5>
+
+<p>Removes the last element from an array and returns that element.</p>
+
+<h6 id="syntax-3">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.pop()
+</code></pre>
+</div>
+
+<h6 id="example-2">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// [1, 2]</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypepush">Array.prototype.push()</h5>
+
+<p>Adds one or more elements to the end of an array and returns the new length of the array.</p>
+
+<h6 id="syntax-4">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.push([element1[, ...[, elementN]]])
+</code></pre>
+</div>
+
+<h6 id="example-3">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">sports</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'soccer'</span><span class="p">,</span> <span class="s1">'baseball'</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">total</span> <span class="o">=</span> <span class="nx">sports</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">'football'</span><span class="p">,</span> <span class="s1">'swimming'</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sports</span><span class="p">);</span> <span class="c1">// ['soccer', 'baseball', 'football', 'swimming']</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">total</span><span class="p">);</span>  <span class="c1">// 4</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypereverse">Array.prototype.reverse()</h5>
+
+<p>Reverses the order of the elements of an array in place — the first becomes the last, and the last becomes the first..</p>
+
+<h6 id="syntax-5">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>a.reverse()
+</code></pre>
+</div>
+
+<h6 id="example-4">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'one'</span><span class="p">,</span> <span class="s1">'two'</span><span class="p">,</span> <span class="s1">'three'</span><span class="p">];</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span> 
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// ['three', 'two', 'one']</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypeshift">Array.prototype.shift()</h5>
+
+<p>Removes the first element from an array and returns that element.</p>
+
+<h6 id="syntax-6">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.shift()
+</code></pre>
+</div>
+
+<h6 id="example-5">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// [2, 3]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span> <span class="c1">// 1</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypesort">Array.prototype.sort()</h5>
+
+<p>Sorts the elements of an array in place and returns the array.</p>
+
+<h6 id="syntax-7">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.sort()
+arr.sort(compareFunction)
+</code></pre>
+</div>
+
+<h6 id="example-6">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fruit</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'cherries'</span><span class="p">,</span> <span class="s1">'apples'</span><span class="p">,</span> <span class="s1">'bananas'</span><span class="p">];</span>
+<span class="nx">fruit</span><span class="p">.</span><span class="nx">sort</span><span class="p">();</span> <span class="c1">// ['apples', 'bananas', 'cherries']</span>
+
+<span class="kd">var</span> <span class="nx">scores</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span> 
+<span class="nx">scores</span><span class="p">.</span><span class="nx">sort</span><span class="p">();</span> <span class="c1">// [1, 10, 2, 21]</span>
+<span class="c1">// Note that 10 comes before 2,</span>
+<span class="c1">// because '10' comes before '2' in Unicode code point order.</span>
+
+<span class="kd">var</span> <span class="nx">things</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'word'</span><span class="p">,</span> <span class="s1">'Word'</span><span class="p">,</span> <span class="s1">'1 Word'</span><span class="p">,</span> <span class="s1">'2 Words'</span><span class="p">];</span>
+<span class="nx">things</span><span class="p">.</span><span class="nx">sort</span><span class="p">();</span> <span class="c1">// ['1 Word', '2 Words', 'Word', 'word']</span>
+<span class="c1">// In Unicode, numbers come before upper case letters,</span>
+<span class="c1">// which come before lower case letters.</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypesplice">Array.prototype.splice()</h5>
+
+<p>Adds and/or removes elements from an array.</p>
+
+<h6 id="syntax-8">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>array.splice(start)
+array.splice(start, deleteCount)
+array.splice(start, deleteCount, item1, item2, ...)
+</code></pre>
+</div>
+
+<h6 id="example-7">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myFish</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'angel'</span><span class="p">,</span> <span class="s1">'clown'</span><span class="p">,</span> <span class="s1">'mandarin'</span><span class="p">,</span> <span class="s1">'sturgeon'</span><span class="p">];</span>
+
+<span class="nx">myFish</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">'drum'</span><span class="p">);</span> 
+<span class="c1">// myFish is ["angel", "clown", "drum", "mandarin", "sturgeon"]</span>
+
+<span class="nx">myFish</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span> 
+<span class="c1">// myFish is ["angel", "clown", "mandarin", "sturgeon"]</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypeunshift">Array.prototype.unshift()</h5>
+
+<p>Adds one or more elements to the front of an array and returns the new length of the array.</p>
+
+<h6 id="syntax-9">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.unshift([element1[, ...[, elementN]]])
+</code></pre>
+</div>
+
+<h6 id="example-8">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// [4, 5, 1, 2, 3]</span>
+</code></pre>
+</div>
+
+<h4 id="accessor-methods">Accessor methods</h4>
+
+<p>These methods do not modify the array and return some representation of the array</p>
+
+<h5 id="arrayprototypeconcat">Array.prototype.concat()</h5>
+
+<p>Returns a new array comprised of this array joined with other array(s) and/or value(s).</p>
+
+<h6 id="syntax-10">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var new_array = old_array.concat(value1[, value2[, ...[, valueN]]])
+</code></pre>
+</div>
+
+<h6 id="example-9">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">arr2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'d'</span><span class="p">,</span> <span class="s1">'e'</span><span class="p">,</span> <span class="s1">'f'</span><span class="p">];</span>
+
+<span class="kd">var</span> <span class="nx">arr3</span> <span class="o">=</span> <span class="nx">arr1</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arr2</span><span class="p">);</span>
+
+<span class="c1">// results in a new array [ "a", "b", "c", "d", "e", "f" ]</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypeincludes">Array.prototype.includes()</h5>
+
+<p>Determines whether an array contains a certain element, returning true or false as appropriate.</p>
+
+<h6 id="syntax-11">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.includes(searchElement)
+arr.includes(searchElement, fromIndex)
+</code></pre>
+</div>
+
+<h6 id="example-10">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// true </span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// false</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypeindexof">Array.prototype.indexOf()</h5>
+
+<p>Returns the first (least) index of an element within the array equal to the specified value, or -1 if none is found.</p>
+
+<h6 id="syntax-12">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.indexOf(searchElement)
+arr.indexOf(searchElement, fromIndex)
+</code></pre>
+</div>
+
+<h6 id="example-11">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">];</span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>     <span class="c1">// 0</span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>     <span class="c1">// -1</span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>  <span class="c1">// 2</span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// -1</span>
+<span class="nx">array</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 0</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypejoin">Array.prototype.join()</h5>
+
+<p>Joins all elements of an array into a string.</p>
+
+<h6 id="syntax-13">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.join()
+arr.join(separator)
+</code></pre>
+</div>
+
+<h6 id="example-12">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Wind'</span><span class="p">,</span> <span class="s1">'Rain'</span><span class="p">,</span> <span class="s1">'Fire'</span><span class="p">];</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">join</span><span class="p">();</span>    <span class="c1">// 'Wind,Rain,Fire'</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">'-'</span><span class="p">);</span> <span class="c1">// 'Wind-Rain-Fire'</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypelastindexof">Array.prototype.lastIndexOf()</h5>
+
+<p>Returns the last (greatest) index of an element within the array equal to the specified value, or -1 if none is found.</p>
+
+<h6 id="syntax-14">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.lastIndexOf(searchElement)
+arr.lastIndexOf(searchElement, fromIndex)
+</code></pre>
+</div>
+
+<h6 id="example-13">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">];</span>
+<span class="nx">numbers</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// 3</span>
+<span class="nx">numbers</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span> <span class="c1">// -1</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypeslice">Array.prototype.slice()</h5>
+
+<p>Extracts a section of an array and returns a new array.</p>
+
+<h6 id="syntax-15">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.slice()
+arr.slice(begin)
+arr.slice(begin, end)
+</code></pre>
+</div>
+
+<h6 id="example-14">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Banana'</span><span class="p">,</span> <span class="s1">'Orange'</span><span class="p">,</span> <span class="s1">'Lemon'</span><span class="p">,</span> <span class="s1">'Apple'</span><span class="p">,</span> <span class="s1">'Mango'</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">citrus</span> <span class="o">=</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+
+<span class="c1">// fruits contains ['Banana', 'Orange', 'Lemon', 'Apple', 'Mango']</span>
+<span class="c1">// citrus contains ['Orange','Lemon']</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypetostring">Array.prototype.toString()</h5>
+
+<p>Returns a string representing the array and its elements. Overrides the Object.prototype.toString() method.</p>
+
+<h6 id="syntax-16">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.toString()
+</code></pre>
+</div>
+
+<h6 id="example-15">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">months</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Jan'</span><span class="p">,</span> <span class="s1">'Feb'</span><span class="p">,</span> <span class="s1">'Mar'</span><span class="p">,</span> <span class="s1">'Apr'</span><span class="p">];</span>
+<span class="nx">months</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span> <span class="c1">// "Jan,Feb,Mar,Apr"</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypetolocalestring">Array.prototype.toLocaleString()</h5>
+
+<p>Returns a localized string representing the array and its elements. Overrides the Object.prototype.toLocaleString() method.</p>
+
+<h6 id="syntax-17">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.toLocaleString();
+arr.toLocaleString(locales);
+arr.toLocaleString(locales, options);
+</code></pre>
+</div>
+
+<h6 id="example-16">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">1337</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">myArr</span> <span class="o">=</span> <span class="p">[</span><span class="nx">number</span><span class="p">,</span> <span class="nx">date</span><span class="p">,</span> <span class="s1">'foo'</span><span class="p">];</span>
+
+<span class="kd">var</span> <span class="nx">str</span> <span class="o">=</span> <span class="nx">myArr</span><span class="p">.</span><span class="nx">toLocaleString</span><span class="p">();</span> 
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span> 
+<span class="c1">// logs '1337,6.12.2013 19:37:35,foo'</span>
+<span class="c1">// if run in a German (de-DE) locale with timezone Europe/Berlin</span>
+</code></pre>
+</div>
+
+<h4 id="iteration-methods">Iteration methods</h4>
+
+<p>Several methods take as arguments functions to be called back while processing the array. When these methods are called, the length of the array is sampled, and any element added beyond this length from within the callback is not visited. Other changes to the array (setting the value of or deleting an element) may affect the results of the operation if the method visits the changed element afterwards. While the specific behavior of these methods in such cases is well-defined, you should not rely upon it so as not to confuse others who might read your code. If you must mutate the array, copy into a new array instead.</p>
+
+<h5 id="arrayprototypeentries">Array.prototype.entries()</h5>
+
+<p>Returns a new Array Iterator object that contains the key/value pairs for each index in the array.</p>
+
+<h6 id="syntax-18">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>a.entries()
+</code></pre>
+</div>
+
+<h6 id="example-17">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">iterator</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">entries</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// [0, 'a']</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// [1, 'b']</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// [2, 'c']</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypeevery">Array.prototype.every()</h5>
+
+<p>Returns true if every element in this array satisfies the provided testing function.</p>
+
+<h6 id="syntax-19">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.every(callback[, thisArg])
+</code></pre>
+</div>
+
+<h6 id="example-18">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">isBigEnough</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span> 
+  <span class="k">return</span> <span class="nx">element</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">;</span> 
+<span class="p">}</span> 
+
+<span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">44</span><span class="p">].</span><span class="nx">every</span><span class="p">(</span><span class="nx">isBigEnough</span><span class="p">);</span>   <span class="c1">// false </span>
+<span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">44</span><span class="p">].</span><span class="nx">every</span><span class="p">(</span><span class="nx">isBigEnough</span><span class="p">);</span> <span class="c1">// true</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypefilter">Array.prototype.filter()</h5>
+
+<p>Creates a new array with all of the elements of this array for which the provided filtering function returns true.</p>
+
+<h6 id="syntax-20">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var newArray = arr.filter(callback[, thisArg])
+</code></pre>
+</div>
+
+<h6 id="example-19">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">isBigEnough</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">value</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">44</span><span class="p">].</span><span class="nx">filter</span><span class="p">(</span><span class="nx">isBigEnough</span><span class="p">);</span>
+<span class="c1">// filtered is [12, 130, 44]</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypefind">Array.prototype.find()</h5>
+
+<p>Returns the found value in the array, if an element in the array satisfies the provided testing function or undefined if not found.</p>
+
+<h6 id="syntax-21">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.find(callback[, thisArg])
+</code></pre>
+</div>
+
+<h6 id="example-20">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">isBigEnough</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">element</span> <span class="o">&gt;=</span> <span class="mi">15</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">44</span><span class="p">].</span><span class="nx">find</span><span class="p">(</span><span class="nx">isBigEnough</span><span class="p">);</span> <span class="c1">// 130</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypefindindex">Array.prototype.findIndex()</h5>
+
+<p>Returns the found index in the array, if an element in the array satisfies the provided testing function or -1 if not found.</p>
+
+<h6 id="syntax-22">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.findIndex(callback[, thisArg])
+</code></pre>
+</div>
+
+<h6 id="example-21">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">isBigEnough</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">element</span> <span class="o">&gt;=</span> <span class="mi">15</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">44</span><span class="p">].</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">isBigEnough</span><span class="p">);</span> <span class="c1">// index of 3rd element in the Array is returned, it will result in '3'</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypeforeach">Array.prototype.forEach()</h5>
+
+<p>Returns the found index in the array, if an element in the array satisfies the provided testing function or -1 if not found.</p>
+
+<h6 id="syntax-23">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.forEach(function callback(currentValue, index, array) {
+    //your iterator
+}[, thisArg]);
+</code></pre>
+</div>
+
+<h6 id="example-22">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">logArrayElements</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'a['</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">'] = '</span> <span class="o">+</span> <span class="nx">element</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Notice that index 2 is skipped since there is no item at</span>
+<span class="c1">// that position in the array.</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">,</span> <span class="mi">9</span><span class="p">].</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">logArrayElements</span><span class="p">);</span>
+<span class="c1">// logs:</span>
+<span class="c1">// a[0] = 2</span>
+<span class="c1">// a[1] = 5</span>
+<span class="c1">// a[3] = 9</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypemap">Array.prototype.map()</h5>
+
+<p>Creates a new array with the results of calling a provided function on every element in this array.</p>
+
+<h6 id="syntax-24">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>var new_array = arr.map(callback[, thisArg])
+</code></pre>
+</div>
+
+<h6 id="example-23">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">roots</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">);</span>
+<span class="c1">// roots is now [1, 2, 3]</span>
+<span class="c1">// numbers is still [1, 4, 9]</span>
+</code></pre>
+</div>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">kvArray</span> <span class="o">=</span> <span class="p">[{</span><span class="na">key</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="mi">10</span><span class="p">},</span> 
+               <span class="p">{</span><span class="na">key</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> 
+               <span class="p">{</span><span class="na">key</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="mi">30</span><span class="p">}];</span>
+
+<span class="kd">var</span> <span class="nx">reformattedArray</span> <span class="o">=</span> <span class="nx">kvArray</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span> 
+   <span class="kd">var</span> <span class="nx">rObj</span> <span class="o">=</span> <span class="p">{};</span>
+   <span class="nx">rObj</span><span class="p">[</span><span class="nx">obj</span><span class="p">.</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+   <span class="k">return</span> <span class="nx">rObj</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">// reformattedArray is now [{1: 10}, {2: 20}, {3: 30}], </span>
+
+<span class="c1">// kvArray is still: </span>
+<span class="c1">// [{key: 1, value: 10}, </span>
+<span class="c1">//  {key: 2, value: 20}, </span>
+<span class="c1">//  {key: 3, value: 30}]</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypereduce">Array.prototype.reduce()</h5>
+
+<p>Apply a function against an accumulator and each value of the array (from left-to-right) as to reduce it to a single value.</p>
+
+<h6 id="syntax-25">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.reduce(callback, [initialValue])
+</code></pre>
+</div>
+
+<h6 id="example-24">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">sum</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nx">reduce</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">acc</span> <span class="o">+</span> <span class="nx">val</span><span class="p">;</span>
+<span class="p">},</span> <span class="mi">0</span><span class="p">);</span>
+<span class="c1">// sum is 6</span>
+
+<span class="kd">var</span> <span class="nx">list1</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]];</span>
+<span class="kd">var</span> <span class="nx">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">5</span><span class="p">]]]]]];</span>
+
+<span class="kr">const</span> <span class="nx">flatten</span> <span class="o">=</span> <span class="nx">arr</span> <span class="o">=&gt;</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">reduce</span><span class="p">(</span>
+  <span class="p">(</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">acc</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span>
+    <span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">?</span> <span class="nx">flatten</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="p">:</span> <span class="nx">val</span>
+  <span class="p">),</span>
+  <span class="p">[]</span>
+<span class="p">);</span>
+<span class="nx">flatten</span><span class="p">(</span><span class="nx">list1</span><span class="p">);</span> <span class="c1">// returns [0, 1, 2, 3, 4, 5]</span>
+<span class="nx">flatten</span><span class="p">(</span><span class="nx">list2</span><span class="p">);</span> <span class="c1">// returns [0, 1, 2, 3, 4, 5]</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypereduceright">Array.prototype.reduceRight()</h5>
+
+<p>Apply a function against an accumulator and each value of the array (from right-to-left) as to reduce it to a single value.</p>
+
+<h6 id="syntax-26">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.reduceRight(callback[, initialValue])
+</code></pre>
+</div>
+
+<h6 id="example-25">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">flattened</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]].</span><span class="nx">reduceRight</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">a</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">b</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">[]);</span>
+
+<span class="c1">// flattened is [4, 5, 2, 3, 0, 1]</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypesome">Array.prototype.some()</h5>
+
+<p>Returns true if at least one element in this array satisfies the provided testing function.</p>
+
+<h6 id="syntax-27">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.some(callback[, thisArg])
+</code></pre>
+</div>
+
+<h6 id="example-26">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">isBiggerThan10</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">element</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="nx">some</span><span class="p">(</span><span class="nx">isBiggerThan10</span><span class="p">);</span>  <span class="c1">// false</span>
+<span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="nx">some</span><span class="p">(</span><span class="nx">isBiggerThan10</span><span class="p">);</span> <span class="c1">// true</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypesome-1">Array.prototype.some()</h5>
+
+<p>Returns true if at least one element in this array satisfies the provided testing function.</p>
+
+<h6 id="syntax-28">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.some(callback[, thisArg])
+</code></pre>
+</div>
+
+<h6 id="example-27">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">isBiggerThan10</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">array</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">element</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="nx">some</span><span class="p">(</span><span class="nx">isBiggerThan10</span><span class="p">);</span>  <span class="c1">// false</span>
+<span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">].</span><span class="nx">some</span><span class="p">(</span><span class="nx">isBiggerThan10</span><span class="p">);</span> <span class="c1">// true</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypevalues">Array.prototype.values()</h5>
+
+<p>Returns a new Array Iterator object that contains the values for each index in the array.</p>
+
+<h6 id="syntax-29">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr.values()
+</code></pre>
+</div>
+
+<h6 id="example-28">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'w'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'k'</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">,</span> <span class="s1">'p'</span><span class="p">];</span> 
+<span class="kd">var</span> <span class="nx">iterator</span> <span class="o">=</span> <span class="nx">a</span><span class="p">.</span><span class="nx">values</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// w </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// y </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// k </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// o </span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">iterator</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// p</span>
+</code></pre>
+</div>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'w'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'k'</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">,</span> <span class="s1">'p'</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">iterator</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">values</span><span class="p">();</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">letter</span> <span class="nx">of</span> <span class="nx">iterator</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">letter</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h5 id="arrayprototypeiterator">Array.prototype<a href="">@@iterator</a></h5>
+
+<p>Returns a new Array Iterator object that contains the values for each index in the array.</p>
+
+<h6 id="syntax-30">Syntax</h6>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>arr[Symbol.iterator]()
+</code></pre>
+</div>
+
+<h6 id="example-29">Example</h6>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'w'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'k'</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">,</span> <span class="s1">'p'</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">eArr</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]();</span>
+<span class="c1">// your browser must support for..of loop</span>
+<span class="c1">// and let-scoped variables in for loops</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">letter</span> <span class="nx">of</span> <span class="nx">eArr</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">letter</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'w'</span><span class="p">,</span> <span class="s1">'y'</span><span class="p">,</span> <span class="s1">'k'</span><span class="p">,</span> <span class="s1">'o'</span><span class="p">,</span> <span class="s1">'p'</span><span class="p">];</span>
+<span class="kd">var</span> <span class="nx">eArr</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">Symbol</span><span class="p">.</span><span class="nx">iterator</span><span class="p">]();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">eArr</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// w</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">eArr</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// y</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">eArr</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// k</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">eArr</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// o</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">eArr</span><span class="p">.</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// p</span>
+</code></pre>
+</div>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="creating-an-array">Creating an array</h3>
+
+<p>The following example creates an array, msgArray, with a length of 0, then assigns values to msgArray[0] and msgArray[99], changing the length of the array to 100.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">msgArray</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="nx">msgArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Hello'</span>
+<span class="nx">msgArray</span><span class="p">[</span><span class="mi">99</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'world'</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nx">msgArray</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="err">'</span><span class="nx">The</span> <span class="nx">length</span> <span class="nx">is</span> <span class="mi">100</span><span class="p">.)</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h3 id="creating-a-two-dimensional-array">Creating a two-dimensional array</h3>
+
+<p>The following creates a chess board as a two dimensional array of strings. The first move is made by copying the ‘p’ in (6,4) to (4,4). The old position (6,4) is made blank.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="p">[</span> 
+  <span class="p">[</span><span class="s1">'R'</span><span class="p">,</span><span class="s1">'N'</span><span class="p">,</span><span class="s1">'B'</span><span class="p">,</span><span class="s1">'Q'</span><span class="p">,</span><span class="s1">'K'</span><span class="p">,</span><span class="s1">'B'</span><span class="p">,</span><span class="s1">'N'</span><span class="p">,</span><span class="s1">'R'</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">'P'</span><span class="p">,</span><span class="s1">'P'</span><span class="p">,</span><span class="s1">'P'</span><span class="p">,</span><span class="s1">'P'</span><span class="p">,</span><span class="s1">'P'</span><span class="p">,</span><span class="s1">'P'</span><span class="p">,</span><span class="s1">'P'</span><span class="p">,</span><span class="s1">'P'</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">,</span><span class="s1">' '</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">],</span>
+  <span class="p">[</span><span class="s1">'r'</span><span class="p">,</span><span class="s1">'n'</span><span class="p">,</span><span class="s1">'b'</span><span class="p">,</span><span class="s1">'q'</span><span class="p">,</span><span class="s1">'k'</span><span class="p">,</span><span class="s1">'b'</span><span class="p">,</span><span class="s1">'n'</span><span class="p">,</span><span class="s1">'r'</span><span class="p">]</span> <span class="p">];</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">board</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">'\n'</span><span class="p">));</span>
+
+<span class="c1">// Move King's Pawn forward 2</span>
+<span class="nx">board</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="nx">board</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">4</span><span class="p">];</span>
+<span class="nx">board</span><span class="p">[</span><span class="mi">6</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="s1">' '</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">board</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">'\n'</span><span class="p">));</span>
+</code></pre>
+</div>
+
+<h3 id="using-an-array-to-tabulate-a-set-of-values">Using an array to tabulate a set of values</h3>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">values</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">){</span>
+ <span class="nx">values</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span>
+  <span class="mi">2</span> <span class="o">**</span> <span class="nx">x</span><span class="p">,</span>
+  <span class="mi">2</span> <span class="o">*</span> <span class="nx">x</span> <span class="o">**</span> <span class="mi">2</span>
+ <span class="p">])</span>
+<span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">table</span><span class="p">(</span><span class="nx">values</span><span class="p">)</span>
+</code></pre>
+</div>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Andree DevelDoe Ray
+            
+            </li>
+            
+            <li><a href="mailto:me@develdoe.com">me@develdoe.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/andreedeveldoeray"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">andreedeveldoeray</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/develdoe"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">develdoe</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

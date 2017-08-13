@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>REST Constraints</title>
+  <meta name="description" content="There are two ways to define a system.">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:2000/2016/rest-constraints/">
+  <link rel="alternate" type="application/rss+xml" title="WIMSE - Developer" href="/feed.xml">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+
+
+  <body>
+
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div style="padding-bottom: 20px;"><a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> back</a></div>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">REST Constraints</h1>
+    <p class="post-meta"><time datetime="2016-09-28T09:52:00+02:00" itemprop="datePublished">Sep 28, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>There are two ways to define a system.</p>
+
+<p>One is to start from a blank slate, an empty whiteboard, with no initial knowledge of the system being built or the use of familiar components until the needs are satisfied.</p>
+
+<p>A second approach is to start with the full set of needs for the system, and constraints are added to individual components until the forces that influence the system are able to interact in harmony with each other.</p>
+
+<p>REST follows the second approach. In order to define a REST architecture, a null-state is initially defined. a system that has no constraints whatsoever and where component differentiation is nothing but a myth, and constraints are added one by one.</p>
+
+<h3 id="client-server">Client-Server</h3>
+<p>The first constraint to be added is one of the most common ones on network-based architectures: client - server. A server is in charge of handling a set of services, and it listens for requests regarding said services. The requests, in turn, are made via a connector by a client system needing one of those services</p>
+
+<p>The main principle behind this constraint is the separation of concerns. It allows for the separation of front-end code from the server side code, which should take care of storage and server-side processing of the data.</p>
+
+<p>This constraint allows for the independent evolution of both components, offering a great deal of flexibility by letting client applications improve without affecting the server code and vice-versa.</p>
+
+<h3 id="stateless">Stateless</h3>
+<p>The constraint to be added on top of the previous one is the stateless constraint. Communication between client and server must be stateless, meaning that each request done from the client must have all the information required for the server to understand it, without taking advantage of any stored data.</p>
+
+<p>This constraint represents several improvements for the underlying architecture:</p>
+
+<ul>
+  <li>
+    <p><strong>Visibility:</strong> Monitoring the system becomes easy when all the information required is inside the request.</p>
+  </li>
+  <li>
+    <p><strong>Scalability:</strong> By not having to store data between requests, the server can free resources faster.</p>
+  </li>
+  <li>
+    <p><strong>Reliability:</strong> A system that is stateless can recover from a failure much easier than one that isn’t, since the only thing to recover is the application itself.</p>
+  </li>
+  <li>
+    <p><strong>Easier implementation:</strong> Writing code that doesn’t have to manage stored state data across multiple servers is much easier to do, thus the full server-side system becomes simpler.</p>
+  </li>
+</ul>
+
+<p>This constrains are a trade-off. On one hand, benefits are gained by the system, but on the other side, network traffic could potentially be harmed by adding a minor overhead on every request from sending repeated state information.</p>
+
+<h3 id="cacheable">Cacheable</h3>
+<p>The cacheable constraint is added to the current set of constraints. It proposes that every response to a request must be explicitly or implicitly set as cacheable, when applicable.</p>
+
+<p>By caching the responses, there are some obvious benefits that get added to the architecture.</p>
+
+<p>On the server side, some interactions are completely bypassed while the content is cached. On the client side, an apparent improvement of performance is perceived. The trade-off with this constraint is the possibility of cached data being stale, due to poor caching rules. This constraint is, again, dependent on the type of system being implemented.</p>
+
+<h3 id="uniform-interface">Uniform Interface</h3>
+<p>One of REST’s main characteristics and winning points when compared to other alternatives is the uniform interface constraint.</p>
+
+<p>By keeping a uniform interface between components, you simplify the job of the client when it comes to interacting with your system.</p>
+
+<p>Another major winning point here is that the client’s implementation is independent of yours, so by defining a standard and uniform interface for all of your services, you effectively simplified the implementation of independent clients by giving them a clear set of rules to follow.</p>
+
+<p>Said rules are not part of the REST style, but there are constraints that can be used to create such rules for each individual case.</p>
+
+<p>This benefit doesn’t come without a price, though; as with many other constraints, there is a trade-off here.</p>
+
+<p>Having a standardized and uniform interface for all interactions with your system might harm performance when a more optimized form of communication exists. Particularly, the REST style is designed to be optimized for the Web, so the more you move away from that, the more inefficient the interface can be.</p>
+
+<p><em>Note In order to achieve the uniform interface, a new set of constraints must be added to the interface: identification of resources, manipulation of resources through representation, self-descriptive messages, and hypermedia as the engine of application state (a.k.a HATEOAS).</em></p>
+
+<h3 id="rest-layered-system">REST Layered System</h3>
+
+<p>REST was designed with the Internet in mind, which means that an architecture that follows REST is expected to work properly with the massive amount of traffic that exists in the web of webs.</p>
+
+<p>In order to achieve this, the concept of layers is introduced. By separating components into layers, and allowing each layer to only use the one below and to communicate its output to the one above, you simplify the system’s overall complexity and keep component coupling in check.</p>
+
+<p>The main disadvantage of this constraint is that for small systems, it might add unwanted latency into the overall data flow, due to the different interactions between layers.</p>
+
+<h3 id="code-on-demand">Code-on-Demand</h3>
+<p>Code-on-demand is the only optional constraint imposed by REST, which means that an architect using REST can choose whether or not to use this constraint, and either gains its advantages or suffers its disadvantages.</p>
+
+<p>With this constraint, the client can download and execute code provided by the server (such as Java applets, JavaScript scripts, etc.). In the case of REST APIs, this constraint seems unnecessary, because the normal thing for an API client to do is just get information from an endpoint, and then process it however needed, but for other uses of REST, like web servers, a client
+(i.e., a browser) will probably benefit from this constraint.</p>
+
+<hr />
+
+<p>All of these constraints provide a set of virtual walls within which an architecture can move and still gain the benefits of the REST design style.</p>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Andree DevelDoe Ray
+            
+            </li>
+            
+            <li><a href="mailto:me@develdoe.com">me@develdoe.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/andreedeveldoeray"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">andreedeveldoeray</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/develdoe"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">develdoe</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

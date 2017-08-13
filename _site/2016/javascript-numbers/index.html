@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Javascript - Numbers</title>
+  <meta name="description" content="Unlike many languages, JS does not make an distinction between integer values and floating point values.">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:2000/2016/javascript-numbers/">
+  <link rel="alternate" type="application/rss+xml" title="WIMSE - Developer" href="/feed.xml">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+
+
+  <body>
+
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div style="padding-bottom: 20px;"><a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> back</a></div>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Javascript - Numbers</h1>
+    <p class="post-meta"><time datetime="2016-10-24T13:37:00+02:00" itemprop="datePublished">Oct 24, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Unlike many languages, JS does not make an distinction between integer values and floating point values.</p>
+
+<p>When a number appear directly in a JS program, it is called a numeric literal. JS supports numeric literals in several formats. Numeric literal can be proceded by a minus sign to make it negative. Technically, however - is the unary negation operator and is not part of the numeric syntax.</p>
+
+<p>All numbers are represented as floating-point values. JS represents numbers using the 64-bit floating-point format, the same format as “double” in many other languages. This format allows you to represent all integers between -9007199254740992(-2^53) and 9007199354740992(2^53), if you use integers bigger than this you might loos presicion in the trailing digits.</p>
+
+<p>Watch out for things like:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">==</span> <span class="mf">0.30000000000000004</span>
+</code></pre>
+</div>
+
+<p>In practice, integer values are treated as 32-bit ints, and some implementations even store it that way until they are asked to perform an instruction that’s valid on a Number but not on a 32-bit integer.</p>
+
+<p>This can be important for bit-wise operations and array indexing, since thay are performed with 32-bit integers.</p>
+
+<p>The standard arithmetic operators are supported, including addition, subtraction, modulus (or remainder) arithmetic, and so forth. There’s also a built-in object called Math that provides advanced mathematical functions and constants:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="mf">3.5</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">circumference</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">*</span> <span class="p">(</span><span class="nx">r</span> <span class="o">+</span> <span class="nx">r</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>You can convert a string to an integer using the built-in parseInt() function. This takes the base for the conversion as an optional second argument, which you should always provide:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nb">parseInt</span><span class="p">(</span><span class="s2">"123"</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// 123</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s2">"010"</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// 10</span>
+</code></pre>
+</div>
+
+<p>In older browsers, strings beginning with a “0” are assumed to be in octal (radix 8), but this hasn’t been the case since 2013 or so. Unless you’re certain of your string format, you can get surprising results on those older browsers:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nb">parseInt</span><span class="p">(</span><span class="s2">"010"</span><span class="p">);</span>  <span class="c1">//  8</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s2">"0x10"</span><span class="p">);</span> <span class="c1">// 16</span>
+</code></pre>
+</div>
+
+<p>Here, we see the parseInt() function treat the first string as octal due to the leading 0, and the second string as hexadecimal due to the leading “0x”. The hexadecimal notation is still in place; only octal has been removed.</p>
+
+<p>If you want to convert a binary number to an integer, just change the base:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nb">parseInt</span><span class="p">(</span><span class="s2">"11"</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="c1">// 3</span>
+</code></pre>
+</div>
+
+<p>Similarly, you can parse floating point numbers using the built-in parseFloat() function. Unlike its parseInt() cousin, parseFloat() always uses base 10.</p>
+
+<p>You can also use the unary + operator to convert values to numbers:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="o">+</span> <span class="s2">"42"</span><span class="p">;</span>   <span class="c1">// 42</span>
+<span class="o">+</span> <span class="s2">"010"</span><span class="p">;</span>  <span class="c1">// 10</span>
+<span class="o">+</span> <span class="s2">"0x10"</span><span class="p">;</span> <span class="c1">// 16</span>
+</code></pre>
+</div>
+
+<p>A special value called NaN (short for “Not a Number”) is returned if the string is non-numeric:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nb">parseInt</span><span class="p">(</span><span class="s2">"hello"</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span> <span class="c1">// NaN</span>
+</code></pre>
+</div>
+
+<p>NaN is toxic: if you provide it as an input to any mathematical operation the result will also be NaN:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="kc">NaN</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// NaN</span>
+</code></pre>
+</div>
+
+<p>You can test for NaN using the built-in isNaN() function:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nb">isNaN</span><span class="p">(</span><span class="kc">NaN</span><span class="p">);</span> <span class="c1">// true</span>
+</code></pre>
+</div>
+
+<p>JavaScript also has the special values Infinity and -Infinity:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//  Infinity</span>
+<span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// -Infinity</span>
+</code></pre>
+</div>
+
+<p>You can test for Infinity, -Infinity and NaN values using the built-in isFinite() function:</p>
+
+<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="nb">isFinite</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">0</span><span class="p">);</span> <span class="c1">// false</span>
+<span class="nb">isFinite</span><span class="p">(</span><span class="o">-</span><span class="kc">Infinity</span><span class="p">);</span> <span class="c1">// false</span>
+<span class="nb">isFinite</span><span class="p">(</span><span class="kc">NaN</span><span class="p">);</span> <span class="c1">// false</span>
+</code></pre>
+</div>
+
+<p><strong>The parseInt() and parseFloat() functions parse a string until they reach a character that isn’t valid for the specified number format, then return the number parsed up to that point. However the “+” operator simply converts the string to NaN if there is an invalid character contained within it. Just try parsing the string “10.2abc” with each method by yourself in the console and you’ll understand the differences better.</strong></p>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Andree DevelDoe Ray
+            
+            </li>
+            
+            <li><a href="mailto:me@develdoe.com">me@develdoe.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/andreedeveldoeray"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">andreedeveldoeray</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/develdoe"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">develdoe</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

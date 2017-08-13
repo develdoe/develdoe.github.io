@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JavaScript - Client Side</title>
+  <meta name="description" content="This article shows you how to embed JS in an HTML document and goes through some other client-side JS examples.">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:2000/2016/JavaScript-Client-Side/">
+  <link rel="alternate" type="application/rss+xml" title="WIMSE - Developer" href="/feed.xml">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+
+
+  <body>
+
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div style="padding-bottom: 20px;"><a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> back</a></div>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">JavaScript - Client Side</h1>
+    <p class="post-meta"><time datetime="2016-03-02T11:18:00+01:00" itemprop="datePublished">Mar 2, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>This article shows you how to embed JS in an HTML document and goes through some other client-side JS examples.</p>
+
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"library.js"</span><span class="nt">&gt;</span> <span class="c">&lt;!--</span> <span class="nx">Include</span> <span class="nx">a</span> <span class="nx">library</span> <span class="nx">of</span> <span class="nx">JS</span> <span class="nx">code</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="sr">/head</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">body</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">paragraph</span> <span class="nx">of</span> <span class="nx">HTML</span> <span class="nx">markup</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="c1">// and this is some client-side JS code</span>
+<span class="c1">// litteraly embedded within the HTML document</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;p&gt;</span>More HTML markup<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+
+<span class="c">&lt;!-- The window object, is a techique for scripting the web browser --&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="kd">function</span> <span class="nx">monveon</span><span class="p">()</span> <span class="p">{</span>
+	<span class="c1">// Display a modal dialog box to ask the user a question</span>
+	<span class="kd">var</span> <span class="nx">answer</span> <span class="o">=</span> <span class="nx">confirm</span><span class="p">(</span><span class="s2">"Ready to move on?"</span><span class="p">);</span>
+	<span class="c1">// If answer "OK", make browser load new page</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">aswer</span><span class="p">)</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">"http://google.com"</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="c1">// Run the functino defined 1 minute (60,000 millliseconds) from now.</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="nx">moveon</span><span class="p">,</span><span class="mi">60000</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- This function demonstrate a number of basic document searching and mod techniques --&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="c1">// Display a message in a special debugging output section of the document.</span>
+<span class="c1">// if the document does not contain such a section. create one.</span>
+<span class="kd">function</span> <span class="nx">debug</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+	<span class="c1">// Find the debugging section of the document, looking at HTML id attribute</span>
+	<span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"debuglog"</span><span class="p">);</span>
+
+	<span class="c1">// If no element with the id exist, create one.</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">log</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">log</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"div"</span><span class="p">);</span>	<span class="c1">// Crete a new &lt;div&gt; element</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">"debuglog"</span><span class="p">;</span>			<span class="c1">// Set the HTML attribute on it</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">"&lt;h1&gt;Debug Log&lt;/h1&gt;"</span><span class="p">;</span>	<span class="c1">// Define initial content</span>
+		<span class="nb">document</span><span class="p">.</span><span class="nx">boby</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">log</span><span class="p">);</span>		<span class="c1">// Add it at the end</span>
+	<span class="p">}</span>
+
+	<span class="c1">// Wrap the message in its own &lt;pre&gt; and append it to the log.</span>
+	<span class="kd">var</span> <span class="nx">pre</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"pre"</span><span class="p">);</span>	<span class="c1">// Create a &lt;pre&gt; tag</span>
+	<span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>	<span class="c1">// Wrap msg in a text node</span>
+	<span class="nx">pre</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>				<span class="c1">// Add text to the &lt;pre&gt;</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">pre</span><span class="p">);</span>				<span class="c1">// Add &lt;pre&gt; to the log</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+<span class="c">&lt;!-- How to use JS woth CSS style that define the presentation --&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="kd">function</span> <span class="nx">hide</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">reflow</span><span class="p">)</span> <span class="p">{</span>				<span class="c1">// Hide the element e</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">reflow</span><span class="p">)</span> <span class="p">{</span>					<span class="c1">// If 2nd argument is true</span>
+		<span class="nx">e</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">"none"</span><span class="p">;</span>		<span class="c1">// hide element and use its space</span>
+	<span class="p">}</span>
+	<span class="k">else</span> <span class="p">{</span>						<span class="c1">// Otherwise</span>
+		<span class="nx">e</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span> <span class="o">=</span> <span class="s2">"hidden"</span><span class="p">;</span>		<span class="c1">// make invisible, but leave its space</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">highlight</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>					<span class="c1">// Highlight e by setting a CSS class</span>
+	<span class="c1">// Simply define or append to the HTML class attribute.</span>
+	<span class="c1">// This assumes that a CSS stylesheet already defines the "hilite" class.</span>
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">e</span><span class="p">.</span><span class="nx">className</span><span class="p">)</span> <span class="nx">e</span><span class="p">.</span><span class="nx">className</span> <span class="o">=</span> <span class="s2">"hilite"</span><span class="p">;</span>
+	<span class="k">else</span> <span class="nx">e</span><span class="p">.</span><span class="nx">className</span> <span class="o">+=</span> <span class="s2">" hilite"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="sr">/scritpt</span><span class="err">&gt;
+</span>
+<span class="c">&lt;!--</span> <span class="nx">To</span> <span class="nx">define</span> <span class="nx">behavior</span> <span class="kd">with</span> <span class="nx">JS</span><span class="p">,</span> <span class="nx">we</span> <span class="nx">register</span> <span class="nx">events</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">"debug.js"</span><span class="o">&gt;</span><span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"hide.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"hide(this,true); debug('hide button 1');"</span><span class="nt">&gt;</span>Hide1<span class="nt">&lt;/button&gt;</span>
+<span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"hide(this); debug('hide butto 2');"</span><span class="nt">&gt;</span>Hide 2<span class="nt">&lt;/button&gt;</span>
+}
+
+<span class="c">&lt;!-- Some more client-side JS that uses events --&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="c1">// The load event occurs when a document is fully loaded. Usually we need to wait for this event</span>
+<span class="c1">// before we start runnung our JS code</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="nb">Function</span><span class="p">()</span> <span class="p">{</span>				<span class="c1">// Run this function after the document loads</span>
+	<span class="c1">// Find all &lt;img&gt; tags in the document</span>
+	<span class="kd">var</span> <span class="nx">images</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s2">"img"</span><span class="p">);</span>
+
+	<span class="c1">// Loop through them, adding an event handler for click events to each so that clicking on</span>
+	<span class="c1">// images hides it</span>
+	<span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">image</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">images</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+		<span class="k">if</span><span class="p">(</span><span class="nx">image</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">)</span>		<span class="c1">// another way of register a handler</span>
+			<span class="nx">image</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">"click"</span><span class="p">,</span><span class="nx">hide</span><span class="p">,</span><span class="kc">false</span><span class="p">);</span>
+		<span class="k">else</span>					<span class="c1">// For compatability with IE 8 and before</span>
+			<span class="nx">image</span><span class="p">.</span><span class="nx">attachEvent</span><span class="p">(</span><span class="s2">"onclick"</span><span class="p">,</span><span class="nx">hide</span><span class="p">);</span>
+	<span class="p">}</span>
+
+	<span class="c1">// This is the event handler function registered above</span>
+	<span class="kd">function</span> <span class="nx">hide</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// srcElement needed for IE8, target for Chrome and Firefox</span>
+		<span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span> <span class="p">?</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span> <span class="p">:</span> <span class="nx">event</span><span class="p">.</span><span class="nx">srcElement</span><span class="p">;</span>
+		<span class="nx">target</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">visibility</span> <span class="o">=</span> <span class="s2">"hidden"</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c">&lt;!--</span> <span class="nx">Example</span> <span class="nx">the</span> <span class="nx">use</span> <span class="nx">of</span> <span class="nx">JQuary</span> <span class="nx">library</span> <span class="o">--&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="kd">function</span> <span class="nx">debug</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">log</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"#debug"</span><span class="p">);</span>				<span class="c1">// Find the element to display msg in</span>
+	<span class="k">if</span><span class="p">(</span><span class="nx">log</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>				<span class="c1">// If it doesn't exist yetm create it...</span>
+		<span class="nx">log</span> <span class="o">==</span> <span class="nx">$</span><span class="p">(</span><span class="s2">"&lt;div id='debuglog'&gt;&lt;h1&gt;Debug Log&lt;/h1&gt;&lt;/div&gt;"</span><span class="p">);</span>
+		<span class="nx">log</span><span class="p">.</span><span class="nx">appendTo</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">);</span>		<span class="c1">// and insert it at the end of the body</span>
+	<span class="p">}</span>
+	<span class="nx">log</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">"&lt;pre/&gt;"</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">msg</span><span class="p">));</span>		<span class="c1">// Wrap msg in &lt;pre&gt; and append to log.</span>
+<span class="p">}</span>
+<span class="nt">&lt;/script&gt;</span>
+}</code></pre></figure>
+
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Andree DevelDoe Ray
+            
+            </li>
+            
+            <li><a href="mailto:me@develdoe.com">me@develdoe.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/andreedeveldoeray"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">andreedeveldoeray</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/develdoe"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">develdoe</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

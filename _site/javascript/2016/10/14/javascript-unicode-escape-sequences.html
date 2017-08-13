@@ -1,9 +1,0 @@
-<p>Some computer hardware and software can not display or input the full set of Unicode.</p>
-
-<p>To support programmers using this older technology, JS defines special sequence of six ASCII characters to represent any 16 bit Unicode codepoint. These Unicode escapes begin with \u and are followed by exactly four hexadecimal digits.</p>
-
-<p>Unicode escapes may appear in JS string literals, regular expressions literals, and in identifiers (but not in language keywords).</p>
-
-<div class="language-javascript highlighter-rouge"><pre class="highlight"><code><span class="s2">"cafe"</span> <span class="o">===</span> <span class="s2">"caf\u00e9"</span>	<span class="c1">// =&gt; true</span>
-</code></pre>
-</div>

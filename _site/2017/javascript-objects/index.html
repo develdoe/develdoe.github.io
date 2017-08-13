@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JavaScript - Objects</title>
+  <meta name="description" content="JavaScript is designed on a simple object-based paradigm.">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:2000/2017/javascript-objects/">
+  <link rel="alternate" type="application/rss+xml" title="WIMSE - Developer" href="/feed.xml">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+
+
+  <body>
+
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div style="padding-bottom: 20px;"><a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> back</a></div>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">JavaScript - Objects</h1>
+    <p class="post-meta"><time datetime="2017-03-20T15:00:00+01:00" itemprop="datePublished">Mar 20, 2017</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>JavaScript is designed on a simple object-based paradigm.</p>
+
+<p>An object is a collection of properties, and a property is an association between a name (or key) and a value.</p>
+
+<p>A property’s value can be a function, in which case the property is known as a method.</p>
+
+<p>In addition to objects that are predefined in the browser, you can define your own objects.</p>
+
+<h2 id="objects-and-properties">Objects and properties</h2>
+
+<p>Object properties are basically the same as ordinary JavaScript variables, except for the attachment to objects.</p>
+
+<p>The properties of an object define the characteristics of the object. You access the properties of an object with a simple dot-notation:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">obj</span><span class="p">.</span><span class="nx">property</span>
+</code></pre>
+</div>
+
+<p>Like all JavaScript variables, both the object name (which could be a normal variable) and property name are case sensitive. You can define a property by assigning it a value.</p>
+
+<p>For example, let’s create an object named myCar and give it properties named make, model, and year as follows:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myCar</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">()</span>
+<span class="nx">myCar</span><span class="p">.</span><span class="nx">make</span> <span class="o">=</span> <span class="s2">"Ford"</span>
+<span class="nx">myCar</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="s2">"Mustang"</span>
+<span class="nx">myCat</span><span class="p">.</span><span class="nx">year</span> <span class="o">=</span> <span class="mi">1969</span>
+</code></pre>
+</div>
+
+<p>Unassigned properties of an object are undefined (and not null), <code class="highlighter-rouge">myCar.color; // undefined</code>.</p>
+
+<p>Properties of JavaScript objects can also be accessed or set using a bracket notation. Objects are sometimes called associative arrays, since each property is associated with a string value that can be used to access it. So, for example, you could access the properties of the myCar object as follows:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">myCar</span><span class="p">[</span><span class="s1">'make'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Ford'</span><span class="p">;</span>
+<span class="nx">myCar</span><span class="p">[</span><span class="s1">'model'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Mustang'</span><span class="p">;</span>
+<span class="nx">myCar</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1969</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>An object property name can be any valid JavaScript string, or anything that can be converted to a string, including the empty string.</p>
+
+<p>However, any property name that is not a valid JavaScript identifier (for example, a property name that has a space or a hyphen, or that starts with a number) can only be accessed using the square bracket notation.</p>
+
+<p>This notation is also very useful when property names are to be dynamically determined (when the property name is not determined until runtime). Examples are as follows:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myObj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">(),</span>
+    <span class="nx">str</span> <span class="o">=</span> <span class="s1">'myString'</span><span class="p">,</span>
+    <span class="nx">rand</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">(),</span>
+    <span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">()</span>
+
+<span class="nx">myObj</span><span class="p">.</span><span class="nx">type</span>              <span class="o">=</span> <span class="s1">'Dot syntax'</span>
+<span class="nx">myObj</span><span class="p">[</span><span class="s1">'date created'</span><span class="p">]</span>   <span class="o">=</span> <span class="s1">'String with space'</span>
+<span class="nx">myObj</span><span class="p">[</span><span class="nx">str</span><span class="p">]</span>              <span class="o">=</span> <span class="s1">'String value'</span>
+<span class="nx">myObj</span><span class="p">[</span><span class="nx">rand</span><span class="p">]</span>             <span class="o">=</span> <span class="s1">'Random Number'</span>
+<span class="nx">myObj</span><span class="p">[</span><span class="nx">obj</span><span class="p">]</span>              <span class="o">=</span> <span class="s1">'Object'</span>
+<span class="nx">myObj</span><span class="p">[</span><span class="s1">''</span><span class="p">]</span>               <span class="o">=</span> <span class="s1">'Even an empty string'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myObj</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>Please note that all keys in the square bracket notation are converted to String type, since objects in JavaScript can only have String type as key type.</p>
+
+<p>For example, in the above code, when the key obj is added to the myObj, JavaScript will call the obj.toString() method, and use this result string as the new key.</p>
+
+<p>You can also access properties by using a string value that is stored in a variable:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">propertyName</span> <span class="o">=</span> <span class="s1">'make'</span><span class="p">;</span>
+<span class="nx">myCar</span><span class="p">[</span><span class="nx">propertyName</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Ford'</span><span class="p">;</span>
+
+<span class="nx">propertyName</span> <span class="o">=</span> <span class="s1">'model'</span><span class="p">;</span>
+<span class="nx">myCar</span><span class="p">[</span><span class="nx">propertyName</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Mustang'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>You can use the bracket notation with for…in to iterate over all the enumerable properties of an object.</p>
+
+<p>To illustrate how this works, the following function displays the properties of the object when you pass the object and the object’s name as arguments to the function:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">showProps</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span><span class="nx">objName</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="s1">''</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// obj.hasOwnProperty() is used to filter out properties from the object's prototype chain</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">i</span><span class="p">))</span> <span class="p">{</span>
+      <span class="nx">result</span> <span class="o">+=</span> <span class="nx">objName</span> <span class="o">+</span> <span class="s1">'.'</span> <span class="o">+</span> <span class="nx">i</span> <span class="o">+</span> <span class="s1">' = '</span> <span class="o">+</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'\n'</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="nx">showProps</span><span class="p">(</span><span class="nx">myObj</span><span class="p">,</span> <span class="s2">"myObj"</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<h2 id="enumerate-the-properties-of-an-object">Enumerate the properties of an object</h2>
+
+<p>Starting with ECMAScript 5, there are three native ways to list/traverse object properties:</p>
+
+<ul>
+  <li>for…in loops - This method traverses all enumerable properties of an object and its prototype chain</li>
+  <li>Object.keys(o) - This method returns an array with all the own (not in the prototype chain) enumerable properties’ names (“keys”) of an object o.</li>
+  <li>Object.getOwnPropertyNames(o) - This method returns an array containing all own properties’ names (enumerable or not) of an object o.</li>
+</ul>
+
+<p>Before ECMAScript 5, there was no native way to list all properties of an object. However, this can be achieved with the following function:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">listAllProperties</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kd">var</span> <span class="nx">objectToInspect</span><span class="p">;</span>     
+	<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">[];</span>
+	
+	<span class="k">for</span><span class="p">(</span><span class="nx">objectToInspect</span> <span class="o">=</span> <span class="nx">o</span><span class="p">;</span> <span class="nx">objectToInspect</span> <span class="o">!==</span> <span class="kc">null</span><span class="p">;</span> <span class="nx">objectToInspect</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">getPrototypeOf</span><span class="p">(</span><span class="nx">objectToInspect</span><span class="p">))</span> <span class="p">{</span>  
+      <span class="nx">result</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyNames</span><span class="p">(</span><span class="nx">objectToInspect</span><span class="p">));</span>  
+	<span class="p">}</span>
+	
+	<span class="k">return</span> <span class="nx">result</span><span class="p">;</span> 
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>This can be useful to reveal “hidden” properties (properties in the prototype chain which are not accessible through the object, because another property has the same name earlier in the prototype chain). Listing accessible properties only can easily be done by removing duplicates in the array.</p>
+
+<h2 id="creating-new-objects">Creating new objects</h2>
+
+<p>JavaScript has a number of predefined objects. In addition, you can create your own objects. You can create an object using an object initializer. Alternatively, you can first create a constructor function and then instantiate an object invoking that function in conjunction with the new operator.</p>
+
+<h3 id="using-object-initializers">Using object initializers</h3>
+
+<p>In addition to creating objects using a constructor function, you can create objects using an object initializer. Using object initializers is sometimes referred to as creating objects with literal notation. “Object initializer” is consistent with the terminology used by C++.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">property_1</span><span class="p">:</span>   <span class="nx">value_1</span><span class="p">,</span>   <span class="c1">// property_# may be an identifier...</span>
+            <span class="mi">2</span><span class="p">:</span>            <span class="nx">value_2</span><span class="p">,</span>   <span class="c1">// or a number...</span>
+            <span class="c1">// ...,</span>
+            <span class="s1">'property n'</span><span class="p">:</span> <span class="nx">value_n</span> <span class="p">};</span> <span class="c1">// or a string</span>
+</code></pre>
+</div>
+
+<p>where obj is the name of the new object, each property_i is an identifier (either a name, a number, or a string literal), and each value_i is an expression whose value is assigned to the property_i.</p>
+
+<p>The obj and assignment is optional; if you do not need to refer to this object elsewhere, you do not need to assign it to a variable. <em>(Note that you may need to wrap the object literal in parentheses if the object appears where a statement is expected, so as not to have the literal be confused with a block statement.)</em></p>
+
+<p>Object initializers are expressions, and each object initializer results in a new object being created whenever the statement in which it appears is executed.</p>
+
+<p>Identical object initializers create distinct objects that will not compare to each other as equal. Objects are created as if a call to new Object() were made; that is, objects made from object literal expressions are instances of Object.</p>
+
+<p>The following statement creates an object and assigns it to the variable x if and only if the expression cond is true:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">cond</span><span class="p">)</span> <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">{</span><span class="na">greeting</span><span class="p">:</span> <span class="s1">'hi there'</span><span class="p">};</span>
+</code></pre>
+</div>
+
+<p>The following example creates myHonda with three properties. Note that the engine property is also an object with its own properties.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">myHonda</span> <span class="o">=</span> <span class="p">{</span><span class="na">color</span><span class="p">:</span> <span class="s1">'red'</span><span class="p">,</span> <span class="na">wheels</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="na">engine</span><span class="p">:</span> <span class="p">{</span><span class="na">cylinders</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="na">size</span><span class="p">:</span> <span class="mf">2.2</span><span class="p">}};</span>
+</code></pre>
+</div>
+
+<p>You can also use object initializers to create arrays. See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Array_literals">array literals</a>.</p>
+
+<h4 id="using-a-constructor-function">Using a constructor function</h4>
+
+<p>Alternatively, you can create an object with these two steps:</p>
+
+<p>1 Define the object type by writing a constructor function. There is a strong convention, with good reason, to use a capital initial letter.
+2 Create an instance of the object w</p>
+
+<p>To define an object type, create a function for the object type that specifies its name, properties, and methods.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(</span><span class="nx">make</span><span class="p">,</span> <span class="nx">model</span><span class="p">,</span> <span class="nx">year</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">make</span> <span class="o">=</span> <span class="nx">make</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="nx">model</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">year</span> <span class="o">=</span> <span class="nx">year</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Notice the use of this to assign values to the object’s properties based on the values passed to the function.</p>
+
+<p>Now you can create an object called mycar as follows:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">mycar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="s1">'Eagle'</span><span class="p">,</span> <span class="s1">'Talon TSi'</span><span class="p">,</span> <span class="mi">1993</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>This statement creates mycar and assigns it the specified values for its properties. Then the value of mycar.make is the string “Eagle”, mycar.year is the integer 1993, and so on.</p>
+
+<p>You can create any number of car objects by calls to new. For example,</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">kenscar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="s1">'Nissan'</span><span class="p">,</span> <span class="s1">'300ZX'</span><span class="p">,</span> <span class="mi">1992</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">vpgscar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="s1">'Mazda'</span><span class="p">,</span> <span class="s1">'Miata'</span><span class="p">,</span> <span class="mi">1990</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>An object can have a property that is itself another object. For example, suppose you define an object called person as follows:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">sex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="nx">sex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>and then instantiate two new person objects as follows:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">rand</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s1">'Rand McKinnon'</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">ken</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s1">'Ken Jones'</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="s1">'M'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>Then, you can rewrite the definition of car to include an owner property that takes a person object, as follows:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(</span><span class="nx">make</span><span class="p">,</span> <span class="nx">model</span><span class="p">,</span> <span class="nx">year</span><span class="p">,</span> <span class="nx">owner</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">make</span> <span class="o">=</span> <span class="nx">make</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="nx">model</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">year</span> <span class="o">=</span> <span class="nx">year</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">owner</span> <span class="o">=</span> <span class="nx">owner</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>To instantiate the new objects, you then use the following:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">car1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="s1">'Eagle'</span><span class="p">,</span> <span class="s1">'Talon TSi'</span><span class="p">,</span> <span class="mi">1993</span><span class="p">,</span> <span class="nx">rand</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">car2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="s1">'Nissan'</span><span class="p">,</span> <span class="s1">'300ZX'</span><span class="p">,</span> <span class="mi">1992</span><span class="p">,</span> <span class="nx">ken</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>Notice that instead of passing a literal string or integer value when creating the new objects, the above statements pass the objects rand and ken as the arguments for the owners. Then if you want to find out the name of the owner of car2, you can access the following property:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">car2</span><span class="p">.</span><span class="nx">owner</span><span class="p">.</span><span class="nx">name</span>
+</code></pre>
+</div>
+
+<p>Note that you can always add a property to a previously defined object. For example, the statement</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">car1</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">'black'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>adds a property color to car1, and assigns it a value of “black.” However, this does not affect any other objects.</p>
+
+<p>To add the new property to all objects of the same type, you have to add the property to the definition of the car object type (or use <a href="http://developer.wimse.se/2017/javascript-prototype/">prototype</a>).</p>
+
+<h4 id="using-the-objectcreate-method">Using the Object.create method</h4>
+
+<p>Objects can also be created using the Object.create() method.</p>
+
+<p>This method can be very useful, because it allows you to choose the prototype object for the object you want to create, without having to define a constructor function.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Animal</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">type</span><span class="p">:</span> <span class="s1">'Invertebrates'</span><span class="p">,</span>
+  <span class="na">displayType</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">animal1</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Animal</span><span class="p">)</span>
+<span class="nx">animal1</span><span class="p">.</span><span class="nx">displayType</span><span class="p">()</span> <span class="c1">// Output:Invertebrates</span>
+
+<span class="kd">var</span> <span class="nx">fish</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Animal</span><span class="p">);</span>
+<span class="nx">fish</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">'Fishes'</span><span class="p">;</span>
+<span class="nx">fish</span><span class="p">.</span><span class="nx">displayType</span><span class="p">();</span> <span class="c1">// Output:Fishes</span>
+</code></pre>
+</div>
+
+<h3 id="inheritance">Inheritance</h3>
+
+<p>All objects in JavaScript inherit from at least one other object. The object being inherited from is known as the prototype, and the inherited properties can be found in the prototype object of the constructor.</p>
+
+<p>See <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain">Inheritance and the prototype chain</a> for more information.</p>
+
+<h3 id="indexing-object-properties">Indexing object properties</h3>
+
+<p>You can refer to a property of an object either by its property name or by its ordinal index.</p>
+
+<p>If you initially define a property by its name, you must always refer to it by its name, and if you initially define a property by an index, you must always refer to it by its index.</p>
+
+<p>This restriction applies when you create an object and its properties with a constructor function (as we did previously with the Car object type) and when you define individual properties explicitly (for example, myCar.color = “red”).</p>
+
+<p>If you initially define an object property with an index, such as myCar[5] = “25 mpg”, you subsequently refer to the property only as myCar[5].</p>
+
+<p>The exception to this rule is objects reflected from HTML, such as the forms array.</p>
+
+<p>You can always refer to objects in these arrays by either their ordinal number (based on where they appear in the document) or their name (if defined).</p>
+
+<p>For example, if the second <code class="highlighter-rouge">&lt;FORM&gt;</code> tag in a document has a NAME attribute of “myForm”, you can refer to the form as document.forms[1] or document.forms[“myForm”] or document.forms.myForm.</p>
+
+<h2 id="defining-properties-for-an-object-type-using-prototype">Defining properties for an object type using prototype</h2>
+
+<p>You can add a property to a previously defined object type by using the prototype property.</p>
+
+<p>This defines a property that is shared by all objects of the specified type, rather than by just one instance of the object.</p>
+
+<p>The following code adds a color property to all objects of type car, and then assigns a value to the color property of the object car1.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">Car</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="nx">car1</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="s1">'black'</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>See the <a href="http://developer.wimse.se/2017/javascript-prototype/">prototype article</a></p>
+
+<h2 id="defining-methods">Defining methods</h2>
+
+<p>A method is a function associated with an object, or, simply put, a method is a property of an object that is a function.</p>
+
+<p>Methods are defined the way normal functions are defined, except that they have to be assigned as the property of an object.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">objectName</span><span class="p">.</span><span class="nx">methodname</span> <span class="o">=</span> <span class="nx">function_name</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">myObj</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">myMethod</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...do something</span>
+  <span class="p">}</span>
+
+  <span class="c1">// OR THIS WORKS TOO</span>
+
+  <span class="nx">myOtherMethod</span><span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...do something else</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>where objectName is an existing object, methodname is the name you are assigning to the method, and function_name is the name of the function.</p>
+
+<p>You can then call the method in the context of the object as follows:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">object</span><span class="p">.</span><span class="nx">methodname</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>You can define methods for an object type by including a method definition in the object constructor function.</p>
+
+<p>For example, you could define a function that would format and display the properties of the previously-defined car objects;</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">displayCar</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="s1">'A Beautiful '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">year</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">make</span>
+    <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">;</span>
+  <span class="nx">pretty_print</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>where pretty_print is a function to display a horizontal rule and a string. Notice the use of this to refer to the object to which the method belongs.</p>
+
+<p>You can make this function a method of car by adding the statement:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">this</span><span class="p">.</span><span class="nx">displayCar</span> <span class="o">=</span> <span class="nx">displayCar</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<p>to the object definition. So, the full definition of car would now look like:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(</span><span class="nx">make</span><span class="p">,</span> <span class="nx">model</span><span class="p">,</span> <span class="nx">year</span><span class="p">,</span> <span class="nx">owner</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">make</span> <span class="o">=</span> <span class="nx">make</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="nx">model</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">year</span> <span class="o">=</span> <span class="nx">year</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">owner</span> <span class="o">=</span> <span class="nx">owner</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">displayCar</span> <span class="o">=</span> <span class="nx">displayCar</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Then you can call the displayCar method for each of the objects as follows:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">car1</span><span class="p">.</span><span class="nx">displayCar</span><span class="p">();</span>
+<span class="nx">car2</span><span class="p">.</span><span class="nx">displayCar</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<h2 id="using-this-for-object-references">Using this for object references</h2>
+
+<p>JavaScript has a special keyword, this, that you can use within a method to refer to the current object.</p>
+
+<p>For example, suppose you have a function called validate that validates an object’s value property, given the object and the high and low values:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">validate</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">lowval</span><span class="p">,</span> <span class="nx">hival</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">((</span><span class="nx">obj</span><span class="p">.</span><span class="nx">value</span> <span class="o">&lt;</span> <span class="nx">lowval</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">value</span> <span class="o">&gt;</span> <span class="nx">hival</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'Invalid Value!'</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Then, you could call validate in each form element’s onchange event handler, using this to pass it the element, as in the following example:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"age"</span> <span class="na">size=</span><span class="s">"3"</span> <span class="na">onChange=</span><span class="s">"validate(this, 18, 99)"</span><span class="nt">&gt;</span>
+</code></pre>
+</div>
+
+<p>In general, this refers to the calling object in a method, but, when combined with the form property, this can refer to the current object’s parent form.</p>
+
+<p>For example, the form myForm contains a Text object and a button. When the user clicks the button, the value of the Text object is set to the form’s name. The button’s onclick event handler uses this.form to refer to the parent form, myForm.</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">name=</span><span class="s">"myForm"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;p&gt;&lt;label&gt;</span>Form name:<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"text1"</span> <span class="na">value=</span><span class="s">"Beluga"</span><span class="nt">&gt;&lt;/label&gt;</span>
+<span class="nt">&lt;p&gt;&lt;input</span> <span class="na">name=</span><span class="s">"button1"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">value=</span><span class="s">"Show Form Name"</span>
+     <span class="na">onclick=</span><span class="s">"this.form.text1.value = this.form.name"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre>
+</div>
+
+<h2 id="defining-getters-and-setters">Defining getters and setters</h2>
+
+<p>A getter is a method that gets the value of a specific property.</p>
+
+<p>A setter is a method that sets the value of a specific property.</p>
+
+<p>You can define getters and setters on any predefined core object or user-defined object that supports the addition of new properties. The syntax for defining getters and setters uses the object literal syntax.</p>
+
+<p>The following illustrates how getters and setters could work for a user-defined object o.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">a</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="nx">get</span> <span class="nx">b</span><span class="p">()</span> <span class="p">{</span> 
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">},</span>
+  <span class="nx">set</span> <span class="nx">c</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 7</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">b</span><span class="p">);</span> <span class="c1">// 8</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">c</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span> <span class="c1">// 25</span>
+</code></pre>
+</div>
+
+<p>The o object’s properties are:</p>
+
+<ul>
+  <li>o.a — a number</li>
+  <li>o.b — a getter that returns o.a plus 1</li>
+  <li>o.c — a setter that sets the value of o.a to half of the value o.c is being set to</li>
+</ul>
+
+<p>Please note that function names of getters and setters defined in an object literal using “[gs]et property()” (as opposed to <strong>define[GS]etter</strong> ) are not the names of the getters themselves, even though the [gs]et propertyName(){ } syntax may mislead you to think otherwise.</p>
+
+<p>To name a function in a getter or setter using the “[gs]et property()” syntax, define an explicitly named function programmatically using Object.defineProperty (or the Object.prototype.<strong>defineGetter</strong> legacy fallback).</p>
+
+<p>For example, the following code illustrates how getters and setters can extend the Date prototype to add a year property to all instances of the predefined Date class. It uses the Date class’s existing getFullYear and setFullYear methods to support the year property’s getter and setter.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">prototype</span><span class="p">;</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">d</span><span class="p">,</span> <span class="s1">'year'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span> <span class="p">},</span>
+  <span class="na">set</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">y</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">setFullYear</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>These statements use the getter and setter in a Date object:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">now</span><span class="p">.</span><span class="nx">year</span><span class="p">);</span> <span class="c1">// 2000</span>
+<span class="nx">now</span><span class="p">.</span><span class="nx">year</span> <span class="o">=</span> <span class="mi">2001</span><span class="p">;</span> <span class="c1">// 987617605170</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
+<span class="c1">// Wed Apr 18 11:13:25 GMT-0700 (Pacific Daylight Time) 2001</span>
+</code></pre>
+</div>
+
+<p>In principle, getters and setters can be either</p>
+
+<ul>
+  <li>defined using object initializers, or</li>
+  <li>added later to any object at any time using a getter or setter adding method.</li>
+</ul>
+
+<p>When defining getters and setters using object initializers all you need to do is to prefix a getter method with get and a setter method with set. Of course, the getter method must not expect a parameter, while the setter method expects exactly one parameter (the new value to set). For instance:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">a</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="nx">get</span> <span class="nx">b</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="p">},</span>
+  <span class="nx">set</span> <span class="nx">c</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>Getters and setters can also be added to an object at any time after creation using the Object.defineProperties method.</p>
+
+<p>This method’s first parameter is the object on which you want to define the getter or setter.</p>
+
+<p>he second parameter is an object whose property names are the getter or setter names, and whose property values are objects for defining the getter or setter functions.</p>
+
+<p>Here’s an example that defines the same getter and setter used in the previous example:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{</span> <span class="na">a</span><span class="p">:</span> <span class="mi">0</span> <span class="p">};</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperties</span><span class="p">(</span><span class="nx">o</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s1">'b'</span><span class="p">:</span> <span class="p">{</span> <span class="na">get</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span> <span class="p">},</span>
+    <span class="s1">'c'</span><span class="p">:</span> <span class="p">{</span> <span class="na">set</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">o</span><span class="p">.</span><span class="nx">c</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// Runs the setter, which assigns 10 / 2 (5) to the 'a' property</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">o</span><span class="p">.</span><span class="nx">b</span><span class="p">);</span> <span class="c1">// Runs the getter, which yields a + 1 or 6</span>
+</code></pre>
+</div>
+
+<p>Which of the two forms to choose depends on your programming style and task at hand. If you already go for the object initializer when defining a prototype you will probably most of the time choose the first form. This form is more compact and natural. However, if you need to add getters and setters later — because you did not write the prototype or particular object — then the second form is the only possible form. The second form probably best represents the dynamic nature of JavaScript — but it can make the code hard to read and understand.</p>
+
+<h2 id="deleting-properties">Deleting properties</h2>
+
+<p>You can remove a non-inherited property by using the delete operator. The following code shows how to remove a property.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="c1">// Creates a new object, myobj, with two properties, a and b.</span>
+<span class="kd">var</span> <span class="nx">myobj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">;</span>
+<span class="nx">myobj</span><span class="p">.</span><span class="nx">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="nx">myobj</span><span class="p">.</span><span class="nx">b</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+
+<span class="c1">// Removes the a property, leaving myobj with only the b property.</span>
+<span class="k">delete</span> <span class="nx">myobj</span><span class="p">.</span><span class="nx">a</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="p">(</span><span class="s1">'a'</span> <span class="k">in</span> <span class="nx">myobj</span><span class="p">);</span> <span class="c1">// yields "false"</span>
+</code></pre>
+</div>
+
+<p>You can also use delete to delete a global variable if the var keyword was not used to declare the variable:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">g</span> <span class="o">=</span> <span class="mi">17</span><span class="p">;</span>
+<span class="k">delete</span> <span class="nx">g</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<h2 id="comparing-objects">Comparing Objects</h2>
+
+<p>In JavaScript objects are a reference type.</p>
+
+<p>Two distinct objects are never equal, even if they have the same properties. Only comparing the same object reference with itself yields true.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="c1">// Two variables, two distinct objects with the same properties</span>
+<span class="kd">var</span> <span class="nx">fruit</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s1">'apple'</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">fruitbear</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s1">'apple'</span><span class="p">};</span>
+
+<span class="nx">fruit</span> <span class="o">==</span> <span class="nx">fruitbear</span><span class="p">;</span> <span class="c1">// return false</span>
+<span class="nx">fruit</span> <span class="o">===</span> <span class="nx">fruitbear</span><span class="p">;</span> <span class="c1">// return false</span>
+</code></pre>
+</div>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="c1">// Two variables, a single object</span>
+<span class="kd">var</span> <span class="nx">fruit</span> <span class="o">=</span> <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="s1">'apple'</span><span class="p">};</span>
+<span class="kd">var</span> <span class="nx">fruitbear</span> <span class="o">=</span> <span class="nx">fruit</span><span class="p">;</span>  <span class="c1">// assign fruit object reference to fruitbear</span>
+
+<span class="c1">// here fruit and fruitbear are pointing to same object</span>
+<span class="nx">fruit</span> <span class="o">==</span> <span class="nx">fruitbear</span><span class="p">;</span> <span class="c1">// return true</span>
+<span class="nx">fruit</span> <span class="o">===</span> <span class="nx">fruitbear</span><span class="p">;</span> <span class="c1">// return true</span>
+</code></pre>
+</div>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">fruit</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">'grape'</span><span class="p">;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fruitbear</span><span class="p">);</span>    <span class="c1">// yields { name: "grape" } instead of { name: "apple" }</span>
+</code></pre>
+</div>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Andree DevelDoe Ray
+            
+            </li>
+            
+            <li><a href="mailto:me@develdoe.com">me@develdoe.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/andreedeveldoeray"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">andreedeveldoeray</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/develdoe"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">develdoe</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

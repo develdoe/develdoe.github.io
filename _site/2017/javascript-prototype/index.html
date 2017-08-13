@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>JavaScript - Prototype</title>
+  <meta name="description" content="Every JavaScript object has a prototype and the prototype is also an object.">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:2000/2017/javascript-prototype/">
+  <link rel="alternate" type="application/rss+xml" title="WIMSE - Developer" href="/feed.xml">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+
+
+  <body>
+
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div style="padding-bottom: 20px;"><a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> back</a></div>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">JavaScript - Prototype</h1>
+    <p class="post-meta"><time datetime="2017-03-19T23:08:00+01:00" itemprop="datePublished">Mar 19, 2017</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p>Every JavaScript object has a prototype and the prototype is also an object.</p>
+
+<p>The Object.prototype property represents the Object prototype object.</p>
+
+<p>All JavaScrpit object inherit their properties and methods from their prototype.</p>
+
+<p>Nearly all objects in JavaScript are instances of Object.</p>
+
+<p>A typical object inherits properties (including methods) from Object.prototype, although these properties may be shadowed (a.k.a. overridden).</p>
+
+<p>However, an Object may be deliberately created for which this is not true (e.g. by Object.create(null)), or it may be altered so that this is no longer true (e.g. with Object.setPrototypeOf).</p>
+
+<p>Objects created using an object literal, or with new Object(), inherit from a prototype called Object.prototype.</p>
+
+<p>Changes to the Object prototype object are seen by all objects through prototype chaining, unless the properties and methods subject to those changes are overridden further along the prototype chain.</p>
+
+<p>This provides a very powerful although potentially dangerous mechanism to override or extend object behavior.</p>
+
+<h2 id="creating-a-prototype">Creating a Prototype</h2>
+
+<p>The strandard way to create an object protoype is to use an object constructor function:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">first</span><span class="p">,</span><span class="nx">last</span><span class="p">,</span><span class="nx">age</span><span class="p">,</span><span class="nx">eyecolor</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="nx">first</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">last</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">eyeColor</span> <span class="o">=</span> <span class="nx">eyecolor</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">father</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Person</span><span class="p">(</span><span class="s1">'Thomas'</span><span class="p">,</span><span class="s1">'Fors'</span><span class="p">,</span><span class="mi">66</span><span class="p">,</span><span class="s1">'blue'</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">father</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><strong>The constructor function is the prototype for Person object. It is considered good practice to name constructor functions with an upper-case first letter.</strong></p>
+
+<h2 id="using-the-prototype-property">Using the prototype Property</h2>
+
+<p>The JavaScript prototype property allows you to add new properties to an existing prototype:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">first</span><span class="p">,</span> <span class="nx">last</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">eyecolor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="nx">first</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">last</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eyeColor</span> <span class="o">=</span> <span class="nx">eyecolor</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">nationality</span> <span class="o">=</span> <span class="s2">"English"</span><span class="p">;</span> 
+</code></pre>
+</div>
+
+<p>The JavaScript prototype property also allows you to add new methods to an existing prototype:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">first</span><span class="p">,</span> <span class="nx">last</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">eyecolor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="nx">first</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">last</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eyeColor</span> <span class="o">=</span> <span class="nx">eyecolor</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
+<span class="p">};</span> 
+</code></pre>
+</div>
+
+<p><strong>Only modify your own prototypes. Never modify the prototypes of standard JavaScript objects!</strong></p>
+
+<h2 id="without-using-the-prototype-property">Without using the prototype property</h2>
+
+<p>Adding a new property to an existing object is easy:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">father</span><span class="p">.</span><span class="nx">nationality</span> <span class="o">=</span> <span class="s2">"Swedish"</span>
+</code></pre>
+</div>
+
+<p>However, this property will be added to father and not to any other person objects.</p>
+
+<p>Adding a new method to an existing object is also easy:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">father</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>However, this method will also jsut be added to father and not to any other person objects.</p>
+
+<p>You cannot add a new property to a prototype the same way as you add a new property to an existing object, because the prototype is not an existing object.</p>
+
+<p>To add a new property to a prototype, you must add it to the constructor function:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">first</span><span class="p">,</span> <span class="nx">last</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">eyecolor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="nx">first</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">last</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eyeColor</span> <span class="o">=</span> <span class="nx">eyecolor</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">nationality</span> <span class="o">=</span> <span class="s2">"English"</span><span class="p">;</span> <span class="c1">// can have default values</span>
+<span class="p">}</span> 
+</code></pre>
+</div>
+
+<p>Your constructor function can also define methods:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">first</span><span class="p">,</span> <span class="nx">last</span><span class="p">,</span> <span class="nx">age</span><span class="p">,</span> <span class="nx">eyecolor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="nx">first</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">last</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">eyeColor</span> <span class="o">=</span> <span class="nx">eyecolor</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;};</span>
+<span class="p">}</span> 
+</code></pre>
+</div>
+
+<h2 id="methods">Methods</h2>
+
+<h3 id="objectprototypehasownproperty">Object.prototype.hasOwnProperty()</h3>
+
+<p>Returns a boolean indicating whether an object contains the specified property as a direct property of that object and not inherited through the prototype chain.</p>
+
+<h4 id="syntax">Syntax</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>obj.hasOwnProperty(prop)
+</code></pre>
+</div>
+
+<h5 id="parameters">Parameters</h5>
+
+<h6 id="prop">prop</h6>
+
+<p>The String name or symbol of the property to test.</p>
+
+<h5 id="return-value">Return value</h5>
+
+<p>A Boolean indicating whether or not the object has the specified property.</p>
+
+<h4 id="description">Description</h4>
+
+<p>Every object descended from Object inherits the hasOwnProperty method. This method can be used to determine whether an object has the specified property as a direct property of that objec</p>
+
+<h4 id="examples">Examples</h4>
+
+<p>Using hasOwnProperty to test for a property’s existence</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">()</span>
+<span class="nx">obj</span><span class="p">.</span><span class="nx">prop</span> <span class="o">=</span> <span class="s1">'exist'</span>
+
+<span class="kd">function</span> <span class="nx">changeObj</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nx">obj</span><span class="p">.</span><span class="nx">newprop</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">prop</span>
+  <span class="k">delete</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">prop</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">'prop'</span><span class="p">))</span>
+<span class="nx">changeObj</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">'prop'</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<h3 id="objectprototypeisprototypeof">Object.prototype.isPrototypeOf()</h3>
+
+<p>The isPrototypeOf() method checks if an object exists in another object’s prototype chain.</p>
+
+<h4 id="syntax-1">Syntax</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>prototypeObj.isPrototypeOf(object)
+</code></pre>
+</div>
+
+<h5 id="parameters-1">Parameters</h5>
+
+<h6 id="object">object</h6>
+
+<p>The object whose prototype chain will be searched.</p>
+
+<h5 id="return-value-1">Return value</h5>
+
+<p>A Boolean indicating whether the calling object has the specified object in its prototype chain.</p>
+
+<h5 id="errors-thrown">Errors thrown</h5>
+
+<h6 id="typeerror">TypeError</h6>
+
+<p>A TypeError is thrown if prototypeObj is undefined or null.</p>
+
+<h4 id="description-1">Description</h4>
+
+<p>The isPrototypeOf() method allows you to check whether or not an object exists within another object’s prototype chain.</p>
+
+<h4 id="examples-1">Examples</h4>
+
+<p>This example demonstrates that Baz.prototype, Bar.prototype, Foo.prototype and Object.prototype exist in the prototype chain for object baz:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Foo</span><span class="p">()</span> <span class="p">{}</span>
+<span class="kd">function</span> <span class="nx">Bar</span><span class="p">()</span> <span class="p">{}</span>
+<span class="kd">function</span> <span class="nx">Baz</span><span class="p">()</span> <span class="p">{}</span>
+
+<span class="nx">Bar</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Foo</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="nx">Baz</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Bar</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">baz</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Baz</span><span class="p">();</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Baz</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">baz</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Bar</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">baz</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Foo</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">baz</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">isPrototypeOf</span><span class="p">(</span><span class="nx">baz</span><span class="p">));</span> <span class="c1">// true</span>
+</code></pre>
+</div>
+
+<h3 id="objectprototypepropertyisenumerable">Object.prototype.propertyIsEnumerable()</h3>
+
+<p>The propertyIsEnumerable() method returns a Boolean indicating whether the specified property is enumerable.</p>
+
+<h4 id="syntax-2">Syntax</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>obj.propertyIsEnumerable(prop)
+</code></pre>
+</div>
+
+<h5 id="parameters-2">Parameters</h5>
+
+<h6 id="prop-1">prop</h6>
+
+<p>The name of the property to test.</p>
+
+<h5 id="return-value-2">Return value</h5>
+
+<p>A Boolean indicating whether the specified property is enumerable.</p>
+
+<h4 id="description-2">Description</h4>
+
+<p>Every object has a propertyIsEnumerable method. This method can determine whether the specified property in an object can be enumerated by a for…in loop, with the exception of properties inherited through the prototype chain. If the object does not have the specified property, this method returns false.</p>
+
+<h4 id="examples-2">Examples</h4>
+
+<p>The following example shows the use of propertyIsEnumerable on objects and arrays:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="p">{};</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">prop</span> <span class="o">=</span> <span class="s1">'is enumerable'</span><span class="p">;</span>
+<span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'is enumerable'</span><span class="p">;</span>
+
+<span class="nx">o</span><span class="p">.</span><span class="nx">propertyIsEnumerable</span><span class="p">(</span><span class="s1">'prop'</span><span class="p">);</span>   <span class="c1">// returns true</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">propertyIsEnumerable</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>        <span class="c1">// returns true</span>
+</code></pre>
+</div>
+
+<h3 id="objectprototypetolocalestring">Object.prototype.toLocaleString()</h3>
+
+<p>The toLocaleString() method returns a string representing the object. This method is meant to be overridden by derived objects for locale-specific purposes.</p>
+
+<h4 id="syntax-3">Syntax</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>obj.toLocaleString();
+</code></pre>
+</div>
+
+<h5 id="return-value-3">Return value</h5>
+
+<p>A string representing the object.</p>
+
+<h4 id="description-3">Description</h4>
+
+<p>Object’s toLocaleString returns the result of calling toString().</p>
+
+<p>This function is provided to give objects a generic toLocaleString method, even though not all may use it. See the list below.</p>
+
+<h4 id="objects-overriding-tolocalestring">Objects overriding toLocaleString</h4>
+
+<ul>
+  <li>Array: Array.prototype.toLocaleString()</li>
+  <li>Number: Number.prototype.toLocaleString()</li>
+  <li>Date: Date.prototype.toLocaleString()</li>
+</ul>
+
+<h3 id="objectprototypetostring">Object.prototype.toString()</h3>
+
+<p>The toString() method returns a string representing the object.</p>
+
+<h4 id="syntax-4">Syntax</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>obj.toString()
+</code></pre>
+</div>
+
+<h5 id="return-value-4">Return value</h5>
+
+<p>A string representing the object.</p>
+
+<h4 id="description-4">Description</h4>
+
+<p>Every object has a toString() method that is automatically called when the object is to be represented as a text value or when an object is referred to in a manner in which a string is expected. By default, the toString() method is inherited by every object descended from Object. If this method is not overridden in a custom object, toString() returns “[object type]”, where type is the object type. The following code illustrates this:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">o</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Object</span><span class="p">();</span>
+<span class="nx">o</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span> <span class="c1">// returns [object Object]</span>
+</code></pre>
+</div>
+
+<h4 id="examples-3">Examples</h4>
+
+<h5 id="overriding-the-default-tostring-method">Overriding the default toString method</h5>
+
+<p>You can create a function to be called in place of the default toString() method. The toString() method takes no arguments and should return a string. The toString() method you create can be any value you want, but it will be most useful if it carries information about the object.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Dog</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">breed</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">sex</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">breed</span> <span class="o">=</span> <span class="nx">breed</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">sex</span> <span class="o">=</span> <span class="nx">sex</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">theDog</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dog</span><span class="p">(</span><span class="s1">'Gabby'</span><span class="p">,</span> <span class="s1">'Lab'</span><span class="p">,</span> <span class="s1">'chocolate'</span><span class="p">,</span> <span class="s1">'female'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">theDog</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span> <span class="c1">// returns [object Object]</span>
+</code></pre>
+</div>
+
+<p>The following code creates and assigns dogToString() to override the default toString() method. This function generates a string containing the name, breed, color, and sex of the object, in the form “property = value;”.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">Dog</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">dogToString</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">ret</span> <span class="o">=</span> <span class="s1">'Dog '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">' is a '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">sex</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">color</span> <span class="o">+</span> <span class="s1">' '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">breed</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">ret</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>With the preceding code in place, any time theDog is used in a string context, JavaScript automatically calls the dogToString() function, which returns the following string:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="s2">"Dog Gabby is a female chocolate Lab"</span>
+</code></pre>
+</div>
+
+<h5 id="using-tostring-to-detect-object-class">Using toString() to detect object class</h5>
+
+<p>toString() can be used with every object and allows you to get its class. To use the Object.prototype.toString() with every object, you need to call Function.prototype.call() or Function.prototype.apply() on it, passing the object you want to inspect as the first parameter called thisArg.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">toString</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">toString</span><span class="p">;</span>
+
+<span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">);</span>    <span class="c1">// [object Date]</span>
+<span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">new</span> <span class="nb">String</span><span class="p">);</span>  <span class="c1">// [object String]</span>
+<span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nb">Math</span><span class="p">);</span>        <span class="c1">// [object Math]</span>
+<span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">undefined</span><span class="p">);</span>   <span class="c1">// [object Undefined]</span>
+<span class="nx">toString</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>        <span class="c1">// [object Null]</span>
+</code></pre>
+</div>
+
+<h3 id="objectprototypevalueof">Object.prototype.valueOf()</h3>
+
+<p>The valueOf() method returns the primitive value of the specified object.</p>
+
+<h4 id="syntax-5">Syntax</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>object.valueOf()
+</code></pre>
+</div>
+
+<h5 id="return-value-5">Return value</h5>
+
+<p>The primitive value of the specified object.</p>
+
+<h4 id="description-5">Description</h4>
+
+<p>JavaScript calls the valueOf method to convert an object to a primitive value. You rarely need to invoke the valueOf method yourself; JavaScript automatically invokes it when encountering an object where a primitive value is expected.</p>
+
+<p>By default, the valueOf method is inherited by every object descended from Object. Every built-in core object overrides this method to return an appropriate value. If an object has no primitive value, valueOf returns the object itself.</p>
+
+<p>You can use valueOf within your own code to convert a built-in object into a primitive value. When you create a custom object, you can override Object.prototype.valueOf() to call a custom method instead of the default Object method.</p>
+
+<h5 id="overriding-valueof-for-custom-objects">Overriding valueOf for custom objects</h5>
+
+<p>You can create a function to be called in place of the default valueOf method. Your function must take no arguments.</p>
+
+<p>Suppose you have an object type myNumberType and you want to create a valueOf method for it. The following code assigns a user-defined function to the object’s valueOf method:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">myNumberType</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">valueOf</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">customPrimitiveValue</span><span class="p">;</span> <span class="p">};</span>
+</code></pre>
+</div>
+
+<p>With the preceding code in place, any time an object of type myNumberType is used in a context where it is to be represented as a primitive value, JavaScript automatically calls the function defined in the preceding code.</p>
+
+<p>An object’s valueOf method is usually invoked by JavaScript, but you can invoke it yourself as follows:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">myNumber</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">()</span>
+</code></pre>
+</div>
+
+<h4 id="examples-4">Examples</h4>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">myNumberType</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">number</span> <span class="o">=</span> <span class="nx">n</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">myNumberType</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">valueOf</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">number</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">myObj</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">myNumberType</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+<span class="nx">myObj</span> <span class="o">+</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// 7</span>
+</code></pre>
+</div>
+
+<h2 id="methods-1">Methods</h2>
+
+<p>When altering the behavior of existing Object.prototype methods, consider injecting code by wrapping your extension before or after the existing logic.  For example, this (untested) code will pre-conditionally execute custom logic before the built-in logic or someone else’s extension is executed.</p>
+
+<p>When a function is called, the arguments to the call are held in the array-like “variable” arguments. For example, in the call “myFn(a, b, c)”, the arguments within myFn’s body will contain 3 array elements corresponding to (a, b, c).  When modifying protoypes with hooks, simply pass this &amp; the arguments (the call state) to the current behavior by calling apply() on the function.  This pattern can be used for any prototype, such as Node.prototype, Function.prototype, etc.</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">current</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">valueOf</span>
+
+<span class="c1">// Since my property "-prop-value" is cross-cutting and isn't always</span>
+<span class="c1">// on the same prototype chain, I want to modify Object.prototype: </span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">valueOf</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s1">'-prop-value'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">[</span><span class="s1">'-prop-value'</span><span class="p">]</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// It doesn't look like one of my objects, so let's fall back on </span>
+    <span class="c1">// the default behavior by reproducing the current behavior as best we can.</span>
+    <span class="c1">// The apply behaves like "super" in some other languages.</span>
+    <span class="c1">// Even though valueOf() doesn't take arguments, some other hook may.</span>
+    <span class="k">return</span> <span class="nx">current</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">arguments</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>Since JavaScript doesn’t exactly have sub-class objects, prototype is a useful workaround to make a “base class” object of certain functions that act as objects. For example:</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">Person</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">canTalk</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">greet</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">canTalk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hi, I am '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">Employee</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">title</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Person</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">title</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">Employee</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="nx">Employee</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Employee</span><span class="p">;</span>
+
+<span class="nx">Employee</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">greet</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">canTalk</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Hi, I am '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">', the '</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">title</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">var</span> <span class="nx">Customer</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Person</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">Customer</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="nx">Customer</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Customer</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">Mime</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">Person</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">canTalk</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">Mime</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="nx">Mime</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Mime</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">bob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Employee</span><span class="p">(</span><span class="s1">'Bob'</span><span class="p">,</span> <span class="s1">'Builder'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">joe</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Customer</span><span class="p">(</span><span class="s1">'Joe'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rg</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Employee</span><span class="p">(</span><span class="s1">'Red Green'</span><span class="p">,</span> <span class="s1">'Handyman'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">mike</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Customer</span><span class="p">(</span><span class="s1">'Mike'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">mime</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Mime</span><span class="p">(</span><span class="s1">'Mime'</span><span class="p">);</span>
+
+<span class="nx">bob</span><span class="p">.</span><span class="nx">greet</span><span class="p">();</span>
+<span class="c1">// Hi, I am Bob, the Builder</span>
+
+<span class="nx">joe</span><span class="p">.</span><span class="nx">greet</span><span class="p">();</span>
+<span class="c1">// Hi, I am Joe</span>
+
+<span class="nx">rg</span><span class="p">.</span><span class="nx">greet</span><span class="p">();</span>
+<span class="c1">// Hi, I am Red Green, the Handyman</span>
+
+<span class="nx">mike</span><span class="p">.</span><span class="nx">greet</span><span class="p">();</span>
+<span class="c1">// Hi, I am Mike</span>
+
+<span class="nx">mime</span><span class="p">.</span><span class="nx">greet</span><span class="p">();</span>
+</code></pre>
+</div>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Andree DevelDoe Ray
+            
+            </li>
+            
+            <li><a href="mailto:me@develdoe.com">me@develdoe.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/andreedeveldoeray"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">andreedeveldoeray</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/develdoe"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">develdoe</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

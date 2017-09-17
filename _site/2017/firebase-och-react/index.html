@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Firebase och React</title>
+  <meta name="description" content="Denna artikel är en förkortning och översättning av artikeln “Intro to Firebase and React” som du hittar hos CSS Tricks, “https://css-tricks.com/intro-fireba...">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:2000/2017/firebase-och-react/">
+  <link rel="alternate" type="application/rss+xml" title="WIMSE - Developer" href="/feed.xml">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  
+</head>
+
+
+  <body>
+
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div style="padding-bottom: 20px;"><a href="/"><i class="fa fa-arrow-left" aria-hidden="true"></i> back</a></div>
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Firebase och React</h1>
+    <p class="post-meta"><time datetime="2017-08-16T00:00:00+02:00" itemprop="datePublished">Aug 16, 2017</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <p><em>Denna artikel är en förkortning och översättning av artikeln “Intro to Firebase and React”  som du hittar hos CSS Tricks, “https://css-tricks.com/intro-firebase-react/”</em></p>
+
+<p><strong>Den här artikeln förutsätter att du redan har viss grundläggande kunskaper om hur React fungerar.</strong></p>
+
+<h2 id="vad-är-firebase">Vad är Firebase?</h2>
+
+<p>Googles Firebase är en cloud-based databas värdtjänst där du kan hosta en databas. De erbjuder dig verktygen att interagera med den. Du kan använda den för att lagra och hämta data i realtid.</p>
+
+<p>Utöver det så kan firebase göra  fler saker som hantering användarautentisering och lagra filer.</p>
+
+<h3 id="hur-lagrar-firebase-data">Hur lagrar Firebase data?</h3>
+
+<p>Firebase lagrar data som ett jätteobjekt med nyckelvärdespar. Till skillnad från JSON eller JavaScript-objekt finns det inga arrayer i Firebase.</p>
+
+<p>En Firebase-databas kan se ut så här:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+      </span><span class="nt">"groceries"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"-KjQTqG3R2dPT8s2jylW"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tomato"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"-KjQTrds1feHT3GH_29o"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pasta"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"-KjQTsmfBR8zN1SwPPT8"</span><span class="p">:</span><span class="w"> </span><span class="s2">"milk"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"-KjQTtnzt_jJZPoCHWUM"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sugar"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"-KjQTyIfKFEVMYJRZ09X"</span><span class="p">:</span><span class="w"> </span><span class="s2">"simon"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"-KjQU-Xuy5s7I-On9rYP"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ryan"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"-KjQU0MYVeKRsLuIQCYX"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sylvia"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Du hittar mer information kring struktureringen i Firebase i dess <a href="https://firebase.google.com/docs/database/web/structure-data">dokumentation</a>.</p>
+
+<h2 id="bootstrap-project">Bootstrap Project</h2>
+
+<p>Börja med att bootstrappa ett React projekt. Jag har ett projekt som heter <a href="https://github.com/AndreeDeveldoeRay/DevelStrap">DevelStrap</a>, men du kan använda vilket som.</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/AndreeDeveldoeRay/DevelStrap.git
+<span class="nb">cd </span>DevelStrap
+npm install
+npm install firebase
+npm start
+</code></pre>
+</div>
+
+<p>Open new terminal window or tab:</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>webpack -w 
+</code></pre>
+</div>
+
+<h2 id="firebase-database">Firebase Database</h2>
+
+<p>Nu när vår app är konfigurerad måste vi skapa ett konto och en databas på Firebase så att vi kan länka upp vår applikation till den.</p>
+
+<p><a href="https://firebase.google.com/">Gå vidare till Firebase hemsida</a> och klicka på “Get Started”</p>
+
+<p>Detta tar dig till en sida där du kommer att bli bedd att autentisera med ditt Google-konto. Välj det konto som du vill att projektet ska anslutas till och tryck på OK.</p>
+
+<p>Detta bör ta dig till Firebase-konsolen, som ser något ut så här:</p>
+
+<p><img src="https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1496406458/firebase-dashboard_gigmqp.png" alt="" /></p>
+
+<p>Skapa en ny data bas genom att klicka på “Add new project” och ge det ett namn.</p>
+
+<p>Det tar dig till din apps instrumentpanel, som ser ut så här:</p>
+
+<p><img src="https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1496406510/firebase-overview_xa2kp0.png" alt="" /></p>
+
+<p>Eftersom vi bygger en webapp väljer du “Add Firebase to your web app”. Vilket kommer att utlösa en popup med någon kod som ser ut så här:</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://www.gstatic.com/firebasejs/4.2.0/firebase.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+  <span class="c1">// Initialize Firebase</span>
+  <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">apiKey</span><span class="p">:</span> <span class="s2">"AIzaSyDHXPH6kH9wevpz3WRVDcmyuxPLdwCiHigh"</span><span class="p">,</span>
+    <span class="na">authDomain</span><span class="p">:</span> <span class="s2">"fir-d45cd5.firebaseapp.com"</span><span class="p">,</span>
+    <span class="na">databaseURL</span><span class="p">:</span> <span class="s2">"https://fir-d45sc5.firebaseio.com"</span><span class="p">,</span>
+    <span class="na">projectId</span><span class="p">:</span> <span class="s2">"fir-d445c5"</span><span class="p">,</span>
+    <span class="na">storageBucket</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="na">messagingSenderId</span><span class="p">:</span> <span class="s2">"1022982s3456205754"</span>
+  <span class="p">};</span>
+  <span class="nx">firebase</span><span class="p">.</span><span class="nx">initializeApp</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre>
+</div>
+
+<p>Eftersom vi importerar Firebase till vårt projekt med ES6-moduler behöver vi inte skript taggarna. Konfigurationsobjektet är viktigt, eftersom det är så vi verifierar vår React-applikation mot vår Firebase-databas.</p>
+
+<h2 id="koppla-upp-vår-app-mot-firebase">Koppla upp vår App mot Firebase</h2>
+
+<p>Kopiera det hela konfigurationsobjektet från Firebase.</p>
+
+<p>Skapa sedan en ny mapp i <code class="highlighter-rouge">src</code> mappen som du döper till <code class="highlighter-rouge">firebase</code>. I den mappen skapar vi en fil med namnet <code class="highlighter-rouge">index.jsx</code>.</p>
+
+<p>I den nya filen skall vi importera Firebase, vårt konfigurationsobject och initialisera vår app.</p>
+
+<p><strong>./src/firebase/index.jsx</strong></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>import Firebase from 'firebase'
+
+var config = {
+    apiKey: "AIzaSyDHXPH6kH9wevpz3WRVDcmyuxPLdwCiHigh",
+    authDomain: "fir-d45cd5.firebaseapp.com",
+    databaseURL: "https://fir-d45sc5.firebaseio.com",
+    projectId: "fir-d445c5",
+    storageBucket: "",
+    messagingSenderId: "1022982s3456205754"
+  }
+
+firebase.initializeApp(config)
+
+export default firebase
+</code></pre>
+</div>
+
+<p>En sista sak som vi behöver göra innan vi kan dyka in i grovkörning av vår App. Vi måste tillfälligt inaktivera autentiseringskrav så att vi kan lägga till och ta bort objekt utan att behöva ha någon typ av användarautentiseringsflöde.</p>
+
+<p>I Firebase Dashboard, till vänster om skärmen, märker du att det finns en flik “Databas”. Klicka på den. Sedan, på höger sida, under realtidsdatabasen underrubrik ser du en flik för “Regler”.  Där hittar du en uppsättning regler som ser ut något som:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"rules"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">".read"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth != null"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">".write"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auth != null"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>Vi måste ställa in <code class="highlighter-rouge">.read</code> och <code class="highlighter-rouge">.write</code>  till sanna, så att vi kan lägga till och läsa data utan att authentisera oss. När du är klar ska det se ut så här:</p>
+
+<p><img src="https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1496406627/firebase-rules_sjfzyy.png" alt="" /></p>
+
+  </div>
+
+  
+</article>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>
+            
+              Andree DevelDoe Ray
+            
+            </li>
+            
+            <li><a href="mailto:me@develdoe.com">me@develdoe.com</a></li>
+            
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/andreedeveldoeray"><span class="icon icon--github"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">andreedeveldoeray</span></a>
+
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/develdoe"><span class="icon icon--twitter"><svg viewBox="0 0 16 16" width="16px" height="16px"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+</span><span class="username">develdoe</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

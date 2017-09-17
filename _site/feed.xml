@@ -1,4 +1,138 @@
-<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:2000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.4.0">Jekyll</generator><link href="http://localhost:2000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:2000/" rel="alternate" type="text/html" /><updated>2017-08-13T15:53:13+02:00</updated><id>http://localhost:2000//</id><title type="html">WIMSE - Developer</title><subtitle>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</subtitle><author><name>Andree DevelDoe Ray</name></author><entry><title type="html">testing</title><link href="http://localhost:2000/2017/testing/" rel="alternate" type="text/html" title="testing" /><published>2017-08-13T00:00:00+02:00</published><updated>2017-08-13T00:00:00+02:00</updated><id>http://localhost:2000/2017/testing</id><content type="html" xml:base="http://localhost:2000/2017/testing/">&lt;p&gt;testing&lt;/p&gt;</content><author><name>Andree DevelDoe Ray</name></author><summary type="html">testing</summary></entry><entry><title type="html">LINUX - Clear iptables</title><link href="http://localhost:2000/2017/linux-clear-iptables/" rel="alternate" type="text/html" title="LINUX - Clear iptables" /><published>2017-05-13T08:30:00+02:00</published><updated>2017-05-13T08:30:00+02:00</updated><id>http://localhost:2000/2017/linux-clear-iptables</id><content type="html" xml:base="http://localhost:2000/2017/linux-clear-iptables/">&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;iptables -F
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:2000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.4.0">Jekyll</generator><link href="http://localhost:2000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:2000/" rel="alternate" type="text/html" /><updated>2017-08-30T15:17:34+02:00</updated><id>http://localhost:2000//</id><title type="html">WIMSE - Developer</title><subtitle>Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal.</subtitle><author><name>Andree DevelDoe Ray</name></author><entry><title type="html">Firebase och React</title><link href="http://localhost:2000/2017/firebase-och-react/" rel="alternate" type="text/html" title="Firebase och React" /><published>2017-08-16T00:00:00+02:00</published><updated>2017-08-16T00:00:00+02:00</updated><id>http://localhost:2000/2017/firebase-och-react</id><content type="html" xml:base="http://localhost:2000/2017/firebase-och-react/">&lt;p&gt;&lt;em&gt;Denna artikel är en förkortning och översättning av artikeln “Intro to Firebase and React”  som du hittar hos CSS Tricks, “https://css-tricks.com/intro-firebase-react/”&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Den här artikeln förutsätter att du redan har viss grundläggande kunskaper om hur React fungerar.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;vad-är-firebase&quot;&gt;Vad är Firebase?&lt;/h2&gt;
+
+&lt;p&gt;Googles Firebase är en cloud-based databas värdtjänst där du kan hosta en databas. De erbjuder dig verktygen att interagera med den. Du kan använda den för att lagra och hämta data i realtid.&lt;/p&gt;
+
+&lt;p&gt;Utöver det så kan firebase göra  fler saker som hantering användarautentisering och lagra filer.&lt;/p&gt;
+
+&lt;h3 id=&quot;hur-lagrar-firebase-data&quot;&gt;Hur lagrar Firebase data?&lt;/h3&gt;
+
+&lt;p&gt;Firebase lagrar data som ett jätteobjekt med nyckelvärdespar. Till skillnad från JSON eller JavaScript-objekt finns det inga arrayer i Firebase.&lt;/p&gt;
+
+&lt;p&gt;En Firebase-databas kan se ut så här:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;groceries&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;-KjQTqG3R2dPT8s2jylW&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;tomato&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;-KjQTrds1feHT3GH_29o&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;pasta&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;-KjQTsmfBR8zN1SwPPT8&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;milk&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;-KjQTtnzt_jJZPoCHWUM&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sugar&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;users&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;-KjQTyIfKFEVMYJRZ09X&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;simon&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;-KjQU-Xuy5s7I-On9rYP&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ryan&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+          &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;-KjQU0MYVeKRsLuIQCYX&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;sylvia&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+        &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Du hittar mer information kring struktureringen i Firebase i dess &lt;a href=&quot;https://firebase.google.com/docs/database/web/structure-data&quot;&gt;dokumentation&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;bootstrap-project&quot;&gt;Bootstrap Project&lt;/h2&gt;
+
+&lt;p&gt;Börja med att bootstrappa ett React projekt. Jag har ett projekt som heter &lt;a href=&quot;https://github.com/AndreeDeveldoeRay/DevelStrap&quot;&gt;DevelStrap&lt;/a&gt;, men du kan använda vilket som.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/AndreeDeveldoeRay/DevelStrap.git
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;DevelStrap
+npm install
+npm install firebase
+npm start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Open new terminal window or tab:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;webpack -w 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;firebase-database&quot;&gt;Firebase Database&lt;/h2&gt;
+
+&lt;p&gt;Nu när vår app är konfigurerad måste vi skapa ett konto och en databas på Firebase så att vi kan länka upp vår applikation till den.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://firebase.google.com/&quot;&gt;Gå vidare till Firebase hemsida&lt;/a&gt; och klicka på “Get Started”&lt;/p&gt;
+
+&lt;p&gt;Detta tar dig till en sida där du kommer att bli bedd att autentisera med ditt Google-konto. Välj det konto som du vill att projektet ska anslutas till och tryck på OK.&lt;/p&gt;
+
+&lt;p&gt;Detta bör ta dig till Firebase-konsolen, som ser något ut så här:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1496406458/firebase-dashboard_gigmqp.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Skapa en ny data bas genom att klicka på “Add new project” och ge det ett namn.&lt;/p&gt;
+
+&lt;p&gt;Det tar dig till din apps instrumentpanel, som ser ut så här:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1496406510/firebase-overview_xa2kp0.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Eftersom vi bygger en webapp väljer du “Add Firebase to your web app”. Vilket kommer att utlösa en popup med någon kod som ser ut så här:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;script &lt;/span&gt;&lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.gstatic.com/firebasejs/4.2.0/firebase.js&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;script&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;// Initialize Firebase&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;apiKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;AIzaSyDHXPH6kH9wevpz3WRVDcmyuxPLdwCiHigh&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;authDomain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;fir-d45cd5.firebaseapp.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;databaseURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;https://fir-d45sc5.firebaseio.com&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;projectId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;fir-d445c5&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;storageBucket&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;messagingSenderId&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;1022982s3456205754&quot;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;firebase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;initializeApp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Eftersom vi importerar Firebase till vårt projekt med ES6-moduler behöver vi inte skript taggarna. Konfigurationsobjektet är viktigt, eftersom det är så vi verifierar vår React-applikation mot vår Firebase-databas.&lt;/p&gt;
+
+&lt;h2 id=&quot;koppla-upp-vår-app-mot-firebase&quot;&gt;Koppla upp vår App mot Firebase&lt;/h2&gt;
+
+&lt;p&gt;Kopiera det hela konfigurationsobjektet från Firebase.&lt;/p&gt;
+
+&lt;p&gt;Skapa sedan en ny mapp i &lt;code class=&quot;highlighter-rouge&quot;&gt;src&lt;/code&gt; mappen som du döper till &lt;code class=&quot;highlighter-rouge&quot;&gt;firebase&lt;/code&gt;. I den mappen skapar vi en fil med namnet &lt;code class=&quot;highlighter-rouge&quot;&gt;index.jsx&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;I den nya filen skall vi importera Firebase, vårt konfigurationsobject och initialisera vår app.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;./src/firebase/index.jsx&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import Firebase from 'firebase'
+
+var config = {
+    apiKey: &quot;AIzaSyDHXPH6kH9wevpz3WRVDcmyuxPLdwCiHigh&quot;,
+    authDomain: &quot;fir-d45cd5.firebaseapp.com&quot;,
+    databaseURL: &quot;https://fir-d45sc5.firebaseio.com&quot;,
+    projectId: &quot;fir-d445c5&quot;,
+    storageBucket: &quot;&quot;,
+    messagingSenderId: &quot;1022982s3456205754&quot;
+  }
+
+firebase.initializeApp(config)
+
+export default firebase
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;En sista sak som vi behöver göra innan vi kan dyka in i grovkörning av vår App. Vi måste tillfälligt inaktivera autentiseringskrav så att vi kan lägga till och ta bort objekt utan att behöva ha någon typ av användarautentiseringsflöde.&lt;/p&gt;
+
+&lt;p&gt;I Firebase Dashboard, till vänster om skärmen, märker du att det finns en flik “Databas”. Klicka på den. Sedan, på höger sida, under realtidsdatabasen underrubrik ser du en flik för “Regler”.  Där hittar du en uppsättning regler som ser ut något som:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;rules&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.read&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth != null&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+      &lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&quot;.write&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;auth != null&quot;&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+    &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;w&quot;&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Vi måste ställa in &lt;code class=&quot;highlighter-rouge&quot;&gt;.read&lt;/code&gt; och &lt;code class=&quot;highlighter-rouge&quot;&gt;.write&lt;/code&gt;  till sanna, så att vi kan lägga till och läsa data utan att authentisera oss. När du är klar ska det se ut så här:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1496406627/firebase-rules_sjfzyy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;</content><author><name>Andree DevelDoe Ray</name></author><category term="react" /><summary type="html">Denna artikel är en förkortning och översättning av artikeln “Intro to Firebase and React”  som du hittar hos CSS Tricks, “https://css-tricks.com/intro-firebase-react/”</summary></entry><entry><title type="html">LINUX - Clear iptables</title><link href="http://localhost:2000/2017/linux-clear-iptables/" rel="alternate" type="text/html" title="LINUX - Clear iptables" /><published>2017-05-13T08:30:00+02:00</published><updated>2017-05-13T08:30:00+02:00</updated><id>http://localhost:2000/2017/linux-clear-iptables</id><content type="html" xml:base="http://localhost:2000/2017/linux-clear-iptables/">&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;iptables -F
 iptables -X
 iptables -t nat -F
 iptables -t nat -X

@@ -6,6 +6,9 @@ title: Handlebars
 Handlebars är en kraftfull mall (eng: templating) motor som är enkel att använda. Handlebars innehåller:
 
 * Templates
+* Expressions
+* Context
+* Helpers
 
 Det är baserat på Mustasch mallens språk, men förbättrar den på flera viktiga sätt. Med Handlebars kan du skilja din HTML markup från din JavaScript och skriva renare kod.
 
@@ -40,7 +43,7 @@ var template = Handlebars.compile(templateScript);
 // Definera vårt data objekt
 var context={
   "name": "Ray"
-            };
+};
 
 // Skicka data:n till vår mall
 var theCompiledHtml = template(context);
@@ -147,3 +150,13 @@ var theCompiledHtml = template(context);
 // Add the compiled html to the page
 document.body.innerHTML = theCompiledHtml;
 ```
+
+---
+
+## Helpers
+
+Handlebars tillåter dig inte att skriva JavaScript direkt i mallar, istället ger det dig hjälpare.
+
+Det här är JavaScript-funktioner som du kan anropa från dina mallar, och hjälper dig att återanvända kod och skapa komplexa mallar.
+
+To call a helper, just use it as an expression `{{helpername}}`.

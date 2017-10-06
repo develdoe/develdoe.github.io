@@ -260,4 +260,48 @@ I exemplet nedan, ändrar vi texten till stora bokstäver:
 
 **JS**
 ```js
+// hämta innehållet i vår mall
+var templateScript = document.getElementById('template').innerHTML;
+
+// Registrera en block hjälpare
+// Namnet på vår helper är den första parametern, i detta fall 'uppercase'
+Handlebars.registerHelper('uppercase', function(options) {
+
+// Detta är kontexten som existerade när vi anropade hjälparen.
+
+// option objektet har en special funktion (fn). Vilket 
+// är en kompilerad version av mallen som befinner sig 
+// mellan öppning och stägnings uttrycken. 
+// För att få en sträng anropar du fn med dess kontext.
+
+return options.fn(this).toUpperCase();
+
+});
+
+// Kompilera mallen
+var template = Handlebars.compile(templateScript);
+
+// Definiera kontext
+var context = {
+"code": "up up down down left right left right b a select start"
+};
+
+// Skicka context objeket till vår mall
+var theCompiledHtml = template(context);
+
+// Skicka in vår compilerade html markup till dokumentet
+document.getElementById('placeholder').innerHTML = theCompiledHtml
+```
+
+---
+
+## Resurser och vidare läsning
+
+Nu vet du tillräckligt för att börja använda Handlebars i dina webbapps! Men det gör aldrig ont att veta lite mer, så här är några fler resurser och artiklar om du vill gräva djupare i biblioteket:
+
+[Handlebars.js](http://handlebarsjs.com/) - Handlebars hemsida är fullt av bra dokumentation och exempel.
+[Try Handlebars.js](http://tryhandlebarsjs.com/) - prova olika handtagsscenarier i din webbläsare (det är för en äldre version av handtagen, tyvärr, men grunderna är ganska mycket desamma).
+[Handlebars Helpers](https://github.com/helpers/handlebars-helpers) - en samling av 130 + styrhjälpmedel i ~ 20 kategorier.
+[SWAG](https://github.com/elving/swag) - flera Handlebars helpers.
+[Handlebars API Reference.](http://handlebarsjs.com/reference.html)
 

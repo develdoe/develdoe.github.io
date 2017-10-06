@@ -23,7 +23,7 @@ Mallar måste sammanställas till en JavaScript-funktion före användning. Du k
 
 **html**
 ```html
-<script id="template" type="text/x-handlebars-template">Mitt namn är {{name}}</script>
+<script id="template" type="text/x-handlebars-template">Mitt namn är {{{name}}}</script>
 
 /*Det nya innehållet kommer att placeras här*/
 <div class="content-placeholder"></div>

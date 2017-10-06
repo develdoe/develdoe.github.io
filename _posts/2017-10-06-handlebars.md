@@ -65,11 +65,13 @@ Observera också att Handlebars uttryck stödjer nästlade värden som gör att 
 **HTML**
 ```html
 <script id="template" type="text/x-handlebars-template">
+{% raw %}
     {{description.escaped}}
     {{example}}
     <br><br>
     {{description.unescaped}}
     {{{example}}}
+{% endraw %}
 </script>
 
 <!--Your new content will be displayed in here-->

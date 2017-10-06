@@ -80,8 +80,8 @@ Observera också att Handlebars uttryck stödjer nästlade värden som gör att 
 
 **JS**
 ```js
-// Grab the template script
-var templateScript = document.getElementById('template').innerHTML
+// hämta innehållet i vår mall
+var templateScript = document.getElementById('template').innerHTML;
 
 // Kompilera mallen
 var template = Handlebars.compile(templateScript);
@@ -130,7 +130,8 @@ Men hjälpare som #each eller #with modifierar det, så att du direkt kan komma 
 ```
 **JS**
 ```js
-var templateScript = document.getElementById('template').innerHTML
+// hämta innehållet i vår mall
+var templateScript = document.getElementById('template').innerHTML;
 
 // Kompilera mallen
 var template = Handlebars.compile(templateScript);
@@ -164,3 +165,73 @@ Det här är JavaScript-funktioner som du kan anropa från dina mallar, och hjä
 To call a helper, just use it as an expression `{{helpername}}`.
 
 Du kan också vidarebefordra parametrar `{{help name 12345}}`, som skickas som parametrar till din hjälparfunktion.
+
+För att skapa en hjälpare, använder du registerHelper funktionen. 
+
+**HTML**
+```html
+<script id="template" type="text/x-handlebars-template">
+{% raw %}{{#each animals}} {% endraw %}
+	<p>
+    	The {% raw %} {{capitalize this.name}} {% endraw %} says 
+        {% raw %} {{#if this.noize}} {% endraw %}
+        {% raw %} {{this.noize}} {% endraw %}
+        {% raw %} {{#else}} {% endraw %}
+        nothing at all
+        {% raw %} {{#/if}} {% endraw %}
+{% raw %} {{#/each}} {% endraw %}
+</script>
+
+<div id="placeholder"></div>
+```
+
+**JS**
+```js
+// Registrera en hjälpare
+Handlebars.registerHelper('capitalize', function(str){
+	// str är argumentet till hjälparen när anropad
+  	str = str || '';
+    return str.slice(0,1).toUpperCase() + str.slice(1);
+});
+
+// hämta innehållet i vår mall
+var templateScript = document.getElementById('template').innerHTML;
+
+// Kompilera mallen
+var template = Handlebars.compile(templateScript);
+
+// Vår kontext
+var context = {
+    animals:[
+      {
+        name: "cow",
+        noise: "moooo"
+      },
+      {
+        name: "cat",
+        noise: "meow"
+      },
+      {
+        name: "fish",
+        noise: ""
+      },
+      {
+        name: "farmer",
+        noise: "Get off my property!"
+      }
+    ]
+};
+
+// Pass our data to the template
+var theCompiledHtml = template(context);
+
+// Add the compiled html to the page
+document.body.innerHTML = theCompiledHtml;
+```
+
+---
+
+## Block helpers
+
+Blockhjälpare är precis som de vanliga, men de har en öppning och en avslutande tagg (som #if och #each inbyggda).
+

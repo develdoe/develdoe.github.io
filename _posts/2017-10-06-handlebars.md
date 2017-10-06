@@ -96,3 +96,57 @@ var theCompiledHtml = template(context);
 // Add the compiled html to the page
 document.getElementById('placeholder').innerHTML = theCompiledHtml
 ```
+
+---
+
+## Context
+
+Handlebars kontext är ett js objekt där vi lägger till våra egna. 
+
+Alla Mallar har ett kontext. På översta nivån är det JavaScript-objektet som du skickar till den sammanställda mallen.
+
+Men hjälpare som #each eller #with modifierar det, så att du direkt kan komma dess egenskaper för att iterera objektet.
+
+**HTML**
+```js
+<!-- The #each helper iterates over an array of items. -->
+<script id="template" type="text/x-handlebars-template">
+
+  <!-- people is looked up on the global context, the one we pass to the compiled template -->
+
+  {{#each people}}
+
+    <!-- Here the context is each individual person. So we can access its properties directly: -->
+    <p>{{firstName}} {{lastName}}</p>
+
+  {{/each}}
+
+</script>
+```
+**JS**
+```js
+var templateScript = document.getElementById('template').innerHTML
+
+// Kompilera mallen
+var template = Handlebars.compile(templateScript);
+
+// This is the default context, which is passed to the template
+var context = {
+people: [ 
+  { firstName: 'Homer', lastName: 'Simpson' },
+  { firstName: 'Peter', lastName: 'Griffin' },
+  { firstName: 'Eric', lastName: 'Cartman' },
+  { firstName: 'Kenny', lastName: 'McCormick' },
+  { firstName: 'Bart', lastName: 'Simpson' }
+]
+};
+
+---
+
+
+// Pass our data to the template
+var theCompiledHtml = template(context);
+
+// Add the compiled html to the page
+document.body.innerHTML = theCompiledHtml;
+```

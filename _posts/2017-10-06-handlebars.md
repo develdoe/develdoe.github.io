@@ -45,7 +45,7 @@ var context={
   "name": "Ray"
 };
 
-// Skicka data:n till vår mall
+// Skicka context objeket till vår mall
 var theCompiledHtml = template(context);
 
 // Skicka in vår compilerade html markup till dokumentet
@@ -95,7 +95,7 @@ var context={
     "example": "<button> Hello </button>"
   };
 
-// Pass our data to the template
+// Skicka context objeket till vår mall
 var theCompiledHtml = template(context);
 
 // Add the compiled html to the page
@@ -147,7 +147,7 @@ people: [
 ]
 };
 
-// Pass our data to the template
+// Skicka context objeket till vår mall
 var theCompiledHtml = template(context);
 
 // Add the compiled html to the page
@@ -188,6 +188,7 @@ För att skapa en hjälpare, använder du registerHelper funktionen.
 **JS**
 ```js
 // Registrera en hjälpare
+// Namnet på vår helper är den första parametern, i detta fall 'capitalize'
 Handlebars.registerHelper('capitalize', function(str){
 	// str är argumentet till hjälparen när anropad
   	str = str || '';
@@ -200,7 +201,7 @@ var templateScript = document.getElementById('template').innerHTML;
 // Kompilera mallen
 var template = Handlebars.compile(templateScript);
 
-// Vår kontext
+// Definiera kontext
 var context = {
     animals:[
       {
@@ -222,7 +223,7 @@ var context = {
     ]
 };
 
-// Pass our data to the template
+// Skicka context objeket till vår mall
 var theCompiledHtml = template(context);
 
 // Add the compiled html to the page
@@ -237,4 +238,26 @@ Blockhjälpare är precis som de vanliga, men de har en öppning och en avslutan
 
 Dessa hjälpare kan ändra HTML innehållet i de kontext de omfångar. De är lite mer komplicerade att skapa, men är mycket kraftfulla. Du kan använda dem för att återanvända funktionalitet eller skapa stora block av HTML på ett återanvändbart sätt. Som exempelvist en lista av objekt som du återanvänder på flera ställen i din applikation.
 
-För att skapa en blockhjälpare använder du igen `Handlebars.registerHelper()`.
+För att skapa en blockhjälpare använder du igen `Handlebars.registerHelper()`. Skillnaden är att den här gången kommer vi att använda den andra parametern i callback funktionen som vi skickar till `registerHelper()` metoden. Det exponerar att antal användbara egenskaper. 
+
+I exemplet nedan, ändrar vi texten till stora bokstäver:
+
+**HTML**
+```html
+<script id="template" type="text/x-handlebars-template">
+
+  <p> 
+    The <b> {% raw %} {{#uppercase}} {% endraw %}  konami {% raw %} {{/uppercase}} {% endraw %} </b> 
+    Code is a cheat code that appears in many video games.
+  </p>
+
+  <p>{% raw %} {{#uppercase}} {% endraw %}{{code}} {% raw %} {{/uppercase}} {% endraw %}</p>
+
+</script>
+
+<div id="placeholder"></div>
+```
+
+**JS**
+```js
+

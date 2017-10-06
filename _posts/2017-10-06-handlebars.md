@@ -109,7 +109,7 @@ Men hjälpare som #each eller #with modifierar det, så att du direkt kan komma 
 
 **HTML**
 ```js
-<!-- The #each helper iterates over an array of items. -->
+<!-- The #each helper itererar över array matriser. -->
 <script id="template" type="text/x-handlebars-template">
 
   <!-- people is looked up on the global context, the one we pass to the compiled template -->

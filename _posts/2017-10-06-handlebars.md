@@ -22,7 +22,7 @@ Uttryckningar är inslagna i dubbel- eller trippelklamrar `{{}}`. Uttryck talar 
 Mallar måste sammanställas till en JavaScript-funktion före användning. Du kan se ett exempel nedan:
 
 **html**
-```html
+```
 <script id="template" type="text/x-handlebars-template">Mitt namn är {{name}}</script>
 
 /*Det nya innehållet kommer att placeras här*/
@@ -51,3 +51,8 @@ $function(function() {
   	document.getElementById('placeholder').innerHTML = theCompiledHtml
 });
 ```
+
+---
+
+## Expressions
+

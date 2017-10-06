@@ -60,7 +60,7 @@ Det här är en bra säkerhetsfunktion, men ibland kanske du vill skriva ut rå 
 Observera också att Handlebars uttryck stödjer nästlade värden som gör att vi enkelt kan komma åt data från vilket  JavaScript objekt som helst.
 
 **HTML**
-```js
+```html
 <script id="template" type="text/x-handlebars-template">
    \{\{description.escaped\}\}
     {{example}}

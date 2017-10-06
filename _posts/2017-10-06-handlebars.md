@@ -235,3 +235,6 @@ document.body.innerHTML = theCompiledHtml;
 
 Blockhjälpare är precis som de vanliga, men de har en öppning och en avslutande tagg (som **#if** och **#each** inbyggda).
 
+Dessa hjälpare kan ändra HTML innehållet i de kontext de omfångar. De är lite mer komplicerade att skapa, men är mycket kraftfulla. Du kan använda dem för att återanvända funktionalitet eller skapa stora block av HTML på ett återanvändbart sätt. Som exempelvist en lista av objekt som du återanvänder på flera ställen i din applikation.
+
+För att skapa en blockhjälpare använder du igen `Handlebars.registerHelper()`.

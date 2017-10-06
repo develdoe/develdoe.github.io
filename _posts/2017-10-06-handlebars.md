@@ -141,9 +141,6 @@ people: [
 ]
 };
 
----
-
-
 // Pass our data to the template
 var theCompiledHtml = template(context);
 

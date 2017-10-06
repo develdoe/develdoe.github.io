@@ -26,7 +26,7 @@ Mallar måste sammanställas till en JavaScript-funktion före användning. Du k
 
 **html**
 ```hb
-<script id="template" type="text/x-handlebars-template">Mitt namn är {{name}}</script>
+<script id="template" type="text/x-handlebars-template">Mitt namn är {% raw %} {{name}} {% endraw %}</script>
 
 /*Det nya innehållet kommer att placeras här*/
 <div class="content-placeholder"></div>

@@ -233,5 +233,5 @@ document.body.innerHTML = theCompiledHtml;
 
 ## Block helpers
 
-Blockhjälpare är precis som de vanliga, men de har en öppning och en avslutande tagg (som #if och #each inbyggda).
+Blockhjälpare är precis som de vanliga, men de har en öppning och en avslutande tagg (som **#if** och **#each** inbyggda).
 

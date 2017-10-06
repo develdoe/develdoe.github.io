@@ -162,9 +162,9 @@ Handlebars tillåter dig inte att skriva JavaScript direkt i mallar, istället g
 
 Det här är JavaScript-funktioner som du kan anropa från dina mallar, och hjälper dig att återanvända kod och skapa komplexa mallar.
 
-To call a helper, just use it as an expression `{{helpername}}`.
+To call a helper, just use it as an expression `{% raw %}{{helpername}}{% endraw %}`.
 
-Du kan också vidarebefordra parametrar `{{help name 12345}}`, som skickas som parametrar till din hjälparfunktion.
+Du kan också vidarebefordra parametrar `{% raw %}{{help name 12345}}{% endraw %}`, som skickas som parametrar till din hjälparfunktion.
 
 För att skapa en hjälpare, använder du registerHelper funktionen. 
 

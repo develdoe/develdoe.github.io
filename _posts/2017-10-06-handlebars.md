@@ -113,7 +113,7 @@ Alla Mallar har ett kontext. På översta nivån är det JavaScript-objektet som
 Men hjälpare som #each eller #with modifierar det, så att du direkt kan komma dess egenskaper för att iterera objektet.
 
 **HTML**
-```js
+```html
 <!-- The #each helper itererar över array matriser. -->
 <script id="template" type="text/x-handlebars-template">
 

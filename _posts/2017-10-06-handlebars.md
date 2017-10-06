@@ -62,7 +62,7 @@ Observera också att Handlebars uttryck stödjer nästlade värden som gör att 
 **HTML**
 ```html
 <script id="template" type="text/x-handlebars-template">
-    {{description.escaped}}
+    &#123;&#123;description.escaped}}
     {{example}}
     <br><br>
     {{description.unescaped}}

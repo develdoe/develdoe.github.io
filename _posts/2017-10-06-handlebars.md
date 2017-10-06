@@ -30,7 +30,7 @@ Mallar måste sammanställas till en JavaScript-funktion före användning. Du k
 ```
 
 **JS**
-```js
+```
 $function(function() {
 	
   	// hämta innehållet i vår mall

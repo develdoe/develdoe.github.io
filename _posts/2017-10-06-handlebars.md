@@ -22,15 +22,15 @@ Uttryckningar är inslagna i dubbel- eller trippelklamrar `{{}}`. Uttryck talar 
 Mallar måste sammanställas till en JavaScript-funktion före användning. Du kan se ett exempel nedan:
 
 **html**
-```
-<script id="template" type="text/x-handlebars-template">Mitt namn är {{name}}</script>
+```html
+<script id="template" type="text/x-handlebars-template">Mitt namn är <pre>{{name}}</pre></script>
 
 /*Det nya innehållet kommer att placeras här*/
 <div class="content-placeholder"></div>
 ```
 
 **JS**
-```
+```js
 $function(function() {
 	
   	// hämta innehållet i vår mall

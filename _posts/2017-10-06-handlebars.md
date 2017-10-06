@@ -119,10 +119,10 @@ Men hjälpare som #each eller #with modifierar det, så att du direkt kan komma 
 
   <!-- people is looked up on the global context, the one we pass to the compiled template -->
 
-  {{#each people}}
+  {% raw %}{{#each people}}{% endraw %}
 
     <!-- Here the context is each individual person. So we can access its properties directly: -->
-    <p>{{firstName}} {{lastName}}</p>
+    <p>{% raw %}{{firstName}} {{lastName}}{% endraw %}</p>
 
   {{/each}}
 

@@ -23,7 +23,7 @@ These all are not exactly the same, but the core idea is similar.
 * Ta emot data och skicakr callbacks exklusivt via props uteslutande via rekvisita.
 * Sällan har sitt eget state (när de gör det, är det UI-state istället för data).
 * Skrivs som [funktionella komponenter](http://developer.wimse.se/2017/stateless-functional-components/) om de inte behöver state, livscykelhakar eller prestandaoptimeringar.
-* Exempel: Sida, Sidpanel, Story, UserInfo, List.
+* Exempel: Page, PagePanel, Story, UserInfo, List.
 
 #### React container components:
 
@@ -32,4 +32,15 @@ These all are not exactly the same, but the core idea is similar.
 * Erbjuder data och beteende till presentations eller andra container komponenter.
 * Anroper Redux actions och tillhandahålle dem som återkopplingar till presentationsdelarna.
 * Är ofta stateful, eftersom de tenderar att fungera som datakällor.
+* Genereras vanligen med hjälp av högre orderkomponenter som `connect()` från React Redux, `createContainer()` från Relay eller `Container.create()` från Flux Utils, istället för att skrivas för hand.
+* Exempel: UserPage, FollowersSidebar, StoryContainer, FollowedUserList.
 
+Du kan lägga dem i olika mappar för att göra denna åtskillnad tydlig.
+
+#### Benefits
+
+* Bättre separation av ärende (eng: concerns). Du förstår din app och ditt användargränssnitt bättre genom att skriva komponenter på så sätt.
+* Bättre återanvändning. Du kan använda samma presentationsdel med helt olika state-skällor och omvandla dem i separata behållarkomponenter som kan återanvändas.
+* Presentationskomponenter är huvudsakligen din apps "palett". Du kan lägga dem på en enda sida och låta konstruktören anpassa alla sina variationer utan att röra appens logik. Du kan köra skärmdumps regressionstest på den sidan.
+* Detta tvingar dig att extrahera "layoutkomponenter", som Sidebar, Page, ContextMenu och använd this.props.children istället för att duplicera samma markup och layout i flera behållarkomponenter.
+* Kom ihåg att komponenter inte behöver avge DOM. De behöver bara tillhandahålla kompositionsgränser mellan UI ärenden (eng: concerns).

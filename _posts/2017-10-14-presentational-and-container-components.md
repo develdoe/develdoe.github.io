@@ -61,4 +61,28 @@ Den här gratis tutorialen [Redux Egghead](https://egghead.io/courses/getting-st
 
 ## Other Dichotomies
 
+Det är viktigt att du förstår att skillnaden mellan presentationsdelarna och behållarna inte är teknisk. Snarare är det en skillnad i deras syfte.
+
+Däremot är det några relaterade (men olika!) Tekniska skillnader:
+
+* **Stateful and Stateless** - Vissa komponenter använder React setState() metoden och vissa gör det inte. Medan behållarkomponenter tenderar att vara statefull och presenterande komponenter tenderar att vara statsless, är inte detta en hård regel. Presentationskomponenter kan vara statful, och behållare kan också vara statless.
+* **Classes and Functions** - Eftersom Reakt 0,14 kan komponenter deklareras både som klasser och som funktioner. Funktionella komponenter är enklare att definiera men de saknar vissa funktioner som för närvarande endast är tillgängliga för klasskomponenter. Några av dessa begränsningar kan gå bort i framtiden men de finns idag. Eftersom funktionella komponenter är lättare att förstå, föreslår jag att du använder dem om du inte behöver state, livscykelhakar eller prestandaoptimeringar, som endast är tillgängliga för klasskomponenterna just nu.
+* **Pure and Impure** - Man säger att en komponent är ren om den garanterat att returnera samma resultat given samma prop och state. Rena komponenter kan definieras både som klasser och funktioner, och kan vara både stateful och stateless. En annan viktig aspekt av rena komponenter är att de inte har några krav på djupa mutationer i props eller state, så deras prestanda kan optimeras genom en grundlig jämförelse i deras shouldComponentUpdate() -krok. För närvarande kan endast klasser definiera shouldComponentUpdate() men det kan ändras i framtiden.
+
+Både presentationsdelar och behållare kan vara i någon av bäda dessa. Enligt min erfarenhet tenderar presentationsdelar att vara stateless rena funktioner, och behållare tenderar att vara stateful rena klasser. Men det här är inte en regel utan en observation, och jag har sett de exakta motsatta fallen som visste sig under vissa omständigheter.
+
+Ta inte delningen av presentations- och behållarkomponenten som en dogma. Ibland spelar ingen roll eller det är svårt att rita linjen. Om du är osäker på om en viss komponent ska vara presentativ eller en behållare, kan det vara för tidigt att bestämma.
+
+## Example
+
+[This gist](https://gist.github.com/chantastic/fc9e3853464dffdb1e3c)
+
+## Further Reading
+
+[Getting Started with Redux](https://egghead.io/courses/getting-started-with-redux)
+[Mixins are Dead, Long Live Composition](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750)
+[Container Components](https://medium.com/@learnreact/container-components-c0e67432e005)
+[Atomic Web Design](http://bradfrost.com/blog/post/atomic-web-design/)
+[Building the Facebook News Feed with Relay](http://facebook.github.io/react/blog/2015/03/19/building-the-facebook-news-feed-with-relay.html)
+
 

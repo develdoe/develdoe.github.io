@@ -10,7 +10,7 @@ Om du har gjort React ett tag har du förmodligen redan upptäckt det. Denna art
 Du hittar dina komponenter mycket lättare att återanvända och motivera om du delar dem i två kategorier.
 
 Jag kallar dem Container och Presentationskomponenter, men jag hörde också hört *Fet* and *Mager*, *Smart* and *Dumb*, *Stateful* och *Pure*, *Screens* coh  *Components*, etc.
-
+s
 These all are not exactly the same, but the core idea is similar.
 
 Mina presentations komponenter:
@@ -22,5 +22,5 @@ Mina presentations komponenter:
 * Ange inte hur data laddas eller muteras.
 * Ta emot data och skicakr callbacks exklusivt via props uteslutande via rekvisita.
 * Sällan har sitt eget state (när de gör det, är det UI-state istället för data).
-* Skrivs som funktionella komponenter om de inte behöver tillstånd, livscykelhakar eller prestandaoptimeringar.
+* Skrivs som [funktionella komponenter](http://developer.wimse.se/2017/stateless-functional-components/) om de inte behöver state, livscykelhakar eller prestandaoptimeringar.
 * Exempel: Sida, Sidpanel, Story, UserInfo, List.

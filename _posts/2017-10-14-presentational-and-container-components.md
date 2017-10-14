@@ -80,9 +80,11 @@ Ta inte delningen av presentations- och behållarkomponenten som en dogma. Iblan
 ## Further Reading
 
 [Getting Started with Redux](https://egghead.io/courses/getting-started-with-redux)
+
 [Mixins are Dead, Long Live Composition](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750)
+
 [Container Components](https://medium.com/@learnreact/container-components-c0e67432e005)
+
 [Atomic Web Design](http://bradfrost.com/blog/post/atomic-web-design/)
+
 [Building the Facebook News Feed with Relay](http://facebook.github.io/react/blog/2015/03/19/building-the-facebook-news-feed-with-relay.html)
-
-

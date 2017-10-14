@@ -44,3 +44,21 @@ Du kan lägga dem i olika mappar för att göra denna åtskillnad tydlig.
 * Presentationskomponenter är huvudsakligen din apps "palett". Du kan lägga dem på en enda sida och låta konstruktören anpassa alla sina variationer utan att röra appens logik. Du kan köra skärmdumps regressionstest på den sidan.
 * Detta tvingar dig att extrahera "layoutkomponenter", som Sidebar, Page, ContextMenu och använd this.props.children istället för att duplicera samma markup och layout i flera behållarkomponenter.
 * Kom ihåg att komponenter inte behöver avge DOM. De behöver bara tillhandahålla kompositionsgränser mellan UI ärenden (eng: concerns).
+
+## When to Introduce Containers?
+
+Jag föreslår att du först börjar bygga din app med bara presentativa komponenter först. Så småningom kommer du inse att du passerar för många props ner till närmaste komponenterna.
+
+När du märker att vissa komponenter inte använder de rekvisita som de får men bara vidarebefordrar dem och du måste omdirigera alla de mellanliggande komponenterna när barnen behöver mer data, är det bra att introducera vissa behållarkomponenter.
+
+På så sätt kan du få data och beteendestöd till nod-komponenterna utan att belasta de orelaterade komponenterna i mitten av trädet.
+
+Detta är en pågående refactoringprocess, så försök inte få det rätt första gången.
+
+När du experimenterar med detta mönster kommer du att utveckla en intuitiv känsla för när det är dags att extrahera några behållare, precis som du vet när det är dags att extrahera en funktion.
+
+Den här gratis tutorialen [Redux Egghead](https://egghead.io/courses/getting-started-with-redux) serie är en bra vägledare.
+
+## Other Dichotomies
+
+

@@ -7,7 +7,7 @@ Det finns ett enkelt mönster som jag tycker är oerhört användbart när du sk
 
 Om du har gjort React ett tag har du förmodligen redan upptäckt det. Denna artikel förklarar det bra, men jag vill lägga till några fler poäng.
 
-Du hittar dina komponenter mycket lättare att återanvända och motivera om du delar dem i två kategorier.
+Dina komponenter lir mycket lättare att återanvända och motivera om du delar dem i två kategorier.
 
 Jag kallar dem Container och Presentationskomponenter, men jag hörde också hört *Fet* and *Mager*, *Smart* and *Dumb*, *Stateful* och *Pure*, *Screens* coh  *Components*, etc.
 s

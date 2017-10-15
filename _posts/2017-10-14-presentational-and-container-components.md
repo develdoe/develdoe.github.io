@@ -25,6 +25,19 @@ These all are not exactly the same, but the core idea is similar.
 * Skrivs som [funktionella komponenter](http://developer.wimse.se/2017/stateless-functional-components/) om de inte behöver state, livscykelhakar eller prestandaoptimeringar.
 * Exempel: Page, PagePanel, Story, UserInfo, List.
 
+```js
+// CommentList.js
+import React from "react";
+
+const Commentlist = comments => (
+  <ul>
+    {comments.map(({ body, author }) =>
+      <li>{body}-{author}</li>
+    )}
+  </ul>
+)
+```
+
 #### React container components:
 
 * Är bekymrad över hur sakerna fungerar.
@@ -34,6 +47,29 @@ These all are not exactly the same, but the core idea is similar.
 * Är ofta stateful, eftersom de tenderar att fungera som datakällor.
 * Genereras vanligen med hjälp av högre orderkomponenter som `connect()` från React Redux, `createContainer()` från Relay eller `Container.create()` från Flux Utils, istället för att skrivas för hand.
 * Exempel: UserPage, FollowersSidebar, StoryContainer, FollowedUserList.
+
+```js
+// CommentListContainer.js
+import React from "react";
+import CommentList from "./CommentList";
+
+class CommentListContainer extends React.Component {
+  constructor() {
+    super();
+    this.state = { comments: [] }
+  }
+  
+  componentDidMount() {
+    fetch("/my-comments.json")
+      .then(res => res.json())
+      .then(comments => this.setState({ comments }))
+  }
+  
+  render() {
+    return <CommentList comments={this.state.comments} />;
+  }
+}
+```
 
 Du kan lägga dem i olika mappar för att göra denna åtskillnad tydlig.
 

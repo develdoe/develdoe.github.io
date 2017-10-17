@@ -36,3 +36,12 @@ Den viktigaste sak som Backbone kan hjälpa dig med är att hålla din affärslo
 
 När de två är intrasslade är förändring svår; När logiken inte är beroende av användargränssnitt blir ditt gränssnitt lättare att arbeta med.
 
+#### Model
+
+* Orkesterar data och affärslogik.
+* Laddar och sparar från servern.
+* Utsänder events när data ändras.
+
+#### View
+
+* 

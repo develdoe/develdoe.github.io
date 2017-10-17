@@ -59,3 +59,11 @@ Modeller ska i allmänhet vara omedvetna om Vyer. Istället lyssnar Vyer på mod
 * Listens for changes and renders UI.
 * Hanterar användarinmatning och interaktivitet.
 * Skickar infångad input till modellen.
+
+## Collections
+
+![collections](http://backbonejs.org/docs/images/intro-collections.svg)
+
+En kollektion hjälper dig att hantera en grupp relaterade modeller.
+
+En kollektion hanterar laddning och lagring av nya modeller till servern och tillhandahåller hjälparfunktioner för att utföra aggregeringar eller beräkningar mot en lista av modeller.

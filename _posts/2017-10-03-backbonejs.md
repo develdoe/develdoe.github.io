@@ -27,8 +27,12 @@ Med Backbone representerar du dina data som Modeller, dessa kan skapas, förstö
 
 När en UI-åtgärd orsakar att en modell av en modell ändras, utlöser modellen en "förändring" -event; alla synpunkter som visar modellens tillstånd kan meddelas om ändringen, så att de kan svara i enlighet med det, återförvisa sig med den nya informationen. I en färdig Backbone-app behöver du inte skriva den limkod som tittar på DOM för att hitta ett element med ett visst ID och uppdatera HTML manuellt. När modellen ändras uppdateras vyerna.
 
+## Models and Views
 
 
+![models and views](http://backbonejs.org/docs/images/intro-model-view.svg)
+
+Den viktigaste sak som Backbone kan hjälpa dig med är att hålla din affärslogik separat från ditt användargränssnitt.
 
 
 

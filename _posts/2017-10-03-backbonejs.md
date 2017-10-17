@@ -72,7 +72,7 @@ Förutom att kollektioner har egna events, så lyssnar man även på modellernas
 
 ## API Integration
 
-Backbone är förkonfigurerad för att synkronisera med ett RESTful API. Skapa helt enkelt en ny kollektion med dess URL: n för en resursändpunkt:
+Backbone är förkonfigurerad för att synkronisera med ett RESTful API. Skapa helt enkelt en ny kollektion med dess URL: n för en resursändpunkt.
 
 
 

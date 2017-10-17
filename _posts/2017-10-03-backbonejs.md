@@ -6,6 +6,8 @@ title: BackboneJS
 
 Backbone.js ger strukturen till webbapplikationer.
 
+I ett ekosystem där övergripande, beslutar-allt-för-dig-ramverk är vanliga, och många bibliotek kräver att din webbplats omorganiseras för att passa deras utseende, känsla och standardbeteende. Vill Backbone vara ett verktyg som ger dig frihet hur du utformar din webbapplikation.
+
 Filosofiskt är Backbone ett försök att upptäcka de minimala uppsättningarna av datastrukturering (modeller och kollektioner) och användargränssnitt (vyer och URL:er) primitiva som är vanligtvist användbara vid uppbyggnad av webbapplikationer med JavaScript.
 
 * Den tillhandahåller modeller med nyckel-värde par bindningar  

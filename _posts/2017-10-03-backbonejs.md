@@ -72,7 +72,30 @@ Förutom att kollektioner har egna events, så lyssnar man även på modellernas
 
 ## API Integration
 
-Backbone är förkonfigurerad för att synkronisera med ett RESTful API. Skapa helt enkelt en ny kollektion med dess URL: n för en resursändpunkt.
+Backbone är förkonfigurerad för att synkronisera med ett RESTful API. Skapa helt enkelt en ny kollektion med dess URL för en resursändpunkt.
 
+```js
+var Books = Backbone.Collection.extend({
+  url: '/books'
+});
+```
 
+Kollektion- och modellkomponenterna bildar tillsammans en direkt kartläggning av REST-resurser med hjälp av följande metoder:
+
+```js
+GET  /books/ .... collection.fetch();
+POST /books/ .... collection.create();
+GET  /books/1 ... model.fetch();
+PUT  /books/1 ... model.save();
+DEL  /books/1 ... model.destroy();
+```
+
+När du hämtar råa JSON-data från ett API, kommer en kollektion automatiskt att populeras med data formaterad som en array, medan en modell automatiskt fyller sig med data formaterad som ett objekt:
+
+```js
+[{"id": 1}] ..... populates a Collection with one model.
+{"id": 1} ....... populates a Model with one attribute.
+```
+
+Det är dock ganska vanligt att stöta på API: er som returnerar data i ett annat format än vad Backbone förväntar sig. Som exempel, föreställ dig att du hämta en kollektion från ett API som returnerar den verkliga datarrayen som är inbäddad i metadata:
 

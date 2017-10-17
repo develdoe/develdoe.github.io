@@ -99,3 +99,16 @@ När du hämtar råa JSON-data från ett API, kommer en kollektion automatiskt a
 
 Det är dock ganska vanligt att stöta på API: er som returnerar data i ett annat format än vad Backbone förväntar sig. Som exempel, föreställ dig att du hämta en kollektion från ett API som returnerar den verkliga datarrayen som är inbäddad i metadata:
 
+```js
+{
+  "page": 1,
+  "limit": 10,
+  "total": 2,
+  "books": [
+    {"id": 1, "title": "Pride and Prejudice"},
+    {"id": 4, "title": "The Great Gatsby"}
+  ]
+}
+```
+
+

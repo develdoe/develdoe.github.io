@@ -130,4 +130,6 @@ Varje vy hanterar rendering och användarinteraktion inom sitt eget DOM-element.
 
 Om du är strikt om att inte tillåta vyer att nå utanför sig, hjälper det att hålla gränssnittet flexibelt, så att vyer kan göras isolerat på någon plats där de kan behövas.
 
-Backbone har ingen opinion ang processen som används för att göra vy objekt och deras objekt till användargränssnittet. Du definierar hur dina modeller blir översatta till HTML (eller SVG eller Canvas eller något mer exotiskt).
+Backbone har ingen opinion ang processen som används för att göra vy objekt och deras objekt till användargränssnittet. Du definierar hur dina modeller blir översatta till HTML (eller SVG eller Canvas eller något mer exotiskt). Det kan vara så prosaiskt som en enkel Underscore-mall, eller så snyggt som React Virtual DOM. Några grundläggande sätt att återge vyer finns i Backbone primer.
+
+## Routing with URLs

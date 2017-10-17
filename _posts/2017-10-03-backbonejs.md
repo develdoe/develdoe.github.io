@@ -111,4 +111,23 @@ Det är dock ganska vanligt att stöta på API: er som returnerar data i ett ann
 }
 ```
 
+I ovanstående exempeldata borde en kollektion populeras med användning av "books"-raktionen istället för rotobjektstrukturen. Denna skillnad är lätt att förena med en analysmetod som returnerar (eller omvandlar) önskad del av API-data:
 
+```js
+var Books = Backbone.Collection.extend({
+  url: '/books',
+  parse: function(data) {
+    return data.books;
+  }
+});
+```
+
+## View Rendering
+
+![view rendering](http://backbonejs.org/docs/images/intro-views.svg)
+
+Varje vy hanterar rendering och användarinteraktion inom sitt eget DOM-element.
+
+Om du är strikt om att inte tillåta vyer att nå utanför sig, hjälper det att hålla gränssnittet flexibelt, så att vyer kan göras isolerat på någon plats där de kan behövas.
+
+Backbone har ingen opinion ang processen som används för att göra vy objekt och deras objekt till användargränssnittet. Du definierar hur dina modeller blir översatta till HTML (eller SVG eller Canvas eller något mer exotiskt).

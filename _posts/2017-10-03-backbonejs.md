@@ -133,3 +133,11 @@ Om du är strikt om att inte tillåta vyer att nå utanför sig, hjälper det at
 Backbone har ingen opinion ang processen som används för att göra vy objekt och deras objekt till användargränssnittet. Du definierar hur dina modeller blir översatta till HTML (eller SVG eller Canvas eller något mer exotiskt). Det kan vara så prosaiskt som en enkel Underscore-mall, eller så snyggt som React Virtual DOM. Några grundläggande sätt att återge vyer finns i Backbone primer.
 
 ## Routing with URLs
+
+![routing](http://backbonejs.org/docs/images/intro-routing.svg)
+
+I rika webbapplikationer vill vi fortfarande tillhandahålla länkar, bokmärkningsbara och delbara webbadresser till meningsfulla platser i en app. 
+
+Använd routern för att uppdatera webbläsarens webbadress när användaren når en ny "plats" i din app som de kanske vill bokmärka eller dela.
+
+Omvänt upptäcker routern ändringar i webbadressen, säg att de trycker på "Tillbaka" -knappen, och kan diregera i applikationen beroende på vart du nu är.

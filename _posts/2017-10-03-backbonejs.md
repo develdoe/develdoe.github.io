@@ -50,6 +50,12 @@ Modeller hanterar synkroniseringsdata med ett persistenslager, vanligtvis ett RE
 
 #### View
 
+En Vy är en minimal del av användargränssnittet. Den renderar ofta data från en viss modell eller antal modeller.
+
+Men en Vy kan också vara data-less delar av användargränssnitt som står oberoende.
+
+Modeller ska i allmänhet vara omedvetna om Vyer. Istället lyssnar Vyer på modellen "change" events och reagerar eller återställer sig på lämpligt sätt.
+
 * Listens for changes and renders UI.
 * Hanterar användarinmatning och interaktivitet.
 * Skickar infångad input till modellen.

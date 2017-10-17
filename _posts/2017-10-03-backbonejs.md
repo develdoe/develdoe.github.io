@@ -34,5 +34,5 @@ När en UI-åtgärd orsakar att en modell av en modell ändras, utlöser modelle
 
 Den viktigaste sak som Backbone kan hjälpa dig med är att hålla din affärslogik separat från ditt användargränssnitt.
 
-
+När de två är intrasslade är förändring svår; När logiken inte är beroende av användargränssnitt blir ditt gränssnitt lättare att arbeta med.
 

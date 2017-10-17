@@ -67,3 +67,12 @@ Modeller ska i allmänhet vara omedvetna om Vyer. Istället lyssnar Vyer på mod
 En kollektion hjälper dig att hantera en grupp relaterade modeller.
 
 En kollektion hanterar laddning och lagring av nya modeller till servern och tillhandahåller hjälparfunktioner för att utföra aggregeringar eller beräkningar mot en lista av modeller.
+
+Förutom att kollektioner har egna events, så lyssnar man även på modellernas egna events, vilket tillåter dig att lyssna efter event på alla modeller som tillhör kollektionen på ett och samma ställe.
+
+## API Integration
+
+Backbone är förkonfigurerad för att synkronisera med ett RESTful API. Skapa helt enkelt en ny kollektion med dess URL: n för en resursändpunkt:
+
+
+

@@ -36,7 +36,13 @@ Den viktigaste sak som Backbone kan hjälpa dig med är att hålla din affärslo
 
 När de två är intrasslade är förändring svår; När logiken inte är beroende av användargränssnitt blir ditt gränssnitt lättare att arbeta med.
 
+Designa dina modeller som minimala återanvändbara objekt som innehåller alla användbara funktioner för att manipulera deras speciella bit data.
+
 #### Model
+
+En modell hanterar en intern tabell med dataattribut och utlöser "change" event när någon av dess data ändras.
+
+Modeller hanterar synkroniseringsdata med ett persistenslager, vanligtvis ett REST API med en databas. 
 
 * Orkesterar data och affärslogik.
 * Laddar och sparar från servern.

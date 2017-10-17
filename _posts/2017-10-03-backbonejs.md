@@ -44,4 +44,6 @@ När de två är intrasslade är förändring svår; När logiken inte är beroe
 
 #### View
 
-* 
+* Listens for changes and renders UI.
+* Hanterar användarinmatning och interaktivitet.
+* Skickar infångad input till modellen.

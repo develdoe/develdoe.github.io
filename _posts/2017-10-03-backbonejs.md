@@ -3,17 +3,21 @@ date: '2017-10-03 12:07 +0200'
 published: true
 title: BackboneJS
 ---
+Backbone är en Model-View ramverk som använder vyer, modeller och kollektioner i kommunikation med en REST-webbservice.
 
-I ett ekosystem där övergripande, beslutar-allt-för-dig-ramverk är vanliga, och många bibliotek kräver att din webbplats omorganiseras för att passa deras utseende, känsla och standardbeteende. Vill Backbone vara ett verktyg som ger dig frihet hur du utformar din webbapplikation.
-
-Filosofiskt är Backbone ett försök att upptäcka de minimala uppsättningarna av datastrukturering (modeller och kollektioner) och användargränssnitt (vyer och URL:er) primitiva som är vanligtvist användbara vid uppbyggnad av webbapplikationer med JavaScript.
-
-Backbone kopplar allt till ditt befintliga API över ett RESTful JSON-gränssnitt.
+Det har också en router för att se till att användaren navigerar genom faktiska serverns banor och gör det möjligt att markera visningarna i programmet. I funktionshowBodyView laddas vyn för innehållsdelen av vyn.
 
 * Den tillhandahåller modeller med nyckel-värde par bindningar  
 * Anpassade event-hanteringar
 * Kollektioner med ett rikt API av otaliga funktioner
 * Vyer med deklarativ event-hantering 
+
+## philosophy
+
+I ett ekosystem där övergripande, beslutar-allt-för-dig-ramverk är vanliga, och många bibliotek kräver att din webbplats omorganiseras för att passa deras utseende, känsla och standardbeteende. Vill Backbone vara ett verktyg som ger dig frihet hur du utformar din webbapplikation.
+
+Filosofiskt är Backbone ett försök att upptäcka de minimala uppsättningarna av datastrukturering (modeller och kollektioner) och användargränssnitt (vyer och URL:er) primitiva som är vanligtvist användbara vid uppbyggnad av webbapplikationer med JavaScript.
+
 
 ### Beroenden
 * Underscore.js (> = 1.8.3)

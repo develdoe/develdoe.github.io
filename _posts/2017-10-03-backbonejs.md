@@ -10,6 +10,11 @@ Filosofiskt är Backbone ett försök att upptäcka de minimala uppsättningarna
 
 Backbone kopplar allt till ditt befintliga API över ett RESTful JSON-gränssnitt.
 
+* Den tillhandahåller modeller med nyckel-värde par bindningar  
+* Anpassade event-hanteringar
+* Kollektioner med ett rikt API av otaliga funktioner
+* Vyer med deklarativ händelsehantering 
+
 ### Beroenden
 * Underscore.js (> = 1.8.3)
 * För RESTful persistens och DOM manipulation (Backbone.View), jQuery (> = 1.11.0) 

@@ -13,7 +13,7 @@ Backbone kopplar allt till ditt befintliga API över ett RESTful JSON-gränssnit
 * Den tillhandahåller modeller med nyckel-värde par bindningar  
 * Anpassade event-hanteringar
 * Kollektioner med ett rikt API av otaliga funktioner
-* Vyer med deklarativ händelsehantering 
+* Vyer med deklarativ event-hantering 
 
 ### Beroenden
 * Underscore.js (> = 1.8.3)

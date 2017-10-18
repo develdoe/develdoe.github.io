@@ -21,4 +21,27 @@ arguments[1]
 arguments[2]
 ```
 
+Argument kan också ställas in:
+
+```js
+arguments[1] = 'new value';
+```
+
+`arguments` objektet är inte en `Array`. `arguments` liknar en `Array`, men har inga av dess egenskaper förutom `length`. Det har till exempel inte `pop` metoden. Men det kan konverteras till en riktig Array:
+
+```js
+var args = Array.prototype.slice.call(arguments);
+var args = [].slice.call(arguments);
+
+// ES2015
+const args = Array.from(arguments);
+```` 
+
+**Använda `slice`på `arguments` förhindrar optimeringar i vissa JavaScript-motorer (V8 till exempel). Försök istället att bygga en ny array genom att iterera genom argumentobjektet istället. Ett alternativ skulle vara att använda den föragtiga `Array` konstruktören som en funktion:**
+
+```js
+var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments));
+```
+
+
 

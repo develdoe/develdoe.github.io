@@ -13,12 +13,12 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: WIMSE - Developer
-email: me@develdoe.com
+title: DevelDoe's Log
+email: me@andreeray.se
 author: Andree DevelDoe Ray
-description: "Hello, I am the Devel. A front end engineer who loves all things HTML, CSS and Javascript. This is my journal."
+description: "Hello, I am DevelDoe a front end engineer who loves all things HTML, CSS and Javascript. This is my journal."
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://develdoe.com/"
+url: "http://log.andreeray.se/"
 twitter_username: develdoe
 github_username:  andreedeveldoeray
 

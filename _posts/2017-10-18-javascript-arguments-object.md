@@ -13,6 +13,8 @@ Denna teknik är användbar för funktioner som kan överföras ett variabelt an
 
 Använd `arguments.length` för att bestämma antalet argumenter som skickats till funktionen, och bearbeta sedan varje argument genom att använda `arguments` objektet.
 
+För att bestämma antalet parametrar i funktionens signatur, använd egenskapen `Function.length` metoden.
+
 * `arguments` objektet är en lokal variabel tillgänglig inom alla (non-arrow) funktioner.
 * Du kan referera till en funktions arguments inom funktionen med hjälp av `arguments` objektet. 
 * Detta objekt innehåller en post för varje argument som skickas till funktionen, index börjar vid 0.

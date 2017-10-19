@@ -7,7 +7,7 @@ title: JavaScript - Arguments object
 
 ## Description
 
-Du kan använda argumentobjektet om du aropar en funktion med fler argument än det formellt förklaras att acceptera.
+Du kan använda `arguments` objektet om du aropar en funktion med fler argument än det formellt förklaras att acceptera.
 
 `arguments` objektet är en lokal variabel tillgänglig inom alla (non-arrow) funktioner.
 

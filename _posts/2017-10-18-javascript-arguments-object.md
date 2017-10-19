@@ -11,7 +11,7 @@ Denna teknik är användbar för funktioner som kan överföras ett variabelt an
 
 Använd `arguments.length` för att bestämma antalet argumenter som skickats till funktionen, och bearbeta sedan varje argument genom att använda `arguments` objektet.
 
-För att bestämma antalet parametrar i funktionens signatur, använd egenskapen `Function.length` metoden.
+För att bestämma antalet parametrar i funktionens [signatur](https://developer.mozilla.org/en-US/docs/Glossary/Signature/Function), använd egenskapen `Function.length` metoden.
 
 * `arguments` objektet är en lokal variabel tillgänglig inom alla (non-arrow) funktioner.
 * Du kan referera till en funktions arguments inom funktionen med hjälp av `arguments` objektet. 
@@ -47,5 +47,26 @@ const args = Array.from(arguments);
 var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments));
 ```
 
+## Använda `typeof` med Arguments
 
+`typeof` av `arguments` returnerar ett objek".
 
+```js
+console.log(typeof arguments); // 'object'
+console.log(typeof arguments[0]); // typeof individual arguments.
+```
+
+## Använda Spread Syntax med Arguments
+
+Du kan också använda metoden `Array.from()` eller spridningsoperatören för att konvertera argument till en riktig Array:
+
+```js
+var args = Array.from(arguments);
+var args = [...arguments];
+```
+
+## Egenskaper
+
+[arguments.callee](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments/caller) - Hänvisning till den nuvarande exekveringsfunktionen
+[arguments.length](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments/length) - Hänvisning till antalet argument som skickats till funktionen
+[argument[@@ iterator]](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments/@@iterator)  Returnerar ett nytt Array Iterator-objekt som innehåller värdena för varje index i argumenten

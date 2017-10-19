@@ -9,11 +9,13 @@ title: JavaScript - Arguments object
 
 Du kan använda `arguments` objektet om du aropar en funktion med fler argument än det formellt förklaras att acceptera.
 
-`arguments` objektet är en lokal variabel tillgänglig inom alla (non-arrow) funktioner.
+Denna teknik är användbar för funktioner som kan överföras ett variabelt antal argument.
 
-Du kan referera till en funktions argument inom funktionen med hjälp av `arguments` objektet. 
+Använd `arguments.length` för att bestämma antalet argumenter som skickats till funktionen, och bearbeta sedan varje argument genom att använda `arguments` objektet.
 
-Detta objekt innehåller en post för varje argument som skickas till funktionen, den första postens index börjar vid 0.
+* `arguments` objektet är en lokal variabel tillgänglig inom alla (non-arrow) funktioner.
+* Du kan referera till en funktions arguments inom funktionen med hjälp av `arguments` objektet. 
+* Detta objekt innehåller en post för varje argument som skickas till funktionen, index börjar vid 0.
 
 Om en funktion exempelvis har skickat tre argument kan du hänvisa till dem enligt följande:
 

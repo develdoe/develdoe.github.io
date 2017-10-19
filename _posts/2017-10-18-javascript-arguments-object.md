@@ -5,9 +5,7 @@ title: JavaScript - Arguments object
 ---
 `arguments` objektet är ett Array-liknande objekt som motsvarar de argument som överförs till en funktion.
 
-Du kan använda `arguments` objektet om du aropar en funktion med fler argument än det formellt förklaras att acceptera.
-
-Denna teknik är användbar för funktioner som kan överföras ett variabelt antal argument.
+Du kan använda `arguments` objektet om du aropar en funktion med fler argument än det formellt förklaras att acceptera.Denna teknik är användbar för funktioner som kan överföras ett variabelt antal argument.
 
 Använd `arguments.length` för att bestämma antalet argumenter som skickats till funktionen, och bearbeta sedan varje argument genom att använda `arguments` objektet.
 

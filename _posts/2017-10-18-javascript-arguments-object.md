@@ -68,3 +68,57 @@ var args = [...arguments];
 [arguments.callee](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments/caller) - Hänvisning till den nuvarande exekveringsfunktionen
 [arguments.length](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments/length) - Hänvisning till antalet argument som skickats till funktionen
 [argument[@@ iterator]](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments/@@iterator)  Returnerar ett nytt Array Iterator-objekt som innehåller värdena för varje index i argumenten
+
+## Exempel
+
+#### Definiera en funktion som sammanlänkar flera strängar
+
+I det här exemplet definieras en funktion som sammanlänkar flera strängar. Det enda formella argumentet för funktionen är en sträng som specificerar de tecken som skiljer objekten att sammanfoga. Funktionen definieras enligt följande:
+
+```js
+function myConcat(separator) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  return args.join(separator);
+}
+```
+
+Du kan skicka ett antal argument till den här funktionen, och det skapar en lista med varje argument som ett objekt i listan:
+
+```js
+// returns "red, orange, blue"
+myConcat(', ', 'red', 'orange', 'blue');
+
+// returns "elephant; giraffe; lion; cheetah"
+myConcat('; ', 'elephant', 'giraffe', 'lion', 'cheetah');
+
+// returns "sage. basil. oregano. pepper. parsley"
+myConcat('. ', 'sage', 'basil', 'oregano', 'pepper', 'parsley');
+```
+
+#### Definiera en funktion som skapar HTML-listor
+
+I det här exemplet definieras en funktion som skapar en sträng som innehåller HTML för en lista. Det enda formella argumentet för funktionen är en sträng som är `u` om listan ska vara onumrerad med punkter eller `o` om listan ska vara numrerad. Funktionen definieras enligt följande:
+
+```js
+function list(type) {
+  var result = '<' + type + 'l><li>';
+  var args = Array.prototype.slice.call(arguments, 1);
+  result += args.join('</li><li>');
+  result += '</li></' + type + 'l>'; // end list
+
+  return result;
+}
+```
+
+Du kan skicka ett antal argument till den här funktionen, och det lägger till varje argument som ett objekt till en lista över den angivna typen. Till exempel:
+
+```js
+var listHTML = list('u', 'One', 'Two', 'Three');
+
+/* listHTML is:
+
+"<ul><li>One</li><li>Two</li><li>Three</li></ul>"
+
+*/
+```
+

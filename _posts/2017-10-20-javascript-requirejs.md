@@ -44,7 +44,60 @@ define(
 );
 ```
 
-Som du kan se av inline-kommentarerna är module_id ett valfritt argument som vanligtvis endast krävs när icke AMD konkatenation används (det kan finnas några andra specialfall där det också är användbart). När detta argument lämnas ut kallas modulen "anonym". 
+module_id ett valfritt argument som vanligtvis endast krävs när icke AMD konkatenation används (det kan finnas några andra specialfall där det också är användbart). När detta argument uteslutas kallas modulen "anonym". När du arbetar med anonyma moduler, kommer RequireJS att använda modulens filväg som dess module_id, Don't Repeat Yourself (DRY) bör tillämpas genom att utelämna module_id i `define()` anrop.
 
-När du arbetar med anonyma moduler, kommer RequireJS att använda en moduls filväg som dess module_id, Don't Repeat Yourself (DRY) bör tillämpas genom att utelämna module_id i `define()` anrop.
+`[dependencies]` argumentet är en array som representerar alla andra moduler som denna modul beror på.
 
+Det tredje argumentet är en funktion för att skapa en instans av en modul eller ett objekt.
+
+En barebones-modul (kompatibel med RequireJS) kan definieras med hjälp av `define()` enligt följande:
+
+```js
+// A module ID has been omitted here to make the module anonymous
+
+define(['foo', 'bar'],
+    // module definition function
+    // dependencies (foo and bar) are mapped to function parameters
+    function (foo,bar) {
+        // return a value that defines the module export
+        // (i.e the functionality we want to expose for consumption)
+
+        // create your module here
+        var myModule = {
+            doStuff:function(){
+                console.log('Yay! Stuff');
+            }
+        }
+
+        return myModule;
+});
+```
+
+*Obs! RequireJS är intelligent nog för att automatiskt lägga till ".js" -tillägget till dina skriptfilnamn. Som sådan utelämnas denna förlängning i allmänhet när man specificerar beroenden.*
+
+#### Alternativ syntax
+
+Det finns också en alternativ version av `define()` som låter dig att deklarera dina beroenden som lokala variabler med `require()`. Detta kommer att känna sig bekant för alla som har använt Node och kan vara enklare att lägga till eller ta bort beroenden. Här är det tidigare stycket med den alternativa syntaxen:
+
+```js
+// A module ID has been omitted here to make the module anonymous
+
+define(function(require){
+    // module definition function
+    // dependencies (foo and bar) are defined as local vars
+    var foo = require('foo'),
+        bar = require('bar');
+
+    // return a value that defines the module export
+    // (i.e the functionality we want to expose for consumption)
+
+    // create your module here
+    var myModule = {
+        doStuff:function(){
+            console.log('Yay! Stuff');
+        }
+    }
+
+    return myModule;
+});
+```

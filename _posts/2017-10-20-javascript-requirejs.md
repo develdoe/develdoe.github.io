@@ -23,3 +23,7 @@ Som standard, gällande beredskapshantering, är helt enkelt att se till att vi 
 Tänk på Gmail webbklienten för ett ögonblick. När en användare initialt laddar sidan vid sitt första besök, kan Google helt enkelt dölja widgets som chattmodulen tills användaren har angett (genom att klicka på "expandera") att de vill använda den. Genom att ladda ner dynamiskt beroende kan Google ladda upp chattmodulen vid den tiden, i stället för att tvinga alla användare att ladda den när sidan initialiseras.
 
 ## Asynkronmodulsdefinition (AMD)
+
+RequireJS implementerar [AMD-specifikationen](https://github.com/amdjs/amdjs-api/wiki/AMD) som definierar en metod för att skriva modulär kod och hantera beroenden. RequireJS webbplatsen har också en [sektion som dokumenterar orsakerna till att implementera AMD](http://requirejs.org/docs/whyamd.html):
+
+> AMD-formatet kommer från att ha ett modulformat som var bättre än dagens "skriva ett gäng skriptetiketter med implicita beroenden som du måste beställa manuellt" och något som var lätt att använda direkt i webbläsaren. Något med bra felsökningsegenskaper som inte krävde serverspecifik verktyg för att komma igång.

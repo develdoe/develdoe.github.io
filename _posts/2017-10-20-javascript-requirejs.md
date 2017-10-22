@@ -32,7 +32,7 @@ RequireJS implementerar [AMD-specifikationen](https://github.com/amdjs/amdjs-api
 
 Såsom diskuterats ovan är det övergripande målet för AMD-formatet att tillhandahålla en lösning för modulärt JavaScript som utvecklare kan använda idag.
 
-De två koncept som du måste vara medveten om när du använder de med en skriptlasstare är `define()` metoden för att definiera moduler och metoden `require()` för att ladda beroenden. 
+Det finns två koncept som du måste vara medveten om när du använder de med en skriptlasstare. De två koncepten är `define()` metoden, för att definiera moduler samt metoden `require()` för att ladda beroenden. 
 
 `define()` används för att definiera namngivna eller ej namngivna moduler med följande signatur:
 

@@ -9,4 +9,6 @@ När du arbetar med webbapplikationer är det bra att dela upp din app i flera J
 
 Verktyg som RequireJS gör så att script laddas asynkront. Detta betyder att du måste anpassa din kodbas något. Du kan inte bara byta ut `<script>` element för en liten bit av RequireJS-kod, men fördelarna är värdefulla:
 
-Laddar skriptna asynkront betyder att lastprocessen är icke-blockerande. Webbläsaren kan fortsätta måla upp resten av sidan när skriptna laddas, vilket gör att den första laddningstiden påskyndas.
+* Laddar skriptna asynkront betyder att lastprocessen är icke-blockerande. Webbläsaren kan fortsätta måla upp resten av sidan när skriptna laddas, vilket gör att den första laddningstiden påskyndas.
+* Vi kan ladda modulerna mer intelligent, ha mer kontroll över när de laddas och se till att moduler som har beroenden laddas i rätt ordning.
+

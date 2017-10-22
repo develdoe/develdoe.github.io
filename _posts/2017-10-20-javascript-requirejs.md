@@ -5,7 +5,9 @@ title: JavaScript - RequireJS
 ---
 Att ladda in dina JavaScript-filer via flera `<script>` taggar är mycket enkelt, men att göra det på så sätt har många nackdelar, inklusive ökning av HTTP-överhead.
 
-När du arbetar med webbapplikationer är det bra att dela upp din app i flera JS-filer, så det är enkelt att snabbt nå den gränsen. Detta kan negeras genom att du compilera din kod i en fil som en del av en byggprocess, men hjälper inte när skript laddas synkront. Det innebär att webbläsaren inte kan fortsätta måla sidan medan skriptet laddas.
+Varje gång webbläsaren laddar in en fil som du har refererat till i en `<script>` tagg, gör den en HTTP-begäran om att ladda in filens innehåll. Den gör en ny sådan HTTP-begäran för varje fil du vill ladda in, vilket orsakar problem:
+
+* Webbläsare är begränsade i hur många parallella förfrågningar de kan göra, så ofta är det långsamt att ladda flera filer, eftersom det bara kan göra ett visst antal i taget. Detta nummer beror på användarens inställningar och webbläsare, men är vanligtvis runt 4-8. När du arbetar med webb-applikationer är det bra att dela upp din app i flera JS-filer, så det är enkelt att snabbt nå den gränsen. Detta kan negeras genom att du compilerar din kod i en fil som en del av en byggprocess, men hjälper inte när skript laddas synkront. Det innebär att webbläsaren inte kan fortsätta måla sidan medan skriptet laddas.
 
 Verktyg som RequireJS gör så att script laddas asynkront. Detta betyder att du måste anpassa din kodbas något. Du kan inte bara byta ut `<script>` element för en liten bit av RequireJS-kod, men fördelarna är värdefulla:
 
@@ -19,3 +21,5 @@ Dependenshantering är ett utmanande ämne, i synnerhet när du skriver JavaScri
 Som standard, gällande beredskapshantering, är helt enkelt att se till att vi anropar våra scripts med `<script>` taggar så att kod som beror på kod i en annan fil laddas efter den fil det beror på. Detta är inte ett bra tillvägagångssätt.
 
 Tänk på Gmail webbklienten för ett ögonblick. När en användare initialt laddar sidan vid sitt första besök, kan Google helt enkelt dölja widgets som chattmodulen tills användaren har angett (genom att klicka på "expandera") att de vill använda den. Genom att ladda ner dynamiskt beroende kan Google ladda upp chattmodulen vid den tiden, i stället för att tvinga alla användare att ladda den när sidan initialiseras.
+
+## Asynkronmodulsdefinition (AMD)

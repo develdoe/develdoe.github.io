@@ -53,23 +53,20 @@ Det tredje argumentet är en funktion för att skapa en instans av en modul elle
 En barebones-modul (kompatibel med RequireJS) kan definieras med hjälp av `define()` enligt följande:
 
 ```js
-// A module ID has been omitted here to make the module anonymous
-
-define(['foo', 'bar'],
-    // module definition function
-    // dependencies (foo and bar) are mapped to function parameters
-    function (foo,bar) {
-        // return a value that defines the module export
-        // (i.e the functionality we want to expose for consumption)
-
-        // create your module here
-        var myModule = {
-            doStuff:function(){
-                console.log('Yay! Stuff');
+define('myModule', 
+    ['math', 'graph'], 
+    function ( math, graph ) {
+ 
+        // Note that this is a slightly different pattern
+        // With AMD, it's possible to define modules in a few
+        // different ways due as it's relatively flexible with
+        // certain aspects of the syntax
+        return {
+            plot: function(x, y){
+                return graph.drawPie(math.randomGrid(x,y));
             }
         }
-
-        return myModule;
+    };
 });
 ```
 
@@ -80,24 +77,40 @@ define(['foo', 'bar'],
 Det finns också en alternativ version av `define()` som låter dig att deklarera dina beroenden som lokala variabler med `require()`. Detta kommer att känna sig bekant för alla som har använt Node och kan vara enklare att lägga till eller ta bort beroenden. Här är det tidigare stycket med den alternativa syntaxen:
 
 ```js
-// A module ID has been omitted here to make the module anonymous
-
-define(function(require){
-    // module definition function
-    // dependencies (foo and bar) are defined as local vars
-    var foo = require('foo'),
-        bar = require('bar');
-
-    // return a value that defines the module export
-    // (i.e the functionality we want to expose for consumption)
-
-    // create your module here
-    var myModule = {
-        doStuff:function(){
-            console.log('Yay! Stuff');
+// note that I also made it anonymous. 
+define(function (require ) {
+  
+        var foo = require('math');
+        var bar = require('graph');
+ 
+        // Note that this is a slightly different pattern
+        // With AMD, it's possible to define modules in a few
+        // different ways due as it's relatively flexible with
+        // certain aspects of the syntax
+        return {
+            plot: function(x, y){
+                return graph.drawPie(math.randomGrid(x,y));
+            }
         }
-    }
-
-    return myModule;
+    };
 });
 ```
+
+Metoden require() används vanligtvis för att ladda kod högst upp i en JavaScript-fil eller inom en modul, när du dynamiskt vill hämta beroenden. Ett exempel på dess användning är:
+
+```js
+// Consider 'foo' and 'bar' are two external modules
+// In this example, the 'exports' from the two modules loaded are passed as
+// function arguments to the callback (foo and bar)
+// so that they can similarly be accessed
+
+require( ['foo', 'bar'], function ( foo, bar ) {
+    // rest of your code here
+    foo.doSomething();
+});
+```
+
+Addys post på [Writing Modular JS](https://addyosmani.com/writing-modular-js/) täcker AMD-specifikationen i mycket mer detalj. Definiera och använda moduler kommer snart att behandlas när vi tittar på mer strukturerade exempel på att använda RequireJS.
+
+## Komma igång med RequireJS
+

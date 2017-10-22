@@ -12,3 +12,6 @@ Verktyg som RequireJS gör så att script laddas asynkront. Detta betyder att du
 * Laddar skriptna asynkront betyder att lastprocessen är icke-blockerande. Webbläsaren kan fortsätta måla upp resten av sidan när skriptna laddas, vilket gör att den första laddningstiden påskyndas.
 * Vi kan ladda modulerna mer intelligent, ha mer kontroll över när de laddas och se till att moduler som har beroenden laddas i rätt ordning.
 
+## Behov av bättre beroendehantering
+
+Dependenshantering är ett utmanande ämne, i synnerhet när du skriver JavaScript i webbläsaren.

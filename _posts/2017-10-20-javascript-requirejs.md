@@ -16,6 +16,6 @@ Verktyg som RequireJS gör så att script laddas asynkront. Detta betyder att du
 
 Dependenshantering är ett utmanande ämne, i synnerhet när du skriver JavaScript i webbläsaren.
 
-Det närmaste som vi måste beredskapshantering som standard är helt enkelt att se till att vi beställer våra `<script>` taggar så att kod som beror på kod i en annan fil laddas efter den fil det beror på. Detta är inte ett bra tillvägagångssätt.
+Som standard, gällande beredskapshantering, är helt enkelt att se till att vi anropar våra scripts med `<script>` taggar så att kod som beror på kod i en annan fil laddas efter den fil det beror på. Detta är inte ett bra tillvägagångssätt.
 
-Tänk på Gmail webbklienten för ett ögonblick. När en användare initialt laddar sidan vid sitt första besök, kan Google helt enkelt dölja widgets som chattmodulen tills användaren har angett (genom att klicka på "expandera") att de vill använda den.
+Tänk på Gmail webbklienten för ett ögonblick. När en användare initialt laddar sidan vid sitt första besök, kan Google helt enkelt dölja widgets som chattmodulen tills användaren har angett (genom att klicka på "expandera") att de vill använda den. Genom att ladda ner dynamiskt beroende kan Google ladda upp chattmodulen vid den tiden, i stället för att tvinga alla användare att ladda den när sidan initialiseras.

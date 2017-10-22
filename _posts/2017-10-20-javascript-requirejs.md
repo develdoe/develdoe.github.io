@@ -53,6 +53,7 @@ Det tredje argumentet är en funktion för att skapa en instans av en modul elle
 En barebones-modul (kompatibel med RequireJS) kan definieras med hjälp av `define()` enligt följande:
 
 ```js
+// Ej anononym definition
 define('myModule', 
     ['math', 'graph'], 
     function ( math, graph ) {
@@ -74,7 +75,7 @@ define('myModule',
 
 #### Alternativ syntax
 
-Det finns också en alternativ version av `define()` som låter dig att deklarera dina beroenden som lokala variabler med `require()`. Detta kommer att känna sig bekant för alla som har använt Node och kan vara enklare att lägga till eller ta bort beroenden. Här är det tidigare stycket med den alternativa syntaxen:
+Det finns också en alternativ version av `define()` som låter dig att deklarera dina beroenden som lokala variabler med `require()`. Detta kommer att känna sig bekant för alla som har använt Node och kan vara enklare att lägga till eller ta bort beroenden:
 
 ```js
 // note that I also made it anonymous. 

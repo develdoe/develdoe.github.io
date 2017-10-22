@@ -15,3 +15,7 @@ Verktyg som RequireJS gör så att script laddas asynkront. Detta betyder att du
 ## Behov av bättre beroendehantering
 
 Dependenshantering är ett utmanande ämne, i synnerhet när du skriver JavaScript i webbläsaren.
+
+Det närmaste som vi måste beredskapshantering som standard är helt enkelt att se till att vi beställer våra `<script>` taggar så att kod som beror på kod i en annan fil laddas efter den fil det beror på.
+
+

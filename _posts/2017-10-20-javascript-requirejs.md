@@ -105,7 +105,7 @@ Metoden require() används vanligtvis för att ladda kod högst upp i en JavaScr
 // function arguments to the callback (foo and bar)
 // so that they can similarly be accessed
 
-require( ['foo', 'bar'], function ( foo, bar ) {
+require(['foo', 'bar'], function ( foo, bar ) {
     // rest of your code here
     foo.doSomething();
 });
@@ -114,4 +114,5 @@ require( ['foo', 'bar'], function ( foo, bar ) {
 Addys post på [Writing Modular JS](https://addyosmani.com/writing-modular-js/) täcker AMD-specifikationen i mycket mer detalj. Definiera och använda moduler kommer snart att behandlas när vi tittar på mer strukturerade exempel på att använda RequireJS.
 
 ## Komma igång med RequireJS
+
 

@@ -30,3 +30,21 @@ RequireJS implementerar [AMD-specifikationen](https://github.com/amdjs/amdjs-api
 
 ## Skriva AMD-moduler med RequireJS
 
+Såsom diskuterats ovan är det övergripande målet för AMD-formatet att tillhandahålla en lösning för modulärt JavaScript som utvecklare kan använda idag.
+
+De två koncept som du måste vara medveten om när du använder de med en skriptlasstare är `define()` metoden för att definiera moduler och metoden `require()` för att ladda beroenden. 
+
+`define()` används för att definiera namngivna eller ej namngivna moduler med följande signatur:
+
+```js
+define(
+    module_id /*optional*/,
+    [dependencies] /*optional*/,
+    definition function /*function for instantiating the module or object*/
+);
+```
+
+Som du kan se av inline-kommentarerna är module_id ett valfritt argument som vanligtvis endast krävs när icke AMD konkatenation används (det kan finnas några andra specialfall där det också är användbart). När detta argument lämnas ut kallas modulen "anonym". 
+
+När du arbetar med anonyma moduler, kommer RequireJS att använda en moduls filväg som dess module_id, Don't Repeat Yourself (DRY) bör tillämpas genom att utelämna module_id i `define()` anrop.
+

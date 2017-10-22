@@ -79,7 +79,7 @@ Det finns också en alternativ version av `define()` som låter dig att deklarer
 
 ```js
 // note that I also made it anonymous. 
-define(function (require ) {
+define(function(require ) {
   
         var foo = require('math');
         var bar = require('graph');

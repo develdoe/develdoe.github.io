@@ -84,6 +84,6 @@ Servern tar emot en HTTP-förfrågan och routrar den via en enda ingångspunkt. 
 
 Flera studier har bekräftat att förbättringar av latens kan ha en positiv inverkan på användningen och användarengagemanget för webbplatser och appar. Detta står i motsats till det traditionella tillvägagångssättet för webbapputveckling, vilket är mycket servercentrerat, vilket kräver en fullständig sidåterladdning för att flytta från en sida till nästa. Även med tung cache på plats måste webbläsaren fortfarande analysera CSS, JavaScript och HTML och rendera gränssnittet till skärmen.
 
-Förutom att resultera i att mycket duplicerat innehåll serveras tillbaka till användaren, påverkar detta tillvägagångssätt både latens och allmän upplevelse av användarupplevelsen. En trend för att förbättra uppfattad latens under de senaste åren har varit att gå vidare mot att bygga s.k. Single Page Applications (SPA) - appar som efter en första sidbelastning kan hantera efterföljande navigeringar och begäran om data utan att behöva komplettera omlastningen.
+Förutom att resultera i att mycket duplicerat innehåll serveras tillbaka till användaren, påverkar detta tillvägagångssätt både latens och allmän upplevelse av användarupplevelsen. En trend för att förbättra uppfattad latens under de senaste åren har varit att gå vidare mot att bygga s.k. Single Page Applications (SPA) - appar som efter en första sidbelastning kan hantera efterföljande navigeringar och begäran om data utan att behöva helt ladda om sidan.
 
 

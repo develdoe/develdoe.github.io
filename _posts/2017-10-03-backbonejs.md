@@ -41,7 +41,6 @@ När en UI-åtgärd orsakar att en modell av en modell ändras, utlöser modelle
 
 ## Models and Views
 
-
 ![models and views](http://backbonejs.org/docs/images/intro-model-view.svg)
 
 Den viktigaste sak som Backbone kan hjälpa dig med är att hålla din affärslogik separat från ditt användargränssnitt.

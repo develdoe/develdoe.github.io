@@ -60,11 +60,17 @@ Kärnpunkten är de tre MVC-komponenterna vi förväntar oss - modell-, vy- och 
 
 Med detta sagt, även om serverns arbetsflöde för att ta emot en begäran från en webbadress, bakar du ut en HTML-sida som svar och skiljer din affärslogik från gränssnittet har många fördelar. På samma sätt som att hålla ditt användargränssnitt skilt från dina databasregistreringar är användbart i server-side ramverk, är det lika användbart att hålla din användargränssnitt ren separerad från dina datamodeller i JavaScript.
 
-Olika implementeringar av server-side av MVC (som PHP Zend ramverket) implementerar också Front Controller-designmönstret. Det här mönstret lagrar en MVC stack bakom en enda entry punkt. Den här enskilda ingångspunkten innebär att alla HTTP-förfrågningar (t.ex. http://www.example.com, http://www.example.com/whicheverpage/, etc.) dirigeras av serverns konfiguration till samma handler, oberoende av URI.
+Olika implementeringar av server-side av MVC (som PHP Zend ramverket) implementerar också Front Controller-designmönstret. Det här mönstret lagrar en MVC stack bakom en enda entry punkt. Den här enskilda ingångspunkten innebär att alla HTTP-förfrågningar (t.ex. `http://www.example.com`, `http://www.example.com/whicheverpage/`, etc.) dirigeras av serverns konfiguration till samma handler, oberoende av URI.
 
 När Front Controllern mottar en HTTP-förfrågan analyserar den den och bestämmer vilken klass (Controller) och Method (Action) som ska åberopas. Den valda Controller Action tar över och interagerar med lämplig modell för att uppfylla begäran. Controller tar emot data tillbaka från modellen, laddar in en lämplig vy, injicerar modelldata i den och returnerar svaret till webbläsaren.
 
-Låt oss till exempel säga att vi har vår blogg på www.example.com och vi vill redigera en artikel (med id = 43) och begära http://www.example.com/article/edit/43:
+Låt oss till exempel säga att vi har vår blogg på `www.example.com` och vi vill redigera en artikel (med `id=43`) och begära `http://www.example.com/article/edit/43:`
 
-På serverns sida skulle Front Controller analysera webbadressen och åberopa artikelkontrolleraren (motsvarande **/article/** delen av URI) och dess Redigerings Action (som motsvarar **/edit/** delen av URI).
+På serverns sida skulle Front Controller analysera webbadressen och åberopa artikelkontrolleraren (motsvarande `/article/` delen av URI) och dess Redigerings Action (som motsvarar `/edit/` delen av URI). I den Action skulle det finnas ett anrop till, låt oss säga Article Model och dess `Article::getEntry(43)` metod (43 motsvarar `/43` i slutet av URI). Detta skulle returnera bloggartikeldata från databasen för redigering. Article Controller skulle sedan ladda (`article/Edit`) View som skulle inkludera logik för att injicera artikelns data i en form som är lämplig för att redigera dess innehåll, titel och andra (meta) data. Slutligen skulle det resulterande HTML-svaret returneras till webbläsaren.
+
+Som ni kan föreställa er ett liknande flöde nödvändigt med POST-förfrågningar efter att vi trycker på en spara-knapp i en form.
+
+POST-åtgärdens URI skulle se kunna se ut så här, `/article/save/43`. Förfrågan skulle gå igenom samma kontroller, men den här gången skulle Save Action åtgärden åberopas (på grund av `/save/` URI-delen), Article Model skulle spara den redigerade artikeln i databasen med `Articles::saveEntry(43)` och webbläsaren skulle omdirigeras till `/article/edit/43` URI för vidare redigering.
+
+
 

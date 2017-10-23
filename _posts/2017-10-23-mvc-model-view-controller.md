@@ -78,7 +78,12 @@ Bilden nedan visar denna typiska HTTP-förfrågan / svarlivscykel för server-si
 
 ![svarlivscykel för server-sida MVC:](https://addyosmani.com/backbone-fundamentals/img/webmvcflow_bacic.png)
 
+Servern tar emot en HTTP-förfrågan och routrar den via en enda ingångspunkt. Vid den ingången analyserar Front Controller förfrågan och baserat på den, åberopas en Action av aktuell Controller. Denna process kallas routing. Action modellen uppmanas att returnera och/eller spara inlämnade data. Modellen kommunicerar med datakällan (t.ex. databas eller API). När Model slutfört sitt arbete returnerar den data till Controllern som sedan laddar in lämplig Vy. Viewen kör presentationslogik, loopar genom artiklar och utskrifter, innehåll, etc, med hjälp av den medföljande data. I slutändan returneras ett HTTP-svar till webbläsaren.
 
+### Client-Side MVC & Single Page Apps
 
+Flera studier har bekräftat att förbättringar av latens kan ha en positiv inverkan på användningen och användarengagemanget för webbplatser och appar. Detta står i motsats till det traditionella tillvägagångssättet för webbapputveckling, vilket är mycket servercentrerat, vilket kräver en fullständig sidåterladdning för att flytta från en sida till nästa. Även med tung cache på plats måste webbläsaren fortfarande analysera CSS, JavaScript och HTML och rendera gränssnittet till skärmen.
+
+Förutom att resultera i att mycket duplicerat innehåll serveras tillbaka till användaren, påverkar detta tillvägagångssätt både latens och allmän upplevelse av användarupplevelsen. En trend för att förbättra uppfattad latens under de senaste åren har varit att gå vidare mot att bygga s.k. Single Page Applications (SPA) - appar som efter en första sidbelastning kan hantera efterföljande navigeringar och begäran om data utan att behöva komplettera omlastningen.
 
 

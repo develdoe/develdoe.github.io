@@ -7,6 +7,12 @@ Backbone.js är ett lättviktigt JavaScript-bibliotek som lägger till struktur 
 
 Backbone fokuserar på att ge dig användbara metoder för förfrågningar och manipulera dina data istället för att återuppfinna JavaScript-objektmodellen. Det är ett bibliotek, snarare än ett ramverk som spelar bra med andra och skalas up väl, från inbyggda widgets till stora applikationer.
 
+Backbone tillhandahåller en minimal uppsättning datastruktureringsmodeller (Models, Collections) och användargränssnitt (Views, URLs) primitiva som är användbara när du bygger dynamiska applikationer med hjälp av JavaScript. Det är inte Backbone har ingen opinion om hur du bygger din applikation, vilket innebär att du har frihet och flexibilitet att bygga upp den bästa upplevelsen för din webbapplikation, som passar dig. Du kan antingen använda den föreskrivna arkitekturen som den erbjuder eller utöka den för att uppfylla dina krav.
+
+Biblioteket fokuserar inte på widgets eller ersätter hur du strukturerar objekt - det förser dig bara med verktyg för att manipulera och göra förfrågningar mot data i din applikation.
+
+Backbone föreskriver inte en specifik mallmotor. Medan du är fri att använda den mikro-templering som erbjuds av Underscore.js (Backbones enda hårda beroende) kan vyer bindas till HTML konstruerad med hjälp av en vilken templeringslösning du än väljer.
+
 Backbone är en Model-View ramverk som använder vyer, modeller och kollektioner i kommunikation med en REST-webbservice.
 
 Det har också en router för att se till att användaren navigerar genom faktiska serverns banor och gör det möjligt att markera visningarna i programmet. I funktionshowBodyView laddas vyn för innehållsdelen av vyn.

@@ -60,3 +60,11 @@ Kärnpunkten är de tre MVC-komponenterna vi förväntar oss - modell-, vy- och 
 
 Med detta sagt, även om serverns arbetsflöde för att ta emot en begäran från en webbadress, bakar du ut en HTML-sida som svar och skiljer din affärslogik från gränssnittet har många fördelar. På samma sätt som att hålla ditt användargränssnitt skilt från dina databasregistreringar är användbart i server-side ramverk, är det lika användbart att hålla din användargränssnitt ren separerad från dina datamodeller i JavaScript.
 
+Olika implementeringar av server-side av MVC (som PHP Zend ramverket) implementerar också Front Controller-designmönstret. Det här mönstret lagrar en MVC stack bakom en enda entry punkt. Den här enskilda ingångspunkten innebär att alla HTTP-förfrågningar (t.ex. http://www.example.com, http://www.example.com/whicheverpage/, etc.) dirigeras av serverns konfiguration till samma handler, oberoende av URI.
+
+När Front Controllern mottar en HTTP-förfrågan analyserar den den och bestämmer vilken klass (Controller) och Method (Action) som ska åberopas. Den valda Controller Action tar över och interagerar med lämplig modell för att uppfylla begäran. Controller tar emot data tillbaka från modellen, laddar in en lämplig vy, injicerar modelldata i den och returnerar svaret till webbläsaren.
+
+Låt oss till exempel säga att vi har vår blogg på www.example.com och vi vill redigera en artikel (med id = 43) och begära http://www.example.com/article/edit/43:
+
+På serverns sida skulle Front Controller analysera webbadressen och åberopa artikelkontrolleraren (motsvarande **/article/** delen av URI) och dess Redigerings Action (som motsvarar **/edit/** delen av URI).
+

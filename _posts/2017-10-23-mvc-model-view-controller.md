@@ -57,3 +57,6 @@ Kärnpunkten är de tre MVC-komponenterna vi förväntar oss - modell-, vy- och 
 * Controllers erbjuder limet mellan modeller och visningar. Deras ansvar är att bearbeta förfrågningar från webbläsaren, fråga dina modeller om data och ge sedan erbjuda denna datan till vyer så att de kan presenteras för webbläsaren.
 
 Även om det finns en tydlig separation av intresse som är MVC-liknande i Rails, använder det faktiskt ett annat mönster som heter Model2. En orsak till detta är att Rails inte meddelar vyer från modellen eller controllers, det passar bara modelldata direkt till vyn.
+
+Med detta sagt, även om serverns arbetsflöde för att ta emot en begäran från en webbadress, bakar du ut en HTML-sida som svar och skiljer din affärslogik från gränssnittet har många fördelar. På samma sätt som att hålla ditt användargränssnitt skilt från dina databasregistreringar är användbart i server-side ramverk, är det lika användbart att hålla din användargränssnitt ren separerad från dina datamodeller i JavaScript.
+

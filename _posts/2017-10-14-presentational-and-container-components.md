@@ -1,7 +1,7 @@
 ---
 date: '2017-10-14 17:42 +0200'
 published: true
-title: Presentational and Container Components
+title: React - Presentational and Container Components
 ---
 Det finns ett enkelt mönster som jag tycker är oerhört användbart när du skriver React-applikationer.
 

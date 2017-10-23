@@ -1,7 +1,9 @@
 ---
 date: '2017-10-23 17:37 +0200'
 published: true
-title: MVC - How the pattern moved over to the Front Side
+title: >-
+  MVC - historien om MVC-designmönstret och varför det introducerades på klient
+  sidan
 ---
 Ett antal moderna JavaScript-ramverk ger utvecklare en enkel väg att organisera sin kod med hjälp av variationer av ett mönster som kallas MVC (Model-View-Controller). MVC skiljer intressen i en applikation i tre delar:
 

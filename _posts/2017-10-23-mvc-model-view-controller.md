@@ -86,4 +86,6 @@ Flera studier har bekräftat att förbättringar av latens kan ha en positiv inv
 
 Förutom att resultera i att mycket duplicerat innehåll serveras tillbaka till användaren, påverkar detta tillvägagångssätt både latens och allmän upplevelse av användarupplevelsen. En trend för att förbättra uppfattad latens under de senaste åren har varit att gå vidare mot att bygga s.k. Single Page Applications (SPA) - appar som efter en första sidbelastning kan hantera efterföljande navigeringar och begäran om data utan att behöva helt ladda om sidan.
 
+När en användare navigerar till en ny vy begärs ytterligare innehåll för visningen med hjälp av en XHR (XMLHttpRequest), som typiskt kommunicerar med ett REST API eller slutpunkt på serverns endpoint. Ajax (Asynkron JavaScript och XML) gör kommunikation med servern asynkron så att data överförs och bearbetas i bakgrunden, vilket gör att användaren kan interagera med andra delar av en sida utan avbrott. Detta förbättrar användbarhet och lyhördhet.
+
 

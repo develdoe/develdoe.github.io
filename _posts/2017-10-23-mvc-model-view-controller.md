@@ -101,5 +101,3 @@ Korgen och dess data presenteras i HTML. Data och dess associerade View i HTML �
 Behovet av snabba, komplexa och lyhörda Ajax-drivna webbapplikationer kräver replikering av mycket av denna logik på klientsidan, vilket dramatiskt ökar storleken och komplexiteten hos koden som finns där. Så småningom har det lett till att vi behöver MVC (eller en liknande arkitektur) som implementeras på klient sidan för att bättre strukturera koden och underlätta att underhålla och vidareutveckla under applikationens livscykel.
 
 Genom utveckling och försök har JavaScript-utvecklare utnyttjat kraften i det traditionella MVC-mönstret, vilket leder till utvecklingen av flera MVC-inspirerade JavaScript-ramverk.
-
-

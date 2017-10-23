@@ -1,7 +1,7 @@
 ---
 date: '2017-10-23 17:37 +0200'
 published: true
-title: MVC - Model View Controller
+title: MVC - How the pattern moved over to the Front Side
 ---
 Ett antal moderna JavaScript-ramverk ger utvecklare en enkel väg att organisera sin kod med hjälp av variationer av ett mönster som kallas MVC (Model-View-Controller). MVC skiljer intressen i en applikation i tre delar:
 

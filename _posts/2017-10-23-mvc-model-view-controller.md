@@ -72,5 +72,13 @@ Som ni kan föreställa er ett liknande flöde nödvändigt med POST-förfrågni
 
 POST-åtgärdens URI skulle se kunna se ut så här, `/article/save/43`. Förfrågan skulle gå igenom samma kontroller, men den här gången skulle Save Action åtgärden åberopas (på grund av `/save/` URI-delen), Article Model skulle spara den redigerade artikeln i databasen med `Articles::saveEntry(43)` och webbläsaren skulle omdirigeras till `/article/edit/43` URI för vidare redigering.
 
+Slutligen, om användaren begärde http://www.example.com/ skulle Front Controller anropa standard Controller och Action; t.ex. Index Controllern och dess Index-action. Inom Index Action skulle det finnas ett anrop till Araticles-modellen och dess `Articles::getLastEntries(10)` metod som skulle returnera de senaste 10 blogginläggen. Controllern skulle ladda blog/index vyn som skulle ha grundläggande logik för att lista bloggposterna.
+
+Bilden nedan visar denna typiska HTTP-förfrågan / svarlivscykel för server-sida MVC:
+
+![svarlivscykel för server-sida MVC:](https://addyosmani.com/backbone-fundamentals/img/webmvcflow_bacic.png)
+
+
+
 
 

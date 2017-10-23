@@ -88,4 +88,14 @@ Förutom att resultera i att mycket duplicerat innehåll serveras tillbaka till 
 
 När en användare navigerar till en ny vy begärs ytterligare innehåll för visningen med hjälp av en XHR (XMLHttpRequest), som typiskt kommunicerar med ett REST API eller slutpunkt på serverns endpoint. Ajax (Asynkron JavaScript och XML) gör kommunikation med servern asynkron så att data överförs och bearbetas i bakgrunden, vilket gör att användaren kan interagera med andra delar av en sida utan avbrott. Detta förbättrar användbarhet och lyhördhet.
 
+SPAs kan också dra nytta av webbläsarfunktioner som History API för att uppdatera adressen som ses i platsfältet när du flyttar från en vy till en annan. Dessa webbadresser gör det också möjligt att bokmärke och dela ett visst programstatus utan att behöva navigera till helt nya sidor.
+
+Det typiska SPA består av mindre bitar av gränssnitt som representerar logiska enheter, som alla har egna användargränssnitt, affärslogik och data. Ett bra exempel är en korg i en shopping webbapplikation som kan ha föremål tillagt. Denna korg kan presenteras för användaren i en ruta längst upp till höger på sidan (se bilden nedan):
+
+![smaller pieces of interface](https://addyosmani.com/backbone-fundamentals/img/wireframe_e_commerce.png)
+
+Korgen och dess data presenteras i HTML. Data och dess associerade View i HTML ändras över tiden. Det fanns en tid när vi använde jQuery (eller ett liknande DOM-manipulationsbibliotek) och en massa Ajax-samtal och återuppringningar för att hålla de två synkroniserade. Det skapade ofta kod som inte var välstrukturerad eller lätt att underhålla. Buggar var frekventa och kanske oundvikliga.
+
+Behovet av snabba, komplexa och lyhörda Ajax-drivna webbapplikationer kräver replikering av mycket av denna logik på klientsidan, vilket dramatiskt ökar storleken och komplexiteten hos koden som finns där. Så småningom har det lett till att vi behöver MVC (eller en liknande arkitektur) som implementeras på klient sidan för att bättre strukturera koden och underlätta att underhålla och vidareutveckla under applikationens livscykel.
+
 

@@ -54,3 +54,59 @@ var myTodo = new Todo({
 ```
 
 Vår Todo Model utökar Backbone.Model och definierar helt enkelt standardvärden för två dataattribut. Som du kommer att upptäcka i de kommande kapitlen, ger Backbone-modellerna många fler funktioner, men den här enkla modellen illustrerar att först och främst en modell är en datakontainer.
+
+Varje Todo-instans kommer att göras på sidan av en TodoView:
+
+```js
+var TodoView = Backbone.View.extend({
+
+    tagName: 'li',
+
+    // Cache mallfunktionen för ett enda objekt.
+    todoTpl: _.template($('#item-template').html()),
+
+    events: {
+        'dblclick label': 'edit',
+        'keypress .edit': 'updateOnEnter',
+        'blur .edit': 'close'
+    },
+
+    // Kallas när visningen skapas först
+    initialize: function() {
+        this.$el = $('#todo')
+        // Later we'll look at:
+        // this.listenTo(someCollection, 'all', this.render);
+        // but you can actually run this example right now by
+        // calling todoView.render();
+    },
+
+    render: function() {
+        this.$el.html(this.todoTpl(this.model.attributes))
+        // $el här är en referens till jQuery-elementet
+        // associerad med visningen är todoTpl en referens
+        // till en Underscore mall och model.attributes
+        // som innehåller attributen till modellen.
+        // Sammanfattningsvis ersätter uttalandet HTML för
+        // ett DOM-element med resultatet att instansera a
+        // mall med modellens attribut.
+        this.input = this.$('.edit')
+        return this
+    },
+
+    edit: function() {
+        // körs när todo-etiketten är dubbelklickad
+    },
+
+    close: function() {
+        // körs när todo förlorar fokus
+    },
+
+    updateOnEnter: function() {
+        // exekveras på varje knapptryckning när du gör det i redigeringsläget,
+        // men vi väntar på att komma in för att komma igång
+    }
+})
+
+// skapa en vy för en todo
+var todoView = new TodoView({model: myTodo})
+```

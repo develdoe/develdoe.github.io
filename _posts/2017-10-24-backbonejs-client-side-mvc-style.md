@@ -1,7 +1,7 @@
 ---
 date: '2017-10-24 20:38 +0200'
 published: true
-title: BackboneJS - Client-Side MVC Style
+title: BackboneJS - Mocel View Implementation
 ---
 Låt oss ta en titt på hur Backbone.js ger fördelarna med MVC till klient utveckling med hjälp av en Todo-applikation som vårt exempel. Vi kommer att bygga på det här exemplet i de kommande kapitlen när vi utforskar Backbone-funktioner men för närvarande fokuserar vi bara på kärnkomponenternas relationer till MVC.
 

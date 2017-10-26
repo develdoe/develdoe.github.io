@@ -110,3 +110,7 @@ var TodoView = Backbone.View.extend({
 // skapa en vy för en todo
 var todoView = new TodoView({model: myTodo})
 ```
+
+TodoView definieras genom att förlänga Backbone.View och är instansierad med en tillhörande modell.
+
+I vårt exempel använder metoden `render()` en mall för att konstruera HTML för Todo-objektet som placeras inuti ett li-element. Varje anrop till `render()` kommer att ersätta innehållet av li-elementet med den aktuella modelldatan. Således gör en View-instans innehållet i ett DOM-element med attributen till en tillhörande modell. Senare ser vi hur en vy kan binda sin `render()` metod till modelländringshändelser, vilket gör att visningen återställs när modellen ändras.

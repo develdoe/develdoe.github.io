@@ -101,7 +101,7 @@ var TodoView = Backbone.View.extend({
         // körs när todo förlorar fokus
     },
 
-    updateOnEnter: function() {
+    updateOnEnter: function( e ) {
         // exekveras på varje knapptryckning när du gör det i redigeringsläget,
         // men vi väntar på att komma in för att komma igång
     }

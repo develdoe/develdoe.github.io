@@ -60,10 +60,10 @@ Varje Todo-instans kommer att göras på sidan av en TodoView:
 ```js
 var TodoView = Backbone.View.extend({
 
-    tagName: 'li',
+    tagName:  'li',
 
     // Cache mallfunktionen för ett enda objekt.
-    todoTpl: _.template($('#item-template').html()),
+    todoTpl: _.template( $('#item-template').html() ),
 
     events: {
         'dblclick label': 'edit',
@@ -81,7 +81,7 @@ var TodoView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.html(this.todoTpl(this.model.attributes))
+        this.$el.html( this.todoTpl( this.model.attributes ) );
         // $el här är en referens till jQuery-elementet
         // associerad med visningen är todoTpl en referens
         // till en Underscore mall och model.attributes
@@ -89,8 +89,8 @@ var TodoView = Backbone.View.extend({
         // Sammanfattningsvis ersätter uttalandet HTML för
         // ett DOM-element med resultatet att instansera a
         // mall med modellens attribut.
-        this.input = this.$('.edit')
-        return this
+        this.input = this.$('.edit');
+        return this;
     },
 
     edit: function() {

@@ -120,3 +120,7 @@ Hittills har vi sett Backbone.Model implementerar modellaspekten av MVC och Back
 I stället adresseras Controller ansvar inom en Vy. Kom ihåg att Controller svarar på förfrågningar och utför lämpliga åtgärder som kan leda till förändringar i modellen och uppdateringar till vyn. I en applikation på en sida, istället för att ha förfrågningar i traditionell mening, har vi händelser. Händelser kan vara traditionella DOM-händelser för webbläsare (t ex klick) eller interna programhändelser som modelländringar.
 
 I vår TodoView uppfyller händelseattributet rollen som Controller konfigurator, och definierar hur händelser som förekommer i View's DOM-element ska dirigeras till händelsehanteringsmetoder som definieras i Vyn.
+
+Medan händelser i detta fall hjälper oss att relatera Backbone till MVC-mönstret, ser vi dem spela en mycket större roll i våra SPA-applikationer. Backbone.Event är en grundläggande ryggradskomponent som blandas i både Backbone.Model och Backbone.View, vilket ger dem rika eventhanteringsfunktioner. Observera att den traditionella kontrollerns roll (Smalltalk-80-stil) utförs av mallen, inte av Backbone.View.
+
+

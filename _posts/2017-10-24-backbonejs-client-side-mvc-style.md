@@ -37,7 +37,7 @@ Vårt exempel kommer att behöva ett div-element som vi kan bifoga en lista öve
 I vår Todo-applikation (demo.js) används backbone-modellinstanser för att hålla data för varje Todo-artikel:
 
 ```js
-// Define a Todo Model
+// Definiera en Todo-modell
 var Todo = Backbone.Model.extend({
     // default todo attribute values
     defaults: {
@@ -46,8 +46,8 @@ var Todo = Backbone.Model.extend({
     }
 })
 
-// Instatntiate the Todo MOdel with a title, with the completed attribute
-// defaulting to false
+// Instansierar Todo-modellen med en `title`, med det `completed' attributet
+// default till false
 var myTodo = new Todo({
     titile: 'Checkout attributes of the logged models in the console.'
 })

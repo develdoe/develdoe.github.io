@@ -49,7 +49,7 @@ var Todo = Backbone.Model.extend({
 // Instansierar Todo-modellen med en `title`, med det `completed' attributet
 // default till false
 var myTodo = new Todo({
-    titile: 'Checkout attributes of the logged models in the console.'
+    title: 'Checkout attributes of the logged models in the console.'
 })
 ```
 

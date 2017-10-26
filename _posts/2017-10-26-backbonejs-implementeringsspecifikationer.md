@@ -9,4 +9,5 @@ När första sidan väl är laddad, avlyssnar en klient Router URL-adresser och 
 
 ![Backbone MVC](https://addyosmani.com/backbone-fundamentals/img/backbone_mvc.png)
 
-
+URL-routing, DOM-händelser (t ex musklick) och modellhändelser (t ex attributändringar) utlöser alla utlösningslogik i Vyn. Hanterarna uppdaterar DOM och Modeller, vilket kan utlösa ytterligare händelser. Modeller synkroniseras med datakällor vilket kan innebära att 
+de kommunicera med back-end-servrar.

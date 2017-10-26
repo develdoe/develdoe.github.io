@@ -114,3 +114,9 @@ var todoView = new TodoView({model: myTodo})
 TodoView definieras genom att förlänga Backbone.View och är instansierad med en tillhörande modell.
 
 I vårt exempel använder metoden `render()` en mall för att konstruera HTML för Todo-objektet som placeras inuti ett li-element. Varje anrop till `render()` kommer att ersätta innehållet av li-elementet med den aktuella modelldatan. Således gör en View-instans innehållet i ett DOM-element med attributen till en tillhörande modell. Senare ser vi hur en vy kan binda sin `render()` metod till modelländringshändelser, vilket gör att visningen återställs när modellen ändras.
+
+Hittills har vi sett Backbone.Model implementerar modellaspekten av MVC och Backbone.View implementerar View. Men som vi noterade tidigare, avviker Backbone från traditionell MVC när det gäller Controllers - det finns ingen Backbone.Controller!
+
+I stället adresseras Controller ansvar inom en Vy. Kom ihåg att Controller svarar på förfrågningar och utför lämpliga åtgärder som kan leda till förändringar i modellen och uppdateringar till vyn. I en applikation på en sida, istället för att ha förfrågningar i traditionell mening, har vi händelser. Händelser kan vara traditionella DOM-händelser för webbläsare (t ex klick) eller interna programhändelser som modelländringar.
+
+I vår TodoView uppfyller händelseattributet rollen som Controller konfigurator, och definierar hur händelser som förekommer i View's DOM-element ska dirigeras till händelsehanteringsmetoder som definieras i Vyn.

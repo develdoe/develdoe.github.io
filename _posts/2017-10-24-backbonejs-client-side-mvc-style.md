@@ -1,7 +1,7 @@
 ---
 date: '2017-10-24 20:38 +0200'
 published: true
-title: BackboneJS - Mocel View Implementation
+title: BackboneJS - Model View Implementation
 ---
 Låt oss ta en titt på hur Backbone.js ger fördelarna med MVC till klient utveckling med hjälp av en Todo-applikation som vårt exempel. Vi kommer att bygga på det här exemplet i de kommande kapitlen när vi utforskar Backbone-funktioner men för närvarande fokuserar vi bara på kärnkomponenternas relationer till MVC.
 
@@ -122,5 +122,3 @@ I stället adresseras Controller ansvar inom en Vy. Kom ihåg att Controller sva
 I vår TodoView uppfyller händelseattributet rollen som Controller konfigurator, och definierar hur händelser som förekommer i View's DOM-element ska dirigeras till händelsehanteringsmetoder som definieras i Vyn.
 
 Medan händelser i detta fall hjälper oss att relatera Backbone till MVC-mönstret, ser vi dem spela en mycket större roll i våra SPA-applikationer. Backbone.Event är en grundläggande ryggradskomponent som blandas i både Backbone.Model och Backbone.View, vilket ger dem rika eventhanteringsfunktioner. Observera att den traditionella kontrollerns roll (Smalltalk-80-stil) utförs av mallen, inte av Backbone.View.
-
-

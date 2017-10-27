@@ -7,3 +7,8 @@ title: Git - Introduktion
 
 Den här artikeln handlar om att komma igång med Git. Vi börjar med att förklara lite bakgrund på verktyg för versionskontroll, sedan gå vidare till hur man får Git att köra på ditt system och slutligen hur du konfigurerar det för att börja arbeta med det. I slutet av denna artikel borde du förstå varför Git finns till, varför du bör använda Git, och du borde vara redo attt sätta igång.
 
+## Om Version Control
+
+Vad är "versionskontroll", och varför ska du bry dig? Versionskontroll är ett system som registrerar ändringar i en fil eller en uppsättning filer över tiden så att du kan återkalla specifika versioner senare. 
+
+*I den här artikeln kommer du att använda källkod som exempel, men i verkligheten kan du göra det med nästan vilken typ av fil som helst på en dator.

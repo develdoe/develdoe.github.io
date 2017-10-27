@@ -16,3 +16,5 @@ Vad är "versionskontroll", och varför ska du bry dig? Versionskontroll är ett
 Om du är grafiker eller webbdesigner och vill behålla varje version av en bild eller layout, är ett Version Control System (VCS) ettt mycket smart sak att använda.
 
 Det låter dig återställa valda filer tillbaka till ett tidigare tillstånd, återställa hela projektet tillbaka till ett tidigare tillstånd, jämföra förändringar över tid, se vem som senast gjort ändringar som kan ha orsaka ett problem eller som faktiskt introducerade ett problem och när han/hon gjorde det mm.
+
+Att använda en VCS innebär också att om du förstör eller tappar bort filer, kan du enkelt återställadessa . Dessutom får du allt detta med mycket lite overhead.

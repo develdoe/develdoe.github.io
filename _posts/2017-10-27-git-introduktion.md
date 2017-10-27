@@ -11,7 +11,7 @@ Den här artikeln handlar om att komma igång med Git. Vi börjar med att förkl
 
 Vad är "versionskontroll", och varför ska du bry dig? Versionskontroll är ett system som registrerar ändringar i en fil eller en uppsättning filer över tiden så att du kan återkalla specifika versioner senare. 
 
-*I den här artikeln kommer du att använda källkod som exempel, men i verkligheten kan du göra det med nästan vilken typ av fil som helst på en dator.
+*I den här artikeln kommer du att använda källkod som exempel, men i verkligheten kan du göra det med nästan vilken typ av fil som helst på en dator.*
 
 Om du är grafiker eller webbdesigner och vill behålla varje version av en bild eller layout, är ett Version Control System (VCS) ettt mycket smart sak att använda.
 

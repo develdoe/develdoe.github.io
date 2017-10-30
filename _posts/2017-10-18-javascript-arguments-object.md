@@ -45,6 +45,9 @@ const args = Array.from(arguments);
 var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments));
 ```
 
+Du kan använda argumentobjektet om du anropar en funktion med fler argument än det formellt förklaras att acceptera. Denna teknik är användbar för funktioner som kan överföras ett variabelt antal argument. Använd arguments.length för att bestämma antalet argumenter som skickats till funktionen, och bearbeta sedan varje argument genom att använda argumentobjektet. För att bestämma antalet parametrar i funktions signaturen, använd egenskapen Function.length.
+
+
 ## Använda `typeof` med Arguments
 
 `typeof` av `arguments` returnerar ett objek".
@@ -121,4 +124,3 @@ var listHTML = list('u', 'One', 'Two', 'Three');
 
 */
 ```
-

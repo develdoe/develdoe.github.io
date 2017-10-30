@@ -80,3 +80,9 @@ I vår Todo-applikation är en Controller ansvarig för hanteringen av ändringa
 Det är Controllers som de flesta JavaScript MVC-ramverk avviker från den traditionella tolkningen av MVC-mönstret. Anledningen till detta varierar, men enligt min mening såg JavaScript-ramverk författare initialt på server-side MVC (som Ruby on Rails) och insåg att tillvägagångssättet inte översatte 1:1 på klientsidan, och återtolkade C i MVC för att lösa sitt problem med state förvaltningen. Detta var ett smart tillvägagångssätt, men det kan göra det svårt för utvecklare att komma till MVC för första gången för att förstå både det klassiska MVC-mönstret och den "korrekta" rollen som Controllers har i andra JavaScript-ramverk.
 
 Så har Backbone.js Controllers? Inte riktigt. Backbone innehåller vanligtvis "Controller" -logik, och routrar används för att hantera applikationstillstånd, men är inte en sann Controllers logig enligt klassisk MVC. I det avseendet, i motsats till vad som kan nämnas i den officiella dokumentationen eller i blogginlägg, är Backbone inte ett riktigt MVC-bibliotek. Det är faktiskt bättre att se den vara medlem i MV* -familjen som riktar in sig på sin egen arkitekturella väg. 
+
+## Summering
+
+Sammanfattningsvis hjälper MVC-mönstret dig att behålla din applikationslogik separat från ditt användargränssnitt, vilket gör det lättare att ändra och underhålla båda. Tack vare denna logikavskiljning är det tydligare varför förändringar i dina data, gränssnitt eller affärslogik måste göras och för vad dina enhetstester ska skrivas.
+
+Efter att ha granskat det [klassiska MVC-mönstret](/2017/mvc-model-view-controller/) bör du nu förstå hur det gör det möjligt för utvecklare att separat separera problem i en applikation. Du bör också uppskatta hur JavaScript MVC-ramverk kan skilja sig åt i tolkningen av MVC, och hur de delar några av de grundläggande begreppen i det ursprungliga mönstret.

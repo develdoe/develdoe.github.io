@@ -22,3 +22,16 @@ de kommunicera med back-end-servrar.
 #### Views
 
 * Användare interagerar med Vyer, vilket vanligtvis betyder att läsa och redigera modelldata. Till exempel, i vår [Todo-applikation](/2017/backbonejs-client-side-mvc-style/), händer Todo Model visning i användargränssnittet i listan över alla Todo-objekt. Inom den är varje Todo gjord med sin titel och avslutad kryssruta. Modellredigering görs genom en "edit" Vy där en användare som har valt en specifik Todo redigerar sin titel i en form.
+* Vi definierar ett `render()` verktyg inom vår vy som är ansvarig för att rendera innehållet i modellen med hjälp av en JavaScript-templerande motor (tillhandahållen av Underscore.js) och uppdatering av innehållet i vår vy, refererad av this.$el.
+* Vi lägger sedan till vår `render()` callback som modellabonnent, så View kan utlösas för att uppdateras när modellen ändras.
+* Du kanske undrar var användarinteraktion kommer till spel här. När användare klickar på ett Todo-element i vyn är det inte vyns ansvaret att veta vad den ska göra här näst. En Controller fattar detta beslut. I Backbone uppnås detta genom att lägga till en händelse lyssnare till Todos elementet som delegerar hanteringen av klicket till en händelsehanterare.
+
+### Templating
+
+I samband med JavaScript-ramverk som stöder MVC/MV * är det värt att titta närmare på JavaScript-templering och dess relation till Vyer.
+
+Det har länge ansetts vara dålig praxis (och beräkningsmässigt dyrt) för att manuellt skapa stora block av HTML-markup i minnet genom strängkonstruktion.Utvecklare som använder den här tekniken ser sig själva ofta iterera genom sin data, sätter in den i in-kapslade divs och använder föråldrade tekniker såsom `document.write` för att injicera "mallen" i dess DOM. Detta tillvägagångssätt innebär ofta att man harin skriptmarkering inline med standardmarkup, vilket snabbt kan bli svårt att läsa och underhålla, särskilt vid uppbyggnad av stora applikationer.
+
+JavaScript-templerande bibliotek (som mustasch eller Handlebars.js) används ofta för att definiera mallar för vyer som HTML-markup som innehåller mallvariabler. Dessa mallblock kan antingen lagras externt eller inom skript taggar med en anpassad typ (t ex 'text /mall').
+
+Variabler är avgränsade med en variabel syntax (t.ex. `<% = title%>` för Underscore och `{{title}}` för Handlebars).

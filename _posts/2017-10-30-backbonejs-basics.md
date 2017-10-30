@@ -24,7 +24,5 @@ Du kan klistra in följande i din textredigerare, och ersätta kommentaren mella
 <script>
   // Your code goes here
 </script>
-</body>
-</html>
 ```
 Du kan sedan spara och köra filen i din webbläsare, t.ex. Chrome eller Firefox. Alternativt, om du föredrar att arbeta med en online-kodredigerare, är jsFiddle och jsBin-versioner av den här kedjan också tillgängliga.

@@ -88,3 +88,16 @@ Sammanfattningsvis hjälper MVC-mönstret dig att behålla din applikationslogik
 Efter att ha granskat det [klassiska MVC-mönstret](/2017/mvc-model-view-controller/) bör du nu förstå hur det gör det möjligt för utvecklare att separat separera problem i en applikation. Du bör också uppskatta hur JavaScript MVC-ramverk kan skilja sig åt i tolkningen av MVC ([Todo-applikation](/2017/backbonejs-client-side-mvc-style/)), och hur de delar några av de grundläggande begreppen i det ursprungliga mönstret.
 
 När du granskar ett nytt JavaScript MVC/MV* -ramverk, kom ihåg - det kan vara användbart att gå tillbaka och överväga hur det valts att närma sig Modeller, Vyer, Controllers eller andra alternativ, eftersom det här bättre kan hjälpa dig att förstå hur ramverket ska utnytjas.
+
+## Backbone.js Snabba fakta
+
+* Kärnkomponenter: Modell, Vyer, Kollektioner, Router. Förfarer sin egen smak av MV*
+* Event-driven kommunikation mellan Vyer och Modeller. Som vi ser är det relativt simpelt att lägga till händelselyssnare till något attribut i en modell, vilket ger utvecklare finkornig kontroll över ändringar i Vyn
+* Stödjer databindningar genom manuella händelser eller ett separat Key-value observing (KVO) bibliotek.
+* Stöd för RESTful gränssnitt, så Modeller enkelt kopplas till en backend
+* Omfattande händelsessystem. Det är trivialt att lägga till stöd för pub/sub i Backbone
+* Prototyper är instansierade med det new nyckelordet, vilket vissa utvecklare föredrar
+* Agnostic om templerande ramverk, men Underscores mikro-templering är som standard tillgängliga
+* Tydliga och flexibla konventioner för strukturering av applikationer. Backbone tvingar inte användningen av alla dess komponenter och kan fungera med bara de som behövs
+
+

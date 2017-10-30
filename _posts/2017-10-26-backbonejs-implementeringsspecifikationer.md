@@ -34,4 +34,4 @@ Det har länge ansetts vara dålig praxis (och beräkningsmässigt dyrt) för at
 
 JavaScript-templerande bibliotek (som mustasch eller Handlebars.js) används ofta för att definiera mallar för vyer som HTML-markup som innehåller mallvariabler. Dessa mallblock kan antingen lagras externt eller inom skript taggar med en anpassad typ (t ex 'text /mall').
 
-Variabler är avgränsade med en variabel syntax (t.ex. `<% = title%>` för Underscore och `{{raw]]}}{{title}}{{endraw}}` för Handlebars).
+Variabler är avgränsade med en variabel syntax (t.ex. `<% = title%>` för Underscore och `{{raw}}{{title}}{{endraw}}` för Handlebars).

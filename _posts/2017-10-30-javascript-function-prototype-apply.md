@@ -30,3 +30,5 @@ Resultatet av att anropa funktionen med det angivna this värde och argument.
 Du kan tilldela ett annat `this` objekt när du anropar en befintlig funktion. `this` hänvisar till det aktuella objektet, det anropande objektet. Med `apply`, kan du skriva en metod en gång och sedan ärva den i ett annat objekt, utan att behöva skriva om metoden för det nya objektet.
 
 `apply` är mycket likt `call()`, förutom typen av argument som den stöder. Du använder en argumentmatris istället för en lista med argument (parametrar). Med apply kan du också använda en array literal, till exempel `func.apply(this, ['eat', 'bananas'])` eller ett Array-objekt, till exempel `func.apply(this, new Array('eat', 'bananas))`.
+
+Du kan också använda `arguments` för argsArray-parametern. `arguments` är en lokal variabel för en funktion. Den kan användas för alla ospecificerade argument för det åberopade objektet. Således behöver du inte veta argumenten för det åberopade objektet när du använder `apply` metoden. Du kan använda `arguments` för att överföra alla argument till det åberopade objektet. Det åberopade objektet ansvarar då för att hantera argumenten.

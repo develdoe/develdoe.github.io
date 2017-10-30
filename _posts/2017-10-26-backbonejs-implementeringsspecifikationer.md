@@ -68,8 +68,12 @@ Du kan också använda dubbla lockiga parenteser (dvs {{}}) (eller annan märkni
 _.templateSettings = { interpolate : /\{\{(.+?)\}\}/g };
 ```
 
-### En notice om navigering och state
+##### En notice om navigering och state
 
 Det är också värt att notera att i klassisk webbutveckling krävde navigering mellan oberoende visningar användningen av en siduppdatering. I en single-page JavaScript-applikationer, hämtas data från en server via Ajax som kan dynamiskt återges i en ny vy på samma sida. Eftersom detta inte uppdaterar webbadressen automatiskt, faller rollen för navigering sålunda till en "router", som hjälper till att hantera applikationstillstånd (t.ex. tillåter användare att bokmärke en viss vy de har navigerat till).
 
+
+#### Controllers
+
+I vår Todo-applikation är en Controller ansvarig för hanteringen av ändringar som användaren gjort i edit View för en viss Todo och uppdatering av en specifik Todo-modell när en användare har slutat redigera.
 

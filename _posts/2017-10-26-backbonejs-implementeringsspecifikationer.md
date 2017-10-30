@@ -35,3 +35,28 @@ Det har länge ansetts vara dålig praxis (och beräkningsmässigt dyrt) för at
 JavaScript-templerande bibliotek (som mustasch eller Handlebars.js) används ofta för att definiera mallar för vyer som HTML-markup som innehåller mallvariabler. Dessa mallblock kan antingen lagras externt eller inom skript taggar med en anpassad typ (t ex 'text /mall'). Variabler är avgränsade med en variabel syntax (t.ex. `<% = title%>` för Underscore och `{%raw%}{{title}}{%endraw%}` för Handlebars).
 
 JavaScript-templerings bibliotek accepterar vanligtvis data i ett antal format, inklusive JSON; ett serialiseringsformat som alltid är en sträng. Grov arbetet med att fylla mallar med data tas i allmänhet hand av ramverket själv. Detta har flera fördelar, särskilt när man väljer att lagra mallar externt vilket gör det möjligt för applikationer att ladda mallar dynamiskt på en nödvändig basis.
+
+Låt oss jämföra två exempel på HTML-templering. En implementeras med det populära Handlebars.js-biblioteket och den andra använder Underscore's "microtemplates".
+
+#### Handlebars.js
+
+```html
+<div class="view">
+  <input class="toggle" type="checkbox" {{#if completed}} checked {{/if}}>
+  <label>{{title}}</label>
+  <button class="destroy"></button>
+</div>
+<input class="edit" value="{{title}}">
+```
+
+#### Underscore.js Microtemplates:
+
+```html
+<div class="view">
+  <input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
+  <label><%= title %></label>
+  <button class="destroy"></button>
+</div>
+<input class="edit" value="<%= title %>">
+```
+

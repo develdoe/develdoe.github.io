@@ -48,7 +48,7 @@ Låt oss jämföra två exempel på HTML-templering. En implementeras med det po
   <label>{%raw%}{{title}}{%endraw%}</label>
   <button class="destroy"></button>
 </div>
-<input class="edit" value="{{title}}">
+<input class="edit" value="{%raw%}{{title}}{%endraw%}">
 ```
 
 #### Underscore.js Microtemplates:

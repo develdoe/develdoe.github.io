@@ -77,3 +77,6 @@ Det är också värt att notera att i klassisk webbutveckling krävde navigering
 
 I vår Todo-applikation är en Controller ansvarig för hanteringen av ändringar som användaren gjort i edit View för en viss Todo och uppdatering av en specifik Todo-modell när en användare har slutat redigera.
 
+Det är Controllers som de flesta JavaScript MVC-ramverk avviker från den traditionella tolkningen av MVC-mönstret. Anledningen till detta varierar, men enligt min mening såg JavaScript-ramverk författare initialt på server-side MVC (som Ruby on Rails) och insåg att tillvägagångssättet inte översatte 1:1 på klientsidan, och återtolkade C i MVC för att lösa sitt problem med state förvaltningen. Detta var ett smart tillvägagångssätt, men det kan göra det svårt för utvecklare att komma till MVC för första gången för att förstå både det klassiska MVC-mönstret och den "korrekta" rollen som Controllers har i andra JavaScript-ramverk.
+
+Så har Backbone.js Controllers? Inte riktigt. Backbone innehåller vanligtvis "Controller" -logik, och routrar används för att hantera applikationstillstånd, men är inte en sann Controllers logig enligt klassisk MVC.

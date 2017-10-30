@@ -32,6 +32,4 @@ I samband med JavaScript-ramverk som stöder MVC/MV * är det värt att titta n�
 
 Det har länge ansetts vara dålig praxis (och beräkningsmässigt dyrt) för att manuellt skapa stora block av HTML-markup i minnet genom strängkonstruktion.Utvecklare som använder den här tekniken ser sig själva ofta iterera genom sin data, sätter in den i in-kapslade divs och använder föråldrade tekniker såsom `document.write` för att injicera "mallen" i dess DOM. Detta tillvägagångssätt innebär ofta att man harin skriptmarkering inline med standardmarkup, vilket snabbt kan bli svårt att läsa och underhålla, särskilt vid uppbyggnad av stora applikationer.
 
-JavaScript-templerande bibliotek (som mustasch eller Handlebars.js) används ofta för att definiera mallar för vyer som HTML-markup som innehåller mallvariabler. Dessa mallblock kan antingen lagras externt eller inom skript taggar med en anpassad typ (t ex 'text /mall').
-
-Variabler är avgränsade med en variabel syntax (t.ex. `<% = title%>` för Underscore och `{%raw%}{{title}}{%endraw%}` för Handlebars).
+JavaScript-templerande bibliotek (som mustasch eller Handlebars.js) används ofta för att definiera mallar för vyer som HTML-markup som innehåller mallvariabler. Dessa mallblock kan antingen lagras externt eller inom skript taggar med en anpassad typ (t ex 'text /mall'). Variabler är avgränsade med en variabel syntax (t.ex. `<% = title%>` för Underscore och `{%raw%}{{title}}{%endraw%}` för Handlebars).

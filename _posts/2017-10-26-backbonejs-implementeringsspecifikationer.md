@@ -44,7 +44,7 @@ Låt oss jämföra två exempel på HTML-templering. En implementeras med det po
 
 ```html
 <div class="view">
-  <input class="toggle" type="checkbox" {{#if completed}} checked {{/if}}>
+  <input class="toggle" type="checkbox" {%raw%}{{#if completed}}{%endraw%} checked {%raw%}{{/if}}{%endraw%}>
   <label>{%raw%}{{title}}{%endraw%}</label>
   <button class="destroy"></button>
 </div>

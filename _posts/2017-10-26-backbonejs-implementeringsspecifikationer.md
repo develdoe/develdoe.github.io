@@ -21,4 +21,4 @@ de kommunicera med back-end-servrar.
 
 #### Views
 
-* Användare interagerar med Vyer, vilket vanligtvis betyder att läsa och redigera modelldata. Till exempel, i vår [Todo-applikation](/2017/backbonejs-client-side-mvc-style/), händer Todo Model visning i användargränssnittet i listan över alla Todo-objekt. Inom den är varje Todo gjord med sin titel och avslutad kryssruta. Modellredigering görs genom en "edit"  Vy där en användare som har valt en specifik Todo redigerar sin titel i en form.
+* Användare interagerar med Vyer, vilket vanligtvis betyder att läsa och redigera modelldata. Till exempel, i vår [Todo-applikation](/2017/backbonejs-client-side-mvc-style/), händer Todo Model visning i användargränssnittet i listan över alla Todo-objekt. Inom den är varje Todo gjord med sin titel och avslutad kryssruta. Modellredigering görs genom en "edit" Vy där en användare som har valt en specifik Todo redigerar sin titel i en form.

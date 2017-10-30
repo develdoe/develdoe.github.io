@@ -32,3 +32,31 @@ De flesta exemplen kan också köras direkt från konsolen i webbläsarens utvec
 För Chrome kan du öppna DevTools via Chrome-menyn högst upp till höger: välj "Fler verktyg> verktyg för programmerare (eller F12)" eller alternativt använda genvägsknappen Control + Shift + I på Windows/Linux eller Kommando+Alternativ+I på Mac.
 
 ![devtools](https://addyosmani.com/backbone-fundamentals/img/devtools.png)
+
+Därefter växlar du till fliken Console, varifrån du kan skriva in och köra all typ av JavaScript-kod genom att trycka på returnyckeln. Du kan också använda konsolen som en flertalsredigerare med hjälp av Shift + Enter-genvägen på Windows/Linux eller Ctrl+Enter genväg på Mac för att flytta från slutet av en rad till början på en annan.
+
+## Modeller
+
+Backbone modeller innehåller data för en applikation samt logiken kring dessa data. Till exempel kan vi använda en modell för att representera begreppet för ett todo-objekt, inklusive dess attribut som titel (todo innehåll) och färdigställt (nuvarande tillstånd för todo).
+
+Modeller kan skapas genom att förlänga `Backbone.Model` enligt följande:
+
+```js
+var Todo = Backbone.Model.extend({})
+
+// Vi kan sedan skapa vår egen konkreta instans av en (Todo) modell
+// med inga värden alls:
+var todo1 = new Todo()
+
+// Följande loggar: {}
+console.log(JSON.stringify(todo1))
+
+// eller med några godtyckliga data:
+var todo2 = new Todo({
+    title: 'I am the title of todo2',
+    completed: true
+})
+
+// Följande loggar: {"title": "I am the title of todo2", "Completed": true}
+console.log(JSON.stringify(todo2))
+```

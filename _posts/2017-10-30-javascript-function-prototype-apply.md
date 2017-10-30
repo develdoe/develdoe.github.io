@@ -34,3 +34,5 @@ Du kan tilldela ett annat `this` objekt när du anropar en befintlig funktion. `
 Du kan också använda `arguments` för argsArray-parametern. `arguments` är en lokal variabel för en funktion. Den kan användas för alla ospecificerade argument för det åberopade objektet. Således behöver du inte veta argumenten för det åberopade objektet när du använder `apply` metoden. Du kan använda `arguments` för att överföra alla argument till det åberopade objektet. Det åberopade objektet ansvarar då för att hantera argumenten.
 
 Sedan ECMAScript 5:e upplagan kan du också använda alla typer av objekt som är arrayliknande, så i praktiken betyder det att den kommer att ha egenskapen length och heltal egenskaper i intervallet (0 ... length-1). Som exempel kan du nu använda en [NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList) eller ett anpassat objekt som {'length': 2, '0': 'eat', '1': 'bananas'}.
+
+**De flesta webbläsare, inklusive Chrome 14 och Internet Explorer 9, accepterar fortfarande inte arrayliknande objekt och kommer att göra ett kasta ett exception.**

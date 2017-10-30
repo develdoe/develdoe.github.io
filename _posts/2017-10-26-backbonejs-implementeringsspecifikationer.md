@@ -86,3 +86,5 @@ Så har Backbone.js Controllers? Inte riktigt. Backbone innehåller vanligtvis "
 Sammanfattningsvis hjälper MVC-mönstret dig att behålla din applikationslogik separat från ditt användargränssnitt, vilket gör det lättare att ändra och underhålla båda. Tack vare denna logikavskiljning är det tydligare varför förändringar i dina data, gränssnitt eller affärslogik måste göras och för vad dina enhetstester ska skrivas.
 
 Efter att ha granskat det [klassiska MVC-mönstret](/2017/mvc-model-view-controller/) bör du nu förstå hur det gör det möjligt för utvecklare att separat separera problem i en applikation. Du bör också uppskatta hur JavaScript MVC-ramverk kan skilja sig åt i tolkningen av MVC, och hur de delar några av de grundläggande begreppen i det ursprungliga mönstret.
+
+När du granskar ett nytt JavaScript MVC/MV* -ramverk, kom ihåg - det kan vara användbart att gå tillbaka och överväga hur det valts att närma sig Modeller, Vyer, Controllers eller andra alternativ, eftersom det här bättre kan hjälpa dig att förstå hur ramverket ska vara utnytjas.

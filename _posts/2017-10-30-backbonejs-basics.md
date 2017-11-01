@@ -234,7 +234,38 @@ myTodo.set({
 Du kan också lyssna på ändringar av enskilda attribut i en Backbone modell. I det följande exemplet loggar vi ett meddelande när ett specifikt attribut (titeln på vår Todo-modell) ändras.
 
 ```js
+var Todo = Backbone.Model.extend({
+    defaults: {
+        title: '',
+        completed: false
+    },
 
+    initialize: function () {
+        console.log('Initierat Todo modellen')
+        this.on('change:title', function() {
+            console.log('Title värdet för denna modellen har ändrats.')
+        })
+    },
+
+    setTitle: function(newTitle) {
+        this.set({title:newTitle})
+    }
+})
+
+var myTodo = new Todo()
+
+myTodo.set('title', 'A Title')
+myTodo.setTitle('This title is from .setTitle function ')
+
+myTodo.set('completed', true)
+console.log('Todo set as completed: ', myTodo.get('completed'))
+```
+
+#### Validering
+
+Backbone stöder modellvalidering genom model.validate(), som tillåter att kontrollera attributvärdena för en modell innan de ställs in.
+
+Som standard sker validering när modellen förbehålls med metoden `save()` eller när `set()` åberopas om `{validate:true}` skickas som argument.
 
 
 

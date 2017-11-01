@@ -63,7 +63,7 @@ console.log(JSON.stringify(todo2))
 
 #### Initiering
 
-Metoden `initialize()` kallas när en ny instans av en modell skapas. Dess användning är valfri; men du kan se varför det är bra att använda det här nedan.
+Metoden `initialize()` kallas när en ny instans av en modell skapas. Dess användning är valfri; men du kan se ett exempel nedan.
 
 
 ```js

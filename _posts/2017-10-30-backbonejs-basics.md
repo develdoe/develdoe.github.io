@@ -68,9 +68,9 @@ Metoden `initialize()` kallas när en ny instans av en modell skapas. Dess anvä
 
 ```js
 var Todo = Backbone.Model.extend({
- 	initialize: function {
-		console.log('Todo modellen har initierats.')
-	}
+  initialize: function {
+    console.log('Todo modellen har initierats.')
+  }
 });
 
 var myTodo = new Todo();
@@ -83,14 +83,14 @@ Det finns tillfällen då du vill att din modell ska ha en uppsättning standard
 
 ```js
 var Todo = Backbone.Model.extend({
-  	initialize: function {
-  		console.log('Todo modellen har initierats.')
-	},
-	// Standard todo attributvärden
-	defaults: {
-    	title: 'Todo Title',
-      	completed: false
-    }
+  initialize: function {
+    console.log('Todo modellen har initierats.')
+  },
+  // Standard todo attributvärden
+  defaults: {
+    title: 'Todo Title',
+    completed: false
+  }
 })
 
 // Vi kan sedan skapa vår egen konkreta instans av en (Todo) modell

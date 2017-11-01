@@ -139,6 +139,11 @@ console.log(JSON.stringify(todo2)) // => {"title": "I am the title of todo2", "C
 Om du behöver läsa eller klona alla modelldatatribut, använd dess metod `toJSON()`. Denna metod returnerar en kopia av attributen som ett objekt (inte EN JSON sträng trots sitt namn). (När `JSON.stringify()` skickas ett objekt med en `toJSON()` metod, strängar det returneringsvärdet för `toJSON()` istället för det ursprungliga objektet. Exemplen i föregående avsnitt utnyttjade denna funktion när de kallade `JSON.stringify()` för att logga på modellinstanserna.)
 
 
+### Model.set()
+
+`Model.set()` anger en hash som innehåller en eller flera attribut på modellen. När någon av dessa attribut förändrar modellens tillstånd, utlöses en "change" händelse på den. change händelser för varje attribut utlöses också och kan vara bundna till (t.ex. `change:name`, `change:age`).
+
+
 
 
 

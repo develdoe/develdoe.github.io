@@ -136,8 +136,7 @@ var todo2 = new Todo({
 console.log(JSON.stringify(todo2)) // => {"title": "I am the title of todo2", "Completed": true}
 ```
 
-
-
+Om du behöver läsa eller klona alla modelldatatribut, använd dess metod `toJSON()`. Denna metod returnerar en kopia av attributen som ett objekt (inte EN JSON sträng trots sitt namn). (När `JSON.stringify()` skickas ett objekt med en `toJSON()` metod, strängar det returneringsvärdet för `toJSON()` istället för det ursprungliga objektet. Exemplen i föregående avsnitt utnyttjade denna funktion när de kallade `JSON.stringify()` för att logga på modellinstanserna.)
 
 
 

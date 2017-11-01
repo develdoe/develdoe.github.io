@@ -110,7 +110,40 @@ var todo2 = new Todo({
 console.log(JSON.stringify(todo2))
 ```
 
+#### Getters & Setters
+### Model.get()
 
+`Model.get()` ger enkel åtkomst till en modells attribut.
+
+```js
+var Todo = Backbone.Model.extend({
+    initialize: function () {
+        console.log('Todo modellen har initierats.')
+    },
+    defaults: {
+        title: 'Todo Title',
+        completed: false
+    }
+})
+
+// Vi kan sedan skapa vår egen konkreta instans av en (Todo) modell
+// med inga värden alls:
+var todo1 = new Todo()
+console.log(todo1.get('title')) // => Todo Title
+console.log(todo1.get('completed')) // => false
+
+// Följande loggar: {}
+console.log(JSON.stringify(todo1))
+
+// eller med några godtyckliga data:
+var todo2 = new Todo({
+    title: 'I am the title of todo2',
+    completed: true
+})
+
+// Följande loggar: {"title": "I am the title of todo2", "Completed": true}
+console.log(JSON.stringify(todo2))
+```
 
 
 

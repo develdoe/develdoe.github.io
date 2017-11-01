@@ -61,7 +61,20 @@ var todo2 = new Todo({
 console.log(JSON.stringify(todo2))
 ```
 
-## Initialization
+#### Initiering
+
+```js
+var Todo = Backbone.Model.extend({
+ 	initialize: function {
+		console.log('Denna model har initierats.')
+	}
+});
+
+var myTodo = new Todo();
+// Loggar: Denna modell har initierats.
+```
+
+### Standard attributvärden
 
 Det finns tillfällen då du vill att din modell ska ha en uppsättning standardvärden (t ex i ett scenario där en komplett uppsättning data inte tillhandahålls av användaren). Detta kan ställas in med en egenskap som kallas defaults i din modell.
 

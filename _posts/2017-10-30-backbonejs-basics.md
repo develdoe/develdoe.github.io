@@ -320,7 +320,7 @@ console.log('completed: ' + myTodo.get('completed'))
 
 **Obs! `attributes` objeket som skickats till `validate` metoden representerar vad attributen skulle vara efter att ha slutfört den aktuella set() eller save(). Detta objekt skiljer sig från modellens aktuella attribut och från parametrar som överförs till operationen. Eftersom det är skapat av utliga kopior, är det inte möjligt att ändra Number, String eller Booleskt attribut för inmatningen i funktionen, men det är möjligt att ändra attribut i nestade objekt.**
 
-Ett exempel på detta (av @fivetanley) finns [här](http://jsfiddle.net/2NdDY/270/).
+Ett exempel på detta finns som [jsfiddle example](http://jsfiddle.net/2NdDY/270/).
 
 Observera också att validering vid initialisering är möjlig men med begränsad användning, eftersom objektet som konstrueras är internt märkt ogiltigt men ändå vidarebefordrat till den som åberoparen (fortsätter ovanstående exempel):
 

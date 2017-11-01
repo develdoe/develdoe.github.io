@@ -267,6 +267,63 @@ Backbone stöder modellvalidering genom model.validate(), som tillåter att kont
 
 Som standard sker validering när modellen förbehålls med metoden `save()` eller när `set()` åberopas om `{validate:true}` skickas som argument.
 
+```js
+var Person = new Backbone.Model({name: 'Ray'})
+
+// Validera model namnet
+Person.validates = function(attrs) {
+    if(!attrs.name) {
+        return 'I need your name!'
+    }
+}
+
+Person.set('name', 'Samuel')
+console.log(Person.get('name'))
+
+Person.unset('name', {validate:true})
+```
+
+Ovan använder vi också metoden `unset()`, som tar bort ett attribut genom att radera det från den interna modellattributets hash.
+
+Valideringsfunktionerna kan vara så enkla eller komplexa som nödvändigt. Om de angivna attributen är giltiga, ska inget returneras från .validate (). Om de är ogiltiga ska ett felvärde returneras istället.
+
+Skulle ett fel returneras:
+
+* En `invalid` händelse kommer att utlösas, som anger `validationError` egenskapen på modellen med det värde som returneras med den här metoden.
+* `.save()` fortsätter inte och attributen på modellen kommer inte att ändras på servern.
+
+```js
+var Todo = Backbone.Model.extend({
+
+    defaults: {
+        completed: false
+    },
+
+    validate: function(attributes) {
+        if(attributes.title === undefined) {
+            return 'Du måste ange en titel för din todo'
+        }
+    },
+
+    initialize: function() {
+        console.log('initialized')
+        this.on('invalid', function(model,error) {
+            console.log(error)
+        })
+    }
+})
+
+var myTodo = new Todo()
+myTodo.set('completed', true, {validate: true})
+console.log('completed: ' + myTodo.get('completed'))
+```
+
+**Obs! `attributes` objeket som skickats till `validate` metoden representerar vad attributen skulle vara efter att ha slutfört den aktuella set() eller save(). Detta objekt skiljer sig från modellens aktuella attribut och från parametrar som överförs till operationen. Eftersom det är skapat av utliga kopior, är det inte möjligt att ändra Number, String eller Booleskt attribut för inmatningen i funktionen, men det är möjligt att ändra attribut i nestade objekt.**
+
+Ett exempel på detta (av @fivetanley) finns [här](http://jsfiddle.net/2NdDY/270/).
+
+Observera också att validering vid initialisering är möjlig men med begränsad användning, eftersom objektet som konstrueras är internt märkt ogiltigt men ändå vidarebefordrat till den som åberoparen (fortsätter ovanstående exempel):
+
 
 
 

@@ -199,6 +199,41 @@ console.log(Person.hasChanged(null))         // => true
 
 *Kom ihåg om det är möjligt är det bästa sättet att använda Model.set (), eller direkt instansiering som förklarats tidigare.*
 
+#### Lyssna på ändringar i din modell
+
+Om du vill få en notice när en Backbone modell ändras kan du binda en lyssnare till modellen för dess förändringshändelse. En praktisk plats för att lägga till lyssnare är i `initialize()` metoden som visas nedan:
+
+```js
+var Todo = Backbone.Model.extend({
+    defaults: {
+        title: '',
+        completed: false
+    },
+    initialize: function () {
+        console.log('Initierat Todo modellen')
+        this.on('change', function() {
+            console.log('Värdena för denna modell har ändrats.')
+        })
+    }
+})
+
+var myTodo = new Todo()
+
+myTodo.set('title', 'Lyssnaren utlöses när ett attributvärde ändras.')
+console.log('Title har ändrats: ' + myTodo.get('title'))
+
+myTodo.set('completed', true)
+console.log('Completed har ändrats: ' + myTodo.get('completed'))
+
+myTodo.set({
+  title: 'Att ändra mer än ett attribut samtidigt utlöser bara lyssnaren en gång.',
+  completed: true
+})
+```
+
+Du kan också lyssna på ändringar av enskilda attribut i en Backbone modell. I det följande exemplet loggar vi ett meddelande när ett specifikt attribut (titeln på vår Todo-modell) ändras.
+
+```js
 
 
 

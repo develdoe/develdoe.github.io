@@ -324,6 +324,11 @@ Ett exempel på detta finns som [jsfiddle example](http://jsfiddle.net/2NdDY/270
 
 Observera också att validering vid initialisering är möjlig men med begränsad användning, eftersom objektet som konstrueras är internt märkt ogiltigt men ändå vidarebefordrat till den som åberoparen (fortsätter ovanstående exempel):
 
+```js
+var emptyTodo = new Todo(null, {validate: true})
+console.log(emptyTodo.validationError);
+```
+
 
 
 

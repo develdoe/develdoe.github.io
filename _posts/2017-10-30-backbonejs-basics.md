@@ -143,6 +143,43 @@ Om du behöver läsa eller klona alla modelldatatribut, använd dess metod `toJS
 
 `Model.set()` anger en hash som innehåller en eller flera attribut på modellen. När någon av dessa attribut förändrar modellens tillstånd, utlöses en "change" händelse på den. change händelser för varje attribut utlöses också och kan vara bundna till (t.ex. `change:name`, `change:age`).
 
+```js
+var Todo = Backbone.Model.extend({
+    initialize: function () {
+        console.log('Initialize:')
+    },
+    defaults: {
+        title: 'Todo Title',
+        completed: false
+    }
+})
+
+// Ange värdet av attribut via instantiering
+var myTodo = new Todo({
+    title: 'Angivet genom instantiering.'
+})
+console.log('Todo title: ' + myTodo.get('title'))       // => Angivet genom instantiering.
+console.log('completed: ' + myTodo.get('completed'))    // => false (Angivet genom defaults)
+
+// Ange ett enkelt attributvärde en åt gången genom Model.set():
+myTodo.set('title', 'Title attribut angivet genom Model.set()')
+console.log('Todo title' + myTodo.get('title'))         // => Angivet genom Model.set()
+console.log('completed: ' + myTodo.get('completed'))    // => false (Angivet genom defaults)
+
+// Ange karta över attribut via Model.set ():
+myTodo.set({
+    title: 'Both attributes set through Model.set()',
+    completed: true
+})
+console.log('Todo title' + myTodo.get('title'))         // => Both attributes set through Model.set()
+console.log('completed: ' + myTodo.get('completed'))    // => true
+```
+
+### Direkt tillgång
+
+Modeller exponerar ett `.attributes` för attribut som representerar en intern hash som innehåller tillståndet för den modellen. Detta är i allmänhet i form av ett JSON-objekt som liknar modelldata som du kan hitta på servern men kan ta andra former.
+
+
 
 
 

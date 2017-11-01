@@ -80,6 +80,9 @@ Det finns tillfällen då du vill att din modell ska ha en uppsättning standard
 
 ```js
 var Todo = Backbone.Model.extend({
+  	initialize: function {
+  		console.log('Todo modellen har initierats.')
+	},
 	// Standard todo attributvärden
 	defaults: {
     	title: 'Todo Title',

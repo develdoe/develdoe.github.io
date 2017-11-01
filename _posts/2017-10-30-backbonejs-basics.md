@@ -179,6 +179,26 @@ console.log('completed: ' + myTodo.get('completed'))    // => true
 
 Modeller exponerar ett `.attributes` för attribut som representerar en intern hash som innehåller tillståndet för den modellen. Detta är i allmänhet i form av ett JSON-objekt som liknar modelldata som du kan hitta på servern men kan ta andra former.
 
+Genom att ställa in värden genom `.attribures` attributet på en modell kringgår utlösare som är bundna till modellen.
+
+Passerar `{silent:true}` på set försenar inte enskilda `"change:attr"` händelser. Istället är de tystade helt:
+
+```js
+var Person = new Backbone.Model()
+
+Person.on("change:name", function() {
+    console.log('Name changed')
+})
+
+Person.set({name: 'Andree'})                // => Name Changed
+Person.set({name: 'Ray'}, {silent: true})   // =>
+
+console.log(Person.hasChanged('name'))       // => true
+console.log(Person.hasChanged(null))         // => true
+```
+
+*Kom ihåg om det är möjligt är det bästa sättet att använda Model.set (), eller direkt instansiering som förklarats tidigare.*
+
 
 
 

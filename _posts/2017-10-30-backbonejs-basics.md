@@ -82,7 +82,7 @@ Det finns tillfällen då du vill att din modell ska ha en uppsättning standard
 var Todo = Backbone.Model.extend({
 	// Standard todo attributvärden
 	defaults: {
-    	title: '',
+    	title: 'Todo Title',
       	completed: false
     }
 })

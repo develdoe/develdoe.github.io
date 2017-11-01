@@ -66,12 +66,12 @@ console.log(JSON.stringify(todo2))
 ```js
 var Todo = Backbone.Model.extend({
  	initialize: function {
-		console.log('Denna model har initierats.')
+		console.log('Todo modellen har initierats.')
 	}
 });
 
 var myTodo = new Todo();
-// Loggar: Denna modell har initierats.
+// Loggar: Todo modellen har initierats.
 ```
 
 ### Standard attributvärden

@@ -93,12 +93,9 @@ var Todo = Backbone.Model.extend({
   }
 })
 
-// Vi kan sedan skapa vår egen konkreta instans av en (Todo) modell
-// med inga värden alls:
 var todo1 = new Todo()
 
-// Följande loggar: {}
-console.log(JSON.stringify(todo1))
+console.log(JSON.stringify(todo1)) // => {"Todo Title", "Completed": false}
 
 // eller med några godtyckliga data:
 var todo2 = new Todo({
@@ -106,8 +103,7 @@ var todo2 = new Todo({
     completed: true
 })
 
-// Följande loggar: {"title": "I am the title of todo2", "Completed": true}
-console.log(JSON.stringify(todo2))
+console.log(JSON.stringify(todo2)) // => {"title": "I am the title of todo2", "Completed": true}
 ```
 
 #### Getters & Setters
@@ -126,8 +122,6 @@ var Todo = Backbone.Model.extend({
     }
 })
 
-// Vi kan sedan skapa vår egen konkreta instans av en (Todo) modell
-// med inga värden alls:
 var todo1 = new Todo()
 console.log(todo1.get('title')) // => Todo Title
 console.log(todo1.get('completed')) // => false

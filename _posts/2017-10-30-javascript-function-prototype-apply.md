@@ -35,4 +35,4 @@ Du kan också använda `arguments` för argsArray-parametern. `arguments` är en
 
 Sedan ECMAScript 5:e upplagan kan du också använda alla typer av objekt som är arrayliknande, så i praktiken betyder det att den kommer att ha egenskapen length och heltal egenskaper i intervallet (0 ... length-1). Som exempel kan du nu använda en [NodeList](https://developer.mozilla.org/en-US/docs/Web/API/NodeList) eller ett anpassat objekt som {'length': 2, '0': 'eat', '1': 'bananas'}.
 
-**De flesta webbläsare, inklusive Chrome 14 och Internet Explorer 9, accepterar fortfarande inte arrayliknande objekt och kommer att göra ett kasta ett exception.**
+**De flesta webbläsare, inklusive Chrome 14 och Internet Explorer 9, accepterar fortfarande inte arrayliknande objekt och kommer att kasta ett exception.**

@@ -60,3 +60,45 @@ var todo2 = new Todo({
 // Följande loggar: {"title": "I am the title of todo2", "Completed": true}
 console.log(JSON.stringify(todo2))
 ```
+
+#### Initialization
+
+Det finns tillfällen då du vill att din modell ska ha en uppsättning standardvärden (t ex i ett scenario där en komplett uppsättning data inte tillhandahålls av användaren). Detta kan ställas in med en egenskap som kallas defaults i din modell.
+
+```js
+var Todo = Backbone.Model.extend({
+	// Default todo attribute values
+	defaults: {
+    	title: '',
+      	completed: false
+    }
+})
+
+// Vi kan sedan skapa vår egen konkreta instans av en (Todo) modell
+// med inga värden alls:
+var todo1 = new Todo()
+
+// Följande loggar: {}
+console.log(JSON.stringify(todo1))
+
+// eller med några godtyckliga data:
+var todo2 = new Todo({
+    title: 'I am the title of todo2',
+    completed: true
+})
+
+// Följande loggar: {"title": "I am the title of todo2", "Completed": true}
+console.log(JSON.stringify(todo2))
+```
+
+
+
+
+
+
+
+
+
+
+
+

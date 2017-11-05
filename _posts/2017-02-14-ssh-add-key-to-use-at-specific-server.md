@@ -5,14 +5,12 @@ title: SSH - Lägg till din SSH nyckel till en Server
 category:
   - Development
 ---
-## How To Set Up SSH Keys
-
-### Generate
+### Generera nyckel
 
 ```
 ssh-keygen -t rsa
 ```
-### show
+### visa nyckeln
 
 ```
 cat .ssh/id_rsa.pub
@@ -20,6 +18,6 @@ cat .ssh/id_rsa.pub
 
 Copy that content all the way from ssh-rsa..... to your email part.
 
-### Add your key 
+### klistra in din nyckel på servern
 
 Logga in på din server och klistra in din shh nyckel (under om det finns befintliga i filen) `.ssh/authorized_keys` 

@@ -15,8 +15,7 @@ ssh-keygen -t rsa
 ```
 cat .ssh/id_rsa.pub
 ```
-
-Copy that content all the way from ssh-rsa..... to your email part.
+Kopiera hela strängen från ssh-rsa... till din mail adress.
 
 ### klistra in din nyckel på servern
 

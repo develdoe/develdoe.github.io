@@ -41,8 +41,12 @@ httpRequest.open('GET', 'http://www.example.org/some.file', true);
 httpRequest.send();
 ```
 
-Den första parametern för anropet open() är HTTP-förfrågan - GET, POST, HEAD, eller en annan metod som stöds av din server. Håll metoden all-capitals enligt HTTP-standarden, annars kan vissa webbläsare (som Firefox) inte behandla förfrågan. För mer information om möjliga HTTP-förfrågningsmetoder, kolla [W3C-specifikationerna](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).
+* Den första parametern för anropet open() är HTTP-förfrågan - GET, POST, HEAD, eller en annan metod som stöds av din server. Håll metoden all-capitals enligt HTTP-standarden, annars kan vissa webbläsare (som Firefox) inte behandla förfrågan. För mer information om möjliga HTTP-förfrågningsmetoder, kolla [W3C-specifikationerna](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html).
 
-Den andra parametern är den webbadress du skickar begäran till. Som säkerhetsfunktion kan du inte åberopa URL-adresser på tredje partens domäner som standard. Var noga med att använda det exakta domännamnet på alla dina sidor, eller så du kommer att få ett "behörighetsförnekat" fel när du anropar call()
+* Den andra parametern är den webbadress du skickar begäran till. Som säkerhetsfunktion kan du inte åberopa URL-adresser på tredje partens domäner som standard. Var noga med att använda det exakta domännamnet på alla dina sidor, eller så du kommer att få ett "behörighetsförnekat" fel när du anropar call(). Ett vanligt fel är att tillgå din webbplats via domain.tld, men istället örsöker anropar dem med www.domain.tld. Om du verkligen behöver skicka en begäran till en annan domän, se [HTTP access control](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+
+* Den valfria tredje parametern anger om begäran är asynkron. Om true (standard), fortsätter JavaScript-körningen och användaren kan interagera med sidan medan serverns svar ännu inte har kommit fram. Detta är det första A i AJAX.
+
+
 
 

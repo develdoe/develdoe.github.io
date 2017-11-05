@@ -13,5 +13,15 @@ n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,
 
 > Om du någonsin vill ändra versionen av nod som är installerad, gör bara en annan nvm-användning vXX.XX.XX för att byta användarens nod till den version du vill ha och kör sedan kommandot ovan för att kopiera det till systemet katalogen.
 
+För att kontrollera att det fungerar, byt till rotanvändaren och gör ett till which kommando för att se till att noden nu är installerad till /usr/local/bin:
 
+```
+sudo -s
+which node
+```
 
+Du borde nu få se: 
+
+```
+/usr/local/bin/node
+```

@@ -1,7 +1,10 @@
 ---
+date: '2017-11-05 10:04 +0100'
 title: Firebase och React
 layout: post
-category: react
+category:
+  - react
+published: true
 ---
 
 *Denna artikel är en förkortning och översättning av artikeln "Intro to Firebase and React"  som du hittar hos CSS Tricks, "https://css-tricks.com/intro-firebase-react/"*
@@ -140,3 +143,5 @@ I Firebase Dashboard, till vänster om skärmen, märker du att det finns en fli
 Vi måste ställa in `.read` och `.write`  till sanna, så att vi kan lägga till och läsa data utan att authentisera oss. När du är klar ska det se ut så här:
 
 ![](https://res.cloudinary.com/css-tricks/image/upload/c_scale,w_1000,f_auto,q_auto/v1496406627/firebase-rules_sjfzyy.png)
+
+TODO:

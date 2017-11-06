@@ -47,6 +47,19 @@ httpRequest.send();
 
 * Den valfria tredje parametern anger om begäran är asynkron. Om true (standard), fortsätter JavaScript-körningen och användaren kan interagera med sidan medan serverns svar ännu inte har kommit fram. Detta är det första A i AJAX.
 
+Parametern för metoden send() kan vara vilken data som helst som du vill skicka till servern om POST begäran. Formdata ska skickas i ett format som servern kan analysera, som en frågesträng:
+
+```js
+"name=value&anothername="+encodeURIComponent(myVar)+"&so=on"
+```
+
+eller andra format, som multipart/form-data, JSON, XML, och så vidare.
+
+**Observera att om du vill använa `POST` data måste du kanske ställa in begärans MIME-typen. Till exempel, använd följande innan du anropar `send()` för formulärdata som skickas som en frågesträng:**
+
+```js
+httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+```
 
 
 

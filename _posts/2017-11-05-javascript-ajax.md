@@ -149,6 +149,15 @@ I det här exemplet:
 * Förfrågan görs och sedan (onreadystatechange) vidarebefodras exekveringen till `alertContents()`
 * `alertContents()` kontrollerar om svaret mottogs och OK, varnar sedan med `alert()` visas innehållet i test.html-filen.
 
+**Anm. 1 Om du skickar en begäran till ett stycke kod som returnerar XML, istället för en statisk XML-fil, måste du ange svarhuvuden för att fungera i Internet Explorer. Om du inte anger header Content-Type: application/xml, kommer IE att kasta ett JavaScript "Object Expected" efter linjen där du försökte komma åt ett XML-element.**
+
+**Anm. 2: Om du inte anger rubrik Cache-Control: no-cache kommer webbläsaren cache svaret och skickar aldrig in begäran när den väl en gång är gjord, vilket gör felsökning utmanande. Du kan också lägga till en unik GET-parameter, som en tidsstämpel eller ett slumpmässigt nummer (se [bypassing the cache](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest#Bypassing_the_cache))**
+
+**Not 3: Om httpRequest-variabeln används globalt kan konkurrerande funktioner som kallar makeRequest() skriva över varandra, vilket orsakar ett tävlingsförhållande. Deklarera httpRequest-variabeln lokal i en "[closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)" som innehåller funktionerna undviker detta.**
+
+
+
+
 
 
 

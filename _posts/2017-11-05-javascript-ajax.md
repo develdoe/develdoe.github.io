@@ -87,3 +87,22 @@ Den fullständiga listan över readyState-värdena dokumenteras på [XMLHTTPRequ
 * 3 (interaktiv) eller (bearbetningsförfrågan)
 * 4 (komplett) eller (förfrågan är klar och svaret är klart)
 
+Kontrollera sedan [svarskoden](https://developer.mozilla.org/en-US/docs/Web/HTTP#HTTP_Response_Codes) för HTTP-svaret. De möjliga koderna är listade på [W3C](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html). I det följande exemplet skiljer vi mellan ett framgångsrikt och misslyckat AJAX-samtal genom att söka efter en `200 OK` svarskod.
+
+```js
+if (httpRequest.status === 200) {
+    // Perfect!
+} else {
+    // There was a problem with the request.
+    // For example, the response may have a 404 (Not Found)
+    // or 500 (Internal Server Error) response code.
+}
+```
+Efter att du har kontrollerat tillståndet för begäran och HTTP-statuskoden för svaret kan du göra vad du vill med de data som servern skickade. Du har två alternativ för att få tillgång till data:
+
+* **httpRequest.responseText** - returnerar serverns svar som en textsträng.
+* **httpRequest.responseXML** - returnerar svaret som ett `XMLDocument` objekt som du kan travasera med JavaScript DOM-funktioner.
+
+
+
+

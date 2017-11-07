@@ -142,6 +142,14 @@ Låt oss sammanföra det med en enkel HTTP-begäran. Vår JavaScript kommer att 
 </script>
 ```
 
+I det här exemplet:
+
+* Användaren klickar på knappen "Make a request"
+* Eventhanteraren kallar funktionen `makeRequest()`
+* Förfrågan görs och sedan (onreadystatechange) vidarebefodras exekveringen till `alertContents()`
+* `alertContents()` kontrollerar om svaret mottogs och OK, varnar sedan med `alert()` visas innehållet i test.html-filen.
+
+
 
 
 

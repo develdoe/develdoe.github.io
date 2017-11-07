@@ -392,3 +392,11 @@ console.log(todoView.el) // logs <li></li>
 #### Vad är `el`?
 
 Den centrala egenskapen för en vy är `el` (värdet loggat i det sista uttrycket i exemplet). Vad är `el` och hur är det definierat?
+
+`el` är i grunden en referens till ett DOM-element och alla vyer måste ha en.
+
+Visningar kan använda el för att komponera dess elements innehåll och sedan infoga det i DOM trädet på en gång, vilket gör det möjligt för snabbare rendering eftersom webbläsaren utför det lägsta antalet reflows och repaints.
+
+Det finns två sätt att associera ett DOM-element med en vy: ett nytt element kan skapas för vyn och därefter läggas till i DOM eller en referens kan göras till ett element som redan finns på sidan.
+
+Om du vill skapa ett nytt element för din vy, ställ in en kombination av följande egenskaper i vyn: `tagName`, `id` och `className`. Ett nytt element kommer att skapas för dig av biblioteket och en referens till den kommer att finnas tillgänglig på `el`. Om inget tagnamn är angivet så blir det som standard en `div`.

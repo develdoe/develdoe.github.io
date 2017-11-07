@@ -103,8 +103,44 @@ Efter att du har kontrollerat tillståndet för begäran och HTTP-statuskoden f�
 * **httpRequest.responseText** - returnerar serverns svar som en textsträng.
 * **httpRequest.responseXML** - returnerar svaret som ett `XMLDocument` objekt som du kan travasera med JavaScript DOM-funktioner.
 
-*Observera att stegen ovan är giltigt endast om du använde en asynkron förfrågan (den tredje parametern för open() var ospecificerad eller satt till true). Om du använde en synkron förfrågan behöver du inte ange en funktion, men det är ej att rekommender eftersom det ger en hemsk användarupplevelse.*
+*Observera att stegen ovan är giltigt endast om du använde en asynkron förfrågan (den tredje parametern för open() var ospecificerad eller satt till `true`). Om du använde en synkron förfrågan behöver du inte ange en funktion, men det är ej att rekommender eftersom det ger en hemsk användarupplevelse.*
 
+## Steg 3 - Ett enkelt exempel
+
+Låt oss sammanföra det med en enkel HTTP-begäran. Vår JavaScript kommer att begära ett HTML-dokument, `test.html`, som innehåller texten "Jag är ett test." Sedan kommer vi att alert() innehållet i svaret. Observera att det här exemplet använder vanilla JavaScript - ingen jQuery är inblandad. HTML, XML och PHP-filerna ska också placeras i samma katalog.
+
+```js
+<button id="ajaxButton" type="button">Make a request</button>
+
+<script>
+(function() {
+  var httpRequest;
+  document.getElementById("ajaxButton").addEventListener('click', makeRequest);
+
+  function makeRequest() {
+    httpRequest = new XMLHttpRequest();
+
+    if (!httpRequest) {
+      alert('Giving up :( Cannot create an XMLHTTP instance');
+      return false;
+    }
+    httpRequest.onreadystatechange = alertContents;
+    httpRequest.open('GET', 'test.html');
+    httpRequest.send();
+  }
+
+  function alertContents() {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        alert(httpRequest.responseText);
+      } else {
+        alert('There was a problem with the request.');
+      }
+    }
+  }
+})();
+</script>
+```
 
 
 

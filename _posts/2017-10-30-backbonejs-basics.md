@@ -328,3 +328,65 @@ Observera också att validering vid initialisering är möjlig men med begränsa
 var emptyTodo = new Todo(null, {validate: true})
 console.log(emptyTodo.validationError);
 ```
+
+## Vyer
+
+Visningar i Backbone innehåller inte HTML-markup för din applikation. De innehåller logiken bakom presentation av modellens data till användaren. Detta uppnås vanligtvis med hjälp av JavaScript-templering (t.ex. Underscore Microtemplates, Mustache, jQuery-tmpl, etc.). 
+
+En vys för `render()` metoden kan vara bunden till en modells `change()` händelse, vilket möjliggör att vyn omedelbart återspeglar modelländringar utan att kräva fullständig siduppdatering.
+
+### Skapa nya vyer
+
+Att skapa en ny vy är relativt enkel och liknar att skapa nya modeller. För att skapa en ny vy, bara utöka Backbone.View. Vi introducerade exemplet TodoView nedan i föregående kapitel; Låt oss nu ta en närmare titt på hur det fungerar:
+
+```js
+var TodoView = Backbone.View.extend({
+
+    tagName: 'li',
+
+    // Cache template funktionen för ett enda objekt.
+    todoTpl: _.template("template"),
+
+    events: {
+        'dblclick label': 'edit',
+        'keypress .edit': 'updateOnEnter',
+        'blur .edit': 'close'
+    },
+
+    initialize: function() {
+        var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments))
+        var options = args.pop()
+        // I Backbone 1.1.0, om du vill komma åt godkända alternativ i
+        // din vy, du måste spara dem enligt följande:
+        this.options = options || {}
+    },
+
+    // åter-rendera titeln på todo-objektet.
+    render: function() {
+        this.$el.html(this.todoTpl(this.model.attributes))
+        this.input = this.$('.edit')
+        return this
+    },
+
+    edit: function() {
+        // exekveras när todo-etiketten är dubbelklickad
+    },
+
+    updateOnEnter: function() {
+        // exekveras på varje knapptryckning du gör det i redigeringsläge,
+        // men vi väntar på att komma in för att komma igång
+    },
+
+    close: function() {
+        // exekveras när todo förlorar fokus
+    },
+
+})
+
+var todoView = new TodoView()
+
+// log refererar till ett DOM-element som motsvarar vyns instans
+console.log(todoView.el) // logs <li></li>
+```
+
+#### Vad är `el`?

@@ -390,3 +390,5 @@ console.log(todoView.el) // logs <li></li>
 ```
 
 #### Vad är `el`?
+
+Den centrala egenskapen för en vy är `el` (värdet loggat i det sista uttrycket i exemplet). Vad är `el` och hur är det definierat?

@@ -155,6 +155,25 @@ I det här exemplet:
 
 **Not 3: Om httpRequest-variabeln används globalt kan konkurrerande funktioner som kallar makeRequest() skriva över varandra, vilket orsakar ett tävlingsförhållande. Deklarera httpRequest-variabeln lokal i en "[closure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)" som innehåller funktionerna undviker detta.**
 
+I händelse av ett kommunikationsfel (som servern går ner), kommer ett undantag att kastas i onreadystatechange metoden vid åtkomst av svarstatusen. För att mildra detta problem kan du pakka om din if...then uttalandet i ett try...catch:
+
+```js
+function alertContents() {
+  try {
+    if (httpRequest.readyState === XMLHttpRequest.DONE) {
+      if (httpRequest.status === 200) {
+        alert(httpRequest.responseText);
+      } else {
+        alert('There was a problem with the request.');
+      }
+    }
+  }
+  catch( e ) {
+    alert('Caught Exception: ' + e.description);
+  }
+}
+```
+
 
 
 

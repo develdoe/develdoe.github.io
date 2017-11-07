@@ -328,7 +328,3 @@ Observera också att validering vid initialisering är möjlig men med begränsa
 var emptyTodo = new Todo(null, {validate: true})
 console.log(emptyTodo.validationError);
 ```
-
-
-
-

@@ -61,5 +61,29 @@ eller andra format, som multipart/form-data, JSON, XML, och så vidare.
 httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 ```
 
+## Steg 2 - Hantera serverns svar
 
+När du skickadar förfrågningar, anger du namnet på en JavaScript-funktion för att hantera svaret:
+
+```js
+httpRequest.onreadystatechange = nameOfTheFunction;
+```
+
+Vad ska den här funktionen göra? Först måste funktionen kontrollera förfrågans tillstånd. Om state har värdet av XMLHttpRequest.DONE (motsvarande 4) betyder det att hela serverresponsen mottogs och det är OK för dig att fortsätta bearbeta det.
+
+```js
+if (httpRequest.readyState === XMLHttpRequest.DONE) {
+    // Everything is good, the response was received.
+} else {
+    // Not ready yet.
+}
+```
+
+Den fullständiga listan över readyState-värdena dokumenteras på [XMLHTTPRequest.readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest#Properties) och är som följer:
+
+* 0 (uninitialized) eller (förfrågan inte initialiserad)
+* 1 (laddning) eller (serverns anslutning etablerad)
+* 2 (laddad) eller (begäran mottagen)
+* 3 (interaktiv) eller (bearbetningsförfrågan)
+* 4 (komplett) eller (förfrågan är klar och svaret är klart)
 

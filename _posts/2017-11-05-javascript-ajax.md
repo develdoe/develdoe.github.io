@@ -103,6 +103,9 @@ Efter att du har kontrollerat tillståndet för begäran och HTTP-statuskoden f�
 * **httpRequest.responseText** - returnerar serverns svar som en textsträng.
 * **httpRequest.responseXML** - returnerar svaret som ett `XMLDocument` objekt som du kan travasera med JavaScript DOM-funktioner.
 
+*Observera att stegen ovan är giltigt endast om du använde en asynkron förfrågan (den tredje parametern för open() var ospecificerad eller satt till true). Om du använde en synkron förfrågan behöver du inte ange en funktion, men det är ej att rekommender eftersom det ger en hemsk användarupplevelse.*
+
+
 
 
 

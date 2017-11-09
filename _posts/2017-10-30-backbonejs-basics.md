@@ -438,4 +438,14 @@ var todosView = new TodosView({el: $('#footer')});
 
 **Obs! När du deklarerar en vy, alternativen, `el`, `tagName`, `id` och `className` kan definieras som funktioner om du vill att deras värden ska bestämmas vid exekvering.**
 
+#### eland()
+
+Vy logik måste ofta påkalla jQuery eller Zepto funktioner på `el` element som är inbädda i vyn. 
+
+Backbone gör det enkelt att göra det, genom att definiera `$el` egenskap och `$()` funktionen.
+
+`view.$el` attribut motsvarar `$(view.el)` och `view.$(Selector)` motsvarar `$(view.el).find(selector)`.
+
+I vårt TodoView-exempels renderingsmetod ser vi `this.$el` används för att ställa in elementets HTML och det `this.$()` används för att hitta dess subelement av klassen `edit`.
+
 

@@ -42,3 +42,22 @@ Och när en funktion körs får den 'this' egenskapen - en variabel med **värde
 
 'this' används inom en funktion (låt oss säga funktion A) och den innehåller värdet på objektet som åberopade funktion A. Vi behöver 'this' för att komma åt metoder och egenskaper på objektet som åberopade funktion A, särskilt eftersom vi inte alltid vet namnet på det uppkallande objektet, och ibland finns inget namn för att hänvisa till det åberopade objektet.
 
+'this' är egentligen bara en genvägsreferens för "föregångsobjektet" - det uppkallande objektet.
+
+Grubbla på detta grundläggande exempel som illustrerar användningen av 'this' i JavaScript:
+
+```js
+var person = {
+    firstName: 'Andree',
+    lastName: 'Ray',
+    //Eftersom 'this' sökordet används i metoden ShowFullName nedan och metoden
+    // ShowFullName definieras på personobjektet,  'this' kommer att ha värdet
+    // på personobjektet eftersom personobjektet anropar showFullName()
+    showFullName: function () {
+        console.log (this.firstName + " " + this.lastName);
+    }
+}
+
+person.showFullName(); // => Andree Ray
+```
+

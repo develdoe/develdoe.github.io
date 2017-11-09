@@ -400,3 +400,41 @@ Visningar kan använda el för att komponera dess elements innehåll och sedan i
 Det finns två sätt att associera ett DOM-element med en vy: ett nytt element kan skapas för vyn och därefter läggas till i DOM eller en referens kan göras till ett element som redan finns på sidan.
 
 Om du vill skapa ett nytt element för din vy, ställ in en kombination av följande egenskaper i vyn: `tagName`, `id` och `className`. Ett nytt element kommer att skapas för dig av biblioteket och en referens till den kommer att finnas tillgänglig på `el`. Om inget tagnamn är angivet så blir det som standard en `div`.
+
+I exemplet ovan, `tagName` är satt till "li", vilket resulterar i skapandet av ett li-element. Följande exempel skapar ett ul-element med id- och klassattribut:
+
+```js
+var TodoView = Backbone.View.extend({
+
+    tagName: 'ul', // krävs, men standard blir annars en `div`.
+
+    className: 'container', // valfritt, du kan tilldela flera klasser
+
+    id: 'todos' // valfritt
+})
+
+var todoView = new TodoView()
+
+console.log(todoView.el)
+```
+
+Ovanstående kod skapar DOM-elementet nedan men lägger inte till det i DOM.
+
+```html
+<ul id="todos" class="container"></ul>
+```
+
+Om elementet redan finns på sidan kan du ställa in `el` som en CSS-väljare som matchar elementet.
+
+```js
+el: '#footer'
+```
+
+Alternativt kan du ställa in `el` till ett befintligt element när du skapar vyn:
+
+```js
+```
+
+**Obs! När du deklarerar en vy, alternativen, `el`, `tagName`, `id` och `className` kan definieras som funktioner om du vill att deras värden ska bestämmas vid exekvering.**
+
+

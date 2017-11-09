@@ -535,3 +535,31 @@ En vanlig Backbone-konvention är att returnera `this` slutet av render(). Detta
 * Göra vyer lätt återanvändbara i andra föräldravisningar.
 * Skapa en lista med element utan att rendera och måla var och en av dem individuellt, bara för att målas upp när hela listan är populerad.
 
+Låt oss försöka implementera den senare av dessa. render metoden för en enkel ListView som inte använder en ItemView för varje objekt kan skrivas:
+
+```js
+var ListView = Backbone.View.extend({
+
+    // Kompilera en mall för den här vyn. I detta fall '...'
+    // är en platshållare för en mall som $("#list_template").html()
+    template: Handlebars.compile(...),
+
+    render: function() {
+        this.$el.html(this.template(this.model.attributes))
+        return this
+    }
+})
+```
+
+Låt oss nu anta att det har fattats beslut att konstruera objekten med hjälp av en ItemView för att ge förbättrat beteende till vår lista. ItemView kan skrivas:
+
+```js
+var ItemView = Backbone.View.extend({
+    events: {},
+    render: function() {
+        this.$el.html( this.template(this.model.attributes))
+        return this
+    }
+})
+```
+

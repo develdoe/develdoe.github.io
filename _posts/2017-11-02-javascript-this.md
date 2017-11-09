@@ -75,7 +75,7 @@ Jag ska redogöra för det föregående jQuery-exemplet: Användandet av `$(this
 
 *Observera att knappen är ett DOM-element på HTML-sidan, och det är också ett objekt; i det här fallet är det ett jQuery-objekt eftersom vi förpackade det i funktionen jQuery $().*
 
-## Den största Gotcha med JavaScript `this` 
+## Den största Gotcha med JavaScript "this" 
 
 Om du förstår den här principen med JavaScript's `this`, kommer du att förstå `this` nyckelordet med tydlighet:
 

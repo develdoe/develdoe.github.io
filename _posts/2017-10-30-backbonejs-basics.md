@@ -493,4 +493,40 @@ console.log(view.$('a b').html()); // => "test"
 
 render() är en valfri funktion som definierar logiken för att rendera en templeringsmall.
 
-Vi använder Backbone mikro-templerande i dessa exempel, men kom ihåg att du kan använda andra templerande ramar om du föredrar det. Vårt exempel kommer att referera till följande HTML-markup:
+Vi använder Handlebars i dessa exempel, men kom ihåg att du kan använda andra templerande ramverk om du föredrar det. Vårt exempel kommer att referera till följande HTML-markup:
+
+```html
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Backbone Boilerplate</title>
+</head>
+<body>
+
+<div id="todo"></div>
+
+<script id="template" type="text/x-handlebars-template">
+    <div>
+        <input id="todo_complete" type="checkbox" {{#if competed}} checked="checked" {{/if}}>
+        {{title}}
+    </div>
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://underscorejs.org/underscore-min.js"></script>
+<script src="http://backbonejs.org/backbone-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script src=todoView.js></script>
+```
+
+Metoden Handlebars.compile i Handlebars sammanställer JavaScript-mallar till funktioner som kan utvärderas för rendering. 
+
+I TodoView passerar jag markup från mallen med id `template` till Handlebars.compile för att sammanställas och lagras i egenskapen `todoTpl` när vyn skapas.
+
+Metoden `render()` använder denna mall genom att skicka den till `toJSON()` för att överföra till attributen för modellen som är associerad med visningen.
+
+Mallen returnerar sin markering efter att ha använt modellens `title` och `completed` flagga för att utvärdera uttrycken som innehåller dem.
+
+Jag ställer sedan in denna markering som HTML-innehållet i `el` DOM-elementet med egenskapen `$el`.
+

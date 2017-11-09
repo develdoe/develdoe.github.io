@@ -73,3 +73,7 @@ $("button").click(function(event) {
 
 Jag ska redogöra för det föregående jQuery-exemplet: Användandet av `$(this)`, vilket är jQuerys syntax för `this` nyckelord i JavaScript, används inom en anonym funktion, och den anonyma funktionen exekveras i knappens click() metod. Anledningen till att `$(this)` är knutet till knappobjektet beror på att jQuery-biblioteket binder `$(this)` till objektet som anropar klickmetoden. Därför kommer `$(this)` att ha värdet på jQuery-knappen `($("button"))` objektet, även om `$(this)` definieras inuti en anonym funktion som inte själv kan komma åt `this` variabeln på den yttre funktionen.
 
+*Observera att knappen är ett DOM-element på HTML-sidan, och det är också ett objekt; i det här fallet är det ett jQuery-objekt eftersom vi förpackade det i funktionen jQuery $().*
+
+
+

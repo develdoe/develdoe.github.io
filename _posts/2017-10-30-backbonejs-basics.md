@@ -526,7 +526,12 @@ I TodoView passerar jag markup från mallen med id `template` till Handlebars.co
 
 Metoden `render()` använder denna mall genom att skicka den till `toJSON()` för att överföra till attributen för modellen som är associerad med visningen.
 
-Mallen returnerar sin markering efter att ha använt modellens `title` och `completed` flagga för att utvärdera uttrycken som innehåller dem.
+Mallen returnerar sin markering efter att ha använt modellens `title` och `completed` flagga för att utvärdera uttrycken som innehåller dem. Jag ställer sedan in denna markering som HTML-innehållet i `el` DOM-elementet med egenskapen `$el`.
 
-Jag ställer sedan in denna markering som HTML-innehållet i `el` DOM-elementet med egenskapen `$el`.
+Detta fyller i mallen, vilket ger dig en data-komplett uppsättning markup på bara några korta rader av kod.
+
+En vanlig Backbone-konvention är att returnera `this` slutet av render(). Detta är användbart av ett antal skäl, inklusive:
+
+* Göra vyer lätt återanvändbara i andra föräldravisningar.
+* Skapa en lista med element utan att rendera och måla var och en av dem individuellt, bara för att målas upp när hela listan är populerad.
 

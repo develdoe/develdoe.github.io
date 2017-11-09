@@ -81,9 +81,9 @@ Om du förstår den här principen med JavaScript's `this`, kommer du att först
 
 **`this` tilldelas inte ett värde förrän ett objekt åberopar funktionen där `this` definieras.**
 
-Låt oss kalla funktionen där det här definieras `this funktionen`.
+Låt oss kalla funktionen där det här definieras "this funktionen".
 
-Även om det verkar som `this` hänvisar till objektet där det definieras, är inte förrän ett objekt åberopar `this funktionen` som detta faktiskt tilldelas ett värde och värdet det tilldelas baseras uteslutande på objektet som anroper funktionen. 
+Även om det verkar som `this` hänvisar till objektet där det definieras, är inte förrän ett objekt åberopar "this funktionen" som detta faktiskt tilldelas ett värde och värdet det tilldelas baseras uteslutande på objektet som anroper funktionen. 
 
 *`this` har värdet av det uppkallande objektet under de flesta omständigheter. Det finns emellertid några scenarier `this` inte har värdet på det uppkallande objektet. Jag berör senare scenarierna.*
 

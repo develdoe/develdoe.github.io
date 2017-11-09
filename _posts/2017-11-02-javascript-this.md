@@ -75,5 +75,16 @@ Jag ska redogöra för det föregående jQuery-exemplet: Användandet av `$(this
 
 *Observera att knappen är ett DOM-element på HTML-sidan, och det är också ett objekt; i det här fallet är det ett jQuery-objekt eftersom vi förpackade det i funktionen jQuery $().*
 
+## Den största Gotcha med JavaScript `this` 
+
+Om du förstår den här principen med JavaScript's `this`, kommer du att förstå `this` nyckelordet med tydlighet:
+
+**`this` tilldelas inte ett värde förrän ett objekt åberopar funktionen där `this` definieras.**
+
+Låt oss kalla funktionen där det här definieras `this funktionen`.
+
+Även om det verkar som `this` hänvisar till objektet där det definieras, är inte förrän ett objekt åberopar `this funktionen` som detta faktiskt tilldelas ett värde och värdet det tilldelas baseras uteslutande på objektet som anroper funktionen. 
+
+`this` har värdet av det uppkallande objektet under de flesta omständigheter. Det finns emellertid några scenarier `this` inte har värdet på det uppkallande objektet. Jag berör senare scenarierna.
 
 

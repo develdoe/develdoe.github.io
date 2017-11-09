@@ -563,3 +563,39 @@ var ItemView = Backbone.View.extend({
 })
 ```
 
+Notera användningen av returnera `this` i slutet av render. Detta vanliga mönster gör det möjligt för oss att återanvända vyn som en undervy. Vi kan också använda den för att för-rendera vyn innan rendering. Med hjälp av detta krävs att vi ändrar vår ListViews renderingsmetod enligt följande:
+
+```js
+var ListView = Backbone.View.extend({
+    render: function() {
+
+        // Antag att vår modell visar de saker vi kommer att göra
+        // visa i vår lista
+        var items = this.model.get('items')
+
+        // Loop genom var och en av våra artiklar med Underscore
+        // _.each iterator
+        _.each(items, function(item){
+
+            // Skapa en ny instans av ItemView, passerar
+            // det ett specifikt modellobjekt
+            var itemView = new ItemView({ model: item });
+
+            // Objektets DOM-element läggs till efter det
+            // att det har renderats. Här är 'return this' hjälpsamt
+            // när itemView gör sin modell. Senare ber vi om
+            // dess output ("el")
+            this.$el.append( itemView.render().el );
+        }, this);
+    }
+})
+```
+
+#### The events hash
+
+Backbones händelser hash tillåter oss att bifoga händelse lyssnare till antingen el-relativa anpassade selektorer, eller direkt till el om ingen väljare tillhandahålls. 
+
+En händelse har formen av ett nyckelvärdespar `eventName selector': 'callbackFunction` och ett antal DOM-händelse-typer stöds, inklusive `click, submit, mouseover, dblclick`, mm.
+
+
+

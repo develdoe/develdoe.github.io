@@ -489,5 +489,8 @@ view.setElement('<p><a><b>test</b></a></p>');
 console.log(view.$('a b').html()); // => "test"
 ```
 
+#### render()
 
+render() är en valfri funktion som definierar logiken för att rendera en templeringsmall.
 
+Vi använder Backbone mikro-templerande i dessa exempel, men kom ihåg att du kan använda andra templerande ramar om du föredrar det. Vårt exempel kommer att referera till följande HTML-markup:

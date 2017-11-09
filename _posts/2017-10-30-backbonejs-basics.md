@@ -448,4 +448,46 @@ Backbone gör det enkelt att göra det, genom att definiera `$el` egenskap och `
 
 I vårt TodoView-exempels renderingsmetod ser vi `this.$el` används för att ställa in elementets HTML och det `this.$()` används för att hitta dess subelement av klassen `edit`.
 
+#### setElement
+
+Om du behöver ange en existerande Backbone-vy till ett annat DOM-element kan `setElement` användas för detta ändamål.
+
+Överstyrning this.el måste både ändra DOM-referensen och binda till händelserna till det nya elementet (och avbinda från det gamla). `setElement` skapar en cachad `$el` referens för dig, flyttar de delegerade händelserna för en vy från det gamla elementet till det nya.
+
+```js
+// Vi skapar två DOM-element som representerar knappar
+var btn1 = $('<button></button>')
+var btn2 = $('<button></button>')
+
+// Definiera en ny vy
+var TodoView = Backbone.View.extend({
+    events: {
+        click: function(e) {
+            console.log(todoView.el === e.target)
+        }
+    }
+})
+
+// Skapa en ny instans av vyn, tillämpa den till btn1
+var todoView = new TodoView({el: btn1})
+
+// Applicera vyn på btn2 med setElement
+todoView.setElement(btn2)
+
+btn1.trigger('click')
+btn2.trigger('click') // => true
+```
+
+Egenskapen "el" representerar markeringsdelen av den vy som ska skapas. För att få vyn att faktiskt rendera till sidan måste du lägga till den som ett nytt element eller lägga till ett befintligt element.
+
+```js
+// Vi kan också tillhandahålla raw markup till setElement
+// som följer (bara för att visa att det kan göras):
+
+var view = new Backbone.View;
+view.setElement('<p><a><b>test</b></a></p>');
+console.log(view.$('a b').html()); // => "test"
+```
+
+
 

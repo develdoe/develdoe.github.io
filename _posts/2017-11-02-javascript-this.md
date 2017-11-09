@@ -87,7 +87,7 @@ Låt oss kalla funktionen där det här definieras "this funktionen".
 
 *`this` har värdet av det uppkallande objektet under de flesta omständigheter. Det finns emellertid några scenarier `this` inte har värdet på det uppkallande objektet. Jag berör senare scenarierna.*
 
-## this i det globala scopet
+## "this" i det globala scopet
 
 
 

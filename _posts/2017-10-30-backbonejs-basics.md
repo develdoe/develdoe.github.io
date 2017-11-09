@@ -433,6 +433,7 @@ el: '#footer'
 Alternativt kan du ställa in `el` till ett befintligt element när du skapar vyn:
 
 ```js
+var todosView = new TodosView({el: $('#footer')});
 ```
 
 **Obs! När du deklarerar en vy, alternativen, `el`, `tagName`, `id` och `className` kan definieras som funktioner om du vill att deras värden ska bestämmas vid exekvering.**

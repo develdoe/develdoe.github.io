@@ -26,25 +26,25 @@ Om vi använder person.firstName och person.lastName, som i det sista exemplet b
 
 Tänk på att det kan finnas en annan global variabel (som vi kanske eller kanske inte är medveten om) med namnet "person". Därefter kan referenser till person.firstName försöka komma åt egenskapen firstName från den globala variabelen, vilket kan leda till till svåra att felsöka fel.
 
-Så vi använder "this" nyckelordet inte bara för estetik (det vill säga som referent), men också för precision; dess användning gör faktiskt vår kod mer entydig, 
+Så vi använder `this` nyckelordet inte bara för estetik (det vill säga som referent), men också för precision; dess användning gör faktiskt vår kod mer entydig, 
 
-Precis som pronomen "han" används för att hänvisa till antecedenten (antecedent är det substantiv som en pronomen refererar till), används 'this' nyckelordet också på ett objekt som funktionen (där den här används) är bunden till.
+Precis som pronomen "han" används för att hänvisa till antecedenten (antecedent är det substantiv som en pronomen refererar till), används `this` nyckelordet också på ett objekt som funktionen (där den här används) är bunden till.
 
 ## JavaScript this nyckelordets grunder
 
 Först, vet att alla funktioner i JavaScript har egenskaper, precis som objekt har egenskaper.
 
-Och när en funktion körs får den 'this' egenskapen - en variabel med **värdet på objektet som anropade funktionen där 'this' används**.
+Och när en funktion körs får den `this` egenskapen - en variabel med **värdet på objektet som anropade funktionen där `this` används**.
 
-'this' referensen hänvisar ALLTID till (och håller värdet av) ett objekt, ett singulärt objekt, och det brukar användas inom en funktion eller metod, även om det kan användas utanför en funktion i det globala scopet.
+`this` referensen hänvisar ALLTID till (och håller värdet av) ett objekt, ett singulärt objekt, och det brukar användas inom en funktion eller metod, även om det kan användas utanför en funktion i det globala scopet.
 
-**Observera att när vi använder strikt läge, 'this' håller värdet av 'undefined' i globala funktioner och i anonyma funktioner som inte är bundna till något objekt.**
+**Observera att när vi använder strikt läge, `this` håller värdet av 'undefined' i globala funktioner och i anonyma funktioner som inte är bundna till något objekt.**
 
-'this' används inom en funktion (låt oss säga funktion A) och den innehåller värdet på objektet som åberopade funktion A. Vi behöver 'this' för att komma åt metoder och egenskaper på objektet som åberopade funktion A, särskilt eftersom vi inte alltid vet namnet på det uppkallande objektet, och ibland finns inget namn för att hänvisa till det åberopade objektet.
+`this` används inom en funktion (låt oss säga funktion A) och den innehåller värdet på objektet som åberopade funktion A. Vi behöver 'this' för att komma åt metoder och egenskaper på objektet som åberopade funktion A, särskilt eftersom vi inte alltid vet namnet på det uppkallande objektet, och ibland finns inget namn för att hänvisa till det åberopade objektet.
 
-'this' är egentligen bara en genvägsreferens för "föregångsobjektet" - det uppkallande objektet.
+`this` är egentligen bara en genvägsreferens för "föregångsobjektet" - det uppkallande objektet.
 
-Grubbla på detta grundläggande exempel som illustrerar användningen av 'this' i JavaScript:
+Grubbla på detta grundläggande exempel som illustrerar användningen av `this` i JavaScript:
 
 ```js
 var person = {
@@ -61,5 +61,15 @@ var person = {
 person.showFullName(); // => Andree Ray
 ```
 
+Och överväga det här grundläggande jQuery-exemplet:
 
+```js
+$("button").click(function(event) {
+    // $(this) kommer att ha värdet på knappen ($("button")) objektet.
+    // eftersom knappobjektet anropar metoden click()
+    console.log($(this).prop("name"));
+});
+```
+
+Jag ska redogöra för det föregående jQuery-exemplet: Användandet av `$(this)`, vilket är jQuerys syntax för `this` nyckelord i JavaScript, används inom en anonym funktion, och den anonyma funktionen exekveras i knappens click() metod. Anledningen till att `$(this)` är knutet till knappobjektet beror på att jQuery-biblioteket binder `$(this)` till objektet som anropar klickmetoden.
 

@@ -726,5 +726,13 @@ I klient-server applikationer innehåller kollekitioner modeller som erhållits 
 
 När du utbyter data mellan klienten och en server behöver du ett sätt att unikt identifiera modeller. I Backbone görs detta med `id`, `cid` och `idAttribute` attribut.
 
+Varje modell i Backbone har ett id, vilket är en unik identifierare som är antingen ett heltal eller en sträng (t.ex. en UUID).
+
+Modeller har också ett `cid` (klient id) som automatiskt genereras av Backbone när modellen skapas. Endera identifieraren kan användas för att hämta en modell från en kollektion.
+
+Huvudskillnaden mellan dem är att cid genereras av Backbone; Det är till hjälp när du inte har ett riktigt id. Detta kan vara fallet om din modell ännu inte har sparats på servern eller om du inte sparar den till en databas.
+
+
+
 
 

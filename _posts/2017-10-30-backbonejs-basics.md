@@ -740,7 +740,53 @@ Värdet på en modells idAttribute bör ställas in av servern när modellen spa
 
 Internt innehåller `Backbone.Collection` en uppsättning modeller som räknas upp av deras id-egendom, om modell instanser råkar ha en. När collection.get(id) anropas, kontrolleras denna array för existens av modell instans med motsvarande ID.
 
+```js
+var Todo = Backbone.Model.extend({
+    defaults: {
+        title: '',
+        completed: false
+    }
+})
 
+var TodosCollection = Backbone.Collection.extend({
+  model: Todo
+})
+
+var myTodo = new Todo({title:'my title', id: 2})
+
+var todos = new TodosCollection([myTodo])
+
+var todo2 = todos.get(2)
+
+var todoCid = todos.get(todo2.cid)
+```
+
+### Listening for events
+
+Eftersom kollektioner representerar en grupp av objekt kan vi lyssna på att lägga till och ta bort händelser som uppstår när modeller läggs till eller tas bort från en kollektion. Här är ett exempel:
+
+```js
+var Todo = Backbone.Model.extend({
+    defaults: {
+        title: 'mr Ray',
+        competed: true
+    }
+})
+
+var todo = new Todo({
+    title: 'fuck'
+})
+
+var TodosCollection = new Backbone.Collection()
+
+
+
+TodosCollection.on('add', function(todo) {
+    console.log("I should " + todo.get('title') + ". Have I done it before? " + (todo.get('competed') ? 'yeah!' : 'no'))
+})
+
+TodosCollection.add(todo)
+```
 
 
 

@@ -617,4 +617,6 @@ Det som inte är direkt uppenbart är att medan Backbone använder jQuery's `.de
 
 Det enda som verkligen är att tänka på är att någon sträng callbackback som levereras till händelseattributet måste ha en motsvarande funktion med samma namn inom ramen för din vy.
 
+De deklarativa delegerade jQuery-händelserna betyder att du inte behöver oroa dig för huruvida ett visst element har renderats till DOM ännu eller ej. Vanligtvis med jQuery måste du oroa dig för "närvaro eller frånvaro i DOM" hela tiden med bindande händelser.
 
+I vårt TodoView-exempel kallas callback funktionen när användaren dubbelklickar ett etikettelement i elelementet, `updateOnEnter` kallas för varje knapptryckning i ett element med klassen "edit" och close exekveras när ett element med klassen ".edit" förlorar fokus. Var och en av dessa återuppringningsfunktioner kan använda `this` för att referera till TodoView-objektet.

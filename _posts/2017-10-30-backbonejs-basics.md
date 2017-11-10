@@ -736,6 +736,10 @@ Huvudskillnaden mellan dem är att `cid` genereras av Backbone; Det är till hj�
 
 Som standard är det `id`, men det kan anpassas efter behov. Om din server, till exempel, anger ett unikt attribut på din modell med namnet "userId", skulle du ange `idAttribute` till "userId" i din modelldefinition.
 
+Värdet på en modells idAttribute bör ställas in av servern när modellen sparas. Efter denna punkt behöver du inte ställa in den manuellt, om inte ytterligare kontroll krävs.
+
+Internt innehåller `Backbone.Collection` en uppsättning modeller som räknas upp av deras id-egendom, om modell instanser råkar ha en. När collection.get(id) anropas, kontrolleras denna array för existens av modell instans med motsvarande ID.
+
 
 
 

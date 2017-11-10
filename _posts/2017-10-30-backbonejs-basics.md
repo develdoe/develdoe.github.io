@@ -597,5 +597,24 @@ Backbones händelser hash tillåter oss att bifoga händelse lyssnare till antin
 
 En händelse har formen av ett nyckelvärdespar `eventName selector': 'callbackFunction` och ett antal DOM-händelse-typer stöds, inklusive `click, submit, mouseover, dblclick`, mm.
 
+```js
+var TodoView = Backbone.View.extend({
+
+    tagName: 'li',
+
+    // med en händelsehash som innehåller DOM-händelser
+    events: {
+        'click .toggle': 'toggleCompleted',
+        'dblclick label': 'edit',
+        'keypress .edit': 'updateOnEnter',
+        'click .destroy': 'clear',
+        'blur '
+    }
+})
+```
+
+Det som inte är direkt uppenbart är att medan Backbone använder jQuery's `.delegate()` underytan, tar Backbone det ett steg vidare genom att utvidga det så att `this` alltid refererar till det aktuella vyns objekt inom callback funktioner.
+
+Det enda som verkligen är att tänka på är att någon sträng callbackback som levereras till händelseattributet måste ha en motsvarande funktion med samma namn inom ramen för din vy.
 
 

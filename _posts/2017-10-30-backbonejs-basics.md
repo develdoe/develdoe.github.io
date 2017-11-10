@@ -730,8 +730,11 @@ Varje modell i Backbone har ett id, vilket är en unik identifierare som är ant
 
 Modeller har också ett `cid` (klient id) som automatiskt genereras av Backbone när modellen skapas. Endera identifieraren kan användas för att hämta en modell från en kollektion.
 
-Huvudskillnaden mellan dem är att cid genereras av Backbone; Det är till hjälp när du inte har ett riktigt id. Detta kan vara fallet om din modell ännu inte har sparats på servern eller om du inte sparar den till en databas.
+Huvudskillnaden mellan dem är att `cid` genereras av Backbone; Det är till hjälp när du inte har ett riktigt id. Detta kan vara fallet om din modell ännu inte har sparats på servern eller om du inte sparar den till en databas.
 
+`IdAttribute` är identifieringsattributnamnet för modellen som returneras från servern (dvs id i din databas). Detta berättar för Backbone vilket datafält från servern ska användas för att fylla i id-egenskapen (tänk på det som en mapper).
+
+Som standard är det `id`, men det kan anpassas efter behov. Om din server, till exempel, anger ett unikt attribut på din modell med namnet "userId", skulle du ange `idAttribute` till "userId" i din modelldefinition.
 
 
 

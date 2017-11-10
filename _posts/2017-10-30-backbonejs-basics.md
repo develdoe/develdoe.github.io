@@ -640,6 +640,91 @@ Normalt, när du skapar en kollektion, vill du också definiera en egenskap som 
 
 I följande exempel skapar vi en TodoCollection som innehåller våra Todo-modeller:
 
+```js
+var Todo = Backbone.Model.extend({
+    defaults: {
+        title: '',
+        completed: false
+    }
+})
+
+var TodoCollection = Backbone.Collection.extend({
+    model: Todo
+})
+
+var myTodo = new Todo({title:'title',id:2})
+
+// Passera en rad modeller på kollektion instansiering
+var todos = new TodoCollection([myTodo])
+console.log("Collection size: " + todos.length) // => Collection size: 1
+```
+
+### Adding and Removing Models
+
+Det föregående exemplet populerade kollektioner med hjälp av en rad modeller när den var instansierad. Efter att en kollektion har skapats kan modeller läggas till och tas bort med metoderna `add()` och `remove()`:
+
+```js
+var Todo = Backbone.Model.extend({
+  defaults: {
+    title: '',
+    completed: false
+  }
+})
+
+var TodosCollection = Backbone.Collection.extend({
+  model: Todo
+})
+
+var a = new Todo({title:'a'}),
+    b = new Todo({title:'b'}),
+    c = new Todo({title:'c'})
+
+var todos = new TodosCollection([a,b])
+
+todos.add(c)
+
+todos.remove([a,b])
+
+todos.remove(c)
+```
+
+Observera att `add()` och `remove()` accepterar både enskilda modeller och listor av modeller.
+
+Observera också att när du använder `add()` på en kollektion, leder {{merge: true} till duplicerade modeller att få deras attribut sammanfogas till befintliga modeller istället för att ignoreras.
+
+```js
+var items = new Backbone.Collection;
+items.add([{id:1, name: 'dog', age: 3}, {id:2, name: 'cat', age: 2}])
+items.add([{id:1, name: 'bear', age: 3}], {merge:true})
+items.add([{id:2, name: 'Andree'}])  // ignoreras 
+```
+
+### Retrieving Models
+
+Det finns några olika sätt att hämta en modell från en kollektion. Den mest raka framåt är att använda `Collection.get()` som accepterar ett enda ID enligt följande:
+
+```js
+var Todo = Backbone.Model.extend({
+    defaults: {
+        title: '',
+        completed: false
+    }
+})
+
+var TodosCollection = Backbone.Collection.extend({
+  model: Todo
+})
+
+var myTodo = new Todo({title:'my title', id: 2})
+
+var todos = new TodosCollection([myTodo])
+
+var todo2 = todo.get(2)
+```
+
+I klient-server applikationer innehåller kollekitioner modeller som erhållits från servern.
+
+När du utbyter data mellan klienten och en server behöver du ett sätt att unikt identifiera modeller. I Backbone görs detta med `id`, `cid` och `idAttribute` attribut.
 
 
 

@@ -620,3 +620,7 @@ Det enda som verkligen är att tänka på är att någon sträng callbackback so
 De deklarativa delegerade jQuery-händelserna betyder att du inte behöver oroa dig för huruvida ett visst element har renderats till DOM ännu eller ej. Vanligtvis med jQuery måste du oroa dig för "närvaro eller frånvaro i DOM" hela tiden med bindande händelser.
 
 I vårt TodoView-exempel kallas callback funktionen när användaren dubbelklickar ett etikettelement i elelementet, `updateOnEnter` kallas för varje knapptryckning i ett element med klassen "edit" och close exekveras när ett element med klassen ".edit" förlorar fokus. Var och en av dessa återuppringningsfunktioner kan använda `this` för att referera till TodoView-objektet.
+
+Observera att du även kan binda metoder själv med hjälp av `_.bind(this.viewEvent, this)`, vilket är vad värdet i varje händels nyckelparametrar gör. Nedan använder vi `_.bind` för att återrendera vår vy när en modell ändras.
+
+

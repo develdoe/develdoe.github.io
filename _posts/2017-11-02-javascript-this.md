@@ -88,3 +88,41 @@ Låt oss kalla funktionen där det här definieras "this funktionen".
 *`this` har värdet av det uppkallande objektet under de flesta omständigheter. Det finns emellertid några scenarier `this` inte har värdet på det uppkallande objektet. Jag berör senare scenarierna.*
 
 ## "this" i det globala scopet
+
+I den globala scopet, när koden körs i webbläsaren, definieras alla globala variabler och funktioner på window objektet. Därför, när vi använder `this` I en global funktion hänvisar den till (och har värdet av) det globala windows objektet. (inte i `strict mode ` som tidigare noterat) som är huvud-container för hela JavaScript-applikationen eller webbsidan. 
+
+```js
+var firstName = "Andree"
+var lastName = "Ray"
+
+function showfullname() {
+    // "this" inuti denna funktion kommer att ha värdet av window objektet
+    // eftersom funktionen showFullName() definieras i det globala scopet, precis som firstName och lastName
+     console.log (this.firstName + " " + this.lastName)
+}
+
+var person = {
+    firstName: "Ilona",
+    lastName: "Ray",
+    showfullname: function () {
+        // "this" inuti denna funktion kommer att ha värdet av person objektet
+        // eftersom funktionen showFullName() anropas i person objektet
+         console.log (this.firstName + " " + this.lastName)
+    }
+}
+
+showfullname() // => Andree Ray
+window.showfullname() // => Andree Ray
+person.showfullname() // => Ilona Ray
+```
+
+## När 'this' är mest missförstått och blir knepigt
+
+* `this` nyckelordet är mest missförstått när vi lånar en metod som använder det `this` 
+* när vi tilldelar en metod som använder `this` till en variabel
+* när en funktion som använder `this` skickas som en callback funktion
+* när `this` används inom en closure - en inre funktion
+
+Vi kommer att titta på varje scenario och lösningarna för att behålla det korrekta värdet av `this` i varje exempel.
+
+

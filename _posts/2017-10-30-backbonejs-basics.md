@@ -619,8 +619,27 @@ Det enda som verkligen är att tänka på är att någon sträng callbackback so
 
 De deklarativa delegerade jQuery-händelserna betyder att du inte behöver oroa dig för huruvida ett visst element har renderats till DOM ännu eller ej. Vanligtvis med jQuery måste du oroa dig för "närvaro eller frånvaro i DOM" hela tiden med bindande händelser.
 
-I vårt TodoView-exempel kallas callback funktionen när användaren dubbelklickar ett etikettelement i elelementet, `updateOnEnter` kallas för varje knapptryckning i ett element med klassen "edit" och close exekveras när ett element med klassen ".edit" förlorar fokus. Var och en av dessa återuppringningsfunktioner kan använda `this` för att referera till TodoView-objektet.
 
 Observera att du även kan binda metoder själv med hjälp av `_.bind(this.viewEvent, this)`, vilket är vad värdet i varje händels nyckelparametrar gör. Nedan använder vi `_.bind` för att återrendera vår vy när en modell ändras.
+
+```js
+var TodoView = Backbone.View.extend({
+    initialize: function() {
+        this.model.bind('change',_.bind(this.render,this))
+    }
+})
+```
+
+_.bind fungerar bara på en metod i taget, men binder en funktion till ett objekt så att när som helst som funktionen kallas kommer värdet av `this` att vara objektet. _.bind stöder också att skicka in argument till funktionen för att fylla in dem i förväg - en teknik som kallas [partial application](http://benalman.com/news/2012/09/partial-application-in-javascript/).
+
+## Kollektioner
+
+Kollektioner är uppsättningar av Modeller och skapas genom att förlänga Backbone.Collection.
+
+Normalt, när du skapar en kollektion, vill du också definiera en egenskap som anger typen av modell som din kollektion innehåller, tillsammans med eventuella instans attribut som krävs.
+
+I följande exempel skapar vi en TodoCollection som innehåller våra Todo-modeller:
+
+
 
 

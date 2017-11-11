@@ -164,7 +164,7 @@ Takeaway är att objektet som åberopar "this funktionen" är i kontext, och vi 
 
 Här är scenarier när "this" nyckelordet blir komplicerat. Exemplen nedan inkluderar lösningar för att åtgärda fel med "this":
 
-## "this" när det används med en callback
+### "this" när det används med en callback
 
 Sakerna blir håriga när vi skickar en metod (som använder "this") som en parameter som ska användas som callback function. Till exempel:
 
@@ -203,3 +203,5 @@ För att åtgärda detta problem i föregående exempel kan vi använda `bind()`
 ```js
 document.getElementById('btn').addEventListener('click',user.clickHandler.bind(user))
 ```
+
+### "this" i en closure

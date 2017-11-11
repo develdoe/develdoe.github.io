@@ -224,6 +224,11 @@ var user = {
     // användningen av this.data här är okey, eftersom "this" avser user
     // objektet och data är en egenskap på user objektet.
     clickHandler: function(e) {
+      	for(var i = 0, len = this.data.length; i < len; i++) {
+         	console.log ("What is This referring to? ", this); //[object Window]​
+            console.log (person.name + " is playing")
+        }
+          
         this.data.forEach(function (person) {
             // Men här inne i den anonyma funktionen (som vi överför till metoden forEach)
             // hänvisar "this" inte längre till user objektet.

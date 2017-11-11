@@ -249,5 +249,7 @@ För att lösa problemet med att använda "this" inom den anonyma funktionen som
 ```js
 ...
 var self = this;
-this.data.forEach(function (person) {...
+this.data.forEach(function (person) {
+    console.log (person.name + " has the title " + self.title)
+})
 ```

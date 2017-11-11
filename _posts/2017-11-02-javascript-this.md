@@ -252,5 +252,3 @@ this.data.forEach(function (person) {
     console.log (person.name + " has the title " + self.title)
 })
 ```
-
-f

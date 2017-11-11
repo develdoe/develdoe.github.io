@@ -169,7 +169,6 @@ Här är scenarier när "this" nyckelordet blir komplicerat. Exemplen nedan inkl
 Sakerna blir håriga när vi skickar en metod (som använder "this") som en parameter som ska användas som callback function. Till exempel:
 
 ```js
-// Vi har ett enkelt objekt med en clickHandler-metod som vi vill använda när en knapp på sidan klickas
 var user = {
     data: [{
         name: 'a.ray',
@@ -180,15 +179,15 @@ var user = {
     }],
 
     clickHandler: function(e) {
-        var randomNumber = ((Math.random() * 2 | 0) 1) -1 // slumptal mellan 0 och 1
+        var randomNumber = ((Math.random() * 2|0) + 1) -1 // slumptal mellan 0 och 1
         // Den här raden skriver ut en slumpmässig persons namn och ålder från datarrayen
         console.log(this.data[randomNumber].name + " " + this.data[randomNumber].age)
     }
 }
 
-// Knappen är insvept i ett jQuery $ wrapper, så det är nu ett jQuery-objekt
+// user.clickhandler skickas som en callback och 'this' context blir nu knappen
 // Och utsignalen blir odefinierad eftersom det inte finns någon data-attribut på knappobjektet
-$("btn").click(user.clickHandler) // => Cannot read property '0' of undefined
+document.getElementById('btn').addEventListener('click',user.clickHandler)
 ```
 
 I koden ovan, eftersom knappen `($("btn"))` är ett objekt på egen hand, och vi skickar `user.clickHandler` metoden till dess `click()` metod som en callback, vet vi att `this` inom vår `user.clickHandler` metoden inte längre att referera till user objektet. `this` kommer nu att referera till objektet där `user.clickHandler` metoden exekveras, eftersom `this` definieras i `user.clickHandler` metoden. Och objektet som påkallar `user.clickHandler` är knappen objektet. `user.clickHandler` kommer att köras inuti knappobjektets `click` metod.
@@ -198,3 +197,6 @@ Observera att även om vi anropar metoden `clickHandler()` med `user.clickHandle
 När kontexten ändras, när vi utför en metod på något annat objekt än var objektet ursprungligen definierades, refererar `this` nyckelordet inte längre till det ursprungliga objektet där `this` ursprungligen definierades, utan hänvisar nu till det föremål som åberopar metoden där `this` definierades.
 
 Eftersom vi verkligen vill att `this.data` ska hänvisa till dataegenskapen på user objektet, kan vi använda metoden `Bind()`, `Apply()` eller `Call()` för att specifikt ange värdet av `this`.
+
+För att åtgärda detta problem i föregående exempel kan vi använda bindningsmetoden:
+

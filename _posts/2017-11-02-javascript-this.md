@@ -124,3 +124,71 @@ person.showfullname() // => Ilona Ray
 * när `this` används inom en closure - en inre funktion
 
 Vi kommer att titta på varje scenario och lösningarna för att behålla det korrekta värdet av `this` i varje exempel.
+
+### Lite om "Context" innan vi fortsätter
+
+Kontextet i JavaScript liknar ämnet för en mening på engelska: "John är vinnaren som återvände pengarna." Ämnet i meningen är John, och vi kan säga att kontexten med meningen är John eftersom fokuseringen av meningen är på honom vid denna tidpunkt i meningen och precis som vi kan använda en semikolon för att ändra ämnet för meningen, kan vi ha ett objekt som är aktuellt sammanhang och byta sammanhanget till ett annat objekt genom att åberopa funktionen med ett annat objekt.
+
+```js
+
+var p1 = {
+    fname: "Ilona",
+    lname: "Ray",
+    showfullName: function () {
+        // "this" inuti denna funktion kommer att ha värdet av person objektet
+        // eftersom funktionen showFullName() anropas i person objektet
+         console.log (this.fname + " " + this.lname)
+    }
+}
+
+// "Kontext", när man anropar showFullName, är personobjektet, när vi
+// anropar metoden showFullName () på personobjektet.
+// Användningen av "this" i metoden showFullName() har värdet av personobjektet,
+p1.showfullName() // => Ilona Ray
+
+var p2 = {
+    firstName: 'Andree',
+    lastName: 'Ray'
+}
+
+// Vi kan använda apply metoden för att ange "this" värdet uttryckligt.
+// "this" får värdet av vilket objekt som åberopar "this" funktionen, följaktligen:
+
+p1.showFullName.apply(p2)
+
+// Så kontextet nu anotherPerson eftersom anotherPerson påkallade
+// person.showFullName() metoden genom att använda metoden apply()
+```
+
+Takeaway är att objektet som åberopar "this funktionen" är i kontext, och vi kan ändra sammanhanget genom att åberopa "this functionen" med ett annat objekt; då är det här nya objektet i kontext.
+
+Här är scenarier när "this" nyckelordet blir komplicerat. Exemplen nedan inkluderar lösningar för att åtgärda fel med "this":
+
+## "this" när det används med en callback
+
+Sakerna blir håriga när vi skickar en metod (som använder "this") som en parameter som ska användas som callback function. Till exempel:
+
+```js
+// Vi har ett enkelt objekt med en clickHandler-metod som vi vill använda när en knapp på sidan klickas
+var user = {
+    data: [{
+        name: 'a.ray',
+        age: 36
+    },{
+        name: 'i.i.ray',
+        age: 40
+    }],
+
+    clickHandler: function(e) {
+        var randomNumber = ((Math.random() * 2 | 0) 1) -1 // slumptal mellan 0 och 1
+        // Den här raden skriver ut en slumpmässig persons namn och ålder från datarrayen
+        console.log(this.data[randomNumber].name + " " + this.data[randomNumber].age)
+    }
+}
+
+// Knappen är insvept i ett jQuery $ wrapper, så det är nu ett jQuery-objekt
+// Och utsignalen blir odefinierad eftersom det inte finns någon data-attribut på knappobjektet
+$("btn").click(user.clickHandler) // => Cannot read property '0' of undefined
+```
+
+I koden ovan, eftersom knappen ($("btn")) är ett objekt på egen hand, och vi skickar user.clickHandler metoden till dess click() metod som en callback, vet vi att "this" inom vår user.clickHandler metoden kommer inte längre att referera till user objektet. "this" kommer nu att referera till objektet där user.clickHandler metoden exekveras, eftersom "this" definieras i user.clickHandler metoden.

@@ -195,3 +195,6 @@ I koden ovan, eftersom knappen `($("btn"))` är ett objekt på egen hand, och vi
 
 Observera att även om vi anropar metoden `clickHandler()` med `user.clickHandler` (som vi måste göra, eftersom `clickHandler` är en metod som definieras på användaren), kommer metoden `clickHandler()` att exekveras med knappobjektet som kontext där `this` nu hänvisas till. Så `this` hänvisar nu till är knappen `($("btn"))` objektet.
 
+När kontexten ändras, när vi utför en metod på något annat objekt än var objektet ursprungligen definierades, refererar `this` nyckelordet inte längre till det ursprungliga objektet där `this` ursprungligen definierades, utan hänvisar nu till det föremål som åberopar metoden där `this` definierades.
+
+Eftersom vi verkligen vill att `this.data` ska hänvisa till dataegenskapen på user objektet, kan vi använda metoden `Bind()`, `Apply()` eller `Call()` för att specifikt ange värdet av `this`.

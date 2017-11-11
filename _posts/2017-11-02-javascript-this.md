@@ -206,3 +206,33 @@ document.getElementById('btn').addEventListener('click',user.clickHandler.bind(u
 
 ### "this" i en closure
 
+En annan instans när `this` är missförstått är när vi använder en inre metod (en closure).
+
+Det är viktigt att notera att stängningar inte kan nå den yttre funktionens variabel genom att använda "this" nyckelord eftersom denna variabel endast är tillgänglig för funktionen själv, inte av inre funktioner. Till exempel:
+
+```js
+var user = {
+    title: 'title',
+    data: [{
+        name: 'a.ray',
+        age: 36
+    },{
+        name: 'i.i.ray',
+        age: 40
+    }],
+
+    // användningen av this.data här är okey, eftersom "this" avser user
+    // objektet och data är en egenskap på user objektet.
+    clickHandler: function(e) {
+        this.data.forEach(function (person) {
+            // Men här inne i den anonyma funktionen (som vi överför till metoden forEach)
+            // hänvisar "this" inte längre till user objektet.
+            // Denna inre funktion kan inte nå den yttre funktionens "this"
+            console.log ("What is This referring to? ", this); //[object Window]​
+            console.log (person.name + " is playing")
+        })
+    }
+}
+
+document.getElementById('btn').addEventListener('click',user.clickHandler.bind(user))
+```

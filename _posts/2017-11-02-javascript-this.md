@@ -89,7 +89,7 @@ Låt oss kalla funktionen där det här definieras "this funktionen".
 
 ## "this" i det globala scopet
 
-I den globala scopet, när koden körs i webbläsaren, definieras alla globala variabler och funktioner på window objektet. Därför, när vi använder `this` I en global funktion hänvisar den till (och har värdet av) det globala windows objektet. (inte i `strict mode ` som tidigare noterat) som är huvud-container för hela JavaScript-applikationen eller webbsidan. 
+I den globala scopet, när koden körs i webbläsaren, definieras alla globala variabler och funktioner på window objektet. Därför, när vi använder `this` I en global funktion hänvisar den till (och har värdet av) det globala windows objektet. (inte i `strict mode` som tidigare noterat) som är huvud-container för hela JavaScript-applikationen eller webbsidan. 
 
 ```js
 var firstName = "Andree"
@@ -124,5 +124,3 @@ person.showfullname() // => Ilona Ray
 * när `this` används inom en closure - en inre funktion
 
 Vi kommer att titta på varje scenario och lösningarna för att behålla det korrekta värdet av `this` i varje exempel.
-
-

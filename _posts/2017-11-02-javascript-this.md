@@ -191,4 +191,7 @@ var user = {
 $("btn").click(user.clickHandler) // => Cannot read property '0' of undefined
 ```
 
-I koden ovan, eftersom knappen ($("btn")) är ett objekt på egen hand, och vi skickar user.clickHandler metoden till dess click() metod som en callback, vet vi att "this" inom vår user.clickHandler metoden kommer inte längre att referera till user objektet. "this" kommer nu att referera till objektet där user.clickHandler metoden exekveras, eftersom "this" definieras i user.clickHandler metoden. Och objektet som påkallar user.clickHandler är knappen objektet. user.clickHandler kommer att köras inuti knappobjektets click metod.
+I koden ovan, eftersom knappen `($("btn"))` är ett objekt på egen hand, och vi skickar `user.clickHandler` metoden till dess `click()` metod som en callback, vet vi att `this` inom vår `user.clickHandler` metoden inte längre att referera till user objektet. `this` kommer nu att referera till objektet där `user.clickHandler` metoden exekveras, eftersom `this` definieras i `user.clickHandler` metoden. Och objektet som påkallar `user.clickHandler` är knappen objektet. `user.clickHandler` kommer att köras inuti knappobjektets `click` metod.
+
+Observera att även om vi anropar metoden `clickHandler()` med `user.clickHandler` (som vi måste göra, eftersom `clickHandler` är en metod som definieras på användaren), kommer metoden `clickHandler()` att exekveras med knappobjektet som kontext där `this` nu hänvisas till. Så `this` hänvisar nu till är knappen `($("btn"))` objektet.
+

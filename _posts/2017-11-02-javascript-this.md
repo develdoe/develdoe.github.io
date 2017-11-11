@@ -198,7 +198,7 @@ När kontexten ändras, när vi utför en metod på något annat objekt än var 
 
 Eftersom vi verkligen vill att `this.data` ska hänvisa till dataegenskapen på user objektet, kan vi använda metoden `Bind()`, `Apply()` eller `Call()` för att specifikt ange värdet av `this`.
 
-För att åtgärda detta problem i föregående exempel kan vi använda bindningsmetoden:
+För att åtgärda detta problem i föregående exempel kan vi använda `bind()` metoden:
 
 ```js
 document.getElementById('btn').addEventListener('click',user.clickHandler.bind(user))

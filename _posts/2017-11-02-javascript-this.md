@@ -200,3 +200,6 @@ Eftersom vi verkligen vill att `this.data` ska hänvisa till dataegenskapen på 
 
 För att åtgärda detta problem i föregående exempel kan vi använda bindningsmetoden:
 
+```js
+document.getElementById('btn').addEventListener('click',user.clickHandler.bind(user))
+```

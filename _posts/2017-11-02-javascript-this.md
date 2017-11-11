@@ -225,8 +225,8 @@ var user = {
     // objektet och data är en egenskap på user objektet.
     clickHandler: function(e) {
       	for(var i = 0, len = this.data.length; i < len; i++) {
-         	console.log ("What is This referring to? ", this); //[object Window]​
-            console.log (person.name + " is playing")
+         	console.log ("for: What is This referring to? ", this); //[object Window]
+            console.log (person.name + " is playing (for)")
         }
           
         this.data.forEach(function (person) {
@@ -240,4 +240,14 @@ var user = {
 }
 
 document.getElementById('btn').addEventListener('click',user.clickHandler.bind(user))
+```
+
+"this" inom den anonyma funktionen kan inte nå den yttre funktionen, så den är bunden till det globala fönsterobjektet när strikt läge inte används.
+
+För att lösa problemet med att använda "this" inom den anonyma funktionen som passerat till metoden förEach använder vi en vanlig praxis i JavaScript och ställer in "this" värdet till en annan variabel innan vi går in i forEachmetod:
+
+```js
+...
+var self = this;
+this.data.forEach(function (person) {...
 ```

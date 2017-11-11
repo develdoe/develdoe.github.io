@@ -205,3 +205,4 @@ document.getElementById('btn').addEventListener('click',user.clickHandler.bind(u
 ```
 
 ### "this" i en closure
+

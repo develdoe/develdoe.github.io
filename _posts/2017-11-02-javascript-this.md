@@ -248,6 +248,8 @@ this.data.forEach(function (person) {
 })
 ```
 
+**Det är praxis att använda `self` eller `that` när man tilldelar `this` en variabel för att använda inom en inre funktion, men, med lite eftertanke så håller jag med original författaren (något jag uteslöt först). Det bästa är nog att använda sig av en namn konvention där du istället för att använda `self` eller `that`, använder ett namn som mer anger det faktiska objekt som "this funktionen" är en del av. I exemplet ovan kunde man ha ett namn som "theUserObject".***
+
 ### "this" när metod tilldelad en variabel
 
 `this` värdet undviker vår fantasi och är bunden till ett annat objekt om vi tilldelar en metod som använder `this` till en variabel.

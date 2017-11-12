@@ -286,7 +286,6 @@ var showUserData = user.showData
 showUserData()
 ```
 
-
 Vi kan lösa detta problem genom att specifikt ställa in `this` värdet med `bind()` metoden:
 
 ```js

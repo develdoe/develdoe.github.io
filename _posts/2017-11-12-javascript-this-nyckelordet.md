@@ -386,6 +386,13 @@ gameController objektet lånar appControllerens avg() metod.
 "this" värdet inuti metoden appController.avg() kommer att ställas in i gameController objektet eftersom vi skickar gameController objektet som den första parametern till apply() metoden. Den första parametern i tillämpningsmetoden anger alltid värdet av "this" explicit.
 
 
+## Summering
+
+verktygen (`bind`, `appy` och `call`, och att ange "this till en variabel) är vad som krävs för att erövra JavaScript "this" i alla scenarion.
+
+Som du har lärt detta blir det lite besvärligt i situationer där det ursprungliga kontexten (där `this` definierades) ändras, särskilt vid callback funktioner, eller när det åberopas med ett annat objekt eller vid upplåning. 
+
+Kom alltid ihåg att `this` är tilldelas vid åberopande av "this funktionen".
 
 
 

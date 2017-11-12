@@ -257,4 +257,43 @@ this.data.forEach(function (person) {
 
 `this` värdet undviker vår fantasi och är bunden till ett annat objekt om vi tilldelar en metod som använder `this` till en variabel.
 
+```js
+// data i det globala scopet (window)
+var data = [{
+    name: 'andree',
+    age: 36
+},{
+    name: 'ilone',
+    age: 40
+}]
+
+// data i ett user object
+var user = {
+
+    data: [{
+        name: 't.woods',
+        age: 37
+    },{
+        name: 'p.Mickelson',
+        age: 43
+    }],
+
+    showData: function(event) {
+        var randomNumber = ((Math.random() * 2|0) +1) -1 // => random 0 - 1
+        console.log(this.data[randomNumber].name + " " + this.data[randomNumber].age)
+    }
+}
+
+// Tildela user.showData till en variabel
+var showUserData = user.showData
+
+showUserData()
+```
+
+
 Vi kan lösa detta problem genom att specifikt ställa in `this` värdet med `bind()` metoden:
+
+```js
+// Tildela user.showData till en variabel
+var showUserData = user.showData.bind(user)
+```

@@ -232,7 +232,7 @@ var user = {
             // Men här inne i den anonyma funktionen (som vi överför till metoden forEach)
             // hänvisar "this" inte längre till user objektet.
             // Denna inre funktion kan inte nå den yttre funktionens "this"
-            console.log ("What is This referring to? ", this); //[object Window]​
+            console.log ("What is This referring to? ", this); //[object Window]
             console.log (person.name + " is playing")
         })
     }

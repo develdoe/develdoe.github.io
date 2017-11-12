@@ -338,5 +338,51 @@ gameController.avgScore = appController.avg()
 
 `avg()` metodens `this` nyckelord kommer inte att referera till `gameController` objektet, det kommer att referera till `appController` objektet eftersom det åberopas på `appController`.
 
+För att åtgärda problemet och se till att `this` inom metoden appController.avg() hänvisar till gameController kan vi använda metoden apply():
+
+```js
+// Vi har två objekt. En av dem har en metod som heter avg()
+// som den andra inte har, vi vill låna metoden avg() från det första objektet.
+
+var gameController = {
+    scores: [20, 34, 55, 46, 77],
+    avgScore: null,
+    players: [{
+        name: 'ilona',
+        id: 987,
+        age:32
+    },{
+        name: 'Andree',
+        id: 345,
+        age: 48
+    }]
+}
+
+var appController = {
+    scores: [900, 845, 809, 950],
+    avgScore: null,
+    avg: function() {
+        var sumOfScores = this.scores.reduce(function(prev, cur, index, array) {
+            return prev + cur
+        })
+        this.avgScore = sumOfScores/this.scores.length
+    }
+}
+
+// Observera att vi använder metoden apply(), så det andra argumentet måste vara
+// ett array-argumenten för att överföras till metoden appController.avg().
+appController.avg.apply(gameController, gameController.scores)
+
+// Egenskapen avgScore var framgångsrikt inställd på gameController-objektet,
+// även om vi lånade metoden avg() från appController objektet
+console.log(gameController.avgScore)
+
+// appController.avgScore är fortfarande null; Det var inte uppdaterat,
+// bara gameController.avgScore uppdaterades
+console.log (appController.avgScore); // null
+```
+
+
+
 
 

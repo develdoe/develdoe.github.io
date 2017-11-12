@@ -125,7 +125,7 @@ person.showfullname() // => Ilona Ray
 
 Vi kommer att titta på varje scenario och lösningarna för att behålla det korrekta värdet av `this` i varje exempel.
 
-### Lite om "Context" innan vi fortsätter
+### Lite om kontext innan vi fortsätter
 
 Kontextet i JavaScript liknar ämnet för en mening på engelska: "John är vinnaren som återvände pengarna." Ämnet i meningen är John, och vi kan säga att kontexten med meningen är John eftersom fokuseringen av meningen är på honom vid denna tidpunkt i meningen och precis som vi kan använda en semikolon för att ändra ämnet för meningen, kan vi ha ett objekt som är aktuellt sammanhang och byta sammanhanget till ett annat objekt genom att åberopa funktionen med ett annat objekt.
 

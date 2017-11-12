@@ -292,3 +292,4 @@ Vi kan lösa detta problem genom att specifikt ställa in `this` värdet med `bi
 // Tildela user.showData till en variabel
 var showUserData = user.showData.bind(user)
 ```
+

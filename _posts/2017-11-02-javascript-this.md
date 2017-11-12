@@ -123,7 +123,7 @@ person.showfullname() // => Ilona Ray
 * när en funktion som använder `this` skickas som en callback funktion
 * när `this` används inom en closure - en inre funktion
 
-Vi kommer att titta på varje scenario och lösningarna för att behålla det korrekta värdet av `this` i varje exempel.
+
 
 ### Lite om kontext innan vi fortsätter
 

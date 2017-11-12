@@ -252,3 +252,9 @@ this.data.forEach(function (person) {
     console.log (person.name + " has the title " + self.title)
 })
 ```
+
+### "this" när metod tilldelad en variabel
+
+`this` värdet undviker vår fantasi och är bunden till ett annat objekt om vi tilldelar en metod som använder `this` till en variabel.
+
+Vi kan lösa detta problem genom att specifikt ställa in `this` värdet med `bind()` metoden:

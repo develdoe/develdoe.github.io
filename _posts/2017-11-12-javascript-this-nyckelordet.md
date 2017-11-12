@@ -381,6 +381,9 @@ console.log(gameController.avgScore)
 // bara gameController.avgScore uppdaterades
 console.log (appController.avgScore); // null
 ```
+gameController objektet lånar appControllerens avg() metod.
+
+"this" värdet inuti metoden appController.avg() kommer att ställas in i gameController objektet eftersom vi skickar gameController objektet som den första parametern till apply() metoden. Den första parametern i tillämpningsmetoden anger alltid värdet av "this" explicit.
 
 
 

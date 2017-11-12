@@ -336,7 +336,7 @@ var appController = {
 gameController.avgScore = appController.avg()
 ```
 
-avg() metoden "this" nyckelord kommer inte att referera till gameController objektet, det kommer att referera till appController-objektet eftersom det åberopas på appController.
+`avg()` metodens `this` nyckelord kommer inte att referera till `gameController` objektet, det kommer att referera till `appController` objektet eftersom det åberopas på `appController`.
 
 
 

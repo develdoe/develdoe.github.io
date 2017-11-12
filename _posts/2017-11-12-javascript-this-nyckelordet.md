@@ -293,3 +293,50 @@ Vi kan lösa detta problem genom att specifikt ställa in `this` värdet med `bi
 var showUserData = user.showData.bind(user)
 ```
 
+### "this" när du lånar metoder
+
+Att låna metoder är en vanlig praxis i JavaScript-utveckling, och som JavaScript-utvecklare kommer vi säkert att stöta på denna praxis gång på gång och från tid till annan kommer vi också att delta i denna tidsbesparande övning.
+
+Låt oss undersöka relevansen av `this` i kontext med lånemetoder:
+
+```js
+// Vi har två objekt. En av dem har en metod som heter avg()
+// som den andra inte har, vi vill låna metoden avg() från det första objektet.
+
+var gameController = {
+    scores: [20, 34, 55, 46, 77],
+    avgScore: null,
+    players: [{
+        name: 'ilona',
+        id: 987,
+        age:32
+    },{
+        name: 'Andree',
+        id: 345,
+        age: 48
+    }]
+}
+
+var appController = {
+    scores: [900, 845, 809, 950],
+    avgScore: null,
+    avg: function() {
+        var sumOfScores = this.scores.reduce(function(prev, cur, index, array) {
+            return prev + cur
+        })
+        this.avgScore = sumOfScores/this.scores.length
+    }
+}
+
+// If we run the code below,​ egenskapen gameController.avgScore attributet kommer
+// att sättas till genomsnittlig poäng från appController objektet "scores" array
+
+// Kör inte den här koden, för den är bara för illustration.
+// vi vill att appController.avgScore ska förbli null
+gameController.avgScore = appController.avg()
+```
+
+avg() metoden "this" nyckelord kommer inte att referera till gameController objektet, det kommer att referera till appController-objektet eftersom det åberopas på appController.
+
+
+

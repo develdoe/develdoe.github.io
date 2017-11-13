@@ -1297,4 +1297,26 @@ En modell kan tas bort från den innehållande kollektionen och servern genom at
 
 Till skillnad från `Collection.remove()` som bara tar bort en modell från en kollektion, skickar `Model.destroy()` också en HTTP DELETE till kollektionens URL.
 
+```js
+var Todo = Backbone.Model.extend({
+  defaults: {
+    title: '',
+    completed: false
+  }
+});
+
+var TodosCollection = Backbone.Collection.extend({
+  model: Todo,
+  url: '/todos'
+});
+
+var todos = new TodosCollection();
+todos.fetch();
+
+var todo2 = todos.get(2);
+todo2.destroy(); // sends HTTP DELETE to /todos/2 and removes from collection
+```
+
+
+
 

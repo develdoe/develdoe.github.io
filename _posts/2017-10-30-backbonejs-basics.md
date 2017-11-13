@@ -1193,5 +1193,102 @@ Den fullständiga listan över vad Underscore kan göra finns i dess officiella 
 
 ### Kedjbart API
 
+När man talar om verktygsmetoder är en annan bit av socker i Backbone sitt stöd för Underscore's chain() metoden.
+
+Kedja är ett vanligt idiom i objektorienterade språk; en kedja är en sekvens av metodanrop på samma objekt som utförs i ett enda uttalande.
+
+Medan Backbone gör Underscores array manipulationsoperationer tillgängliga som metoder för kollektionsobjekt kan de inte direkt kopplas eftersom de returnerar arrays snarare än den ursprungliga samlingen.
+
+Lyckligtvis kan införandet av Underscore's `chain()` metoden du kedja anrop till dessa metoder på kollektioner.
+
+`chain()` metoden returnerar ett objekt som har alla Underscore array-operationer kopplade som metoder vilket returnerar det objektet. Kedjan slutar med ett anrop till value() metoden som helt enkelt returnerar det resulterande matrisvärdet. Om du inte har sett det tidigare ser det här kedjbara API:
+
+```js
+var collection = new Backbone.Collection([
+  { name: 'Tim', age: 5 },
+  { name: 'Ida', age: 26 },
+  { name: 'Rob', age: 55 }
+]);
+
+var filteredNames = collection.chain() // startkedja, returnerar en wrapper runt kollektionens modeller
+    .filter(function(item) { return item.get('age') > 10; }) // returnerar förpackad array exklusive Tim
+    .map(function(item) { return item.get('name'); }) // returnerar förpackad array som innehåller de namn som är kvar
+    .value() // Avslutar kedjan och returnerar den resulterade arrayen.
+
+console.log(filteredNames); // logs: ['Ida', 'Rob']
+```
+
+Några av de Backbone specifika metoderna returnerar `this`, vilket innebär att de även kan vara kedjiga:
+
+```js
+var collection = new Backbone.Collection();
+
+collection
+    .add({ name: 'John', age: 23 })
+    .add({ name: 'Harry', age: 33 })
+    .add({ name: 'Steve', age: 41 });
+
+var names = collection.pluck('name');
+console.log(names); // logs: ['John', 'Harry', 'Steve']
+```
+
+## RESTful Persistence
+
+Hittills har alla våra exempeldata skapats i webbläsaren. För de flesta SPA applikationer är modellerna härledda från en datalager som finns på en server. Det här är ett område där Backbone dramatiskt förenklar koden du behöver skriva för att utföra RESTful synkronisering med en server genom ett enkelt API på dess modeller och samlingar.
+
+### Hämtar modeller från servern
+
+`Collections.fetch()` hämtar en uppsättning modeller från servern i form av en JSON-array genom att skicka en HTTP GET-förfrågan till URL-adressen som anges av samlingens `url` egenskap (vilket kan vara en funktion). När denna data tas emot kommer en `set()` att utföras för att uppdatera kollektionen.
+
+```js
+var Todo = Backbone.Model.extend({
+  defaults: {
+    title: '',
+    completed: false
+  }
+});
+
+var TodosCollection = Backbone.Collection.extend({
+  model: Todo,
+  url: '/todos'
+});
+
+var todos = new TodosCollection();
+todos.fetch(); // sends HTTP GET to /todos
+```
+
+### Spara modeller till servern
+
+Medan Backbone kan hämta en hel samling modeller från servern samtidigt, uppdateras modellerna individuellt med modellens `save()` metod. När `save()` kallas på en modell som hämtats från servern, den konstruerar en URL genom att lägga till modellens id till kollektionens URL och skickar en HTTP-PUT till servern.
+
+Om modellen är en ny instans som skapades i webbläsaren (dvs det har inget ID) skickas en HTTP POST till kollektionens URL.
+
+`Collections.create()` kan användas för att skapa en ny modell, lägga till den i kollektionen och skicka den till servern i ett enda metodanrop.
+
+```js
+var Todo = Backbone.Model.extend({
+  defaults: {
+    title: '',
+    completed: false
+  }
+});
+
+var TodosCollection = Backbone.Collection.extend({
+  model: Todo,
+  url: 'http://35.189.253.140/api/todos'
+});
+
+
+var todos = new TodosCollection();
+todos.fetch(); // sends HTTP GET to /todos
+
+var todo2 = todos.get(2);
+todo2.set('title', 'go fishing');
+todo2.save(); // sends HTTP PUT to /todos/2
+
+todos.create({title: 'Try out code samples'}); // sends HTTP POST to /todos and adds to collection
+```
+
+Som nämnts tidigare kallas en modells validate() metod automatiskt genom att save() och kommer att utlösa en ogiltig händelse på modellen om validering misslyckas.
 
 

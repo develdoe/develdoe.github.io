@@ -1360,9 +1360,46 @@ Mastering-händelser är ett av de snabbaste sätten att bli mer produktiva med 
 * Backbone.History
 * Backbone.View
 
+Observera att `Backbone.Events` är mixad in i själva Backbone-objektet. Eftersom Backbone är globalt synligt kan den användas som en enkel händelsebuss:
 
+```js
+Backbone.on('event', function() {console.log('Handled Backbone event');});
+Backbone.trigger('event'); // logs: Handled Backbone event
+```
 
+### on(), off(), och trigger()
 
+`Backbone.Events` kan ge alla objekt förmågan att binda och utlösa anpassade händelser. Vi kan enkelt blanda den här modulen till något objekt och det finns inget krav på att händelser ska deklareras innan de är bundna till en callback.
+
+Om du är bekant med jQuery-anpassade händelser eller begreppet `Publish/Subscribe`, ger `Backbone.Events` ett system som är mycket likt med att vara analogt till `subscribe` och `trigger` analogt till `publish`.
+
+`on` binder en callback funktion till ett objekt, som vi har gjort med dance i ovanstående exempel. callback åberopas när händelsen utlöses.
+
+Den officiella Backbone.js-dokumentationen rekommenderar namnnamnshändelsesnamn med kolonner om du flera av dessa på din sida. t.ex.:
+
+```js
+var ourObject = {};
+
+// Mixin
+_.extend(ourObject, Backbone.Events);
+
+function dancing (msg) { console.log("We started " + msg); }
+
+// Add namespaced custom events
+ourObject.on("dance:tap", dancing);
+ourObject.on("dance:break", dancing);
+
+// Trigger the custom events
+ourObject.trigger("dance:tap", "tap dancing. Yeah!");
+ourObject.trigger("dance:break", "break dancing. Yeah!");
+
+// This one triggers nothing as no listener listens for it
+ourObject.trigger("dance", "break dancing. Yeah!");
+```
+
+En speciell händelse är tillgänglig om du vill ha meddelanden för varje händelse som uppstår på objektet (till exempel om du vill visa händelser på en enda plats). Alla händelser kan användas enligt följande:
+
+`off` tar bort callback funktionen som tidigare var bundna till ett objekt. Återgå till vår `Publish/Subscrib` jämförelse, tänk på det som en `unsubscribe` för anpassade händelser.
 
 
 

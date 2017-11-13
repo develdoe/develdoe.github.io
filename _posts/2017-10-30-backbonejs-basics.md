@@ -987,3 +987,28 @@ var pete = new Beatle({ firstName: 'Pete', lastName: 'Best'});
 // Uppdatera samlingen
 theBeatles.set([john, paul, george, pete]);
 ```
+
+### Underscore utility funktioner
+
+Backbone utnyttjar fullt ut sitt hårda beroende av Underscore genom att göra många av sina verktyg direkt tillgängliga på kollektioner:
+
+`forEach`: iterera över kollektioner
+```js
+var todos = new Backbone.Collection();
+
+todos.add([
+  { title: 'go to Belgium.', completed: false },
+  { title: 'go to China.', completed: false },
+  { title: 'go to Austria.', completed: true }
+]);
+
+todos.forEach(function(model){
+  console.log(model.get('title'));
+});
+
+// Ovan logs:
+// go to Belgium.
+// go to China.
+// go to Austria.
+```
+

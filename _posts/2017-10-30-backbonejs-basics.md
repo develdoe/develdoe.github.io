@@ -1289,6 +1289,12 @@ todo2.save(); // sends HTTP PUT to /todos/2
 todos.create({title: 'Try out code samples'}); // sends HTTP POST to /todos and adds to collection
 ```
 
-Som nämnts tidigare kallas en modells validate() metod automatiskt genom att save() och kommer att utlösa en ogiltig händelse på modellen om validering misslyckas.
+Som nämnts tidigare kallas en modells `validate()` metod automatiskt genom att `save()` och kommer att utlösa en ogiltig händelse på modellen om validering misslyckas.
+
+### Radera modeller från servern
+
+En modell kan tas bort från den innehållande kollektionen och servern genom att anropa dess `destroy()` metod.
+
+Till skillnad från `Collection.remove()` som bara tar bort en modell från en kollektion, skickar `Model.destroy()` också en HTTP DELETE till kollektionens URL.
 
 

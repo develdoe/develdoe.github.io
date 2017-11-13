@@ -788,6 +788,93 @@ TodosCollection.on('add', function(todo) {
 TodosCollection.add(todo)
 ```
 
+Dessutom kan vi binde till en `change` händelse för att lyssna på ändringar i någon av modellerna i kollektionen.
 
+```js
+var Todo = Backbone.Model.extend({
+    defaults: {
+        title: 'mr Ray',
+        competed: true
+    }
+})
 
+var fuck = new Todo({ title: 'fuck' }),
+    suck = new Todo({ title: 'suck', competed: false}),
+    lick = new Todo({ title: 'lick'})
 
+var TodosCollection = new Backbone.Collection()
+
+TodosCollection.on('change:title', function(todo) {
+    console.log("I should " + todo.get('title') + ". Have I done it before? " + (todo.get('competed') ? 'yeah!' : 'no'))
+})
+
+TodosCollection.add([fuck,suck,lick])
+
+fuck.set('title','beeep')
+```
+
+jQuery-stil händelsekartor av formuläret `obj.on({click: action})` kan också användas. Dessa kan vara tydligare än att behöva tre separata anrop till `.on` och borde anpassa sig bättre med händelserna som används i vyer:
+
+```js
+var Todo = Backbone.Model.extend({
+    defaults: {
+        title: 'mr Ray',
+        completed: true
+    }
+})
+
+var myTodo = new Todo()
+myTodo.set({title: 'Buy some cookies', completed: true})
+
+myTodo.on({
+    'change:title': titleChanged,
+    'change:completed': completedChanged
+})
+
+function titleChanged() {
+    console.log('the title was changed')
+}
+
+function completedChanged() {
+    console.log('completed state changed')
+}
+
+myTodo.set({title: 'Get some groceries'})
+```
+
+Backbone händelser stöder också en `once()` metod, vilket säkerställer att en callback bara exekveras en gång när en notifikatino kommer. Det liknar Node's `once`, eller jQuery's `one`. Detta är särskilt användbart för när du vill säga "nästa gång något händer, gör det här".
+
+```js
+// Definiera ett objekt med två räknare
+var TodoCounter = {counterA: 0, counterB: 0}
+
+// Increment counterA, utlöser en händelse
+var incrA = function() {
+    TodoCounter.counterA += 1
+    //Denna utlösning ger ingen effekt på räknarna
+    TodoCounter.trigger('event')
+}
+
+// Increment counterB
+var incrB = function() {
+    TodoCounter.counterB += 1
+}
+
+// Använd once snarare än att uttryckligen koppla bort vår händelse lyssnare
+TodoCounter.once('event', incrA)
+TodoCounter.once('event', incrB)
+
+// Utlös händelsen för första gången
+TodoCounter.trigger('event')
+
+console.log(TodoCounter.counterA === 1); // true
+console.log(TodoCounter.counterB === 1); // true
+```
+
+counterA och counterB bör bara ha ökats en gång.
+
+### Återställ/Refreashing Kollektioner
+
+I stället för att lägga till eller ta bort modeller enskilt, kanske du vill uppdatera en hel samling på en gång.
+
+`Collection.set()` tar en rad modeller och utför nödvändig `add`, `remove` och `change` operationer som krävs för att uppdatera samlingen.

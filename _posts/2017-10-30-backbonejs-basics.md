@@ -1161,5 +1161,37 @@ console.log(todo.omit('title'));
 ```
 
 `keys()` och `values()` få listor över attributnamn och värden
+```js
+var todo = new Todo({title: 'go to Austria.'});
+console.log(todo.keys());
+// logs: ["title", "completed"]
+
+console.log(todo.values());
+//logs: ["go to Austria.", false]
+```
+
+`pairs()`: få lista över attribut som `[key, value]` par
+```js
+var todo = new Todo({title: 'go to Austria.'});
+var pairs = todo.pairs();
+
+console.log(pairs[0]);
+// logs: ["title", "go to Austria."]
+console.log(pairs[1]);
+// logs: ["completed", false]
+```
+
+`invert()`: skapa objekt där `values` är `keys` och attributen är värden
+```js
+var todo = new Todo({title: 'go to Austria.'});
+console.log(todo.invert());
+
+// logs: {'go to Austria.': 'title', 'false': 'completed'}
+```
+
+Den fullständiga listan över vad Underscore kan göra finns i dess officiella [dokumentation](http://underscorejs.org/).
+
+### Kedjbart API
+
 
 

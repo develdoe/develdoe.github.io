@@ -1325,5 +1325,44 @@ console.log(todo.destroy());
 // false
 ```
 
+### Options
+
+Varje RESTful API-metod accepterar en mängd olika alternativ. Viktigast av allt accepterar alla metoder success- och error callbacks som kan användas för att anpassa hanteringen av serverns svar.
+
+Att ange `{patch: true}` alternativet till `Model.save()` kommer att få det att använda HTTP PATCH för att bara skicka de ändrade attributen (dvs partiella uppdateringar) till servern istället för hela modellen. dvs `model.save(attrs, {patch: true})`:
+
+```js
+// Save partial using PATCH
+model.clear().set({id: 1, a: 1, b: 2, c: 3, d: 4});
+model.save();
+model.save({b: 2, d: 4}, {patch: true});
+console.log(this.syncArgs.method);
+// 'patch'
+```
+
+På samma sätt kommer överföring av `{reset: true}` till `Collection.fetch()` att resultera i att kollektionen uppdateras med `reset()` istället för `set()`.
+
+Se dokumentationen Backbone.js för fullständiga beskrivningar av de stödda alternativen.
+
+## Events
+
+Händelser är en grundläggande inversion av kontroll. Istället för att ha ett funktionsanrop som är ett annat med namn, registreras den andra funktionen som en hanterare som ska anropas när en viss händelse inträffar.
+
+Den del av din applikation som måste veta hur du anropar till den andra delen av din app har blivit inverterad. Detta är kärnpunkten som gör det möjligt för din business logic att inte behöva veta hur ditt användargränssnitt fungerar och är det mest kraftfulla med Backbone Events-systemet.
+
+Mastering-händelser är ett av de snabbaste sätten att bli mer produktiva med Backbone, så låt oss ta en närmare titt på Backbones eventmodell.
+
+`Backbone.Events` är mixade in de andra Backbone "klasserna", inklusive:
+* Backbone
+* Backbone.Model
+* Backbone.Collection
+* Backbone.Router
+* Backbone.History
+* Backbone.View
+
+
+
+
+
 
 

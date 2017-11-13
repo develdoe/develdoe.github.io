@@ -1317,6 +1317,13 @@ var todo2 = todos.get(2);
 todo2.destroy(); // sends HTTP DELETE to /todos/2 and removes from collection
 ```
 
+Åberopa `destory` på en Modell kommer att returnera falskt om modellen är `isNew`:
+
+```js
+var todo = new Backbone.Model();
+console.log(todo.destroy());
+// false
+```
 
 
 

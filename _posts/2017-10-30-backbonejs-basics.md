@@ -1401,5 +1401,32 @@ En speciell händelse är tillgänglig om du vill ha meddelanden för varje hän
 
 `off` tar bort callback funktionen som tidigare var bundna till ett objekt. Återgå till vår `Publish/Subscrib` jämförelse, tänk på det som en `unsubscribe` för anpassade händelser.
 
+För att ta bort dance händelsen som vi tidigare förbundit med vårtObject, skulle vi helt enkelt göra:
+
+```js
+var ourObject = {};
+
+// Mixin
+_.extend(ourObject, Backbone.Events);
+
+function dancing (msg) { console.log("We started " + msg); }
+
+// Add namespaced custom events
+ourObject.on("dance:tap", dancing);
+ourObject.on("dance:break", dancing);
+
+// Trigger the custom events. Each will be caught and acted upon.
+ourObject.trigger("dance:tap", "started tap dancing. Yeah!");
+ourObject.trigger("dance:break", "started break dancing. Yeah!");
+
+// Removes event bound to the object
+ourObject.off("dance:tap");
+
+// Trigger the custom events again, but one is logged.
+ourObject.trigger("dance:tap", "stopped tap dancing."); // won't be logged as it's not listened for
+ourObject.trigger("dance:break", "break dancing. Yeah!");
+```
+
+För att ta bort alla callbacks för händelsen skickar vi ett händelse namn (t.ex. move) till metoden off() på objektet som händelsen är bunden till.
 
 

@@ -912,3 +912,78 @@ TodosCollection.set([
 // Removed go to Disneyland.
 // Added go to Disney World.
 ```
+
+Om du bara behöver ersätta hela innehållet i samlingen kan `Collection.reset()` användas:
+
+```js
+var TodosCollection = new Backbone.Collection()
+
+// we can listen for reset events
+TodosCollection.on("reset", function() {
+console.log("Collection reset.");
+})
+
+TodosCollection.add([
+  { title: 'go to Jamaica.', completed: false },
+  { title: 'go to China.', completed: false },
+  { title: 'go to Disneyland.', completed: true }
+])
+
+console.log('Collection size: ' + TodosCollection.length); // Collection size: 3
+
+TodosCollection.reset([
+  { title: 'go to Cuba.', completed: false }
+]);
+// Above logs 'Collection reset.'
+
+console.log('Collection size: ' + TodosCollection.length); // Collection size: 1
+```
+
+Ett annat användbart tips är att använda reset utan argument för att rensa ut en kollektion helt. Det här är praktiskt när du laddar upp en ny sida med resultat dynamiskt där du vill blanka ut den aktuella resultaten.
+
+```js
+myCollection.reset()
+```
+
+Observera att Collection.reset() inte avfyrar händelserna add, remove. En reset händelse avfyras istället som visas i föregående exempel. Anledningen till att du kanske vill använda detta är att utföra superoptimerad rendering i extrema fall där enskilda händelser är för dyra.
+
+Observera också att du lyssnar på en återställningshändelse. Listan med tidigare modeller är tillgänglig i `options.previousModels`, för enkelhetens skull.
+
+```js
+var todo = new Backbone.Model()
+var todos = new Backbone.Collection([todo]).on('reset', function(todos, options) {
+        console.log(options.previousModels)
+        console.log([todo])
+        console.log(options.previousModels[0] === todo)
+    })
+
+todos.reset([]);
+```
+
+Den `set()` metoden som är tillgänglig för kollektioner kan också användas för "smarta" uppdatering av listor av modeller.
+
+Den här metoden försöker utföra smart uppdatering av en kollektioner med en viss lista över modeller. När en modell i denna lista inte finns i samlingen läggs den till. Om det är närvarande, kommer dess attribut att slås samman. Modeller som finns i kollektionen men inte i listan tas bort.
+
+```js
+// Definiera en modell av typen "Beatle" med ett "job" attribut
+var Beatle = Backbone.Model.extend({
+    defaults: {
+        job: 'musician'
+    }
+})
+
+// Skapa modeller för varje medlem av Beatles
+var john = new Beatle({ firstName: 'John', lastName: 'Lennon'});
+var paul = new Beatle({ firstName: 'Paul', lastName: 'McCartney'});
+var george = new Beatle({ firstName: 'George', lastName: 'Harrison'});
+var ringo = new Beatle({ firstName: 'Ringo', lastName: 'Starr'});
+
+// Skapa en samling med våra modeller
+var theBeatles = new Backbone.Collection([john, paul, george, ringo]);
+
+// Skapa en separat modell för Pete Best
+var pete = new Beatle({ firstName: 'Pete', lastName: 'Best'});
+
+// Uppdatera samlingen
+theBeatles.set([john, paul, george, pete]);
+```

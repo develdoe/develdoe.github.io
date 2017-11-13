@@ -1054,3 +1054,112 @@ todos.min(function(model){
   return model.id;
 }).id;
 ```
+
+`pluk()`: extrahera ett specifikt attribut
+```js
+var captions = todos.pluck('caption');
+// returns list of captions
+```
+
+`ilter()` filtrera en kollektion
+```js
+var Todos = Backbone.Collection.extend({
+  model: Todo,
+  filterById: function(ids){
+    return this.filter(
+      function(c) { 
+        return _.contains(ids, c.id); 
+      })
+  }
+});
+```
+
+`idexOf()` returnera index för ett visst objekt i en kollektion
+```js
+var people = new Backbone.Collection;
+
+people.comparator = function(a, b) {
+  return a.get('name') < b.get('name') ? -1 : 1;
+};
+
+var tom = new Backbone.Model({name: 'Tom'});
+var rob = new Backbone.Model({name: 'Rob'});
+var tim = new Backbone.Model({name: 'Tim'});
+
+people.add(tom);
+people.add(rob);
+people.add(tim);
+
+console.log(people.indexOf(rob) === 0); // true
+console.log(people.indexOf(tim) === 1); // true
+console.log(people.indexOf(tom) === 2); // true
+```
+
+`any()`: bekräfta om något av värdena i en kollektion passerar ett iterator sanningstest
+```js
+todos.any(function(model){
+  return model.id === 100;
+});
+
+// or
+todos.some(function(model){
+  return model.id === 100;
+});
+```
+
+size(): returnera storleken på en samling
+```js
+todos.size();
+
+// equivalent to
+todos.length;
+```
+
+`isEmpty()`: bestäm om en kollektion är tom
+```js
+var isEmpty = todos.isEmpty();
+```
+
+`groupBy()`: gruppera en kollektion i grupper av liknande föremål
+```js
+var todos = new Backbone.Collection();
+
+todos.add([
+  { title: 'go to Belgium.', completed: false },
+  { title: 'go to China.', completed: false },
+  { title: 'go to Austria.', completed: true }
+]);
+
+// skapa grupper av färdiga och ofullständiga modeller
+var byCompleted = todos.groupBy('completed');
+var completed = new Backbone.Collection(byCompleted[true]);
+console.log(completed.pluck('title'));
+// logs: ["go to Austria."]
+```
+
+Dessutom finns flera av Underscore-operationerna på objekt tillgängliga som metoder på Modeller.
+
+`pick()`: extrahera en uppsättning attribut från en modell
+```js
+var Todo = Backbone.Model.extend({
+  defaults: {
+    title: '',
+    completed: false
+  }
+});
+
+var todo = new Todo({title: 'go to Austria.'});
+console.log(todo.pick('title'));
+// logs {title: "go to Austria"}
+```
+
+`omit()`: extrahera alla attribut från en modell utom de som anges
+```js
+var todo = new Todo({title: 'go to Austria.'});
+console.log(todo.omit('title'));
+// logs {completed: false}
+```
+
+`keys()` och `values()` få listor över attributnamn och värden
+
+

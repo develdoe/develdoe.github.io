@@ -878,3 +878,37 @@ counterA och counterB bör bara ha ökats en gång.
 I stället för att lägga till eller ta bort modeller enskilt, kanske du vill uppdatera en hel samling på en gång.
 
 `Collection.set()` tar en rad modeller och utför nödvändig `add`, `remove` och `change` operationer som krävs för att uppdatera samlingen.
+
+```js
+var TodoCollection = new Backbone.Collection()
+
+TodoCollection.add([
+    { id: 1, title: 'go to Jamaica', completed: false},
+    { id: 2, title: 'go to China', completed: false},
+    { id: 3, title: 'go to Disneyland', completed: true}
+])
+
+// Vi kan lyssna på add/change/remove events
+TodoCollection.on('add', function(module) {
+    console.log("add: " + model.get('title'))
+})
+
+TodoCollection.on('remove', function(module) {
+    console.log("remove: " + model.get('title'))
+})
+
+TodoCollection.on('change', function(module) {
+    console.log("chagne: " + model.get('title'))
+})
+
+TodosCollection.set([
+    { id: 1, title: 'go to Jamaica.', completed: true },
+    { id: 2, title: 'go to China.', completed: false },
+    { id: 4, title: 'go to Disney World.', completed: false }
+])
+
+// Ovan logs:
+// Completed go to Jamaica.
+// Removed go to Disneyland.
+// Added go to Disney World.
+```

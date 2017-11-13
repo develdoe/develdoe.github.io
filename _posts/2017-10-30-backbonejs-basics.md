@@ -1012,3 +1012,45 @@ todos.forEach(function(model){
 // go to Austria.
 ```
 
+`sortBy()`: sortera en kollektion på ett specifikt attribut:
+```js
+// sort collection
+var sortedByAlphabet = todos.sortBy(function (todo) {
+    return todo.get("title").toLowerCase();
+});
+
+console.log("- Now sorted: ");
+
+sortedByAlphabet.forEach(function(model){
+  console.log(model.get('title'));
+});
+
+// Ovan logs:
+// - Now sorted:
+// go to Austria.
+// go to Belgium.
+// go to China.
+```
+
+`map()`: iterera genom en kollektion, mappning av varje värde genom en transformationsfunktion
+```js
+var count = 1;
+console.log(todos.map(function(model){
+  return count++ + ". " + model.get('title');
+}));
+// Above logs:
+//1. go to Belgium.
+//2. go to China.
+//3. go to Austria.
+```
+
+`min()/max()`: hämta objekt med värdet min eller max för ett attribut
+```js
+todos.max(function(model){
+  return model.id;
+}).id;
+
+todos.min(function(model){
+  return model.id;
+}).id;
+```

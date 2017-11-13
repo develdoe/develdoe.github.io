@@ -1427,6 +1427,31 @@ ourObject.trigger("dance:tap", "stopped tap dancing."); // won't be logged as it
 ourObject.trigger("dance:break", "break dancing. Yeah!");
 ```
 
-För att ta bort alla callbacks för händelsen skickar vi ett händelse namn (t.ex. move) till metoden off() på objektet som händelsen är bunden till.
+För att ta bort alla callbacks för händelsen skickar vi ett händelse namn (t.ex. move) till metoden `off()` på objektet som händelsen är bunden till. Om vi vill ta bort en särskild callback kan vi vidarebefordra den callback som den andra parametern:
+
+```js
+var ourObject = {};
+
+// Mixin
+_.extend(ourObject, Backbone.Events);
+
+function dancing (msg) { console.log("We are dancing. " + msg); }
+function jumping (msg) { console.log("We are jumping. " + msg); }
+
+// Add two listeners to the same event
+ourObject.on("move", dancing);
+ourObject.on("move", jumping);
+
+// Trigger the events. Both listeners are called.
+ourObject.trigger("move", "Yeah!");
+
+// Removes specified listener
+ourObject.off("move", dancing);
+
+// Trigger the events again. One listener left.
+ourObject.trigger("move", "Yeah, jump, jump!");
+```
+
+
 
 

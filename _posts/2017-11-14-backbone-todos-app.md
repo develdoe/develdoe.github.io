@@ -112,4 +112,4 @@ Vi börjar genom att fylla i  #item-template som används för att visa enskilda
 </script>
 ```
 
-Malltaggen i ovanstående markering, till exempel {{raw}}{{#if}}{{endraw}  och {{raw}}{{{{endraw}}, är specifika för Handlebars.js
+Malltaggen i ovanstående markering, till exempel {{#if}}  och {{, är specifika för Handlebars.js

@@ -1529,8 +1529,8 @@ c.trigger('everything');
 
 Om du använder `on`, `of` och tar bort vyer och motsvarande modeller samtidigt, blir det generellt inga problem. Men ett problem uppstår när du tar bort en vy som registrerat att bli underrättad om händelser på en modell, men du tar inte bort modellen eller anropar off för att ta bort vyns händelsehanterare.
 
-Eftersom modellen har en referens till vys callback funktion , kan JavaScript-sopsamlaren inte ta bort vyn från minnet. Detta kallas en "spökvy" och är en form av minnesläckage som är vanligt eftersom modellerna vanligtvis tenderar att överleva motsvarande vyer under en applikations livscykel. För detaljer om ämnet och en lösning, kolla den här utmärkta [artikeln](https://lostechies.com/derickbailey/2011/09/15/zombies-run-managing-page-transitions-in-backbone-apps/) av Derick Bailey.
+Eftersom modellen har en referens till vys callback funktion, kan JavaScript-sopsamlaren inte ta bort vyn från minnet. Detta kallas en "spökvy" och är en form av minnesläckage som är vanligt eftersom modellerna vanligtvis tenderar att överleva motsvarande vyer under en applikations livscykel. För detaljer om ämnet och en lösning, kolla den här utmärkta [artikeln](https://lostechies.com/derickbailey/2011/09/15/zombies-run-managing-page-transitions-in-backbone-apps/) av Derick Bailey.
 
-
+Praktiskt taget kräver alla `on` anrop till ett objekt också att de ska anropa `of` för att garbage collector ska kunna göra sitt jobb.
 
 

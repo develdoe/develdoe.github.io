@@ -45,6 +45,7 @@ Först lägger vi upp header och de grundläggande applikationsberoende: jQuery,
     <script src="lib/underscore-min.js"></script>
     <script src="lib/backbone-min.js"></script>
     <script src="lib/backbone.localStorage.js"></script>
+    <script src="lib/handlebars.min.js"></script>
     <script src="models/todo.js"></script>
     <script src="collections/todos.js"></script>
     <script src="views/todos.js"></script>
@@ -56,4 +57,44 @@ Först lägger vi upp header och de grundläggande applikationsberoende: jQuery,
 Förutom de ovan nämnda beroenden, notera att några andra applikationsspecifika filer också laddas. Dessa är organiserade i mappar som representerar deras ansvarsansvar: modeller, vyer, kollektioner och routrar. En app.js-fil är närvarande för att hämta centralinitieringskoden.
 
 Obs! Om du vill följa med, skapa en katalogstruktur enligt vad som visas i index.html:
+
+* Placera index.html i en överordnad katalog.
+* Hämta jQuery, Underscore, Backbone och Backbone LocalStorage från sina respektive webbplatser och placera dem under lib/
+* Skapa katalogerna models, collections, views, and routers
+
+Du behöver också [index.css](https://raw.githubusercontent.com/tastejs/todomvc/gh-pages/examples/backbone/node_modules/todomvc-app-css/index.css), som borde ligga i en assets katalog.
+
+Vi kommer att skapa applikations JavaScript-filer under handledningen. Oroa dig inte för de två skriptelementen ‘text/template’ - vi kommer att ersätta dem snart!
+
+### Application HTML
+
+Låt oss nu fylla i index.html. Vi behöver en <input> för att skapa nya todos, en <ul id="todo-list" /> för att lista de faktiska todosna och en sidfot där vi senare kan infoga statistik och länkar för att utföra operationer som att rensa färdiga todos . Vi lägger till följande märkning omedelbart inuti vår body innan skriptelementen:
+
+```html
+<section id=todoapp>
+
+    <header id=header>
+        <h1>todos</h1>
+        <input id="new-todo" placeholder="What needs to be done?" autofocus>
+    </header>
+
+    <section id="main">
+        <input id="toggle-all" type="checkbox">
+        <label for="toggle-all">Mark all as completed</label>
+        <ul id="todo-list"></ul>
+    </section>
+
+    <footer id=footer></footer>
+
+</section>
+
+<div id="info">
+    <p>Double-click to edit a todo</p>
+    <p>Duplicated by <a href="log.andreeray.se">Andree Ray</a></p>
+    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+</div>
+```
+
+### Templates
+
 

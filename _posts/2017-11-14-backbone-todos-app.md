@@ -112,4 +112,58 @@ Vi börjar genom att fylla i  #item-template som används för att visa enskilda
 </script>
 ```
 
-Malltaggen i ovanstående markering, till exempel {{#if}}  och {{, är specifika för Handlebars.js
+Malltaggen i ovanstående markering, till exempel {{#if}}  och {{, är specifika för Handlebars.js och dokumenteras på handlebars-webbplatsen. I dina egna applikationer har du ett urval av mallbibliotek, t.ex. Mustache eller Underscore.
+
+Vi måste också definiera  #stats-template som vi ska använda för att fylla i sidfoten.
+
+```js
+<script type="text/template" id="stats-template">
+    <span id="todo-count">
+        <strong>{{remaining}}</strong>
+        {{#if this.remaining === 1}}
+            {{this.item}}
+        {{#else}}
+            {{this.items}}
+        {{/if}} left
+    </span>
+    <ul id="filters">
+        <li><a class=selected href=#>All</a>
+        <li><a href=#/active>Active</a>
+        <li><a href=#/completed>Completed</a>
+    </ul>
+    {{#if this.completed}}
+    <button id="clear-completed">Clear Completed {{this.completed}}</button>
+    {{/if}}
+</script>
+```
+
+#stats-template visar antalet återstående ej completed objekt och innehåller en lista med hyperlänkar som kommer att användas för att utföra åtgärder när vi implementerar routern. Den innehåller också en knapp som kan användas för att rensa alla completed objekt.
+
+Nu när vi har all HTML som vi behöver, börjar vi implementera vår applikation genom att återgå till grunden: en Todo-modell.
+
+## Todo model
+
+Todo-modellen är anmärkningsvärt enkel. För det första har en todo två attribut: en titel lagrar en todo-artikelens titel och en slutförd status indikerar om den är klar. Dessa attribut överförs som standard, enligt nedan:
+
+```js
+var app = app || {}
+
+/**
+ * Todo model
+ * -----------
+ */
+
+app.Todo = Backbone.Model.extend({
+
+    defaults: {
+        title: '',
+        completed: false
+    },
+
+    // Toggle the 'completed' state of this todo item
+    toggle: function() {
+        this.save({ completed: !this.get('completed') })
+    }
+})
+```
+

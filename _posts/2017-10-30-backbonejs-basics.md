@@ -1541,7 +1541,7 @@ Standard implementeringen av View.remove () gör ett anrop med stopListening(), 
 var view = new Backbone.View();
 
 var b = _.extend({}, Backbone.Events);
-
+DOM-händelser kan vara bundna till en vys events egenskap eller använda jQuery.on().
 view.listenTo(b, 'all', function(){ console.log(true); });
 
 b.trigger('anything');  // logs: true
@@ -1559,5 +1559,139 @@ Inom en vy finns två typer av händelser som du kan lyssna på: DOM-händelser 
 
 Det är viktigt att förstå skillnaderna i hur vyer binder till dessa händelser och det kontext där deras callback åberopas.
 
+DOM-händelser kan vara bundna till en vys events egenskap eller använda `jQuery.on()`. 
+* callbacks som är bundna med `events` egenskapen hänvisar `this` till Vy-objektet
+* callbacks som är bundna direkt med jQuery kommer att ha `this` angivet till det hanterade DOM-elementet av jQuery.
 
+Alla DOM-händelse callbacks skickas till ett händelseobjekt objekt av jQuery. Se `delegateEvents()` i dokumentationen för Backbone för ytterligare information.
+
+```html
+<div id="todo">
+    <input type='checkbox' />
+</div>
+```
+
+```js
+var View = Backbone.View.extend({
+
+    el: '#todo',
+
+    // binder till DOM-händelse med events egenskapen
+    events: {
+        'click [type="checkbox"]': 'clicked',
+    },
+
+    initialize: function () {
+        // binder till DOM-händelse med jQuery
+        this.$el.click(this.jqueryClicked);
+
+        // binder till API event
+        this.on('apiEvent', this.callback);
+    },
+
+    // 'this' är View
+    clicked: function(event) {
+        console.log("events handler for " + this.el.outerHTML);
+        this.trigger('apiEvent', event.type);
+    },
+
+    // 'this' hanterar DOM element
+    jqueryClicked: function(event) {
+        console.log("jQuery handler for " + this.outerHTML);
+    },
+
+    callback: function(eventType) {
+        console.log("event type was " + eventType);
+    }
+
+})
+``` 
+
+## Routers
+
+I Backbone routrar ger ett sätt för dig att ansluta webbadresser (antingen hashfragment eller verkliga) till delar av din applikation.
+
+Varje del av din applikation som du vill vara bokmärkt, delbar och back-button-able behöver en webbadress.
+
+```html
+http://example.com/#about
+http://example.com/#search/seasonal-horns/page2
+```
+
+En applikation brukar ha minst en rutt som kartlägger en URL-rutt till en funktion som avgör vad som händer när en användare når den ruttan. Detta förhållande definieras enligt följande:
+
+```js
+'route' : 'mappedFunction'
+```
+
+Låt oss definiera vår första router genom att utöka Backbone.Router. I den här artikeln kommer vi att fortsätta att låtsas som om vi skapar en komplex todo-applikation (något som en personlig arrangör/planerare) som kräver en komplex TodoRouter.
+
+**Notera inline-kommentarerna i kodexemplet nedan eftersom de fortsätter vår lektion om routrar.**
+
+```js
+var TodoRouter = Backbone.Router.extend({
+    /* Ange rutten och funktionskartorna för den här routern */
+    routes: {
+        "about" : "showAbout",
+        // Ex: http://example.com/#about
+
+        // Detta är ett exempel på att använda en parametervärde som
+        // tillåter oss att matcha någon av komponenterna mellan två URL-snedstreck
+        "todo/:id" : "getTodo",
+        // Ex: http://example.com/#todo/5
+
+            // Vi kan också definiera flera rutter som är bundna till samma kartfunktion,
+            // i det här fallet searchTodos (). Notera nedan hur vi passerar eventuellt
+            // i en referens till ett sidnummer om en levereras
+            "search/:query" : "searchTodos",
+            // Ex: http://example.com/#search/job
+
+            // Webbadresser kan innehålla så många "param"s som vi önskar
+            "search/:query/p:page" : "searchTodos",
+            //Ex: http://example.com/#search/job/p1
+
+            // Detta är ett exempel på att använda en * splat. Splats kan matcha valfritt
+            // antal URL-komponenter och kan kombineras med ": param" s
+            // Om du vill använda splats för något annat än standard routing är det nog en
+            // bra idé att lämna dem i slutet av en URL, annars kan du behöva tillämpa
+            // regular expression uttryck som parsar på ditt fragment
+            "todos/:id/download/*documentPath" : "downloadDocument",
+            // Ex: http://example.com/#todos/5/download/files/Meeting_schedule.doc
+
+            // Detta är en standardväg som också använder en * splat.
+            // Tänk på standardrutan som ett jokertecken för URLs som inte matchas
+            // eller där användaren har felaktigt skrivit in en ruttväg manuellt
+            "*other"    : "defaultRoute",
+            // Ex: : http://example.com/# <anything>
+
+            // Router-URL-adresser stöder också frivilliga delar via parentes,
+            // utan att behöva använda en regex.
+            "optional(/:item)": "optionalItem",
+            "named/optional/(y:z)": "namedOptionalItem"
+        }
+
+        showAbout: function() {},
+
+        // Observera att id som matchas i ovanstående rutt kommer att skickas till denna funktion
+        getTodo: function(id) {
+            console.log("You are trying to reach todo " + id)
+        },
+
+        searchTodos: function(query, page) {
+            var pageNum = page || 1
+            console.log("Page number: " + pageNum + " query: " + query)
+        },
+
+        downloadDocument: function(id, path) {},
+
+        defaultRoute: function(other) {
+             console.log('Invalid. You attempted to reach:' + other)
+        }
+    })
+
+    // Nu när vi har en router konfigurerad måste vi instansera det
+    var myTodoRouter = new TodoRouter();
+```
+
+Backbone erbjuder ett opt-in för HTML5 pushState support via window.history.pushState.
 

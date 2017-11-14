@@ -1452,6 +1452,85 @@ ourObject.off("move", dancing);
 ourObject.trigger("move", "Yeah, jump, jump!");
 ```
 
+Slutligen, som vi har sett i våra tidigare exempel, utlöses `trigger` en callback för en angiven händelse (eller en mellanseparerad lista över händelser). t.ex.:
+
+```js
+var ourObject = {};
+
+// Mixin
+_.extend(ourObject, Backbone.Events);
+
+function doAction(msg) {
+    console.log("We are " + msg);
+}
+
+// Add event listeners
+ourObject.on("dance", doAction);
+ourObject.on("jump", doAction);
+ourObject.on("skip", doAction);
+
+// Single event
+ourObject.trigger("dance", 'just dancing.');
+
+// Multiple events
+ourObject.trigger("dance jump skip", 'very tired from so much action.');
+```
+
+`trigger` kan överföra flera argument till callback funktion:
+
+```JS
+var ourObject = {};
+
+// Mixin
+_.extend(ourObject, Backbone.Events);
+
+
+function doAction(action, duration) {
+  console.log("We are " + action + ' for ' + duration ); 
+}
+
+// Add event listeners
+ourObject.on("dance", doAction);
+ourObject.on("jump", doAction);
+ourObject.on("skip", doAction);
+
+// Passing multiple arguments to single event
+ourObject.trigger("dance", 'dancing', "5 minutes");
+
+// Passing multiple arguments to multiple events
+ourObject.trigger("dance jump skip", 'on fire', "15 minutes");
+```
+
+### listenTo() och stopListening()
+
+`on()` och `off()` lägger till callbacks direkt till ett observerat objekt, `listenTo()` berättar för ett objekt att lyssna på händelser på ett annat objekt, så att lyssnaren kan hålla reda på händelserna som det lyssnar på. `stopListening()` kan senare anropas på lyssnaren för att berätta att den slutar lyssna på händelser:
+
+```js
+var a = _.extend({}, Backbone.Events);
+var b = _.extend({}, Backbone.Events);
+var c = _.extend({}, Backbone.Events);
+
+// add listeners to A for events on B and C
+a.listenTo(b, 'anything', function(event){ console.log("anything happened"); });
+a.listenTo(c, 'everything', function(event){ console.log("everything happened"); });
+
+// trigger an event
+b.trigger('anything'); // logs: anything happened
+
+// stop listening
+a.stopListening();
+
+// A does not receive these events
+b.trigger('anything');
+c.trigger('everything');
+```
+
+`stopListening()` kan också användas för att selektivt sluta lyssna baserat på händelse-, modell- eller callback.
+
+Om du använder `on`, `of` och tar bort vyer och motsvarande modeller samtidigt, blir det generellt inga problem. Men ett problem uppstår när du tar bort en vy som registrerat att bli underrättad om händelser på en modell, men du tar inte bort modellen eller anropar off för att ta bort vyns händelsehanterare.
+
+Eftersom modellen har en referens till vys callback funktion , kan JavaScript-sopsamlaren inte ta bort vyn från minnet. Detta kallas en "spökvy" och är en form av minnesläckage som är vanligt eftersom modellerna vanligtvis tenderar att överleva motsvarande vyer under en applikations livscykel. För detaljer om ämnet och en lösning, kolla den här utmärkta [artikeln](https://lostechies.com/derickbailey/2011/09/15/zombies-run-managing-page-transitions-in-backbone-apps/) av Derick Bailey.
+
 
 
 

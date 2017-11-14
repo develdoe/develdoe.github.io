@@ -1877,6 +1877,8 @@ console.log(data.author ==='Tim Shakespeare'); // true
 console.log(data.length === 123); // true
 ```
 
+`Backbone.sync` anropas varje gång Backbone försöker `read`, `save` eller `delete` modeller.
 
+Det använder jQuery eller Zeptos `$.ajax()` implementeringar för att göra dessa RESTful förfrågningar, men det kan överskrivas enligt dina behov.
 
 

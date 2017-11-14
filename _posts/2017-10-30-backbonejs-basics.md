@@ -1881,4 +1881,17 @@ console.log(data.length === 123); // true
 
 Det använder jQuery eller Zeptos `$.ajax()` implementeringar för att göra dessa RESTful förfrågningar, men det kan överskrivas enligt dina behov.
 
+### Overriding Backbone.sync
+
+`sync` funktionen kan överskrivas globalt som `Backbone.sync`, eller på en finare grannnivå, genom att lägga till en `sync` funktionen till en Backbone kollektion eller till en enskild modell.
+
+Eftersom all persistens hanteras av funktionen Backbone.sync kan ett alternativt persistensskikt användas genom att enkelt åsidosätta Backbone.sync med en funktion som har samma signatur:
+
+```js
+Backbone.sync = function(method, model, options) {
+};
+```
+
+
+
 

@@ -1693,7 +1693,44 @@ var TodoRouter = Backbone.Router.extend({
     var myTodoRouter = new TodoRouter();
 ```
 
-Backbone erbjuder ett opt-in för HTML5 pushState support via `window.history.pushState`. 
+Backbone erbjuder ett opt-in för HTML5 `pushState` support via `window.history.pushState`. 
 
-Detta tillåter dig att definiera rutter som "http://backbonejs.org/just/an/example". Detta kommer att stödjas med automatisk tillbakagång när en användares webbläsare inte stöder pushState.
+Detta tillåter dig att definiera rutter som "http://backbonejs.org/just/an/example". Detta kommer att stödjas med automatisk tillbakagång när en användares webbläsare inte stöder `pushState`.
+
+Observera att det är mycket föredraget om du också kan stödja pushState på servern, även om det är lite svårare att implementera.
+
+### Finns det en gräns för hur många routrar jag ska använda?
+
+Andrew de Andrade har påpekat att DocumentCloud, skaparna av Backbone, vanligtvis bara använder en enda router i de flesta av deras applikationer. Du kommer sannolikt inte att behöva mer än en eller två routrar i dina egna projekt. Majoriteten av din applikation kan hållas organiserad i en enda router utan att den blir otrygg.
+
+### Backbone.history
+
+Därefter måste vi initiera Backbone.history eftersom det hanterar hashchange-händelser i vår applikation.
+
+Detta hanterar automatiskt de rutter som har definierats och utlöser callbacks när de har nåts.
+
+Metoden Backbone.history.start () kommer helt enkelt att berätta för Backbone att det är okej att börja övervaka alla hashchange-händelser enligt följande:
+
+```js
+var TodoRouter = Backbone.Router.extend({
+
+    routes: {
+        "about": "showAbout",
+        "search/:query": "searchTodos",
+        "search/:query/p:page": "searchTodos"
+    },
+
+    showAbout: function() {},
+
+    searchTodos: function(query, page) {
+        var pageNum = page || 1
+        console.log("Page number: " + pageNum + " of the results for todos containing the word: " + query)
+    }
+})
+
+
+var myTodoRouter = new TodoRouter()
+
+Backbone.history.start()
+```
 

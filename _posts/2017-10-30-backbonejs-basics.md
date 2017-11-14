@@ -1533,4 +1533,31 @@ Eftersom modellen har en referens till vys callback funktion, kan JavaScript-sop
 
 Praktiskt taget kräver alla `on` anrop till ett objekt också att de ska anropa `of` för att garbage collector ska kunna göra sitt jobb.
 
+`listenTo()` ändrar det, så att vyer kan binda till modellanmälningar och unbind från dem alla med ett enda anrop - `stopListening()`.
+
+Standard implementeringen av View.remove () gör ett anrop med stopListening(), vilket säkerställer att alla lyssnare som är bundna med listenTo() är obundet innan vyn förgörs.
+
+```js
+var view = new Backbone.View();
+
+var b = _.extend({}, Backbone.Events);
+
+view.listenTo(b, 'all', function(){ console.log(true); });
+
+b.trigger('anything');  // logs: true
+
+view.listenTo(b, 'all', function(){ console.log(false); });
+
+view.remove(); // stopListening() implicitly called
+
+b.trigger('anything');  // does not log anything
+```
+
+### Händelser och Vyer
+
+Inom en vy finns två typer av händelser som du kan lyssna på: DOM-händelser och händelser som utlöses med hjälp av händelse API.
+
+Det är viktigt att förstå skillnaderna i hur vyer binder till dessa händelser och det kontext där deras callback åberopas.
+
+
 

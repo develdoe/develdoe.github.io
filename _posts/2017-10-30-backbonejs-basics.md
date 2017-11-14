@@ -1892,6 +1892,27 @@ Backbone.sync = function(method, model, options) {
 };
 ```
 
+methodMap nedan används av standardsynkroniseringen för att kartlägga metodparametern till en HTTP-operation och illustrerar vilken typ av åtgärd som krävs av varje metodargument:
+
+```js
+var methodMap = {
+  'create': 'POST',
+  'update': 'PUT',
+  'patch':  'PATCH',
+  'delete': 'DELETE',
+  'read':   'GET'
+};
+```
+
+Om vi ville ersätta standardsynkroniseringen med en som enkelt loggade anropen för sync, kunde vi göra det här:
+
+```js
+var id_counter = 1;
+Backbone.sync = function(method, model) {
+  console.log("I've been passed " + method + " with " + JSON.stringify(model));
+  if(method === 'create'){ model.set('id', id_counter++); }
+};
+```
 
 
 

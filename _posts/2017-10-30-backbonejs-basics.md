@@ -1732,10 +1732,39 @@ var TodoRouter = Backbone.Router.extend({
 var myTodoRouter = new TodoRouter()
 
 Backbone.history.start()
-
-// console:
-// http://localhost/#search/job/p3   logs: Page number: 3 of the results for todos containing the word: job
-// http://localhost/#search/job      logs: Page number: 1 of the results for todos containing the word: job 
-// etc.
 ```
+
+Om du vill uppdatera webbadressen för att spegla applikationstillstånd vid en viss punkt kan du använda routerns `.navigate()` metod. Som standard uppdateras det helt enkelt ditt webbadressfragment utan att utlösa hashchange-händelsen:
+
+```js
+// Let's imagine we would like a specific fragment (edit) once a user opens a single todo
+var TodoRouter = Backbone.Router.extend({
+  routes: {
+    "todo/:id": "viewTodo",
+    "todo/:id/edit": "editTodo"
+    // ... other routes
+  },
+
+  viewTodo: function(id){
+    console.log("View todo requested.");
+    this.navigate("todo/" + id + '/edit'); // updates the fragment for us, but doesn't trigger the route
+  },
+
+  editTodo: function(id) {
+    console.log("Edit todo opened.");
+  }
+});
+
+
+var myTodoRouter = new TodoRouter()
+
+Backbone.history.start()
+```
+
+Det är också möjligt för `Router.navigate()` att utlösa rutten tillsammans med uppdatering av URL-fragmentet genom att skicka alternativet `trigger:true`.
+
+**Obs! Denna användning är inte att rekommendera. Den rekommenderade användningen är den ovan beskrivna som skapar en bokmärkt URL när din appplikation övergår till en viss state.**
+
+
+
 

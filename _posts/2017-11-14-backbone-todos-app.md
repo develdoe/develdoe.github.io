@@ -97,4 +97,19 @@ Låt oss nu fylla i index.html. Vi behöver en <input> för att skapa nya todos,
 
 ### Templates
 
+För att slutföra index.html måste vi lägga till mallarna som vi ska använda för att dynamiskt skapa HTML genom att injicera modelldata i deras platshållare. Ett sätt att inkludera mallar på sidan är att använda egna skript taggar. Dessa utvärderas inte av webbläsaren, som bara tolkar dem som vanlig text. Handlebars templering kan sedan komma åt mallarna, vilket renderar fragment av HTML.
 
+Vi börjar genom att fylla i  #item-template som används för att visa enskilda todo-objekt. 
+
+```html
+<script type="text/template" id="item-template">
+    <div class="view">
+        <input class="toggle" type="checkbox" {{#if competed}} checked="checked" {{/if}}>
+        <label>{{title}}</label>
+        <button class="destroy"></button>
+    </div>
+    <input class="edit" value="{{title}}">
+</script>
+```
+
+Malltaggen i ovanstående markering, till exempel {{raw}}{{#if}}{{endraw}  och {{raw}}{{{{endraw}}, är specifika för Handlebars.js

@@ -1765,6 +1765,118 @@ Det är också möjligt för `Router.navigate()` att utlösa rutten tillsammans 
 
 **Obs! Denna användning är inte att rekommendera. Den rekommenderade användningen är den ovan beskrivna som skapar en bokmärkt URL när din appplikation övergår till en viss state.**
 
+```js
+// Let's imagine we would like a specific fragment (edit) once a user opens a single todo
+var TodoRouter = Backbone.Router.extend({
+  routes: {
+    "todo/:id": "viewTodo",
+    "todo/:id/edit": "editTodo"
+    // ... other routes
+  },
+
+  viewTodo: function(id){
+    console.log("View todo requested.");
+    this.navigate("todo/" + id + '/edit', {trigger:true}); // updates the fragment and triggers the route as well
+  },
+
+  editTodo: function(id) {
+    console.log("Edit todo opened.");
+  }
+});
+
+
+var myTodoRouter = new TodoRouter()
+
+Backbone.history.start()
+```
+
+En "rutt" händelse utlöses också på routern förutom att bli avfyrade på `Backbone.history`.
+
+```js
+Backbone.history.on('route', onRoute);
+
+// Trigger 'route' event on router instance.
+router.on('route', function(name, args) {
+  console.log(name === 'routeEvent'); 
+});
+
+location.replace('http://example.com#route-event/x');
+Backbone.history.checkUrl();
+```
+
+## Backbone’s Sync API
+
+Vi diskuterade tidigare hur Backbone stöder RESTful persistens via dess `fetch()` och `create()` metoder för kollektioner och `save()` och `destroy()` metoder på Modeller.
+
+Nu ska vi titta närmare på Backbones synkroniseringsmetod som ligger till grund för dessa operationer.
+
+`Backbone.sync` metoden är en integrerad del av Backbone.js. Det förutsätter en jQuery-liknande `$.ajax()` metod, så HTTP-parametrar är organiserade baserat på jQuery API.
+
+Eftersom vissa äldre servrar kanske inte stöder JSON-formaterade förfrågningar och HTTP PUT och DELETE-operationer kan Backbone konfigureras för att emulera dessa funktioner med hjälp av de två konfigurationsvariablerna nedan med standardvärdena:
+
+```js
+Backbone.emulateHTTP = false; // set to true if server cannot handle HTTP PUT or HTTP DELETE
+Backbone.emulateJSON = false; // set to true if server cannot handle application/json requests
+```
+
+Alternativet Backbone.emulateHTTP bör vara inställt på true om utökade HTTP-metoder inte stöds av servern. Alternativet Backbone.emulateJSON bör vara satt till true om servern inte förstår MIME-typen för JSON.
+
+```js
+// Överskrivning jQuery ajax-metod - nu kommer en faktisk begäran att göras
+var ajaxSettings;
+$.ajax = function(ajaxRequest) {
+    ajaxSettings = ajaxRequest
+}
+
+// Skapa en ny kollektions bibliotek
+var Library = Backbone.Collection.extend({
+    url: function() {
+        return '/library'
+    }
+})
+
+// Definiera attribut för vår modell
+var attrs = {
+    title: 'The Tempest',
+    author: 'Bill SHakespeare',
+    length: 123
+}
+
+// Skapa ett nytt bibliotek instans
+var library = new Library
+
+// Skapa en ny instans av en modell inom vår kollektion
+library.create(attrs, {wait:false})
+
+// Updatera med emulateHTTP
+library.first().save({id: '2-the-tempest', author: 'tim SHakespeare'}, {emulateHTTP:true})
+
+// Kontrollera att ajaxSettings används för vår begäran
+console.log(ajaxSettings.url === '/library/2-the-tempest'); // true
+console.log(ajaxSettings.type === 'POST'); // true
+console.log(ajaxSettings.contentType === 'application/json'); // true
+
+// Parse data för begäran för att bekräfta att det är som förväntat
+var data = JSON.parse(ajaxSettings.data);
+console.log(data.id === '2-the-tempest');  // true
+console.log(data.author === 'Tim Shakespeare'); // true
+console.log(data.length === 123); // true
+```
+
+På samma sätt kan vi bara uppdatera med hjälp av emulateJSON:
+
+```js
+library.first().save({id: '2-the-tempest', author: 'Tim Shakespeare'}, {emulateJSON:true});
+console.log(ajaxSettings.url === '/library/2-the-tempest'); // true
+console.log(ajaxSettings.type === 'PUT'); // true
+console.log(ajaxSettings.contentType ==='application/x-www-form-urlencoded'); // true
+
+var data = JSON.parse(ajaxSettings.data.model);
+console.log(data.id === '2-the-tempest'); // true
+console.log(data.author ==='Tim Shakespeare'); // true
+console.log(data.length === 123); // true
+```
+
 
 
 

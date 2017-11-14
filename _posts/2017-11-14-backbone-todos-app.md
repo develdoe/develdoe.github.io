@@ -55,3 +55,5 @@ Först lägger vi upp header och de grundläggande applikationsberoende: jQuery,
 
 Förutom de ovan nämnda beroenden, notera att några andra applikationsspecifika filer också laddas. Dessa är organiserade i mappar som representerar deras ansvarsansvar: modeller, vyer, kollektioner och routrar. En app.js-fil är närvarande för att hämta centralinitieringskoden.
 
+Obs! Om du vill följa med, skapa en katalogstruktur enligt vad som visas i index.html:
+

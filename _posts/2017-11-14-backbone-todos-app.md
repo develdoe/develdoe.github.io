@@ -27,7 +27,7 @@ Vi lägger hela vår HTML i en enda fil med namnet index.html.
 
 ## Header och Scripts
 
-Först lägger vi upp header och de grundläggande applikationsberoende: jQuery, Underscore, Backbone.js och Backbone LocalStorage-adaptern.
+Först lägger vi upp header och de grundläggande applikationsberoende: jQuery, Underscore, Backbone.js, handlebars och Backbone LocalStorage-adaptern.
 
 ```html
 <!DOCTYPE html>
@@ -59,7 +59,7 @@ Förutom de ovan nämnda beroenden, notera att några andra applikationsspecifik
 Obs! Om du vill följa med, skapa en katalogstruktur enligt vad som visas i index.html:
 
 * Placera index.html i en överordnad katalog.
-* Hämta jQuery, Underscore, Backbone och Backbone LocalStorage från sina respektive webbplatser och placera dem under lib/
+* Hämta jQuery, Underscore, Backbone, Handlebars och Backbone LocalStorage från sina respektive webbplatser och placera dem under lib/
 * Skapa katalogerna models, collections, views, and routers
 
 Du behöver också [index.css](https://raw.githubusercontent.com/tastejs/todomvc/gh-pages/examples/backbone/node_modules/todomvc-app-css/index.css), som borde ligga i en assets katalog.

@@ -1693,5 +1693,7 @@ var TodoRouter = Backbone.Router.extend({
     var myTodoRouter = new TodoRouter();
 ```
 
-Backbone erbjuder ett opt-in för HTML5 pushState support via window.history.pushState.
+Backbone erbjuder ett opt-in för HTML5 pushState support via `window.history.pushState`. 
+
+Detta tillåter dig att definiera rutter som "http://backbonejs.org/just/an/example". Detta kommer att stödjas med automatisk tillbakagång när en användares webbläsare inte stöder pushState.
 

@@ -1640,57 +1640,57 @@ var TodoRouter = Backbone.Router.extend({
         "todo/:id" : "getTodo",
         // Ex: http://example.com/#todo/5
 
-            // Vi kan också definiera flera rutter som är bundna till samma kartfunktion,
-            // i det här fallet searchTodos (). Notera nedan hur vi passerar eventuellt
-            // i en referens till ett sidnummer om en levereras
-            "search/:query" : "searchTodos",
-            // Ex: http://example.com/#search/job
+        // Vi kan också definiera flera rutter som är bundna till samma kartfunktion,
+        // i det här fallet searchTodos (). Notera nedan hur vi passerar eventuellt
+        // i en referens till ett sidnummer om en levereras
+        "search/:query" : "searchTodos",
+        // Ex: http://example.com/#search/job
 
-            // Webbadresser kan innehålla så många "param"s som vi önskar
-            "search/:query/p:page" : "searchTodos",
-            //Ex: http://example.com/#search/job/p1
+        // Webbadresser kan innehålla så många "param"s som vi önskar
+        "search/:query/p:page" : "searchTodos",
+        //Ex: http://example.com/#search/job/p1
 
-            // Detta är ett exempel på att använda en * splat. Splats kan matcha valfritt
-            // antal URL-komponenter och kan kombineras med ": param" s
-            // Om du vill använda splats för något annat än standard routing är det nog en
-            // bra idé att lämna dem i slutet av en URL, annars kan du behöva tillämpa
-            // regular expression uttryck som parsar på ditt fragment
-            "todos/:id/download/*documentPath" : "downloadDocument",
-            // Ex: http://example.com/#todos/5/download/files/Meeting_schedule.doc
+        // Detta är ett exempel på att använda en * splat. Splats kan matcha valfritt
+        // antal URL-komponenter och kan kombineras med ": param" s
+        // Om du vill använda splats för något annat än standard routing är det nog en
+        // bra idé att lämna dem i slutet av en URL, annars kan du behöva tillämpa
+        // regular expression uttryck som parsar på ditt fragment
+        "todos/:id/download/*documentPath" : "downloadDocument",
+        // Ex: http://example.com/#todos/5/download/files/Meeting_schedule.doc
 
-            // Detta är en standardväg som också använder en * splat.
-            // Tänk på standardrutan som ett jokertecken för URLs som inte matchas
-            // eller där användaren har felaktigt skrivit in en ruttväg manuellt
-            "*other"    : "defaultRoute",
-            // Ex: : http://example.com/# <anything>
+        // Detta är en standardväg som också använder en * splat.
+        // Tänk på standardrutan som ett jokertecken för URLs som inte matchas
+        // eller där användaren har felaktigt skrivit in en ruttväg manuellt
+        "*other"    : "defaultRoute",
+        // Ex: : http://example.com/# <anything>
 
-            // Router-URL-adresser stöder också frivilliga delar via parentes,
-            // utan att behöva använda en regex.
-            "optional(/:item)": "optionalItem",
-            "named/optional/(y:z)": "namedOptionalItem"
-        }
+        // Router-URL-adresser stöder också frivilliga delar via parentes,
+        // utan att behöva använda en regex.
+        "optional(/:item)": "optionalItem",
+        "named/optional/(y:z)": "namedOptionalItem"
+    }
 
-        showAbout: function() {},
+    showAbout: function() {},
 
-        // Observera att id som matchas i ovanstående rutt kommer att skickas till denna funktion
-        getTodo: function(id) {
-            console.log("You are trying to reach todo " + id)
-        },
+    // Observera att id som matchas i ovanstående rutt kommer att skickas till denna funktion
+    getTodo: function(id) {
+        console.log("You are trying to reach todo " + id)
+    },
 
-        searchTodos: function(query, page) {
-            var pageNum = page || 1
-            console.log("Page number: " + pageNum + " query: " + query)
-        },
+    searchTodos: function(query, page) {
+        var pageNum = page || 1
+        console.log("Page number: " + pageNum + " of the results for todos containing the word: " + query)
+    },
 
-        downloadDocument: function(id, path) {},
+    downloadDocument: function(id, path) {},
 
-        defaultRoute: function(other) {
-             console.log('Invalid. You attempted to reach:' + other)
-        }
-    })
+    defaultRoute: function(other) {
+         console.log('Invalid. You attempted to reach:' + other)
+    }
+})
 
-    // Nu när vi har en router konfigurerad måste vi instansera det
-    var myTodoRouter = new TodoRouter();
+// Nu när vi har en router konfigurerad måste vi instansera det
+var myTodoRouter = new TodoRouter();
 ```
 
 Backbone erbjuder ett opt-in för HTML5 `pushState` support via `window.history.pushState`. 
@@ -1732,5 +1732,10 @@ var TodoRouter = Backbone.Router.extend({
 var myTodoRouter = new TodoRouter()
 
 Backbone.history.start()
+
+// console:
+// http://localhost/#search/job/p3   logs: Page number: 3 of the results for todos containing the word: job
+// http://localhost/#search/job      logs: Page number: 1 of the results for todos containing the word: job 
+// etc.
 ```
 

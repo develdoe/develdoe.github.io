@@ -1914,5 +1914,83 @@ Backbone.sync = function(method, model) {
 };
 ```
 
+*Observera att vi tilldelar ett unikt ID till alla skapade modeller.*
+
+Backbone.sync-metoden är avsedd att åsidosättas för att stödja andra persistens backends. Den inbyggda metoden är skräddarsydd för en viss ras av RESTful JSON APIs - Backbone extraherades ursprungligen från en Ruby on Rails applikation, som använder HTTP-metoder som PUT på samma sätt.
+
+`sync`metodens tre parametrar:
+
+* method: en av create, update, patch, delete, or read
+* model: Backbone model object
+* options: kan innehålla success och error metoder
+
+Genom att implementera en ny `sync` metod kan du använda följande mönster:
+
+```js
+Backbone.sync = function(method, model, options) {
+
+  function success(result) {
+    // Handle successful results from MyAPI
+    if (options.success) {
+      options.success(result);
+    }
+  }
+
+  function error(result) {
+    // Handle error results from MyAPI
+    if (options.error) {
+      options.error(result);
+    }
+  }
+
+  options || (options = {});
+
+  switch (method) {
+    case 'create':
+      return MyAPI.create(model, success, error);
+
+    case 'update':
+      return MyAPI.update(model, success, error);
+
+    case 'patch':
+      return MyAPI.patch(model, success, error);
+
+    case 'delete':
+      return MyAPI.destroy(model, success, error);
+
+    case 'read':
+      if (model.cid) {
+        return MyAPI.find(model, success, error);
+      } else {
+        return MyAPI.findAll(model, success, error);
+      }
+  }
+};
+```
+
+Det här mönstret delegerar API-samtal till ett nytt objekt (MyAPI), vilket kan vara en klass med Backbone-stil som stöder händelser. Detta kan säkert provas separat, och kan eventuellt användas med andra bibliotek än Backbone.
+
+Det finns en hel del synkroniseringsåtgärder där ute. Följande exempel är alla tillgängliga på GitHub:
+* Backbone localStorage: persists to the browser’s local storage
+* Backbone offline: supports working offline
+* Backbone Redis: uses Redis key-value store
+* backbone-parse: integrates Backbone with Parse.com
+* backbone-websql: stores data to WebSQL
+* Backbone Caching Sync: uses local storage as cache for other sync implementations
+
+## Beroenden
+
+Den officiella Backbone.js [dokumentationen](http://backbonejs.org/) anger:
+
+> Backbone’s only hard dependency is either Underscore.js ( >= 1.4.3) or Lo-Dash. For RESTful persistence, history support via Backbone.Router and DOM manipulation with Backbone.View, include json2.js, and either jQuery ( >= 1.7.0) or Zepto.
+
+Vad det här betyder är att om du behöver arbeta med något annat än modeller, måste du inkludera ett DOM-manipulationsbibliotek som jQuery eller Zepto. Underscore används främst för dess användningsmetoder (vilken Backbone är beroende av kraftigt) och json2.js för äldre webbläsare JSON support om Backbone.sync används.
+
+## Sammanfattning
+
+I den här artikeln har vi presenterat dig för de komponenter du ska använda för att bygga applikationer med Backbone: Modeller, Vyer, Kollektioner och Routrar. Vi har också utforskat händelsemix-in som Backbone använder för att förbättra alla komponenter med publish-subscribe och se hur det kan användas med godtyckliga objekt. Slutligen såg vi hur Backbone utnyttjar APIs Underscore.js och jQuery / Zepto för att lägga till rika manipulations- och persistensfunktioner till Backbone Collections and Models.
+
+Backbone har många operationer och alternativ utöver de som vi har täckt här och utvecklas alltid, så var noga med att besöka den officiella dokumentationen för mer information och de senaste funktionerna. I andra artiklar går igenom implementeringen av olika Backbone-applikationer.
+
 
 

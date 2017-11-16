@@ -171,7 +171,7 @@ För det andra har Todo-modellen en `toggle()` metod genom vilken ett Todo-objek
 
 ## Todo Kollektion
 
-Därefter används en TodoList-kollektion för att gruppera våra modeller. Samlingen använder LocalStorage-adaptern för att åsidosätta Backbones `sync()` operation med en som kommer att lagra våra Todo-poster till HTML5 Local Storage. Genom lokal lagring sparas de mellan sidförfrågningar.
+Därefter används en TodoList-kollektion för att gruppera våra modeller. Kollektionen använder LocalStorage-adaptern för att åsidosätta Backbones `sync()` operation med en som kommer att lagra våra Todo-poster till HTML5 Local Storage. Genom lokal lagring sparas de mellan sidförfrågningar.
 
 ```js
 /**

@@ -94,5 +94,5 @@ button:hover {
 ```
 
 ```html
-<span style="position: fixed;bottom: 10px;right: 10px;font-size: 15px;">made by {yourname}</span>
+<span style="position: fixed;bottom: 10px;right: 10px;font-size: 15px;">in {{ env.mode }}</span>
 ```

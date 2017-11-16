@@ -238,7 +238,51 @@ I vårt fall kommer en AppView att hantera skapandet av nya todos och rendering 
 
 För att hålla sakerna korta och enkla, kommer vi inte att implementera alla programmets funktioner i den här handledningen, vi täcker bara nog för att komma igång. Ändå finns det mycket för oss att täcka i AppView, så vi delar upp vår diskussion i två avsnitt.
 
+```js
+/**
+ * views/App.js
+ */
 
+var app = app || {}
+
+// Vår övergripande ** AppView ** är toppnivån av användargränssnittet.
+app.AppView = Backbone.View.extend({
+
+    // I stället för att skapa ett nytt element, binder vi till den befintligt #app
+    el: '#todo-app',
+
+    // Vår mall för statistiklinjen längst ner i appen.
+    statsTemplate: handlebars.compile($('#stats-template').html()),
+
+    // Vid initialisering binder vi till relevanta händelser på 'Todos'
+    // Kollektioner när objekt läggs till eller ändras.
+    initialize: function() {
+        this.allCheckBox = this.$('#toggle-all')[0]
+        this.$input = this.$('#new-todo')
+        this.$footer = this.$('#footer')
+        this.$main = this.$('#main')
+
+        this.listenTo(app.Todos, 'add', this.addOne)
+        this.listenTo(app.Todos, 'reset', this.addAll)
+    },
+
+    // Lägg till ett enda todo-objekt i listan genom att skapa en vy för det och
+    // lägga till dess element i `<ul>`.
+    addOne: function(todo) {
+        var view = new app.TodoView({ model: todo})
+        $('#todo-list').append(view.render().el)
+    },
+
+    addAll: function() {
+        this.$('#todo-list').html('')
+        app.Todos.each(this.addOne, this)
+    }
+})
+```
+
+Några anmärkningsvärda funktioner finns i vår första version av AppView, inklusive en `statsTemplate`, en initialize metod som implicit åberopas vid instantiering och flera vy specifika metoder.
+
+Ett el (element) attribut lagrar en selektor som riktar in DOM-elementet med ett ID todoapp. När det gäller vår applikation hänvisar el till  elementet <section id="todoapp" /> i index.html.
 
 
 

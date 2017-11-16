@@ -34,6 +34,13 @@ body {
   background-position: left top;
 }
 
+section, div {
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.125);
+  outline: rgba(255, 255, 255, 0.5) solid 1px !important;
+  padding: 20px;
+}
+
 a {
   width: 100%;
   text-align: center;
@@ -45,13 +52,6 @@ a {
 li {
   float: left;
   list-style-type: none;
-}
-
-section, div {
-  color: rgb(255, 255, 255);
-  background-color: rgba(255, 255, 255, 0.125);
-  outline: rgba(255, 255, 255, 0.5) solid 1px !important;
-  padding: 20px;
 }
 
 .group:after {

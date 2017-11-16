@@ -71,7 +71,7 @@ Vi kommer att skapa applikations JavaScript-filer under handledningen. Oroa dig 
 Låt oss nu fylla i index.html. Vi behöver en <input> för att skapa nya todos, en <ul id="todo-list" /> för att lista de faktiska todosna och en sidfot där vi senare kan infoga statistik och länkar för att utföra operationer som att rensa färdiga todos . Vi lägger till följande märkning omedelbart inuti vår body innan skriptelementen:
 
 ```html
-<section id=todoapp>
+<section id=todo-app>
 
     <header id=header>
         <h1>todos</h1>

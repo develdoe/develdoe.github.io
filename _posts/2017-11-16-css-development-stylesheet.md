@@ -96,3 +96,5 @@ button:hover {
 ```html
 <span style="position: fixed;bottom: 10px;right: 10px;font-size: 15px;">in {{ env.mode }}</span>
 ```
+
+*Obs: HTML markup ovan utgår från att du använder ett ramverk som kan modifiera din DOM att visa att du är i utvecklings miljö, men du kan lika gärna hård skriva in "Development"*

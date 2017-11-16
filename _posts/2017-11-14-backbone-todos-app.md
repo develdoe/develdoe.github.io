@@ -166,4 +166,3 @@ app.Todo = Backbone.Model.extend({
     }
 })
 ```
-

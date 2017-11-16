@@ -167,3 +167,4 @@ app.Todo = Backbone.Model.extend({
 })
 ```
 
+För det andra har Todo-modellen en toggle() metod genom vilken ett Todo-objektets slutförandestatus kan ställas in och samtidigt kvarstå.

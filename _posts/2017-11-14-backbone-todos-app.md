@@ -39,6 +39,7 @@ Först lägger vi upp header och de grundläggande applikationsberoende: jQuery,
     <link rel="styelsheet" href="assets/index.css">
 </head>
 <body>
+  	<script id="item-template" type="text/x-handlebars-template></script>
     <script type="text/template" id="item-template"></script>
     <script type="text/template" id="stats-template"></script>
     <script src="lib/jquery.min.js"></script>
@@ -166,4 +167,3 @@ app.Todo = Backbone.Model.extend({
     }
 })
 ```
-

@@ -3,6 +3,9 @@ date: '2017-11-16 20:16 +0100'
 published: true
 title: CSS - Development stylesheet
 ---
+Det här är en stylesheet som jag använder vid utveckling. Det ser ut som en blueprint. 
+
+*Den är fortfarande under utveckling och har tankar kring att lägga upp den för konsumering när jag närmar mig något som är redo för release.*
 
 ```css
 html, body {

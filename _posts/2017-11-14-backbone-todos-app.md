@@ -110,22 +110,16 @@ Vi måste också definiera  #stats-template som vi ska använda för att fylla i
 ```js
 <script type="text/template" id="stats-template">
     <span id="todo-count">
-        <strong>{{remaining}}</strong>
-        {{#if this.remaining === 1}}
-            {{this.item}}
-        {{#else}}
-            {{this.items}}
-        {{/if}} left
+        <strong>{{ remaining }}</strong>
+        {{#if this.remaining === 1}} {{ this.item }} {{#else}} {{ this.items }} {{/if}} left
     </span>
     <ul id="filters">
         <li><a class=selected href=#>All</a>
         <li><a href=#/active>Active</a>
         <li><a href=#/completed>Completed</a>
     </ul>
-    {{#if this.completed}}
-    <button id="clear-completed">Clear Completed {{this.completed}}</button>
-    {{/if}}
-</script>
+    {{#if this.completed}} <button id="clear-completed">Clear Completed {{ this.completed }}</button> {{/if}}
+</script>>
 ```
 
 #stats-template visar antalet återstående ej completed objekt och innehåller en lista med hyperlänkar som kommer att användas för att utföra åtgärder när vi implementerar routern. Den innehåller också en knapp som kan användas för att rensa alla completed objekt.

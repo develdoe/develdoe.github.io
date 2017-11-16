@@ -282,7 +282,4 @@ app.AppView = Backbone.View.extend({
 
 Några anmärkningsvärda funktioner finns i vår första version av AppView, inklusive en `statsTemplate`, en initialize metod som implicit åberopas vid instantiering och flera vy specifika metoder.
 
-Ett el (element) attribut lagrar en selektor som riktar in DOM-elementet med ett ID todoapp. När det gäller vår applikation hänvisar el till  elementet `<section id="todoapp">` i index.html.
-
-
-
+Ett `el` (element) attribut lagrar en selektor som riktar in DOM-elementet med ett ID todoapp. När det gäller vår applikation hänvisar el till  elementet `<section id="todoapp">` i index.html.

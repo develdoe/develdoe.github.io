@@ -262,7 +262,7 @@ app.AppView = Backbone.View.extend({
     el: '#todo-app',
 
     // Vår mall för statistiklinjen längst ner i appen.
-    statsTemplate: handlebars.compile($('#stats-template').html()),
+    statsTemplate: Handlebars.compile($('#stats-template').html()),
 
     // Vid initialisering binder vi till relevanta händelser på 'Todos'
     // Kollektioner när objekt läggs till eller ändras.
@@ -287,7 +287,7 @@ app.AppView = Backbone.View.extend({
         this.$('#todo-list').html('')
         app.Todos.each(this.addOne, this)
     }
-})
+})												
 ```
 
 Några anmärkningsvärda funktioner finns i vår första version av AppView, inklusive en `statsTemplate`, en initialize metod som implicit åberopas vid instantiering och flera vy specifika metoder.

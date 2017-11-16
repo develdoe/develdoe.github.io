@@ -131,12 +131,12 @@ Nu när vi har all HTML som vi behöver, börjar vi implementera vår applikatio
 Todo-modellen är anmärkningsvärt enkel. För det första har en todo två attribut: en titel lagrar en todo-artikelens titel och en slutförd status indikerar om den är klar. Dessa attribut överförs som standard, enligt nedan:
 
 ```js
-var app = app || {}
-
 /**
- * Todo model
- * -----------
+ * models/Todo.js
+ * --------------------
  */
+
+var app = app || {}
 
 app.Todo = Backbone.Model.extend({
 

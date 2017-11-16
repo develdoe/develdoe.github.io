@@ -286,4 +286,4 @@ Ett `el` (element) attribut lagrar en selektor som riktar in DOM-elementet med e
 
 Anropet till  Handlebars.compile använder Handlebars's templering för att konstruera ett `statsTemplate` objekt från vår #stats-template. Vi använder denna mall senare när vi gör vår vy.
 
-Låt oss nu titta på initieringsfunktionen. För det första använder det jQuery för att cache de element som det kommer att använda till lokala egenskaper
+Låt oss nu titta på initieringsfunktionen. För det första använder det jQuery för att cache de element som det kommer att använda till lokala egenskaper `(this.$()` finner element i förhållande till `this.$el`). Sedan binder vi två händelser på Todos kollektion: `add` och `reset`.

@@ -228,4 +228,15 @@ En `nextOrder()` metoden implementerar en sekvensgenerator medan en `comparator(
 
 **Obs: `this.filter`, `this.without` and `this.last` är Underscore metoder som blandas in i Backbone.Collection så att läsaren vet hur man lär sig mer om dem.**
 
+## Applikation Vy
+
+Kärnapplikationslogiken som befinner sig i vyerna. Varje vy stöder funktionalitet som redigering, och innehåller därför en hel del logik.
+
+För att hjälpa till att organisera denna logik använder vi element-kontroller modellen. Element-kontroller modellen består av två visningar: en styr en kollektion av objekt medan den andra hanterar varje enskilt objekt. 
+
+I vårt fall kommer en AppView att hantera skapandet av nya todos och rendering av den ursprungliga todo-listan. Instanser av TodoView kommer att associeras med varje enskild Todo-post. Todo instanser kan hantera redigering, uppdatering och radera deras associerade todo.
+
+
+
+
 

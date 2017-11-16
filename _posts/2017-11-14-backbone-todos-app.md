@@ -201,8 +201,7 @@ var TodoList = Backbone.Collection.extend({
 
     // Filtrera ner listan för att bara lägga till objekt som fortfarande inte är färdiga.
     remaining: function() {
-        var thisTodoList = this
-        return thisTodoList.without.apply(thisTodoList, thisTodoList.completed)
+        return this.without.apply(this, this.completed)
     },
 
     // Vi håller Todos i sekventiell ordning, trots att de sparas av unordered

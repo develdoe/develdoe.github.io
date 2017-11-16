@@ -291,6 +291,7 @@ Låt oss nu titta på initieringsfunktionen. För det första använder det jQue
 *Eftersom vi delegerar hantering av uppdateringar och deligeringar till TodoView-vyn behöver vi inte oroa oss för de här.*
 
 De två delarna av logiken är:
+
 * När en add händelse avfyras kallas metoden `addOne()` och tilldelas den nya modellen. `addOne()` skapar en instans av TodoView vy, renderar den och lägger till det resulterande elementet i vår Todo-lista.
 * När en reset händelse inträffar (dvs uppdaterar vi kollektion i bulk som händer när Todos laddas från Local Storag), `addAll()` kallas, vilket itererar över alla Todos närvarande i vår kollektion och avfyrar `addOne()` för varje objekt.
 

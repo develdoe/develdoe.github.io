@@ -285,3 +285,5 @@ Några anmärkningsvärda funktioner finns i vår första version av AppView, in
 Ett `el` (element) attribut lagrar en selektor som riktar in DOM-elementet med ett ID todoapp. När det gäller vår applikation hänvisar el till  elementet `<section id="todoapp">` i index.html.
 
 Anropet till  Handlebars.compile använder Handlebars's templering för att konstruera ett `statsTemplate` objekt från vår #stats-template. Vi använder denna mall senare när vi gör vår vy.
+
+Låt oss nu titta på initieringsfunktionen. För det första använder det jQuery för att cache de element som det kommer att använda till lokala egenskaper

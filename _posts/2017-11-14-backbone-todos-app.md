@@ -227,3 +227,5 @@ Kollektionens `completed()` och `remaining()` metoder returnerar en rad färdiga
 En `nextOrder()` metoden implementerar en sekvensgenerator medan en `comparator()` sorterar objekt genom sin införingsorder.
 
 **Obs: this.filter, this.without and this.last är Underscore metoder som blandas in i Backbone.Collection så att läsaren vet hur man lär sig mer om dem.**
+
+

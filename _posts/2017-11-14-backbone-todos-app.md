@@ -33,23 +33,23 @@ Först lägger vi upp header och de grundläggande applikationsberoende: jQuery,
 <!DOCTYPE html>
 <html lang=en>
 <head>
+    <title>Backbone | todo</title>
     <meta charset=utf-8>
     <meta http-equiv="X-UA-Compatable" content="IE=edge,chrome=1">
-    <title>Backbone | todoMVC</title>
-    <link rel="styelsheet" href="assets/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"/>
+    <link rel="stylesheet" href="assets/index.css">
 </head>
 <body>
-    <script type="text/template" id="item-template"></script>
-    <script type="text/template" id="stats-template"></script>
     <script src="lib/jquery.min.js"></script>
+    <script src="lib/handlebars.min.js"></script>
     <script src="lib/underscore-min.js"></script>
     <script src="lib/backbone-min.js"></script>
     <script src="lib/backbone.localStorage.js"></script>
-    <script src="lib/handlebars.min.js"></script>
-    <script src="models/todo.js"></script>
-    <script src="collections/todos.js"></script>
-    <script src="views/todos.js"></script>
-    <script src="views/app.ks"></script>
+    <script src="models/Todo.js"></script>
+    <script src="collections/Todos.js"></script>
+    <script src="views/Todos.js"></script>
+    <script src="views/AppView.js"></script>
     <script src="routers/router.js"></script>
     <script src="app.js"></script>
 ```
@@ -296,4 +296,9 @@ De två delarna av logiken är:
 * När en reset händelse inträffar (dvs uppdaterar vi kollektion i bulk som händer när Todos laddas från Local Storag), `addAll()` kallas, vilket itererar över alla Todos närvarande i vår kollektion och avfyrar `addOne()` för varje objekt.
 
 **Observera att vi kunde använda this inom addAll() för att hänvisa till vyn eftersom listenTo() implicit ställer återropets sammanhang till vyn när den skapade bindningen.**
+
+Nu, låt oss lägga till lite mer logik för att slutföra vår AppView:
+
+```js
+
 

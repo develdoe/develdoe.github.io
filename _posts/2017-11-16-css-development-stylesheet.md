@@ -8,10 +8,7 @@ Det här är en stylesheet som jag använder vid utveckling. Det ser ut som en b
 *Den är fortfarande under utveckling och har tankar kring att lägga upp den för konsumering när jag närmar mig något som är redo för release.*
 
 ```css
-html, body {
-  margin: 0;
-  padding: 0;
-}
+html, body { margin: 0; padding: 0; }
 
 body {
   margin: 0 auto;

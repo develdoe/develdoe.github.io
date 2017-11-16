@@ -287,3 +287,14 @@ Ett `el` (element) attribut lagrar en selektor som riktar in DOM-elementet med e
 Anropet till  Handlebars.compile använder Handlebars's templering för att konstruera ett `statsTemplate` objekt från vår #stats-template. Vi använder denna mall senare när vi gör vår vy.
 
 Låt oss nu titta på initieringsfunktionen. För det första använder det jQuery för att cache de element som det kommer att använda till lokala egenskaper `(this.$()` finner element i förhållande till `this.$el`). Sedan binder vi två händelser på Todos kollektion: `add` och `reset`.
+
+*Eftersom vi delegerar hantering av uppdateringar och deligeringar till TodoView-vyn behöver vi inte oroa oss för de här.*
+
+De två delarna av logiken är:
+* När en add händelse avfyras kallas metoden `addOne()` och tilldelas den nya modellen. `addOne()` skapar en instans av TodoView vy, renderar den och lägger till det resulterande elementet i vår Todo-lista.
+* När en reset händelse inträffar (dvs uppdaterar vi kollektion i bulk som händer när Todos laddas från Local Storag), addAll() kallas, vilket itererar över alla Todos närvarande i vår kollektion och avfyrar addOne() för varje objekt.
+
+
+
+```js
+

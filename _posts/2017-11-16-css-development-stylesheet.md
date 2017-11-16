@@ -68,7 +68,7 @@ label {
 }
 
 input {
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.5);
   background-color: rgba(255, 255, 255, 0.125);
   outline: none;
   color: white;

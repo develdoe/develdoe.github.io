@@ -222,5 +222,6 @@ var TodoList = Backbone.Collection.extend({
 var todos = new TodoList()
 ```
 
-Kollektionens completed() och remaining() metoder returnerar en rad färdiga respektive oavslutade todos.
+Kollektionens `completed()` och `remaining()` metoder returnerar en rad färdiga respektive oavslutade todos.
 
+En `nextOrder()` metoden implementerar en sekvensgenerator medan en `comparator()` sorterar objekt genom sin införingsorder.

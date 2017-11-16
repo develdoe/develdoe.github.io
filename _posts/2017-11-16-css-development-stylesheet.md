@@ -8,39 +8,44 @@ Det här är en stylesheet som jag använder vid utveckling. Det ser ut som en b
 *Den är fortfarande under utveckling och har tankar kring att lägga upp den för konsumering när jag närmar mig något som är redo för release.*
 
 ```css
-html, body { margin: 0; padding: 0; }
-
+/* clearfix */
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
 body {
   margin: 0 auto;
   padding: 0px;
   min-width: 230px;
   max-width: 550px;
-
   font: 10px 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: white;
   line-height: 1.4em;
-
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: antialiased;
   font-smoothing: antialiased;
   font-weight: 300;
 }
-
 .background {
   /* Background */
-	background-color: rgb(0, 119, 204);
+  background-color: rgb(0, 119, 204);
   background-image: linear-gradient(0deg, transparent, transparent 7px, rgba(255, 255, 255, 0.25) 7px), linear-gradient(90deg, transparent, transparent 7px, rgba(255, 255, 255, 0.25) 7px);
   background-size: 8px 8px;
   background-position: left top;
 }
 
+/* elements */
 section, div {
   color: rgb(255, 255, 255);
   background-color: rgba(255, 255, 255, 0.125);
   outline: rgba(255, 255, 255, 0.5) solid 1px !important;
   padding: 20px;
 }
-
 a {
   width: 100%;
   text-align: center;
@@ -48,25 +53,19 @@ a {
   text-decoration: none;
   margin-right: 5px;
 }
-
 li {
   float: left;
   list-style-type: none;
 }
 
-.group:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
+/* Forms */
 label {
+  border: 1px solid rgba(255, 255, 255, 0.5);
   float: left;
   text-align: left;
   margin-right: 10px;
   width: 60px;
 }
-
 input {
   border: 1px solid rgba(255, 255, 255, 0.5);
   background-color: rgba(255, 255, 255, 0.125);
@@ -74,12 +73,10 @@ input {
   color: white;
   font-size: 16px;
 }
-
 input::placeholder {
   font-size: 16px;
   color: rgba(255, 255, 255, 0.5);
 }
-
 button {
   color: #ffffff;
   font-size: 16px;
@@ -89,7 +86,6 @@ button {
   border: none;
   width: 100%;
 }
-
 button:hover {
   background: rgba(255, 255, 255, 0.5);
   text-decoration: none;

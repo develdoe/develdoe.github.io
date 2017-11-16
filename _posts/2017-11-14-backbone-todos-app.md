@@ -160,7 +160,8 @@ Därefter används en TodoList-kollektion för att gruppera våra modeller. Koll
 
 ```js
 /**
- * Todos.js
+ * collections/Todos.js
+ * --------------------
  */
 
 var app = app || {}
@@ -175,7 +176,7 @@ var TodoList = Backbone.Collection.extend({
     model: app.Todo,
 
     // Spara alla todo-objekten under `'todos-backbone`` namespace.
-    localStorage: new Backbone.localStorage('todos-backbone'),
+    localStorage: new Backbone.LocalStorage('todos-backbone'),
 
     //Filtrera listan över alla todo-objekt som är färdiga.
     completed: function() {
@@ -205,6 +206,30 @@ var TodoList = Backbone.Collection.extend({
 
 // Skapa vår globala kollektion av ** Todos **.
 var todos = new TodoList()
+
+
+var obj = {
+    num: 2,
+    add: function() {
+        this.add.call(this, this.num)
+    }
+}
+
+function add (a) {
+    return this.num + a
+}
+
+// ------------------
+
+var obj = {
+    num: 2
+}
+
+var add = function(a) {
+    return this.num + a
+}
+
+add.call(obj, 3)
 ```
 
 Kollektionens `completed()` och `remaining()` metoder returnerar en rad färdiga respektive oavslutade todos.

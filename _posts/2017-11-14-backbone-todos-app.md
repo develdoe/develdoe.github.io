@@ -297,7 +297,3 @@ De två delarna av logiken är:
 
 **Observera att vi kunde använda this inom addAll() för att hänvisa till vyn eftersom listenTo() implicit ställer återropets sammanhang till vyn när den skapade bindningen.**
 
-
-
-```js
-

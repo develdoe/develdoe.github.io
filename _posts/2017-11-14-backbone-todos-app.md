@@ -103,7 +103,7 @@ Vi börjar genom att fylla i  #item-template som används för att visa enskilda
 
 Malltaggen i ovanstående markering, till exempel {{#if}}  och {{, är specifika för Handlebars.js och dokumenteras på handlebars-webbplatsen. I dina egna applikationer har du ett urval av mallbibliotek, t.ex. Mustache eller Underscore.
 
-Vi måste också definiera  #stats-template som vi ska använda för att fylla i sidfoten.
+Vi måste också definiera  #stats-template som vi ska använda för att fylla i sidfoten lägg denna under den föregående.
 
 ```js
 <script type="text/template" id="stats-template">

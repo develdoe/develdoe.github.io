@@ -23,7 +23,222 @@ I huvudsak är dessa funktioner klassiska CRUD-metoder.
 
 ## Statisk HTML
 
-Vi lägger hela vår HTML i en enda fil med namnet index.html.
+Börja med att clona mitt repo [DevelDevelStrap](https://github.com/DevelDoe/DevelDevelStap). Repot innehåller ett grundläggande html fil och tillhörande css filer. 
+
+*inded.html*
+```html
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset=utf-8>
+
+    <title>DevelDevelStrap</title>
+    <meta name=description content="Used for quickly strap up development projects.">
+    <meta name=author content="DevelDoe">
+
+    <meta http-equiv=X-UA-Compatable content="IE=edge,chrome=1">
+    <meta name=viewport content="width=device-width, initial-scale=1.0">
+    <link rel=stylesheet href="assets/reset.css"/>
+    <link rel=stylesheet href="assets/default.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body id=background style="position:relative;">
+    <header id=header>
+        <h2>Header</h2>
+    </header>
+    <section id=content>
+        <h3>Content</h3>
+    </section>
+    <footer id=footer>
+        <span >DevelDevelStrap</span>
+</footer>
+```
+
+*assets/reset.css*
+```css
+
+Skip to content
+This repository
+
+    Pull requests
+    Issues
+    Marketplace
+    Explore
+
+    @DevelDoe
+
+1
+0
+
+    0
+
+DevelDoe/DevelDevelStap
+Code
+Issues 0
+Pull requests 0
+Projects 0
+Wiki
+Insights
+Settings
+DevelDevelStap/assets/reset.css
+f8788e9 5 minutes ago
+@DevelDoe DevelDoe rearaged structure, to advanced for the purpose of this branch
+49 lines (47 sloc) 1.06 KB
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+```
+
+*assets/default.css*
+```css
+/* clearfix */
+.group:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* html & body */
+html,body {height: 100%;}
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body {
+    margin: 0 auto;
+    padding: 0px;
+    max-width: 960px;
+
+    font: 10px 'Helvetica Neue', Helvetica, Arial, sans-serif;  /* font-size base 10 */
+    color: white;
+    line-height: 1.4em;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    font-weight: 300;
+}
+
+/* Classes */
+#background {
+    font-size: 1.6rem;
+
+    background-color: rgb(0, 119, 204);
+    background-image: linear-gradient(0deg, transparent, transparent 7px, rgba(255, 255, 255, 0.25) 7px), linear-gradient(90deg, transparent, transparent 7px, rgba(255, 255, 255, 0.25) 7px);
+    background-size: 8px 8px;
+    background-position: left top;
+}
+#header {
+    height: 10%;
+}
+#content {
+    height: 80%;
+}
+#footer {
+    height: 10%;
+}
+
+/* elements */
+section, div, header, footer{
+    color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.125);
+    outline: rgba(255, 255, 255, 0.5) solid 1px !important;
+    padding: 20px;
+}
+a {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    margin-right: 5px;
+}
+li {
+    float: left;
+    list-style-type: none;
+}
+
+/* Forms */
+label {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    float: left;
+    text-align: left;
+    margin-right: 10px;
+    width: 60px;
+}
+input {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.125);
+    outline: none;
+    color: white;
+    font-size: 16px;
+}
+input::placeholder {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.5);
+}
+button {
+    color: #ffffff;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.125);
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    border: none;
+    width: 100%;
+}
+button:hover {
+    background: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+}
+```
 
 ## Header och Scripts
 
@@ -62,7 +277,7 @@ Obs! Om du vill följa med, skapa en katalogstruktur enligt vad som visas i inde
 * Hämta jQuery, Underscore, Backbone, Handlebars och Backbone LocalStorage från sina respektive webbplatser och placera dem under lib/
 * Skapa katalogerna models, collections, views, and routers
 
-Du behöver också [index.css](https://raw.githubusercontent.com/tastejs/todomvc/gh-pages/examples/backbone/node_modules/todomvc-app-css/index.css), som borde ligga i en assets katalog.
+Du behöver också [index.css](https://github.com/log-andreeray/log-andreeray.github.io/blob/master/_posts/2017-11-16-css-development-stylesheet.md), som borde ligga i en assets katalog.
 
 Vi kommer att skapa applikations JavaScript-filer under handledningen. Oroa dig inte för de två skriptelementen ‘text/template’ - vi kommer att ersätta dem snart!
 
@@ -310,5 +525,3 @@ De två delarna av logiken är:
 Nu, låt oss lägga till lite mer logik för att slutföra vår AppView:
 
 ```js
-
-

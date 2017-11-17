@@ -39,40 +39,42 @@ Modifiera sedan vår `html.index` efter de behov som vi har för vår applikatio
 
     <meta http-equiv=X-UA-Compatable content="IE=edge,chrome=1">
     <meta name=viewport content="width=device-width, initial-scale=1.0">
-    <link rel=stylesheet href="assets/reset.css"/>
-    <link rel=stylesheet href="assets/default.css">
+    <link rel=stylesheet href="assets/css/reset.css"/>
+    <link rel=stylesheet href="assets/css/fonts.css"/>
+    <link rel=stylesheet href="assets/css/default.css">
 
     <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
     <![endif]-->
 </head>
-<body id="background todo-app" style="position:relative;">
-    <h1 hidden>Backbone todo app</h1>
-    <header id=header>
-        <h2>Todos app</h2>
-        <input id="new-todo" placeholder="What needs to be done?" autofocus>
-    </header>
-    <section id=content>
-        <input id="toggle-all" type="checkbox">
-        <label for="toggle-all">Mark all as completed</label>
-        <ul id="todo-list"></ul>
-    </section>
-    <footer id=footer>
-        <span >Backbone research by DevelDoe</span>
-    </footer>
-  
+<body id=background>
+    <span id="todo-app">
+        <header id=header>
+            <h2>todos</h2>
+        </header>
+        <section id="content">
+                <input id="new-todo" placeholder="What needs to be done?" autofocus>
+                <label for="toggle-all">Mark all as completed</label>
+                <input id="toggle-all" type="checkbox">
+                <ul id="todo-list"></ul>
+        </section>
+        <footer id=footer>
+            <h4>made by Develdoe</h4>
+        </footer>               
+    </span>
+
     <script src="lib/jquery.min.js"></script>
     <script src="lib/handlebars.min.js"></script>
     <script src="lib/underscore-min.js"></script>
     <script src="lib/backbone-min.js"></script>
     <script src="lib/backbone.localStorage.js"></script>
+
     <script src="models/Todo.js"></script>
     <script src="collections/Todos.js"></script>
     <script src="views/Todos.js"></script>
     <script src="views/AppView.js"></script>
     <script src="routers/router.js"></script>
     <script src="app.js"></script>
-
 ```
 
 Förutom de ovan nämnda beroenden, notera att några andra applikationsspecifika filer också laddas. Dessa är organiserade i mappar som representerar deras ansvarsansvar: modeller, vyer, kollektioner och routrar. En app.js-fil är närvarande för att hämta centralinitieringskoden.

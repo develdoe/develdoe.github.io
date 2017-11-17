@@ -21,26 +21,46 @@ låt oss överväga applikationens arkitektur på en hög nivå. Vi behöver:
 
 I huvudsak är dessa funktioner klassiska CRUD-metoder. 
 
-## Statisk HTML
+## Statisk HTML & CSS
 
 Börja med att clona mitt repo [DevelDevelStrap](https://github.com/DevelDoe/DevelDevelStap). Repot innehåller ett grundläggande html fil och tillhörande css filer. 
 
-## Header och Scripts
-
-Först lägger vi upp header och de grundläggande applikationsberoende: jQuery, Underscore, Backbone.js, handlebars och Backbone LocalStorage-adaptern.
+Modifiera sedan vår `html.index` efter de behov som vi har för vår applikation samt scripter för  de grundläggande applikationsberoende: jQuery, Underscore, Backbone.js, Handlebars och Backbone LocalStorage-adaptern.
 
 ```html
 <!DOCTYPE html>
 <html lang=en>
 <head>
-    <title>Backbone | todo</title>
     <meta charset=utf-8>
-    <meta http-equiv="X-UA-Compatable" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css"/>
-    <link rel="stylesheet" href="assets/index.css">
+
+    <title>DevelDevelStrap</title>
+    <meta name=description content="Used for quickly strap up development projects.">
+    <meta name=author content="DevelDoe">
+
+    <meta http-equiv=X-UA-Compatable content="IE=edge,chrome=1">
+    <meta name=viewport content="width=device-width, initial-scale=1.0">
+    <link rel=stylesheet href="assets/reset.css"/>
+    <link rel=stylesheet href="assets/default.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
 </head>
-<body>
+<body id="background todo-app" style="position:relative;">
+    <h1 hidden>Backbone todo app</h1>
+    <header id=header>
+        <h2>Todos app</h2>
+        <input id="new-todo" placeholder="What needs to be done?" autofocus>
+    </header>
+    <section id=content>
+        <input id="toggle-all" type="checkbox">
+        <label for="toggle-all">Mark all as completed</label>
+        <ul id="todo-list"></ul>
+    </section>
+    <footer id=footer>
+        <span >Backbone research by DevelDoe</span>
+    </footer>
+  
     <script src="lib/jquery.min.js"></script>
     <script src="lib/handlebars.min.js"></script>
     <script src="lib/underscore-min.js"></script>
@@ -52,6 +72,7 @@ Först lägger vi upp header och de grundläggande applikationsberoende: jQuery,
     <script src="views/AppView.js"></script>
     <script src="routers/router.js"></script>
     <script src="app.js"></script>
+
 ```
 
 Förutom de ovan nämnda beroenden, notera att några andra applikationsspecifika filer också laddas. Dessa är organiserade i mappar som representerar deras ansvarsansvar: modeller, vyer, kollektioner och routrar. En app.js-fil är närvarande för att hämta centralinitieringskoden.

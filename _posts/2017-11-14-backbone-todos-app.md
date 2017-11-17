@@ -59,34 +59,6 @@ Börja med att clona mitt repo [DevelDevelStrap](https://github.com/DevelDoe/Dev
 
 *assets/reset.css*
 ```css
-
-Skip to content
-This repository
-
-    Pull requests
-    Issues
-    Marketplace
-    Explore
-
-    @DevelDoe
-
-1
-0
-
-    0
-
-DevelDoe/DevelDevelStap
-Code
-Issues 0
-Pull requests 0
-Projects 0
-Wiki
-Insights
-Settings
-DevelDevelStap/assets/reset.css
-f8788e9 5 minutes ago
-@DevelDoe DevelDoe rearaged structure, to advanced for the purpose of this branch
-49 lines (47 sloc) 1.06 KB
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)

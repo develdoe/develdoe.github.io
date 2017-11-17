@@ -83,26 +83,6 @@ Obs! Om du vill följa med, skapa en katalogstruktur enligt vad som visas i inde
 * Hämta jQuery, Underscore, Backbone, Handlebars och Backbone LocalStorage från sina respektive webbplatser och placera dem under lib/
 * Skapa katalogerna models, collections, views, and routers
 
-### Application HTML
-
-Låt oss nu fylla i index.html. Vi behöver en <input> för att skapa nya todos, en <ul id="todo-list" /> för att lista de faktiska todosna och en sidfot där vi senare kan infoga statistik och länkar för att utföra operationer som att rensa färdiga todos . Vi lägger till följande märkning omedelbart inuti vår body innan skriptelementen:
-
-```html
-<section id=todo-app>
-    <header id=header>
-        <h1>todos</h1>
-        <input id="new-todo" placeholder="What needs to be done?" autofocus>
-    </header>
-    <section id="main">
-        <input id="toggle-all" type="checkbox">
-        <label for="toggle-all">Mark all as completed</label>
-        <ul id="todo-list"></ul>
-    </section>
-    <footer id=footer>
-    </footer>
-</section>
-```
-
 ### Templates
 
 För att slutföra index.html måste vi lägga till mallarna som vi ska använda för att dynamiskt skapa HTML genom att injicera modelldata i deras platshållare. Ett sätt att inkludera mallar på sidan är att använda egna skript taggar. Dessa utvärderas inte av webbläsaren, som bara tolkar dem som vanlig text. Handlebars templering kan sedan komma åt mallarna, vilket renderar fragment av HTML.

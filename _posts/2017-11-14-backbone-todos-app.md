@@ -303,7 +303,7 @@ De två delarna av logiken är:
 * När en add händelse avfyras kallas metoden `addOne()` och tilldelas den nya modellen. `addOne()` skapar en instans av TodoView vy, renderar den och lägger till det resulterande elementet i vår Todo-lista.
 * När en reset händelse inträffar (dvs uppdaterar vi kollektion i bulk som händer när Todos laddas från Local Storag), `addAll()` kallas, vilket itererar över alla Todos närvarande i vår kollektion och avfyrar `addOne()` för varje objekt.
 
-**Observera att vi kunde använda this inom addAll() för att hänvisa till vyn eftersom listenTo() implicit ställer återropets sammanhang till vyn när den skapade bindningen.**
+**Observera att vi kunde använda this inom `addAll()` för att hänvisa till vyn eftersom `listenTo()` implicit ställer återropets sammanhang till vyn när den skapade bindningen.**
 
 Nu, låt oss lägga till lite mer logik för att slutföra vår AppView:
 

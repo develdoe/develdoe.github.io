@@ -32,7 +32,6 @@ body {
   font-weight: 300;
 }
 .background {
-  /* Background */
   background-color: rgb(0, 119, 204);
   background-image: linear-gradient(0deg, transparent, transparent 7px, rgba(255, 255, 255, 0.25) 7px), linear-gradient(90deg, transparent, transparent 7px, rgba(255, 255, 255, 0.25) 7px);
   background-size: 8px 8px;

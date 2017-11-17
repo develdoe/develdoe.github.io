@@ -80,8 +80,6 @@ Modifiera sedan vår `html.index` efter de behov som vi har för vår applikatio
 Förutom de ovan nämnda beroenden, notera att några andra applikationsspecifika filer också laddas. Dessa är organiserade i mappar som representerar deras ansvarsansvar: modeller, vyer, kollektioner och routrar. En app.js-fil är närvarande för att hämta centralinitieringskoden.
 
 Obs! Om du vill följa med, skapa en katalogstruktur enligt vad som visas i index.html:
-
-* Placera index.html i en överordnad katalog.
 * Hämta jQuery, Underscore, Backbone, Handlebars och Backbone LocalStorage från sina respektive webbplatser och placera dem under lib/
 * Skapa katalogerna models, collections, views, and routers
 

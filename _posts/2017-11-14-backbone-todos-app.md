@@ -83,8 +83,6 @@ Obs! Om du vill följa med, skapa en katalogstruktur enligt vad som visas i inde
 * Hämta jQuery, Underscore, Backbone, Handlebars och Backbone LocalStorage från sina respektive webbplatser och placera dem under lib/
 * Skapa katalogerna models, collections, views, and routers
 
-Du behöver också [index.css](https://github.com/log-andreeray/log-andreeray.github.io/blob/master/_posts/2017-11-16-css-development-stylesheet.md), som borde ligga i en assets katalog.
-
 Vi kommer att skapa applikations JavaScript-filer under handledningen. Oroa dig inte för de två skriptelementen ‘text/template’ - vi kommer att ersätta dem snart!
 
 ### Application HTML

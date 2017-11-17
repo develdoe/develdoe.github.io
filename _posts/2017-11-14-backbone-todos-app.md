@@ -80,6 +80,7 @@ Modifiera sedan vår `html.index` efter de behov som vi har för vår applikatio
 Förutom de ovan nämnda beroenden, notera att några andra applikationsspecifika filer också laddas. Dessa är organiserade i mappar som representerar deras ansvarsansvar: modeller, vyer, kollektioner och routrar. En app.js-fil är närvarande för att hämta centralinitieringskoden.
 
 Obs! Om du vill följa med, skapa en katalogstruktur enligt vad som visas i index.html:
+
 * Hämta jQuery, Underscore, Backbone, Handlebars och Backbone LocalStorage från sina respektive webbplatser och placera dem under lib/
 * Skapa katalogerna models, collections, views, and routers
 
@@ -87,7 +88,7 @@ Obs! Om du vill följa med, skapa en katalogstruktur enligt vad som visas i inde
 
 För att slutföra index.html måste vi lägga till mallarna som vi ska använda för att dynamiskt skapa HTML genom att injicera modelldata i deras platshållare. Ett sätt att inkludera mallar på sidan är att använda egna skript taggar. Dessa utvärderas inte av webbläsaren, som bara tolkar dem som vanlig text. Handlebars templering kan sedan komma åt mallarna, vilket renderar fragment av HTML.
 
-Vi börjar genom att fylla i  #item-template som används för att visa enskilda todo-objekt. 
+Vi börjar genom att fylla i  #item-template som används för att visa enskilda todo-objekt längst ned ovan för #todo-app avslutande `</span>` node. 
 
 ```html
 <script type="text/template" id="item-template">

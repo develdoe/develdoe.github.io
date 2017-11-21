@@ -417,7 +417,20 @@ Vi har lagt till logiken för att skapa nya todos, redigera dem och filtrera dem
 * `toggleAllComplete()`: Tillåter att en användare markerar alla objekt i todo-listan som färdigställd genom att klicka på kryssrutan toggle-all.
 * `initialize()`: Vi har bundit callbacks till flera ytterligare händelser:
 * Vi har bundit ett `filterOne()` callback på Todos kollektion för en `change:completed` händelse. Detta lyssnar på ändringar i den completed flaggan för alla modell i samlingen. Den drabbade todo skickas till callbacken som utlöser en anpassad synlig händelse på modellen.
+* Vi har bundit ett `filterAll()` callback för en filter-händelse, som fungerar lite som `addOne()` och `addAll()`. Dess ansvar är att växla vilka todo-objekt som är synliga utifrån det filter som för närvarande är valt i användargränssnittet (all, completed eller remaining) via anrop till `filterOne()`.
+* Vi har använt det speciella all event för att binda alla händelser som utlöses på Todos-samlingen till renderingsmetod(diskuteras nedan).
 
+Metoden `initialize()` färdigställs genom att hämta de tidigare sparade todos från localStorage.
+
+`render()`: Flera saker händer i vår `render()` metod:
+* `#main` och `#footer` sektionerna visas eller döljs beroende på om det finns några todos i samlingen.
+* Footer är populerad med HTML som produceras genom att instansera statsTemplate med antalet färdiga och återstående todo-poster.
+* HTML som produceras av föregående steg innehåller en lista över filterlänkar. Värdet av `app.TodoFilter`, som kommer att ställas in av vår router, används för att tillämpa klassen `"selected"` till länken som motsvarar det aktuella valda filteret. Detta leder till att villkorlig CSS-styling appliceras på det filtret.
+* `allCheckbox` uppdateras baserat på om det finns resterande todos.
+
+## Individuell Todo Vy
+
+Låt oss nu titta på `TodoView` vyn. Denna kommer att ansvara för enskilda Todo poster, se till att vyn uppdateras när en todo gör det.
 
 
 

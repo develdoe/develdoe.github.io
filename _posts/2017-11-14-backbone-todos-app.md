@@ -412,5 +412,8 @@ app.AppView = Backbone.View.extend({
 Vi har lagt till logiken för att skapa nya todos, redigera dem och filtrera dem baserat på deras slutförda status.
 
 * händelser: Vi har definierat en händelsehash som innehåller deklarativa callbacks för våra DOM-händelser. Det binder dessa händelser till följande metoder:
-* createOnEnter(): Skapar en ny Todo-modell och behåller den i localStorage när en användare tycker på enter in i fältet <input />. Återställer också det huvudsakliga <input /> -fältet för att förbereda det för nästa post. Modellen är populerad av newAttributes(), som returnerar ett objekt bokstavligt sammansatt av title, order och completed tillstånd för det nya objektet. Observera att det här hänvisar till vyn och inte DOM-elementet eftersom callback var bunden med händelseshashen.
-* 
+* `createOnEnter()`: Skapar en ny Todo-modell och behåller den i localStorage när en användare tycker på enter in i fältet `<input />`. Återställer också det huvudsakliga `<input />` -fältet för att förbereda det för nästa post. Modellen är populerad av `newAttributes()`, som returnerar ett objekt bokstavligt sammansatt av title, order och completed tillstånd för det nya objektet. Observera att det här hänvisar till vyn och inte DOM-elementet eftersom callback var bunden med händelseshashen.
+* `clearCompleted()`: Tar bort objekten i todo-listan som har markerats som slutförda när användaren klickar på kryssrutan clear-completed (den här kryssrutan kommer att finnas i sidfoten som fylls i av #stats-template).
+* `toggleAllComplete()`: Tillåter att en användare markerar alla objekt i todo-listan som färdigställd genom att klicka på kryssrutan toggle-all.
+* `initialize()`: Vi har bundit callbacks till flera ytterligare händelser:
+

@@ -283,3 +283,128 @@ De två delarna av logiken är:
 Nu, låt oss lägga till lite mer logik för att slutföra vår AppView:
 
 ```js
+/**
+ * views/App.js
+ */
+
+var app = app || {}
+
+// Vår övergripande ** AppView ** är toppnivån av användargränssnittet.
+app.AppView = Backbone.View.extend({
+
+    // I stället för att skapa ett nytt element, binder vi till den befintligt #app
+    el: '#todo-app',
+
+    // Vår mall för statistiklinjen längst ner i appen.
+    statsTemplate: Handlebars.compile($('#stats-template').html()),
+
+    // Delegerade händelser för att skapa nya objekt och rensa färdiga.
+    events: {
+        'keypress #new-todo' : 'createOnEnter',
+        'click #clear-completed' : 'clearCompleted',
+        'click #toggle-all' : 'toggleAllCompleted'
+    },
+
+    // Vid initialisering binder vi till relevanta händelser på 'Todos'
+    // Kollektioner när objekt läggs till eller ändras. Starta saker genom att
+    // ladda några redan existerande todos som kan finnas sparas i localStorage.
+    initialize: function() {
+        this.$main = this.$('#main')
+        this.$input = this.$('#new-todo')
+        this.$footer = this.$('#footer')
+        this.allCheckbox = this.$('#toggle-all')[0]
+
+        this.listenTo(app.Todos, 'add', this.addOne)
+        this.listenTo(app.Todos, 'reset', this.addAll)
+
+        this.listenTo(app.Todos, 'change:completed', this.filterOne)
+        this.listenTo(app.Todos, 'filter', this.filterAll)
+        this.listenTo(app.Todos, 'all', this.render)
+
+        app.Todos.fetch()
+    },
+
+    // rendering gör så man bara uppdaterar statistiken - resten
+    // av appen ändras inte.
+    render: function() {
+        var completed = app.Todos.completed().length
+        var remaining = app.Todos.remaining().length
+
+        if(app.Todos.length) {
+            this.$main.show()
+            this.$footer.show()
+
+            this.$footer.html(this.statsTemplate({
+                completed: completed,
+                remaining: remaining
+            }))
+
+            this.$('#filters li a')
+                .removeClass('selected')
+                .filter('[href=#/]' + (app.TodoFiler ||  '' ) + '"]"')
+                .addClass('selected')
+        } else {
+            this.$main.hide()
+            this.$footer.hide()
+        }
+
+        this.allCheckbox.checked = !remaining
+    },
+
+    // Lägg till ett enda todo-objekt i listan genom att skapa en vy för det och
+    // lägga till dess element i `<ul>`.
+    addOne: function(todo) {
+        var view = new app.TodoView({ model: todo})
+        $('#todo-list').append(view.render().el)
+    },
+
+    addAll: function() {
+        this.$('#todo-list').html('')
+        app.Todos.each(this.addOne, this)
+    },
+
+    filterOne: function() {
+        todo.trigger('visible')
+    },
+
+    filterAll: function() {
+        app.Todos.each(this.filterOne, this)
+    }
+
+    // Generera attributen för ett nytt Todo-objekt.
+    newAttribute: function() {
+        return {
+            title: this.input.val().trim(),
+            order: app.Todos.nextOrder(),
+            completed: false
+        }
+    }
+
+    // Om du tryckjer på enter i huvudinmatningsfältet, skapa en ny Todo-modell,
+    // för att behålla den till localStorage.
+    createOnEnter: function(evet) {
+        if (event.which !== ENTER_KEY || !this.$input.val().trim()) {
+            return;
+        }
+        app.Todos.create(this.newAttribute())
+        this.$input.val('')
+    },
+
+    // Rensa alla färdiga todo-objekt, förstöra deras modeller.
+    clearCompleted: function() {
+        _.invoke(app.Todos.completed(), 'destroy')
+        return false
+    },
+
+    toggleAllCompleted: function() {
+        var completed = this.allCheckbox.checked
+
+        app.Todos.each(function(todo) {
+            todo.save({
+                'completed':completed
+            })
+        })
+    }
+
+})
+```

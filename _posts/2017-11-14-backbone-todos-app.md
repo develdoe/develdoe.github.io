@@ -380,10 +380,10 @@ app.AppView = Backbone.View.extend({
         }
     }
 
-    // Om du tryckjer på enter i huvudinmatningsfältet, skapa en ny Todo-modell,
+    // Om du trycker på enter i huvudinmatningsfältet, skapa en ny Todo-modell,
     // för att behålla den till localStorage.
-    createOnEnter: function(evet) {
-        if (event.which !== ENTER_KEY || !this.$input.val().trim()) {
+    createOnEnter: function(e) {
+        if (e.which !== ENTER_KEY || !this.$input.val().trim()) {
             return;
         }
         app.Todos.create(this.newAttribute())
@@ -408,3 +408,9 @@ app.AppView = Backbone.View.extend({
 
 })
 ```
+
+Vi har lagt till logiken för att skapa nya todos, redigera dem och filtrera dem baserat på deras slutförda status.
+
+* händelser: Vi har definierat en händelsehash som innehåller deklarativa callbacks för våra DOM-händelser. Det binder dessa händelser till följande metoder:
+* createOnEnter(): Skapar en ny Todo-modell och behåller den i localStorage när en användare tycker på enter in i fältet <input />. Återställer också det huvudsakliga <input /> -fältet för att förbereda det för nästa post. Modellen är populerad av newAttributes(), som returnerar ett objekt bokstavligt sammansatt av title, order och completed tillstånd för det nya objektet. Observera att det här hänvisar till vyn och inte DOM-elementet eftersom callback var bunden med händelseshashen.
+* 

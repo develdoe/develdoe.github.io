@@ -416,4 +416,6 @@ Vi har lagt till logiken för att skapa nya todos, redigera dem och filtrera dem
 * `clearCompleted()`: Tar bort objekten i todo-listan som har markerats som slutförda när användaren klickar på kryssrutan clear-completed (den här kryssrutan kommer att finnas i sidfoten som fylls i av #stats-template).
 * `toggleAllComplete()`: Tillåter att en användare markerar alla objekt i todo-listan som färdigställd genom att klicka på kryssrutan toggle-all.
 * `initialize()`: Vi har bundit callbacks till flera ytterligare händelser:
+* Vi har bundit ett `filterOne()` callback på Todos kollektion för en `change:completed` händelse.
+
 

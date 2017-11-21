@@ -432,6 +432,9 @@ Metoden `initialize()` färdigställs genom att hämta de tidigare sparade todos
 
 Låt oss nu titta på `TodoView` vyn. Denna kommer att ansvara för enskilda Todo poster, se till att vyn uppdateras när en todo gör det.
 
+För att aktivera denna funktionalitet lägger vi till händelselyssare i den vy som lyssnar på händelser på en enskild todo HTML-representation.
+
+
 
 
 

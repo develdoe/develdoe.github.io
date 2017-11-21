@@ -3,13 +3,14 @@ date: '2017-11-14 12:51 +0100'
 published: true
 title: Backbone - Todos  app
 ---
-*Den här artikeln är en översättning och försök till förenkling av kapitlet [Exercise 1: Todos - Your First Backbone.js App](https://addyosmani.com/backbone-fundamentals/#exercise-1-todos---your-first-backbone.js-app)*
+*Mycket av denna artikel är tagen från [Exercise 1: Todos - Your First Backbone.js App](https://addyosmani.com/backbone-fundamentals/#exercise-1-todos---your-first-backbone.js-app).*
 
 Att bygga en Todo List är ett bra sätt att lära sig Backbone-konventioner. Det är en relativt enkel applikation, men tekniska utmaningar kring bindande, bestående modelldata, routing och templering ger möjligheter att illustrera vissa kärnfunktioner.
 
 ![todo app](https://addyosmani.com/backbone-fundamentals/img/todos_a.png)
 
-låt oss överväga applikationens arkitektur på en hög nivå. Vi behöver:
+låt oss se över  applikationens arkitektur på en hög nivå. Vi behöver:
+
 * en Todo-modell för att beskriva enskilda todo-objekt
 * en TodoList kollektion för att lagra och persistera todos
 * ett sätt att skapa todos
@@ -25,7 +26,7 @@ I huvudsak är dessa funktioner klassiska CRUD-metoder.
 
 Börja med att clona mitt repo [DevelDevelStrap](https://github.com/DevelDoe/DevelDevelStap). Repot innehåller ett grundläggande html fil och tillhörande css filer. 
 
-Modifiera sedan vår `html.index` efter de behov som vi har för vår applikation samt scripter för  de grundläggande applikationsberoende: jQuery, Underscore, Backbone.js, Handlebars och Backbone LocalStorage-adaptern.
+Modifiera sedan vår `html.index` efter de behov som vi har för vår applikation samt lägga till de dependecies som applikationen är beroende av; jQuery, Underscore, Backbone.js, Handlebars och Backbone LocalStorage-adaptern.
 
 ```html
 <!DOCTYPE html>
@@ -77,16 +78,14 @@ Modifiera sedan vår `html.index` efter de behov som vi har för vår applikatio
     <script src="app.js"></script>
 ```
 
-Förutom de ovan nämnda beroenden, notera att några andra applikationsspecifika filer också laddas. Dessa är organiserade i mappar som representerar deras ansvarsansvar: modeller, vyer, kollektioner och routrar. En app.js-fil är närvarande för att hämta centralinitieringskoden.
-
-Obs! Om du vill följa med, skapa en katalogstruktur enligt vad som visas i index.html:
+Förutom de ovan nämnda beroenden, notera de andra applikationsspecifika. Dessa är organiserade i mappar som representerar deras ansvarsansvar: modeller, vyer, kollektioner och routrar. En app.js-fil är närvarande för centralinitieringskoden.
 
 * Hämta jQuery, Underscore, Backbone, Handlebars och Backbone LocalStorage från sina respektive webbplatser och placera dem under lib/
 * Skapa katalogerna models, collections, views, and routers
 
 ### Templates
 
-För att slutföra index.html måste vi lägga till mallarna som vi ska använda för att dynamiskt skapa HTML genom att injicera modelldata i deras platshållare. Ett sätt att inkludera mallar på sidan är att använda egna skript taggar. Dessa utvärderas inte av webbläsaren, som bara tolkar dem som vanlig text. Handlebars templering kan sedan komma åt mallarna, vilket renderar fragment av HTML.
+För att slutföra index.html måste vi lägga till mallarna som vi ska använda för att dynamiskt skapa HTML genom att injicera modelldata i deras platshållare. Ett sätt att inkludera mallar på sidan är att använda egna skript taggar. Dessa utvärderas inte av webbläsaren, som bara tolkar dem som vanlig text. Handlebars compilerar sedan dessa och renderar fragment av dynamisk HTML.
 
 Vi börjar genom att fylla i  #item-template som används för att visa enskilda todo-objekt längst ned ovan för #todo-app avslutande `</span>` node. 
 
@@ -204,30 +203,6 @@ var TodoList = Backbone.Collection.extend({
 
 // Skapa vår globala kollektion av ** Todos **.
 var todos = new TodoList()
-
-
-var obj = {
-    num: 2,
-    add: function() {
-        this.add.call(this, this.num)
-    }
-}
-
-function add (a) {
-    return this.num + a
-}
-
-// ------------------
-
-var obj = {
-    num: 2
-}
-
-var add = function(a) {
-    return this.num + a
-}
-
-add.call(obj, 3)
 ```
 
 Kollektionens `completed()` och `remaining()` metoder returnerar en rad färdiga respektive oavslutade todos.

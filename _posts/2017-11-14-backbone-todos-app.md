@@ -535,5 +535,31 @@ Låt oss pausa och se till att det arbete vi hittills har utfört fungerar som a
 
 Öppna filen: index.html i din webbläsare och övervaka konsolen. Om allt är bra ska du inte se några JavaScript-fel än vad gäller filen router.js som vi inte har skapat än.
 
+Todo-listan ska vara tom eftersom vi ännu inte har skapat några todos. Dessutom finns det ytterligare arbete som vi behöver göra innan användargränssnittet fungerar fullt ut.
+
+Några saker kan dock testas via JavaScript-konsolen.
+
+Lägg till ett nytt todo-objekt i konsolen: `app.Todos.create({ title: 'My first Todo item' })`.
+
+Om allt fungerar ordentligt, bör det logga den nya todo:n som vi just har lagt till i todos samlingen. Den nyskapade todo sparas också i Local Storage och kommer att finnas tillgänglig på siduppdatering.
+
+`app.Todos.create()` exekverar en kollektione metod (`Collection.create(attributes, [options])`) som instanserar ett nytt modellobjekt av typen som passerat in i kollektionsdefinitionen, i vårt fall `app.Todo`:
+
+```js
+ var TodoList = Backbone.Collection.extend({
+
+      model: app.Todo // the model type used by collection.create() to instantiate new model in the collection
+      ...
+  )};
+```
+
+Kör följande i konsolen för att kolla in det:
+
+```js
+var todo1 = app.Todos.create({ title : 'todo1' })
+todo1 instanceof app.Todo // => true
+```
+
+
 
 

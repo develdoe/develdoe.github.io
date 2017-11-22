@@ -68,12 +68,12 @@ Vi börjar genom att fylla i  #item-template som används för att visa enskilda
 
 ```html
 <script type="text/template" id="item-template">
-    <div class="view">
-        <input class="toggle" type="checkbox" <%=c ompleted ? 'checked' : '' %>>
-        <label><%= title %></label>
-        <button class="destroy"></button>
-    </div>
-    <input class="edit" value="<%= title %>">
+        <div class="view">
+            <input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
+            <label><%= title %></label>
+            <button class="destroy"></button>
+        </div>
+        <input class="edit" value="<%= title %>">
 </script>
 ```
 
@@ -565,6 +565,7 @@ todo1 instanceof app.Todo // => true
 ```
 
 De todos som läggs till via konsolen borde fortfarande visas i listan eftersom de är populerade från den Local Storage. Vi borde också kunna skapa en ny todo genom att skriva en titel och trycka på enter.
+
 
 
 

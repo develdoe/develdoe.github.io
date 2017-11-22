@@ -110,25 +110,30 @@ Nu när vi har all HTML som vi behöver, börjar vi implementera vår applikatio
 Todo-modellen är anmärkningsvärt enkel. För det första har en todo två attribut: en titel lagrar en todo-artikelens titel och en slutförd status indikerar om den är klar. Dessa attribut överförs som standard, enligt nedan:
 
 ```js
-/**
- * models/Todo.js
- * --------------------
- */
+// models/todo.js
 
-var app = app || {}
+var app = app || {};
+
+// Todo Model
+// ----------
+// Vår grundläggande ** Todo ** -modell har `title` och` completed` attributter.
 
 app.Todo = Backbone.Model.extend({
 
+    // Standard attribut sörjer för att varje todo skapad har `title` och` completed` attribut.
     defaults: {
         title: '',
         completed: false
     },
 
-    // Toggle the 'completed' state of this todo item
+    // Växla completed flaggan för detta todo-objekt.
     toggle: function() {
-        this.save({ completed: !this.get('completed') })
+        this.save({
+            completed: !this.get('completed')
+        });
     }
-})
+
+});
 ```
 
 För det andra har Todo-modellen en `toggle()` metod genom vilken ett Todo-objektets slutförandestatus kan ställas in och samtidigt kvarstå.
@@ -138,53 +143,52 @@ För det andra har Todo-modellen en `toggle()` metod genom vilken ett Todo-objek
 Därefter används en TodoList-kollektion för att gruppera våra modeller. Kollektionen använder LocalStorage-adaptern för att åsidosätta Backbones `sync()` operation med en som kommer att lagra våra Todo-poster till HTML5 Local Storage. Genom lokal lagring sparas de mellan sidförfrågningar.
 
 ```js
-/**
- * collections/Todos.js
- * --------------------
- */
+// collections/todos.js
 
-var app = app || {}
+var app = app || {};
 
-// Todos kollektion
-// ----------------
+// Todo Collection
+// ---------------
 
-// Kollektionen av todos stöds av * localStorage * istället för en fjärrserver.
+// The collection of todos is backed by *localStorage* instead of a remote
+// server.
 var TodoList = Backbone.Collection.extend({
 
-    // Referens till denna Kollektions modell.
+    // Reference to this collection's model.
     model: app.Todo,
 
-    // Spara alla todo-objekten under `'todos-backbone`` namespace.
+    // Save all of the todo items under the `"todos-backbone"` namespace.
     localStorage: new Backbone.LocalStorage('todos-backbone'),
 
-    //Filtrera listan över alla todo-objekt som är färdiga.
+    // Filter down the list of all todo items that are finished.
     completed: function() {
         return this.filter(function(todo) {
-            return todo.get('completed')
-        })
+            return todo.get('completed');
+        });
     },
 
-    // Filtrera ner listan för att bara lägga till objekt som fortfarande inte är färdiga.
+    // Filter down the list to only todo items that are still not finished.
     remaining: function() {
-        return this.without.apply(this, this.completed)
+        return this.without.apply(this, this.completed());
     },
 
-    // Vi håller Todos i sekventiell ordning, trots att de sparas av unordered
-    // GUID i databasen. Detta genererar nästa ordernummer för nya objekt.
+    // We keep the Todos in sequential order, despite being saved by unordered
+    // GUID in the database. This generates the next order number for new items.
     nextOrder: function() {
-        if(!this.length) return 1
-        return this.last().get('order') + 1
+        if (!this.length) {
+            return 1;
+        }
+        return this.last().get('order') + 1;
     },
 
-    // Todos sorteras efter deras ursprungliga införingsorder.
+    // Todos are sorted by their original insertion order.
     comparator: function(todo) {
-        return todo.get('order')
+        return todo.get('order');
     }
+});
 
-})
-
-// Skapa vår globala kollektion av ** Todos **.
-var todos = new TodoList()
+// Create our global collection of **Todos**.
+app.Todos = new TodoList();
 ```
 
 Kollektionens `completed()` och `remaining()` metoder returnerar en rad färdiga respektive oavslutade todos.

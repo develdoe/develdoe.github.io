@@ -439,63 +439,67 @@ För att aktivera denna funktionalitet lägger vi till händelselyssare i den vy
 ```js
 // views/todos.js
 
-/**
- * Todo item view
- */
+var app = app || {};
 
-var app = app || {}
+// Todo objekt vy
+// --------------
 
-// DOM-elementet för ett todo-objekt ...
-app.TodoView.Backbone.View.extend({
+// DOM-elementet för ett todo-objekt...
+app.TodoView = Backbone.View.extend({
 
-    // ... är en listetagg.
+    //... är en listetagg.
     tagName: 'li',
 
-    // Cache the template function for a single item.
-    // lagra  mallfunktionen för ett enda objekt.
-    template: Handlebars.compile($('#item-template').html()),
+    // Cache mallfunktionen för ett enda objekt.
+    template: _.template($('#item-template').html()),
 
     // DOM-händelserna specifika för ett objekt.
     events: {
-        'dblclick label' : 'edit',
-        'keypress .edit' : 'updateOnEnter',
-        'blur .edit' : 'close'
+        'dblclick label': 'edit',
+        'keypress .edit': 'updateOnEnter',
+        'blur .edit': 'close'
     },
 
     // TodoView lyssnar på ändringar i sin modell, åter-renderar. Eftersom det finns
-    // en en-till-en-korrespondens mellan en ** Todo ** och en ** TodoView ** i denna
-    // app, sätter vi en direkt referens på modellen för enkelhets skull.
-    initialize : function() {
-        this.listenTo(this.model, 'change', this.render)
+    // en en-till-en korrespondens mellan en ** Todo ** och en ** TodoView **
+    // sätter en direkt referens på modellen för enkelhets skull.
+    initialize: function() {
+        this.listenTo(this.model, 'change', this.render);
     },
 
-    // åter-renderar titlarna för todo-objektet.
+    // Re-rendera titlarna på todo objekten.
     render: function() {
-        this.$el.html(this.template(this.model.attributes))
-        this.$input = this.$('.edit')
-        return this
+        this.$el.html(this.template(this.model.attributes));
+        this.$input = this.$('.edit');
+        return this;
     },
 
-    // Växla denna vy till 'editing' läge, och visa inmatningsfältet.
+    // Växla denna vy till redigering läge, som visar inmatningsfältet.
     edit: function() {
-        this.$el.addClass('edeting')
-        this.$input.focus()
+        this.$el.addClass('editing');
+        this.$input.focus();
     },
 
-    // Close the `"editing"` mode, saving changes to the todo.
-    // Stäng editing läget, spara ändringar i todo.
+    // Stäng `"editing"`läge, spara ändringar i todo.
     close: function() {
-        var value = this.$input.valu().trim()
-        if (value) this.model.save({ title:value })
-        this.$el.removeClass('edeting')
+        var value = this.$input.val().trim();
+
+        if (value) {
+            this.model.save({
+                title: value
+            });
+        }
+
+        this.$el.removeClass('editing');
     },
 
-    // If you hit `enter`, we're through editing the item.
-    // Om du slår `enter`, är man färdig med redigeringen
+    // Om du trycker på `enter`, är vi färdiga med att redigera objektet.
     updateOnEnter: function(e) {
-        if (e.which === ENTER_KEY) this.close()
+        if (e.which === ENTER_KEY) {
+            this.close();
+        }
     }
-})
+});
 ```
 
 I `initialize()` konstruerar vi en lyssnare som övervakar en todo-modells förändringshändelse. Till följd av det, när en todo blir uppdaterad kommer applikationen att åter-rendera och visuellt reflektera dess ändringar.

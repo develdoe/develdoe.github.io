@@ -69,11 +69,11 @@ Vi börjar genom att fylla i  #item-template som används för att visa enskilda
 ```html
 <script type="text/template" id="item-template">
     <div class="view">
-        <input class="toggle" type="checkbox" {{#if competed}} checked="checked" {{/if}}>
-        <label>{{title}}</label>
+        <input class="toggle" type="checkbox" <%=c ompleted ? 'checked' : '' %>>
+        <label><%= title %></label>
         <button class="destroy"></button>
     </div>
-    <input class="edit" value="{{title}}">
+    <input class="edit" value="<%= title %>">
 </script>
 ```
 

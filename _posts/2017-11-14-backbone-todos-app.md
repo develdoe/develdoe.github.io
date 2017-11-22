@@ -32,7 +32,7 @@ Först lägger vi upp header och de grundläggande applikationsberoende: jQuery,
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Backbone.js • TodoMVC</title>
+  <title>Backbone.js TodoMVC</title>
   <link rel="stylesheet" href="assets/index.css">
 </head>
 <body>

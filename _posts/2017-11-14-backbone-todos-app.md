@@ -434,6 +434,79 @@ Låt oss nu titta på `TodoView` vyn. Denna kommer att ansvara för enskilda Tod
 
 För att aktivera denna funktionalitet lägger vi till händelselyssare i den vy som lyssnar på händelser på en enskild todo HTML-representation.
 
+```js
+// views/todos.js
+
+/**
+ * Todo item view
+ */
+
+var app = app || {}
+
+// DOM-elementet för ett todo-objekt ...
+app.TodoView.Backbone.View.extend({
+
+    // ... är en listetagg.
+    tagName: 'li',
+
+    // Cache the template function for a single item.
+    // lagra  mallfunktionen för ett enda objekt.
+    template: Handlebars.compile($('#item-template').html()),
+
+    // DOM-händelserna specifika för ett objekt.
+    events: {
+        'dblclick label' : 'edit',
+        'keypress .edit' : 'updateOnEnter',
+        'blur .edit' : 'close'
+    },
+
+    // TodoView lyssnar på ändringar i sin modell, åter-renderar. Eftersom det finns
+    // en en-till-en-korrespondens mellan en ** Todo ** och en ** TodoView ** i denna
+    // app, sätter vi en direkt referens på modellen för enkelhets skull.
+    initialize : function() {
+        this.listenTo(this.model, 'change', this.render)
+    },
+
+    // åter-renderar titlarna för todo-objektet.
+    render: function() {
+        this.$el.html(this.template(this.model.attributes))
+        this.$input = this.$('.edit')
+        return this
+    },
+
+    // Växla denna vy till 'editing' läge, och visa inmatningsfältet.
+    edit: function() {
+        this.$el.addClass('edeting')
+        this.$input.focus()
+    },
+
+    // Close the `"editing"` mode, saving changes to the todo.
+    // Stäng editing läget, spara ändringar i todo.
+    close: function() {
+        var value = this.$input.valu().trim()
+        if (value) this.model.save({ title:value })
+        this.$el.removeClass('edeting')
+    },
+
+    // If you hit `enter`, we're through editing the item.
+    // Om du slår `enter`, är man färdig med redigeringen
+    updateOnEnter: function(e) {
+        if (e.which === ENTER_KEY) this.close()
+    }
+})
+```
+
+I `initialize()` konstruerar vi en lyssnare som övervakar en todo-modells förändringshändelse. Till följd av det, när en todo blir uppdaterad kommer applikationen att åter-rendera och visuellt reflektera dess ändringar.
+
+*Observera att modellen som passerat i argumentets hash av vår AppView är automatiskt tillgänglig för oss som this.model.*
+
+I metoden `render()`, renderar vi vår Handlebars vi vår `#item-template`, som tidigare compilerades in i this.template med hjälp av Handlebars.compile metod.
+
+Detta returnerar ett HTML-fragment som ersätter innehållet i visningselementet (ett li-element skapades implicit för oss baserat på egenskapen tagName).
+
+Med andra ord är den renderade mallen nu närvarande under `this.el` och kan bifogas todo-listan i användargränssnittet. `render()` avslutar genom att cache inmatningselementet i den instantierade mallen i `this.$input`.
+
+
 
 
 

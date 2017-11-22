@@ -150,30 +150,29 @@ var app = app || {};
 // Todo Collection
 // ---------------
 
-// The collection of todos is backed by *localStorage* instead of a remote
-// server.
+// Kollektion av todos stöds av * localStorage * istället för en fjärrserver.
 var TodoList = Backbone.Collection.extend({
 
-    // Reference to this collection's model.
+    // Referens till denna samlings modell.
     model: app.Todo,
 
-    // Save all of the todo items under the `"todos-backbone"` namespace.
+    // Spara alla todo-objekten under todos-backbone' namespace.
     localStorage: new Backbone.LocalStorage('todos-backbone'),
 
-    // Filter down the list of all todo items that are finished.
+    // Filtrera listan över alla todo-objekt som är färdiga.
     completed: function() {
         return this.filter(function(todo) {
             return todo.get('completed');
         });
     },
 
-    // Filter down the list to only todo items that are still not finished.
+    // Filtrera på listan för att bara lägga till objekt som fortfarande inte är färdiga.
     remaining: function() {
         return this.without.apply(this, this.completed());
     },
 
-    // We keep the Todos in sequential order, despite being saved by unordered
-    // GUID in the database. This generates the next order number for new items.
+    // Vi håller Todos i sekventiell ordning,trots att de sparas av oordnad
+    // GUID i databasen. Detta genererar nästa ordernummer för nya objekt.
     nextOrder: function() {
         if (!this.length) {
             return 1;
@@ -181,13 +180,13 @@ var TodoList = Backbone.Collection.extend({
         return this.last().get('order') + 1;
     },
 
-    // Todos are sorted by their original insertion order.
+    // Todos sorteras efter deras ursprungliga införingsorder.
     comparator: function(todo) {
         return todo.get('order');
     }
 });
 
-// Create our global collection of **Todos**.
+// Skapa vår globala samling ** Todos **.
 app.Todos = new TodoList();
 ```
 

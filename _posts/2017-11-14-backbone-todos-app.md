@@ -24,58 +24,32 @@ I huvudsak är dessa funktioner klassiska CRUD-metoder.
 
 ## Statisk HTML & CSS
 
-Börja med att clona mitt repo [DevelDevelStrap](https://github.com/DevelDoe/DevelDevelStap). Repot innehåller ett grundläggande html fil och tillhörande css filer. 
-
-Modifiera sedan vår `html.index` efter de behov som vi har för vår applikation samt lägga till de dependecies som applikationen är beroende av; jQuery, Underscore, Backbone.js, Handlebars och Backbone LocalStorage-adaptern.
+Först lägger vi upp header och de grundläggande applikationsberoende: jQuery, Underscore, Backbone.js och Backbone LocalStorage-adaptern.
 
 ```html
-<!DOCTYPE html>
-<html lang=en>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset=utf-8>
-
-    <title>DevelDevelStrap</title>
-    <meta name=description content="Used for quickly strap up development projects.">
-    <meta name=author content="DevelDoe">
-
-    <meta http-equiv=X-UA-Compatable content="IE=edge,chrome=1">
-    <meta name=viewport content="width=device-width, initial-scale=1.0">
-    <link rel=stylesheet href="assets/css/reset.css"/>
-    <link rel=stylesheet href="assets/css/fonts.css"/>
-    <link rel=stylesheet href="assets/css/default.css">
-
-    <!--[if lt IE 9]>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
-    <![endif]-->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Backbone.js • TodoMVC</title>
+  <link rel="stylesheet" href="assets/index.css">
 </head>
-<body id=background>
-    <span id="todo-app">
-        <header id=header>
-            <h2>todos</h2>
-        </header>
-        <section id="content">
-                <input id="new-todo" placeholder="What needs to be done?" autofocus>
-                <label for="toggle-all">Mark all as completed</label>
-                <input id="toggle-all" type="checkbox">
-                <ul id="todo-list"></ul>
-        </section>
-        <footer id=footer>
-            <h4>made by Develdoe</h4>
-        </footer>               
-    </span>
-
-    <script src="lib/jquery.min.js"></script>
-    <script src="lib/handlebars.min.js"></script>
-    <script src="lib/underscore-min.js"></script>
-    <script src="lib/backbone-min.js"></script>
-    <script src="lib/backbone.localStorage.js"></script>
-
-    <script src="models/Todo.js"></script>
-    <script src="collections/Todos.js"></script>
-    <script src="views/Todos.js"></script>
-    <script src="views/AppView.js"></script>
-    <script src="routers/router.js"></script>
-    <script src="app.js"></script>
+<body>
+  <script type="text/template" id="item-template"></script>
+  <script type="text/template" id="stats-template"></script>
+  <script src="js/lib/jquery.min.js"></script>
+  <script src="js/lib/underscore-min.js"></script>
+  <script src="js/lib/backbone-min.js"></script>
+  <script src="js/lib/backbone.localStorage.js"></script>
+  <script src="js/models/todo.js"></script>
+  <script src="js/collections/todos.js"></script>
+  <script src="js/views/todos.js"></script>
+  <script src="js/views/app.js"></script>
+  <script src="js/routers/router.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
 ```
 
 Förutom de ovan nämnda beroenden, notera de andra applikationsspecifika. Dessa är organiserade i mappar som representerar deras ansvarsansvar: modeller, vyer, kollektioner och routrar. En app.js-fil är närvarande för centralinitieringskoden.
@@ -560,6 +534,7 @@ var todo1 = app.Todos.create({ title : 'todo1' })
 todo1 instanceof app.Todo // => true
 ```
 
+De todos som läggs till via konsolen borde fortfarande visas i listan eftersom de är populerade från den Local Storage. Vi borde också kunna skapa en ny todo genom att skriva en titel och trycka på enter.
 
 
 

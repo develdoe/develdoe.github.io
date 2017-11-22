@@ -207,45 +207,51 @@ I vårt fall kommer en AppView att hantera skapandet av nya todos och rendering 
 För att hålla sakerna korta och enkla, kommer vi inte att implementera alla programmets funktioner i den här handledningen, vi täcker bara nog för att komma igång. Ändå finns det mycket för oss att täcka i AppView, så vi delar upp vår diskussion i två avsnitt.
 
 ```js
-/**
- * views/App.js
- */
+// views/app.js
 
-var app = app || {}
+var app = app || {};
 
-// Vår övergripande ** AppView ** är toppnivån av användargränssnittet.
+// Applikationen
+// ---------------
+
+// Vår övergripande ** AppView ** är toppnivån av UI.
 app.AppView = Backbone.View.extend({
 
-    // I stället för att skapa ett nytt element, binder vi till den befintligt #app
-    el: '#todo-app',
+    // Istället för att generera ett nytt element, bind till det befintliga skelettet av
+    // Appen finns redan i HTML.
+    el: '#todoapp',
 
     // Vår mall för statistiklinjen längst ner i appen.
-    statsTemplate: Handlebars.compile($('#stats-template').html()),
+    statsTemplate: _.template($('#stats-template').html()),
 
-    // Vid initialisering binder vi till relevanta händelser på 'Todos'
-    // Kollektioner när objekt läggs till eller ändras.
+    // Vid initialisering binder vi till relevanta händelser på `Todos`
+    // kollektion när objekt läggs till eller ändras.
     initialize: function() {
-        this.allCheckBox = this.$('#toggle-all')[0]
-        this.$input = this.$('#new-todo')
-        this.$footer = this.$('#footer')
-        this.$main = this.$('#main')
+        this.allCheckbox = this.$('#toggle-all')[0];
+        this.$input = this.$('#new-todo');
+        this.$footer = this.$('#footer');
+        this.$main = this.$('#main');
 
-        this.listenTo(app.Todos, 'add', this.addOne)
-        this.listenTo(app.Todos, 'reset', this.addAll)
+        this.listenTo(app.Todos, 'add', this.addOne);
+        this.listenTo(app.Todos, 'reset', this.addAll);
     },
 
     // Lägg till ett enda todo-objekt i listan genom att skapa en vy för det och
-    // lägga till dess element i `<ul>`.
+    // lägger till sitt element i `<ul>`.
     addOne: function(todo) {
-        var view = new app.TodoView({ model: todo})
-        $('#todo-list').append(view.render().el)
+        var view = new app.TodoView({
+            model: todo
+        });
+        $('#todo-list').append(view.render().el);
     },
 
+    // Lägg till alla objekt i ** Todos ** -samlingen på en gång.
     addAll: function() {
-        this.$('#todo-list').html('')
-        app.Todos.each(this.addOne, this)
+        this.$('#todo-list').html('');
+        app.Todos.each(this.addOne, this);
     }
-})												
+
+});											
 ```
 
 Några anmärkningsvärda funktioner finns i vår första version av AppView, inklusive en `statsTemplate`, en initialize metod som implicit åberopas vid instantiering och flera vy specifika metoder.

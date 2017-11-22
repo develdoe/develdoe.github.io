@@ -506,6 +506,12 @@ Detta returnerar ett HTML-fragment som ersätter innehållet i visningselementet
 
 Med andra ord är den renderade mallen nu närvarande under `this.el` och kan bifogas todo-listan i användargränssnittet. `render()` avslutar genom att cache inmatningselementet i den instantierade mallen i `this.$input`.
 
+Våra händelser hash innehåller tre callbacks:
+
+* `edit()`: Ändrar aktuell vy till redigeringsläget när en användare dubbelklickar på ett befintligt objekt i todo-listan. Detta gör det möjligt för dem att ändra det befintliga värdet av objektets titelattribut.
+* `updateOnEnter()`: Kontrollerar att användaren har tryckt på Retur / Enter-tangenten och utför funktionen `close()`.
+* `close()`: trimmar värdet av den nuvarande texten i vårt `<input />` -fält, så att vi inte behandlar det vidare om det inte innehåller någon text (t ex ''). Om ett giltigt värde har tillhandahållits lagrar vi ändringarna till nuvarande todo-modellen och stänger redigeringsläget genom att ta bort motsvarande CSS-klass.
+
 
 
 

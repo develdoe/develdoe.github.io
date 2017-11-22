@@ -29,26 +29,29 @@ Först lägger vi upp header och de grundläggande applikationsberoende: jQuery,
 ```html
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Backbone.js TodoMVC</title>
-  <link rel="stylesheet" href="assets/index.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Backbone.js TodoMVC</title>
+    <link rel="stylesheet" href="assets/index.css">
 </head>
+
 <body>
-  <script type="text/template" id="item-template"></script>
-  <script type="text/template" id="stats-template"></script>
-  <script src="js/lib/jquery.min.js"></script>
-  <script src="js/lib/underscore-min.js"></script>
-  <script src="js/lib/backbone-min.js"></script>
-  <script src="js/lib/backbone.localStorage.js"></script>
-  <script src="js/models/todo.js"></script>
-  <script src="js/collections/todos.js"></script>
-  <script src="js/views/todos.js"></script>
-  <script src="js/views/app.js"></script>
-  <script src="js/routers/router.js"></script>
-  <script src="js/app.js"></script>
+    <script type="text/template" id="item-template"></script>
+    <script type="text/template" id="stats-template"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/underscore-min.js"></script>
+    <script src="lib/backbone-min.js"></script>
+    <script src="lib/backbone.localStorage.js"></script>
+    <script src="models/todo.js"></script>
+    <script src="collections/todos.js"></script>
+    <script src="views/todos.js"></script>
+    <script src="views/app.js"></script>
+    <script src="routers/router.js"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>
 ```
 

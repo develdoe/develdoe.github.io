@@ -524,17 +524,15 @@ Våra händelser hash innehåller tre callbacks:
 Nu har vi två vyer, en AppView och en TodoView. Den förstnämnda behöver vara instanserad på sidbelastning så att dess kod körs. Detta kan åstadkommas genom jQuery's ready() util, som kommer att exekvera en funktion när DOM trädet är laddad.
 
 ```js
-/**
- * app.js
- */
+// app.js
 
-var app = app || {}
-var ENTER_KEY = 13
+var app = app || {};
+var ENTER_KEY = 13;
 
 $(function() {
-    // Strappa applikationen genom att skapa ** App **.
-    new app.AppView()
-})
+    // Sparka igång saker genom att skapa ** App **.
+    new app.AppView();
+});
 ```
 
 Låt oss pausa och se till att det arbete vi hittills har utfört fungerar som avsett.

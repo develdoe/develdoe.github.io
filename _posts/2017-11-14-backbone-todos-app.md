@@ -513,7 +513,27 @@ Våra händelser hash innehåller tre callbacks:
 * `close()`: trimmar värdet av den nuvarande texten i vårt `<input />` -fält, så att vi inte behandlar det vidare om det inte innehåller någon text (t ex ''). Om ett giltigt värde har tillhandahållits lagrar vi ändringarna till nuvarande todo-modellen och stänger redigeringsläget genom att ta bort motsvarande CSS-klass.
 
 
+## Uppstart
 
+Nu har vi två vyer, en AppView och en TodoView. Den förstnämnda behöver vara instanserad på sidbelastning så att dess kod körs. Detta kan åstadkommas genom jQuery's ready() util, som kommer att exekvera en funktion när DOM trädet är laddad.
+
+```js
+/**
+ * app.js
+ */
+
+var app = app || {}
+var ENTER_KEY = 13
+
+$(function() {
+    // Strappa applikationen genom att skapa ** App **.
+    new app.AppView()
+})
+```
+
+Låt oss pausa och se till att det arbete vi hittills har utfört fungerar som avsett.
+
+Öppna filen: index.html i din webbläsare och övervaka konsolen. Om allt är bra ska du inte se några JavaScript-fel än vad gäller filen router.js som vi inte har skapat än.
 
 
 

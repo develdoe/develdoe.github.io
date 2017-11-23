@@ -722,7 +722,9 @@ Låt oss nu titta på vad som händer när vi klickar på en todo's destroy butt
 
 1. Metoden `clear()` åberopas som anropar `destroy()` på todo modellen.
 2. Todo raderas från lokal lagring och en `destroy` händelse utlöses.
-3. I vår uppdatering på TodoView, band vi modellens `destroy` händelse till vyens ärvda `remove()` metod.
+3. I vår uppdatering på TodoView, band vi modellens `destroy` händelse till vyens ärvda `remove()` metod. Den här metoden tar bort vyn och tar automatiskt bort det associerade elementet från DOM trädet. Eftersom vi använde listenTo() för att binda vyens lyssnare till dess modell, gör också remove() callbacks av-binds också från modellen, så att minnesläckage inte uppstår.
+4. `destroy()` tar också bort modellen från Todos kollektionen, vilket utlöser en `remove` -händelse på kollektionen.
+5. Eftersom AppView har sin `render()` metod bunden till alla händelser i Todos-kollektionen, blir den vyn renderad och statistiken i sidfoten uppdateras.
 
 
 

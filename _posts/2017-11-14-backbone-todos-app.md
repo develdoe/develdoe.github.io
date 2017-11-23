@@ -716,7 +716,8 @@ Låt oss titta på händelserna som uppstår när vi klickar på kryssrutan för
 1. Funktionen `togglecompleted()` åberopads som anropar `toggle()` på todo-modellen.
 2. `toggle()` växlar den färdiga statusen för todo och anropar `save()` på modellen.
 3. `save` skapar en `change` händelse på modellen som är bunden till vår TodoViews `render()` metod. Vi har lagt till ett uttryck i `render()` som växlar 'completed ' klassen på elementet beroende på modellens färdiga tillstånd. Den tillhörande CSS filen ändrar färgen på titeltexten och slår en linje genom den när todo är klar.
-4. `save` resulterar också i en `change:completed` händelse på modellen som hanteras av AppViews `filterOne()` metod. Om vi tittar tillbaka på AppView ser vi att filterOne() kommer att utlösa en visible händelse på modellen.
+4. `save` resulterar också i en `change:completed` händelse på modellen som hanteras av AppViews `filterOne()` metod. Om vi tittar tillbaka på AppView ser vi att `filterOne()` kommer att utlösa en `visible` händelse på modellen. Detta används i samband med filtreringen i våra routes och kollektioner så att vi bara visar ett objekt om dess `completed` tillstånd faller i linje med det aktuella filtret. I vår uppdatering till TodoView, binder vi modellens `visible` händelse till toggleVisible() metoden.
+
 
 
 

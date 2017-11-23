@@ -716,6 +716,5 @@ Låt oss titta på händelserna som uppstår när vi klickar på kryssrutan för
 1 Funktionen `togglecompleted()` åberopads som anropar `toggle()` på todo-modellen.
 2 `toggle()` växlar den färdiga statusen för todo och anropar `save()` på modellen.
 3 save skapar en `change` händelse på modellen som är bunden till vår TodoViews `render()` metod. Vi har lagt till ett uttryck i `render()` som växlar 'completed ' klassen på elementet beroende på modellens färdiga tillstånd. Den tillhörande CSS filen ändrar färgen på titeltexten och slår en linje genom den när todo är klar.
-4 
 
 

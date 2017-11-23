@@ -726,6 +726,56 @@ Låt oss nu titta på vad som händer när vi klickar på en todo's destroy butt
 4. `destroy()` tar också bort modellen från Todos kollektionen, vilket utlöser en `remove` -händelse på kollektionen.
 5. Eftersom AppView har sin `render()` metod bunden till alla händelser i Todos-kollektionen, blir den vyn renderad och statistiken i sidfoten uppdateras.
 
+## Todo routing
+
+Slutligen fortsätter vi vidare till routing, vilket gör det möjligt för oss att enkelt filtrera listan över objekt som är aktiva samt de som har genomförts. Vi stöder följande rutter:
+
+```
+#/ (all - default)
+#/active
+#/completed
+```
+
+När rutten ändras kommer todo-listan att filtreras på en modellnivå och den valda klassen på filterlänkarna i sidfoten kommer att växlas enligt ovan. När ett objekt uppdateras medan ett filter är aktivt uppdateras det i enlighet därmed (t.ex. om filtret är aktivt och objektet är markerat, kommer det att döljas). Det aktiva filtret kvarstår vid omladdning.
+
+```js
+// routers/router.js
+
+// Todo Router
+// ----------
+
+var app = app || {};
+
+var Workspace = Backbone.Router.extend({
+
+    routes: {
+        '*filter' : 'setFilter'
+    },
+
+    setFilter: function(param) {
+        // Ställ in det aktuella filtret som ska användas
+        if(param) param.trim()
+
+        app.TodoFilter = param || ''
+
+        //Trigger a collection filter event, causing hiding/unhiding
+        // Utför en kollektion filter event, vilket orsakar hiding/unhiding
+        app.Todos.trigger('filter')
+    }
+})
+
+app.TodoRouter = new Workspace()
+Backbone.history.start()
+```
+
+Vår router använder en `*splat` för att ställa in en standard rutt som överför strängen efter `"#/"` i URL-adressen till `setFilter()` som sätter `app.TodoFilter` till den strängen.
+
+Som vi kan se i raden `app.Todos.trigger("filter")`, när filtret har ställts in, utlöser vi enkelt "filter" i vår Todos kollektion för att växla vilka objekt som är synliga och vilka är dolda. Kom ihåg att vår AppViews `filterAll()` metod är bunden till kollektionenens filter händelse och att varje händelse i kollektionen kommer att göra att AppView åter-renderas.
+
+Slutligen skapar vi en förekomst av vår router och anropar `Backbone.history.start()` för att styra den ursprungliga webbadressen under sidladdning.
+
+
+
 
 
 

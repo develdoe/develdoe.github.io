@@ -713,4 +713,5 @@ Den viktigaste delen av detta är de två händelsehanterare som vi har lagt til
 Låt oss titta på händelserna som uppstår när vi klickar på kryssrutan för ett todo-objekt:
 
 
+1 Funktionen togglecompleted() åberopads som anropar toggle() på todo-modellen.
 

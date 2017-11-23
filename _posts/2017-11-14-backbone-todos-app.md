@@ -710,4 +710,7 @@ app.AppView = Backbone.View.extend({
 
 Den viktigaste delen av detta är de två händelsehanterare som vi har lagt till, en togglecompleted händelse i todo's checkbox rutan och ett klickhändelse på todo-knappen `<button class="destroy" />`.
 
+Låt oss titta på händelserna som uppstår när vi klickar på kryssrutan för ett todo-objekt:
+
+
 

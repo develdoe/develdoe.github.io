@@ -720,6 +720,8 @@ Låt oss titta på händelserna som uppstår när vi klickar på kryssrutan för
 
 Låt oss nu titta på vad som händer när vi klickar på en todo's destroy button:
 
+1. Metoden `clear()` åberopas som anropar `destroy()` på todo modellen.
+
 
 
 

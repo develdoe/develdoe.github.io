@@ -714,4 +714,6 @@ Låt oss titta på händelserna som uppstår när vi klickar på kryssrutan för
 
 
 1 Funktionen `togglecompleted()` åberopads som anropar `toggle()` på todo-modellen.
+2 `toggle()` växlar den färdiga statusen för todo och anropar `save()` på modellen.
+3 
 

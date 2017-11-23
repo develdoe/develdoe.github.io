@@ -721,6 +721,8 @@ Låt oss titta på händelserna som uppstår när vi klickar på kryssrutan för
 Låt oss nu titta på vad som händer när vi klickar på en todo's destroy button:
 
 1. Metoden `clear()` åberopas som anropar `destroy()` på todo modellen.
+2. Todo raderas från lokal lagring och en `destroy` händelse utlöses.
+3. I vår uppdatering på TodoView, band vi modellens `destroy` händelse till vyens ärvda `remove()` metod.
 
 
 

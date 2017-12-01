@@ -1,7 +1,7 @@
 ---
 date: '2017-12-01 11:57 +0100'
 published: true
-title: JavaScript - Take out number of objects in an array
+title: JavaScript - Move objects from one array to another
 ---
 ```js
 const LOAD_NUM = 10

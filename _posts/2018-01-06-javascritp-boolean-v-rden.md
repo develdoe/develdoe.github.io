@@ -3,7 +3,7 @@ date: '2018-01-06 10:07 +0100'
 published: true
 title: JavaScritp - Boolean Värden & Komperation
 ---
-Ofta behöver man värden som är antingen sanna eller falska. I programmeringsvärlden använder vi en speciel Typ som heter "Boolean", dessa kan bara evalueras till `true` eller `false`.
+Ofta behöver man värden som är antingen sanna eller falska. I programmeringsvärlden använder vi en speciel typ som heter "Boolean", dessa kan bara evalueras till `true` eller `false`.
 
 # Komparation
 

@@ -22,3 +22,15 @@ console.log( ! flag || false ) // => false
 ```
 
 När man blandar dessa operatörer med aritmetik och andra operatörer är det inte allt självklart hur det tolkas. Operatörsförrang bestämmer hur operatörer analyseras med avseende på varandra. Operatörer med högre prioritet blir operandörerna hos operatörer med lägre prioritet. 
+
+Följande uttryck inte självklar på grund av operatörens företräde:
+
+```js
+1 + 1 == 2 && 10 * 10 > 50 // => true
+```
+
+För att göra det mer läsbart grupperar (precis som i vanligt aritmetik) med hjälp av paranteser.
+
+```js
+(1 + 1 == 2) && (10 * 10) > 50 => true
+```

@@ -23,4 +23,16 @@ Sorteringen är baserad på *Unicode* standarden. Denna standard tilldelar ett n
 
 När man jämför strängar, görs det från vänster till höger, på dess numeriska värden, en och en. 
 
-Andra likanande operatorer
+Andra likanande operatorer är `>=` (störren än eller lika med), `<=` (mindre än eller lika med), `==` (lika med), != (inte lika med).
+
+```js
+console.log("rayman" != "ratman") // => true
+```
+
+Det finns bara ett värde som inte är lika med sig själv och det är `NaN` (not a number).
+`NaN` representerar ett ickeSansat uträkning ooch är därför inte lika resultatet av ytterligare ett `NaN`:
+
+```js
+console.log(NaN == NaN) // => false
+```
+

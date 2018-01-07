@@ -40,10 +40,34 @@ Du kan också använda flera villkor som i ett flera villkor IF-uttryck:
 ```js
 var condition1 = true,
     condition2 = false,
-    access = condition1 ? (condition2 ? "true true": "true false") : (condition2 ? "false true" : "false false");
+    access = condition1 ? (condition2 ? "true true": "true false") : (condition2 ? "false true" : "false false")
 
 console.log(access); // logs "true false"
 ```
 
+*Obs! Parametrarna är inte nödvändiga och påverkar inte funktionaliteten. De är där för att hjälpa till att visualisera hur utfallet behandlas.*
 
+Du kan också använda ternära utvärderingar i ledigt utrymme för att göra olika operationer:
+
+```js
+var stop = false, age = 16
+
+age > 18 ? location.assign('continue.html') : stop = true
+```
+
+Du kan också göra mer än en enskild operation per fall, skilja dem med ett kommatecken och bifoga dem i parentes:
+
+```JS
+var stop = false, age = 23;
+
+age > 18 ? (
+    alert('OK, you can go.'),
+    location.assign('continue.html')
+) : (
+    stop = true,
+    alert('Sorry, you are much too young!')
+)
+```
+
+Du kan också göra mer än en operation under tilldelningen av ett värde. I detta fall, **the last comma-separated value of the parenthesis will be the value to be assigned.**
 

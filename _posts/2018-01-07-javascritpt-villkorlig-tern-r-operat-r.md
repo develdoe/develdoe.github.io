@@ -71,3 +71,21 @@ age > 18 ? (
 
 Du kan också göra mer än en operation under tilldelningen av ett värde. I detta fall, **the last comma-separated value of the parenthesis will be the value to be assigned.**
 
+```js
+var age = 16;
+
+var url = age > 18 ? (
+    alert('OK, you can go.'), 
+    // alert returns "undefined", but it will be ignored because
+    // isn't the last comma-separated value of the parenthesis
+    'continue.html' // the value to be assigned if age > 18
+) : (
+    alert('You are much too young!'),
+    alert('Sorry :-('),
+    // etc. etc.
+    'stop.html' // the value to be assigned if !(age > 18)
+)
+
+location.assign(url); // "stop.html"
+```
+

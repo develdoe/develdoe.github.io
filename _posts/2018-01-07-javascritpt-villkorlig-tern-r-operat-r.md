@@ -35,3 +35,15 @@ Du kan också tilldela variabler beroende på ett ternärt resultat:
 var elvisLives = Math.PI > 4 ? 'Yep' : 'Nope' // => 'Yep'
 ```
 
+Du kan också använda flera villkor som i ett flera villkor IF-uttryck:
+
+```js
+var condition1 = true,
+    condition2 = false,
+    access = condition1 ? (condition2 ? "true true": "true false") : (condition2 ? "false true" : "false false");
+
+console.log(access); // logs "true false"
+```
+
+
+

@@ -32,6 +32,6 @@ Om du till exempel vill visa ett annat meddelande baserat på värdet på isMemb
 Du kan också tilldela variabler beroende på ett ternärt resultat:
 
 ```js
-var elvisLives = Math.PI > 4 ? 'Yep' : 'Nope'
+var elvisLives = Math.PI > 4 ? 'Yep' : 'Nope' // => 'Yep'
 ```
 

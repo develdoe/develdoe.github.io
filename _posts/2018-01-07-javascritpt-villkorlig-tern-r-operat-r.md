@@ -16,3 +16,15 @@ condition ? expr1 : expr2
 `conditions (eller flera vilkor)` Är ett uttryck som utvärderar till sant eller falskt.
 
 `xpr1, expr2` Är uttryck med värden av vilken typ som helst.
+
+## Beskrivning
+
+Om `condition` är sant returnerar operatören värdet av `expr1`; annars `expr2`.
+
+Om du till exempel vill visa ett annat meddelande baserat på värdet på isMember-variabeln kan du använda detta uttryck:
+
+```js
+'The fee is ' + (isMember ? '$2.00' : '$10.00')
+```
+
+

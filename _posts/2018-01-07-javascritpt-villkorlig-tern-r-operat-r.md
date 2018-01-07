@@ -11,6 +11,8 @@ Den villkorliga (ternära) operatören är den enda JavaScript-operatören som t
 condition ? expr1 : expr2 
 ```
 
-## Parametrar
+### Parametrar
 
-`Villkor` Är ett uttryck som utvärderar till sant eller falskt.
+`conditions (eller flera vilkor)` Är ett uttryck som utvärderar till sant eller falskt.
+
+`xpr1, expr2` Är uttryck med värden av vilken typ som helst.

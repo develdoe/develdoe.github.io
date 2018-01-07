@@ -13,4 +13,4 @@ condition ? expr1 : expr2
 
 ## Parametrar
 
-`Villkor` ÄR ett uttryck som utvärderar till sant eller falskt.
+`Villkor` Är ett uttryck som utvärderar till sant eller falskt.

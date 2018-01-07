@@ -89,3 +89,37 @@ var url = age > 18 ? (
 location.assign(url); // "stop.html"
 ```
 
+## Returnera ternära uttryck
+
+Den ternära operatören lånar sig bra för att ge avkastning som annars skulle kräva ett `if/else` uttryck.
+
+```js
+var func1 = function( .. ) {
+  if (condition1) { return value1 }
+  else { return value2 }
+}
+
+var func2 = function( .. ) {
+  return condition1 ? value1 : value2
+}
+```
+
+Ett bra sätt att upptäcka att den ternära är en lämplig ersättning för en `if/else` uttryck är när `return` nyckelord används flera gånger och är det enda uttrycket inuti if-block.
+
+Genom att bryta ternaryen på flera linjer och utnyttja extra blankutrymme kan den ternära operatören användas för att mycket rent ersätta en lång rad `if/else` uttryck.
+
+```js
+var func1 = function( .. ) {
+  if (condition1) { return value1 }
+  else if (condition2) { return value2 }
+  else if (condition3) { return value3 }
+  else { return value4 }
+}
+
+var func2 = function( .. ) {
+  return condition1 ? value1
+       : condition2 ? value2
+       : condition3 ? value3
+       :              value4
+}
+```

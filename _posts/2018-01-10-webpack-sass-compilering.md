@@ -88,6 +88,12 @@ module.exports = {
 }
 ```
 
+Nu när du vill kompilera din app kör du bara:
+
+```bash
+webpack
+```
+
 
 
 

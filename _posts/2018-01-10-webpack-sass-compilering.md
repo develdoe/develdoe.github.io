@@ -180,7 +180,7 @@ module.exports = {
 
 *./src/style.scss*
 
-```
+```js
 $background: #c0c0c0;
 
 body {

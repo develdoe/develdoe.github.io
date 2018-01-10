@@ -197,6 +197,7 @@ console.log('I am running! Woohoo!')
 document.getElementById('app').innerHTML = 'My app is working!'
 ```
 
+Stilar lagras i app.js och importeras till din sida som inline stylesheets.
 
 
 

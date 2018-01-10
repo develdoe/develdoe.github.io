@@ -22,3 +22,8 @@ Göra `webpack` kommandot globalt tillgängligt.
 npm install webpack -g
 ```
 
+Installera webpack-dev-server, som gör att du kan använda webpack-dev-server globalt
+
+```bash
+npm install webpack-dev-server -g
+```

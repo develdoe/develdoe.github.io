@@ -163,13 +163,18 @@ module.exports = {
     },
 
     module: {
-        loaders: [
+        rules: [{
+            test: /\.scss$/,
+            use: [
             {
-                test: /\.scss$/,
-                loaders: ["style", "css", "sass"]
-            }
-        ]
-  }
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "sass-loader" // compiles Sass to CSS
+            }]
+        }]
+    }
 }
 ```
 

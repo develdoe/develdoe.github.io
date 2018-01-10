@@ -93,6 +93,10 @@ Nu när du vill kompilera din app kör du bara:
 ```bash
 webpack
 ```
+Nu slipper du skriva hela kommandot om och om igen. 
+
+Webpack levereras med en funktion som kallas watch, `wepback -w`. Men du kan ange det som en inställning i config-filen. När du är inställd på true, kommer webpack lyssna efter ändringar i dina projektfiler och omkompilerar dina tillgångar direkt utan att du behöver göra någonting.
+
 
 
 

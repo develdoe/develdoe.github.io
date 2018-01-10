@@ -143,7 +143,7 @@ module.exports = {
 Det finns hundratals lastare tillgängliga. För tillfället håller vi oss med Sass-lastaren. Detta tar dina sass- och scss-filer och sammanställer dem till en enda css-fil. Först kan vi installera dem:
 
 ```bash
-npm install sass-loader node-sass --save-dev
+npm install sass-loader node-sass css-loader --save-dev
 ```
 
 *./webpack.config.js*
@@ -176,6 +176,16 @@ module.exports = {
 *./src/style.scss*
 
 ```css
+$background: #c0c0c0;
+
+body {
+    background-color: $background;
+}
+```
+
+*./src/app.js*
+
+```js
 
 
 

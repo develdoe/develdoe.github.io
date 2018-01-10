@@ -73,6 +73,8 @@ Låt oss göra lite Webpack magi. Kör följande kommando:
 webpack ./src/app.js bundle.js
 ```
 
+Kommandot ovan kommer att ta tag i app.js och kompilera det till bundle.js som laddas i index.html.
+
 
 
 

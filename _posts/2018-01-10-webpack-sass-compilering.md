@@ -75,7 +75,18 @@ webpack ./src/app.js bundle.js
 
 Kommandot ovan kommer att ta tag i app.js och kompilera det till bundle.js som laddas i index.html.
 
+## Webpack config fil
 
+*./webpack.config.js*
+
+```js
+module.exports = {
+    entry: "./src/app.js",
+    output: {
+        filename: "bundle.js"
+    }
+}
+```
 
 
 

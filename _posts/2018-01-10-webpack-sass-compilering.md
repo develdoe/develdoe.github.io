@@ -42,7 +42,8 @@ npm init
 
 ### Skapa en ny bundle
 
-Nu är det dags att konfigurera din app. Skapa ett index.html-fil i roten till ditt projekt. Detta kommer att vara startpunkten för din webbläsare.
+
+*./index.html*
 
 ```html
 <!DOCTYPE html>
@@ -58,6 +59,21 @@ Nu är det dags att konfigurera din app. Skapa ett index.html-fil i roten till d
     <div id="app"></div>
     <script src="bundle.js"></script>
 ```
+
+*./src/app.js*
+
+```js
+console.log('I am running! Woohoo!')
+document.getElementById('app').innerHTML = 'My app is working!'
+```
+
+Låt oss göra lite Webpack magi. Kör följande kommando:
+
+```bash
+webpack ./src/app.js bundle.js
+```
+
+
 
 
 

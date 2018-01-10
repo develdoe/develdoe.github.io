@@ -123,5 +123,62 @@ webpack-dev-server
 
 Webpack följer nu dina filer och serverar din app via `http://localhost:8080`. Det sista vi vill göra är att uppdatera sidan automatiskt när en fil ändras.
 
+Detta kan också göras i webpack.config.js
+
+```js
+module.exports = {
+    entry: "./src/app.js",
+    output: {
+        filename: "bundle.js"
+    },
+    watch: true,
+    devServer: {
+        inline: true
+    }
+}
+```
+
+## Hantering av Sass-filer
+
+Det finns hundratals lastare tillgängliga. För tillfället håller vi oss med Sass-lastaren. Detta tar dina sass- och scss-filer och sammanställer dem till en enda css-fil. Först kan vi installera dem:
+
+```bash
+npm install sass-loader node-sass --save-dev
+```
+
+*./webpack.config.js*
+
+```js
+module.exports = {
+    entry: "./src/app.js",
+
+    output: {
+        filename: "bundle.js"
+    },
+
+    watch: true,
+
+    devServer: {
+        inline: true
+    },
+
+    module: {
+        loaders: [
+            {
+                test: /\.scss$/,
+                loaders: ["style", "css", "sass"]
+            }
+        ]
+  }
+}
+```
+
+*./src/style.scss*
+
+```css
+
+
+
+
 
 

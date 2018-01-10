@@ -27,3 +27,7 @@ Installera webpack-dev-server, som gör att du kan använda webpack-dev-server g
 ```bash
 npm install webpack-dev-server -g
 ```
+
+## Skapa ett nytt projekt
+
+`mkdir {projektkatalog}`, `cd {projektkatalog}` och `npm init` . Detta kommer att ställa några frågor om ditt projekt. Dessa inställningar kan ändras i din package.json efteråt.

@@ -28,7 +28,7 @@ Installera webpack-dev-server, som gör att du kan använda webpack-dev-server g
 npm install webpack-dev-server -g
 ```
 
-## Skapa ett nytt projekt
+### Skapa ett nytt node module projekt
 
 Initera ett nytt npm projekt. 
 
@@ -39,3 +39,26 @@ npm init
 ```
 
 *Dessa inställningar kan ändras i din `package.json` efteråt.*
+
+### Skapa en ny bundle
+
+Nu är det dags att konfigurera din app. Skapa ett index.html-fil i roten till ditt projekt. Detta kommer att vara startpunkten för din webbläsare.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="app"></div>
+    <script src="bundle.js"></script>
+```
+
+
+
+

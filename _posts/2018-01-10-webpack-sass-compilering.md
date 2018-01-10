@@ -117,5 +117,11 @@ webpack
 
 Nu när vi ställt in våra Webpack-inställningar är dags att ta en titt på den `webpack-dev-server` som vi har installerat tidigare. Att köra den här servern är lätt.
 
+```bash
+webpack-dev-server
+```
+
+Webpack följer nu dina filer och serverar din app via `http://localhost:8080`. Det sista vi vill göra är att uppdatera sidan automatiskt när en fil ändras.
+
 
 

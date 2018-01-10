@@ -30,4 +30,4 @@ npm install webpack-dev-server -g
 
 ## Skapa ett nytt projekt
 
-`mkdir {projektkatalog}`, `cd {projektkatalog}` och `npm init` . Du kommer få ett antal frågor om ditt projekt. Dessa inställningar kan ändras i din `package.json` efteråt.
+`mkdir {projektkatalog}`, `cd {projektkatalog}`. Du kommer få ett antal frågor om ditt projekt. Dessa inställningar kan ändras i din `package.json` efteråt.

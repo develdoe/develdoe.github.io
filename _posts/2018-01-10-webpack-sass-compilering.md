@@ -138,6 +138,66 @@ module.exports = {
 }
 ```
 
+## Hantering av Sass-filer
+
+Det finns hundratals lastare tillgängliga. För tillfället håller vi oss med Sass-lastaren. Detta tar dina sass- och scss-filer och sammanställer dem till en enda css-fil. Först kan vi installera dem:
+
+```bash
+npm install sass-loader node-sass css-loader --save-dev
+```
+
+*./webpack.config.js*
+
+```js
+module.exports = {
+    entry: "./src/app.js",
+
+    output: {
+        filename: "bundle.js"
+    },
+
+    watch: true,
+
+    devServer: {
+        inline: true
+    },
+
+    module: {
+        rules: [{
+            test: /\.scss$/,
+            use: [
+            {
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "sass-loader" // compiles Sass to CSS
+            }]
+        }]
+    }
+}
+```
+
+*./src/style.scss*
+
+```css
+$background: #c0c0c0;
+
+body {
+    background-color: $background;
+}
+```
+
+*./src/app.js*
+
+```js
+import './style.scss'
+
+console.log('I am running! Woohoo!')
+document.getElementById('app').innerHTML = 'My app is working!'
+```
+
+Stilar lagras i app.js och importeras till din sida som inline stylesheets.
 
 
 

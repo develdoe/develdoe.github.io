@@ -16,6 +16,8 @@ Kort sagt är Webpack en modulbuntare. Det tar tillgångar (som javascript, HTML
 
 ## Setup
 
+Göra `webpack` kommandot globalt tillgängligt.
+
 ```bash
 npm install webpack -g
 ```

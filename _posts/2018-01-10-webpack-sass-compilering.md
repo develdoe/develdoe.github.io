@@ -137,6 +137,47 @@ Webpack följer nu dina filer och serverar din app via `http://localhost:8080`.
 ...
 ```
 
+### WriteFilePlugin
+
+För att få dev server att skriva till disk måste vi installera WriteFilePlugin
+
+```
+npm install write-file-webpack-plugin --save-dev
+```
+
+*webpack.config.js*
+
+```
+const path = require('path')
+const WriteFilePlugin = require('write-file-webpack-plugin')
+
+module.exports = {
+    entry: "./src/root.js",
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: "/dist/",
+        filename: 'bundle.js'
+    },
+
+    watch: true,
+
+    devServer: {
+        inline: true
+    },
+
+    module: {
+        rules: [{
+            test: /\.css$/,
+            use: [ 'style-loader', 'css-loader' ]
+        }]
+    },
+
+    plugins: [
+        new WriteFilePlugin()
+    ]
+}
+```
+
 ## Hantering av Sass-filer
 
 Det finns hundratals lastare tillgängliga. För tillfället håller vi oss med Sass-lastaren. Detta tar dina sass- och scss-filer och sammanställer dem till en enda css-fil. Först kan vi installera dem:

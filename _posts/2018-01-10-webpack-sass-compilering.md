@@ -124,21 +124,17 @@ Nu när vi ställt in våra Webpack-inställningar är dags att ta en titt på d
 webpack-dev-server
 ```
 
-Webpack följer nu dina filer och serverar din app via `http://localhost:8080`. Det sista vi vill göra är att uppdatera sidan automatiskt när en fil ändras.
+Webpack följer nu dina filer och serverar din app via `http://localhost:8080`. 
 
-Detta kan också göras i webpack.config.js
+*package.json*
 
 ```js
-module.exports = {
-    entry: "./src/app.js",
-    output: {
-        filename: "bundle.js"
-    },
-    watch: true,
-    devServer: {
-        inline: true
-    }
-}
+...
+"scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server"
+  },
+...
 ```
 
 ## Hantering av Sass-filer

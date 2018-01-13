@@ -139,7 +139,7 @@ Webpack följer nu dina filer och serverar din app via `http://localhost:8080`.
 
 ### WriteFilePlugin
 
-För att få dev server att skriva till disk måste vi installera WriteFilePlugin
+För att få dev-server att skriva till disk måste vi installera WriteFilePlugin
 
 ```
 npm install write-file-webpack-plugin --save-dev

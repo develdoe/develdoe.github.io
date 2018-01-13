@@ -63,8 +63,8 @@ npm init
 *./src/app.js*
 
 ```js
-console.log('I am running! Woohoo!')
-document.getElementById('app').innerHTML = 'My app is working!'
+console.log.("running...")
+document.getElementById('app').innerHTML = 'Upp and Running!'
 ```
 
 Låt oss göra lite Webpack magi. Kör följande kommando:
@@ -198,9 +198,3 @@ document.getElementById('app').innerHTML = 'My app is working!'
 ```
 
 Stilar lagras i app.js och importeras till din sida som inline stylesheets.
-
-
-
-
-
-

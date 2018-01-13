@@ -157,10 +157,6 @@ module.exports = {
 
     watch: true,
 
-    devServer: {
-        inline: true
-    },
-
     module: {
         rules: [{
             test: /\.scss$/,

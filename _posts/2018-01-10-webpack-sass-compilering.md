@@ -60,7 +60,7 @@ npm init
     <script src="bundle.js"></script>
 ```
 
-*./src/app.js*
+*./src/root.js*
 
 ```js
 console.log.("running...")
@@ -83,7 +83,7 @@ Kommandot ovan kommer att ta tag i app.js och kompilera det till bundle.js som l
 const path = require('path')
 
 module.exports = {
-    entry: "./src/app.js",
+    entry: "./src/root.js",
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
@@ -102,7 +102,7 @@ Webpack levereras med en funktion som kallas watch, `wepback -w`. Men du kan ang
 
 ```js
 module.exports = {
-    entry: "./src/app.js",
+    entry: "./src/root.js",
     output: {
         filename: "bundle.js"
     },

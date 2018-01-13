@@ -147,7 +147,7 @@ npm install write-file-webpack-plugin --save-dev
 
 *webpack.config.js*
 
-```
+```js
 const path = require('path')
 const WriteFilePlugin = require('write-file-webpack-plugin')
 

@@ -80,10 +80,13 @@ Kommandot ovan kommer att ta tag i app.js och kompilera det till bundle.js som l
 *./webpack.config.js*
 
 ```js
+const path = require('path')
+
 module.exports = {
     entry: "./src/app.js",
     output: {
-        filename: "bundle.js"
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.js'
     }
 }
 ```

@@ -65,3 +65,16 @@ Förbered först ett annat basnamn för filerna relaterade till klientcertifikat
 FILENAME=client
 ```
 
+Upprepa proceduren för certifikatgenerering som beskrivs ovan. Kopiera client.pem till SSL-klienten och client.crt till servern.
+
+## OpenSSL Server
+
+I stället för att använda en tcp-lyssning (tcp-l) -adress, använder vi openssl-listen (ssl-l) för servern, cert = ... berättar programmet för filen som innehåller dess ceritificate och privat nyckel och cafile =. .. pekar på filen som innehåller certifikat av peer; Vi litar bara på klienter om de kan bevisa att de har den privata nyckeln (OpenSSL hanterar detta för oss):
+
+```bash
+socat openssl-listen:4433,reuseaddr,cert=$HOME/etc/server.pem,cafile=$HOME/etc/client.crt echo
+```
+
+Efter att ha startat det här kommandot bör socat lyssna på port 4433, men kräver klientautentisering.
+
+## OpenSSL Client

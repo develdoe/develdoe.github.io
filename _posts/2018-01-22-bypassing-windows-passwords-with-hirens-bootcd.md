@@ -5,8 +5,9 @@ title: Bypassing Windows Passwords with Hirens BootCD
 ---
 * Boot Hirens bootCD
 * Select Kon-Boot
-* Run
- * cmd
- * net user
- * net user *{username}*
- * type new password
+* Run -> cmd
+```bash
+net user
+net user {username} 
+//type new password
+```

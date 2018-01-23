@@ -12,3 +12,4 @@ nc -l -p {port}
 nc {idaddress} {port}
 ```
 
+[CheatSheet](https://www.sans.org/security-resources/sec560/netcat_cheat_sheet_v1.pdf)

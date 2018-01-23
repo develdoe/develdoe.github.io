@@ -78,3 +78,11 @@ socat openssl-listen:4433,reuseaddr,cert=$HOME/etc/server.pem,cafile=$HOME/etc/c
 Efter att ha startat det här kommandot bör socat lyssna på port 4433, men kräver klientautentisering.
 
 ## OpenSSL Client
+
+Ersätt ditt tcp-kopplings- eller tcp-adressord med openssl-connect eller bara ssl och lägg till cert och cafile-alternativ här:
+
+``bash
+socat stdio openssl-connect:server.domain.org:4433,cert=$HOME/etc/client.pem,cafile=$HOME/etc/server.crt
+```
+
+Detta kommando bör skapa en säker anslutning till serverprocessen.

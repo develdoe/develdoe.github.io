@@ -21,13 +21,13 @@ Vi antar att serverns värd heter *server.domain.org* och servernsprocessen anv�
 
 Utför följande steg på en betrodd värd där OpenSSL är installerat. Det kan lika väl vara klienten eller servern värd själva.
 
-Förbered ett basnamn för filerna relaterade till serverns certifikat:
+Förbered ett basnamn:
 
 ```bash
 FILENAME=server
 ```
 
-Skapa ett offentligt / privat nyckelpar:
+Skapa ett offentligt/privat nyckelpar:
 
 ```bash
 openssl genrsa -out $FILENAME.key 1024
@@ -39,7 +39,7 @@ Skapa ett självtecknat certifikat:
 openssl req -new -key $FILENAME.key -x509 -days 3653 -out $FILENAME.crt
 ```
 
-Du kommer att bli uppmanad att ange landskod, namn etc .; du kan sluta alla anvisningar med enter-tangenten.
+*Du kommer att bli uppmanad att ange landskod, namn etc .; du kan sluta alla anvisningar med enter-tangenten.*
 
 Generera PEM-filen genom att bara lägga till nyckel- och certifikatfilerna:
 
@@ -52,3 +52,16 @@ The files that contain the private key should be kept secret, thus adapt their p
 ```bash
 chmod 600 $FILENAME.key $FILENAME.pem
 ```
+
+Ta nu filen `server.pem` till SSL-servern, t.ex. att katalogera  HOME/etc/, med en säker kanal som USB-minne eller SSH. Håll fasta behörigheter på filen även på målvärden och ta bort alla andra instanser av `server.key` och `server.pem`.
+
+Kopiera trustcertifikat `server.crt` till SSL-klientvärden, t.ex. att katalog `$HOME/etc/`; en säker kanal krävs inte här, och behörigheterna är inte kritiska.
+
+## Skapa ett klientcertifikat
+
+Förbered först ett annat basnamn för filerna relaterade till klientcertifikatet:
+
+```bash
+FILENAME=client
+```
+

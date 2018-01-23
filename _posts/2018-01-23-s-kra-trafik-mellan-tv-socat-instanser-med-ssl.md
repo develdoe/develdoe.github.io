@@ -1,6 +1,6 @@
 ---
 date: '2018-01-23 14:28 +0100'
-published: false
+published: true
 title: Säkra trafik mellan två socat-instanser med SSL
 ---
 ## Introduktion

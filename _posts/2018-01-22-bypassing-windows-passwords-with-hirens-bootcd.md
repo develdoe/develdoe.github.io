@@ -4,10 +4,5 @@ published: false
 title: Bypassing Windows Passwords with Hirens BootCD
 ---
 * Boot Hirens bootCD
-* Select Kon-Boot
-* Run -> cmd
-```bash
-net user
-net user {username} 
-//type new password
-```
+* Select "Offline NT/2000/XP/Vista/7 Password Changer"
+* 

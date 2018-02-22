@@ -123,3 +123,25 @@ const Plugin = {
 export default Plugin
 ```
 
+**Mixins är ett ganska avancerat ämne som ligger utanför ramen för denna artikel. För närvarande är en tillräcklig förklaring att de i huvudsak är komponentdefinitioner som kombineras i (blandas i) andra komponenter.**
+
+## Automatisk installation
+
+För personer som använder pluginet utanför ett modulsystem förväntas det ofta att, om ditt plugin ingår efter Vue-skriptet, kommer automatiskt att installera sig utan att behöva anropa Vue.use().
+
+Du kan implementera detta genom att lägga till dessa rader i slutet av plugin.js:
+
+```js
+// Automatic installation if Vue has been added to the global scope.
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(MyPlugin)
+}
+```
+
+## Distribuera ditt plugin
+
+När du har skrivit ett plugin och redo att distribuera det till samhället, är det några vanliga steg för att hjälpa personer att upptäcka ditt plugin om du inte redan är bekant med processen.
+
+* Publish the source code and distributable files to NPM and GitHub. (Make sure you choose a fitting license for your code!)
+* Open a pull request to the official Vue cool-stuff-discovery repository: Awesome-Vue. Lots of people come here to look for plugins.
+* (Optional) Post about it on the Vue Forum, Vue Gitter Channel and on Twitter with the hashtag #vuejs.

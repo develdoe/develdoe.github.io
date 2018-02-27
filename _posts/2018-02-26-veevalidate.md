@@ -65,7 +65,6 @@ För att kombinera båda reglerna tilldelar vi strängvärdet `required|email` t
 
 ## Tillgängliga regler
 
-| Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
 |after|alpha|alpha|
 |_dash|alpha_num|alpha_spaces|

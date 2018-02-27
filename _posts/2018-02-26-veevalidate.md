@@ -123,6 +123,7 @@ Du kan ange en fördröjning för att debounce input händelsen, ett scenariot s
 export default {
   name: 'delay-example'
 };
+```
 
 ## Tillgängliga regler
 

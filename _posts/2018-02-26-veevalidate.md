@@ -280,6 +280,165 @@ export default {
 };
 ```
 
+## Scopes
+
+Som standard är validatorns räckvidd den samma som den Vue-instans som äger den. Ibland kan du ha flera fält inom samma komponent, de är i olika former och tjänar olika syften. Valideraren behandlar sedan de två fälten som samma fält som kommer att orsaka problem att detektera inmatningen och visa felen.
+
+Du kan berätta valideraren att omfatta fälten genom att lägga till en `data-vv-scope` attribut som ger valideraren namnet på omfattningen.
+
+Dessa fält identifieras sedan med namnet och deras omfattning, du kan ha inmatningar med samma namn i olika scopes, och du kan visa, rensa och validera dessa områden oberoende.
+
+För enkelhets skyld kan du lägga till `data-vv-scope` attribut på det formuläret, så behöver du inte lägga till attributet på varje input. Du kan också överföra `scope` attributet till valideringsuttrycket.
+
+```html
+<div class="columns is-multiline">
+    <form @submit.prevent="validateForm('form-1')" class="columns column is-multiline is-12" data-vv-scope="form-1">
+        <legend>Form 1</legend>
+        <div class="column is-12">
+            <label class="label">Email</label>
+            <p class="control has-icon has-icon-right">
+                <input name="email" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('form-1.email') }" type="text" placeholder="Email">
+                <i v-show="errors.has('form-1.email')" class="fa fa-warning"></i>
+                <span v-show="errors.has('form-1.email')" class="help is-danger">{{ errors.first('form-1.email') }}</span>
+            </p>
+        </div>
+        <div class="column is-12">
+            <label class="label">Password</label>
+            <p class="control has-icon has-icon-right">
+                <input name="password" v-validate="'required|min:6'" :class="{'input': true, 'is-danger': errors.has('form-1.password') }" type="password" placeholder="Password">
+                <i v-show="errors.has('form-1.password')" class="fa fa-warning"></i>
+                <span v-show="errors.has('form-1.password')" class="help is-danger">{{ errors.first('form-1.password') }}</span>
+            </p>
+        </div>
+        <div class="column is-12">
+            <p class="control">
+                <button class="button is-primary" type="submit" name="button">Sign up</button>
+                <button class="button is-danger" type="button" name="button" @click="errors.clear('form-1')">Clear</button>
+            </p>
+        </div>
+    </form>
+    <form @submit.prevent="validateForm('form-2')" class="columns column is-multiline is-12" data-vv-scope="form-2">
+        <legend>Form 2</legend>
+        <div class="column is-12">
+            <label class="label">Email</label>
+            <p class="control has-icon has-icon-right">
+                <input name="email" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('form-2.email') }" type="text" placeholder="Email">
+                <i v-show="errors.has('form-2.email')" class="fa fa-warning"></i>
+                <span v-show="errors.has('form-2.email')" class="help is-danger">{{ errors.first('form-2.email') }}</span>
+            </p>
+        </div>
+        <div class="column is-12">
+            <label class="label">Password</label>
+            <p class="control has-icon has-icon-right">
+                <input name="password" v-validate="'required|min:6'" :class="{'input': true, 'is-danger': errors.has('form-2.password') }" type="password" placeholder="Password">
+                <i v-show="errors.has('form-2.password')" class="fa fa-warning"></i>
+                <span v-show="errors.has('form-2.password')" class="help is-danger">{{ errors.first('form-2.password') }}</span>
+            </p>
+        </div>
+        <div class="column is-12">
+            <p class="control">
+                <button class="button is-primary" type="submit" name="button">Sign up</button>
+                <button class="button is-danger" type="button" name="button" @click="errors.clear('form-2')">Clear</button>
+            </p>
+        </div>
+    </form>
+</div>
+```
+
+```js
+xport default {
+  name: 'scopes-example',
+  methods: {
+    validateForm(scope) {
+      this.$validator.validateAll(scope).then((result) => {
+        if (result) {
+          // eslint-disable-next-line
+          alert('Form Submitted!');
+        }
+      });
+    }
+  }
+};
+```
+
+## Async-validering
+
+Låt oss säga att du vill validera något specifikt för din appdomän som inte tillhandahålls av standardvalidatorerna.
+
+Till exempel kan vi validera en användarkupong vid kassan. Om det är en giltig kupong så rabatt du det för honom, om inte han betalar det fulla priset.
+
+Här är en lista över våra giltiga kuponger: `SUMMER2016`, `WINTER2016` och `FALL2016`.
+
+Var och en som ger 20% rabatt. Valideringsprocessen är följande: vi tar in inmatningen och skickar den till backend, svaret bör avgöra om kupongen är giltig vilket är upp till dig.Här simulerar jag async beteende med `setTimeout`.
+
+Vee-Validate allows the usage of async validators, but it requires them to return a promise that resolves with an object containing the property `valid` vilket borde motsvara ett booleskt tillstånd i valideringsstatusen.
+
+**html**
+```html
+<div class="columns is-multiline">
+    <div class="column is-12">
+        <span :class="{ 'discounted': discounted }">Price: {{ price }}$</span>
+        <span v-show="discounted" class="SeemsGood">{{ discountedPrice }}$</span>
+    </div>
+    <form @submit.prevent="applyCoupon" class="column is-12">
+        <label class="label">Coupon</label>
+        <p class="control has-icon has-icon-right">
+            <input v-model="coupon" name="coupon" :class="{'input': true, 'is-danger': errors.has('coupon') }" type="text" placeholder="Enter Your Coupon">
+            <i v-show="errors.has('coupon')" class="fa fa-warning"></i>
+            <span v-show="errors.has('coupon')" class="help is-danger">{{ errors.first('coupon') }}</span>
+        </p>
+
+        <p class="control">
+            <button type="submit" class="button is-primary" name="button">Apply</button>
+        </p>
+    </form>
+</div>
+```
+
+**js**
+```js
+import { Validator } from 'vee-validate';
+
+export default {
+  name: 'coupon-example',
+  data: () => ({
+    coupon: '',
+    price: 100,
+    discounted: false
+  }),
+  computed: {
+    discountedPrice() {
+      return this.discounted ? this.price - (0.2 * this.price) : this.price;
+    }
+  },
+  methods: {
+    applyCoupon() {
+      this.$validator.validate('coupon', this.coupon).then((result) => {
+        this.discounted = result;
+      });
+    }
+  },
+  created() {
+    Validator.extend('verify_coupon', {
+      getMessage: field => `The ${field} is not a valid coupon.`,
+      validate: value => new Promise((resolve) => {
+        // API call or database access.
+        const validCoupons = ['SUMMER2016', 'WINTER2016', 'FALL2016'];
+
+        setTimeout(() => {
+          resolve({
+            valid: value && validCoupons.indexOf(value.toUpperCase()) !== -1
+          });
+        }, 500);
+      })
+    });
+    this.$validator.attach({
+      name: 'coupon',
+      rules: 'required|verify_coupon'
+    });
+  }
+};
+```
 
 ## Tillgängliga regler
 

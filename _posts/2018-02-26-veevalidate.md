@@ -63,6 +63,45 @@ Använd `required` för att ange att fältet är obligatoriskt och `email` för 
 
 För att kombinera båda reglerna tilldelar vi strängvärdet `required|email` till v-validate uttrycksvärdet.
 
+**html**
+```html
+<div class="columns is-multiline">
+    <div class="column is-12">
+        <label class="label">Email (1s delay)</label>
+        <p class="control has-icon has-icon-right">
+            <input name="email" v-validate="'required|email'" data-vv-delay="1000" :class="{'input': true, 'is-danger': errors.has('email') }" type="text" placeholder="Email">
+            <i v-show="errors.has('email')" class="fa fa-warning"></i>
+            <span v-show="errors.has('email')" class="help is-danger">{{ errors.first('email') }}</span>
+        </p>
+    </div>
+    <div class="column is-12">
+        <label class="label">Name (0.5s delay)</label>
+        <p class="control has-icon has-icon-right">
+            <input name="name" v-validate="'required|alpha'" data-vv-delay="500" :class="{'input': true, 'is-danger': errors.has('name') }" type="text" placeholder="Name">
+            <i v-show="errors.has('name')" class="fa fa-warning"></i>
+            <span v-show="errors.has('name')" class="help is-danger">{{ errors.first('name') }}</span>
+        </p>
+    </div>
+</div>
+```
+
+**js**
+```js
+export default {
+  name: 'basic-example'
+};
+```
+
+## Försenad validering (debounced)
+
+Du kan ange en fördröjning för att debounce input händelsen, ett scenariot som du kanske vill vänta på att användaren slutar skriva och sedan validera fältet. Detta kan uppnås genom att lägga till ett data-vv-delay attribut på fältet som valideras och tilldela det antal millisekunder du vill vänta på.
+
+**js**
+```js
+export default {
+  name: 'delay-example'
+};
+
 ## Tillgängliga regler
 
 |:------------- |:-------------:| -----:|

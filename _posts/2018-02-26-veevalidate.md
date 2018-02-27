@@ -65,33 +65,16 @@ För att kombinera båda reglerna tilldelar vi strängvärdet `required|email` t
 
 ## Tillgängliga regler
 
-after
-alpha
-alpha_dash
-alpha_num
-alpha_spaces
-before
-between
-confirmed
-credit_card
-date_between
-date_format
-decimal
-digits
-dimensions
-email
-ext
-image
-in
-ip
-max
-max_value
-mimes
-min
-min_value
-not_in
-numeric
-regex
-required
-size
-url
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+|after|alpha|alpha|
+|_dash|alpha_num|alpha_spaces|
+|before|between|confirmed|
+|credit_card|date_between|date_format|
+|decimal|digits|dimensions|
+|email|ext|image|
+|in|ip|max|
+|max_value|mimes|min|
+|min_value|not_in|numeric|
+|regex|required|size|
+|url

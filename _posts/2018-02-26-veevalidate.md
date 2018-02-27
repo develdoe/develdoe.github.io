@@ -133,6 +133,15 @@ export default {
 };
 ```
 
+**Uttrycket för både arg och  v-model direktivet måste vara ett enkelt pricknotationsuttryck, och uttrycket måste existera på förekomsten. Om du till exempel har inputs i en slinga som är bunden av iteratorn, fungerar det inte korrekt och används istället de traditionella lyssnare.**
+
+Som du kan se är arg name som säger `v-validate` att titta på när namnet ändras.
+
+**Du kan debounce validering med `lazy` modifierare på ditt v-model direktiv, vilket gör att valideringen endast ska ske när användaren lämnar inmatningen.**
+
+## Initial Value Validation
+
+
 ## Tillgängliga regler
 
 |:------------- |:-------------:| -----:|

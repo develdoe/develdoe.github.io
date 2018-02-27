@@ -130,6 +130,22 @@ I nästa exempel märker användningen av .initial modifier för att tvinga vali
 <input name="email" v-model="email" v-validate.initial="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" type="text" placeholder="Email">
 ```
 
+```js
+export default {
+  name: 'data-example',
+  data: () => ({
+    email: '',
+    first_name: '',
+    last_name: ''
+  }),
+  computed: {
+    name() {
+      return `${this.first_name} ${this.last_name}`;
+    }
+  }
+};
+```
+
 ## Tillgängliga regler
 
 |:------------- |:-------------:| -----:|

@@ -43,3 +43,20 @@ npm install vee-validate --save
   Vue.use(VeeValidate); // good to go.
 </script>
 ```
+
+
+eller så kan du importera med hjälp av ES6:
+
+```js
+import Vue from 'vue';
+import VeeValidate from 'vee-validate';
+
+Vue.use(VeeValidate);
+```
+
+## Grundläggande exempel
+
+
+Allt du behöver är att lägga till `v-validate` direktivet till inmatningen du vill validera. Sedan vidarebefordra till direktivet en reglersträng som innehåller en lista över valideringsregler separerade av ett rör `|`.
+
+Använd `required` för att ange att fältet är obligatoriskt och `email` för att ange att fältet måste vara ett e-postmeddelande.

@@ -85,16 +85,9 @@ För att kombinera båda reglerna tilldelar vi strängvärdet `required|email` t
 </div>
 ```
 
-**js**
-```js
-export default {
-  name: 'basic-example'
-};
-```
-
 ## Försenad validering (debounced)
 
-Du kan ange en fördröjning för att debounce input händelsen, ett scenariot som du kanske vill vänta på att användaren slutar skriva och sedan validera fältet. Detta kan uppnås genom att lägga till ett data-vv-delay attribut på fältet som valideras och tilldela det antal millisekunder du vill vänta på.
+I ett scenario där du vill vänta på att användaren slutar skriva och sedan validera fältet. Detta kan uppnås genom att lägga till ett `data-vv-delay` attribut på fältet som valideras och tilldela det antal millisekunder du vill vänta på.
 
 **html**
 ```html
@@ -118,11 +111,25 @@ Du kan ange en fördröjning för att debounce input händelsen, ett scenariot s
 </div>
 ```
 
-**js**
+## Models Validering
+
+`v-validate` direktivet detekterar om input har v-model bunden till samma input, och tittar på det värdet och validerar det när det ändras. Men det kan också lyssna på förändringar i computed attribut genom att använda `arg` så här:
+
+```html
+<input v-validate:name="'required|alpha_spaces'" type="text" name="name">
+```
 
 ```js
 export default {
-  name: 'delay-example'
+  data: () => ({
+    first_name: '',
+    last_name: ''
+  }),
+  computed: {
+    name() {
+      return this.first_name + ' ' + this.last_name;
+    }
+  }
 };
 ```
 

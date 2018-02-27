@@ -8,7 +8,7 @@ title: VeeValidate
 
 Det här är ett plugin för Vue.js som låter dig validera inmatningsfält och visa fel på ett enkelt och kraftfullt sätt.
 
-Du behöver inte göra något spacifikt i din app. Det mesta av arbetet ärt ren html. Du behöver bara ange, för varje input, vilken typ av validatorer som ska användas när värdet ändras. Du får då information om felen för varje fält.
+Du behöver inte göra något spacifikt i din app. Det mesta av arbetet är ren html. Du behöver bara ange, för varje input, vilken typ av validatorer som ska användas när värdet ändras. Du får då information om felen för varje fält.
 
 Även om de flesta av valideringarna sker automatiskt så kan du använda valideraren så som passar dig. Valideringsobjektet har inga beroenden och är ett fristående objekt.
 

@@ -60,3 +60,38 @@ Vue.use(VeeValidate);
 Allt du behöver är att lägga till `v-validate` direktivet till inmatningen du vill validera. Sedan vidarebefordra till direktivet en reglersträng som innehåller en lista över valideringsregler separerade av ett rör `|`.
 
 Använd `required` för att ange att fältet är obligatoriskt och `email` för att ange att fältet måste vara ett e-postmeddelande.
+
+För att kombinera båda reglerna tilldelar vi strängvärdet `required|email` till v-validate uttrycksvärdet.
+
+## Tillgängliga regler
+
+after
+alpha
+alpha_dash
+alpha_num
+alpha_spaces
+before
+between
+confirmed
+credit_card
+date_between
+date_format
+decimal
+digits
+dimensions
+email
+ext
+image
+in
+ip
+max
+max_value
+mimes
+min
+min_value
+not_in
+numeric
+regex
+required
+size
+url

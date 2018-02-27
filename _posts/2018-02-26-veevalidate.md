@@ -119,6 +119,7 @@ Du kan ange en fördröjning för att debounce input händelsen, ett scenariot s
 ```
 
 **js**
+
 ```js
 export default {
   name: 'delay-example'

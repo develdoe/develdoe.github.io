@@ -146,6 +146,12 @@ export default {
 };
 ```
 
+## Validate Form Before Submit
+
+Du kanske vill utlösa alla inmatningar validering innan du skickar in ett formulär, kanske en varning visas eller förhindra formulärinsändning om några fel upptäcks. Detta kan enkelt uppnås med `validateAll`  metod.
+
+
+
 ## Tillgängliga regler
 
 |:------------- |:-------------:| -----:|

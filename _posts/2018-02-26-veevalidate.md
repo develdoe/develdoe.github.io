@@ -124,6 +124,11 @@ Som du kan se är arg name som säger `v-validate` att titta på när namnet än
 
 ## Initial Value Validation
 
+I nästa exempel märker användningen av .initial modifier för att tvinga valideringen av fältets initialvärde.
+
+```html
+<input name="email" v-model="email" v-validate.initial="'required|email'" :class="{'input': true, 'is-danger': errors.has('email') }" type="text" placeholder="Email">
+```
 
 ## Tillgängliga regler
 

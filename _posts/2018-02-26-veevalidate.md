@@ -496,7 +496,84 @@ I det följande exemplet ingår inte det tredje värdet med regeln `in:1,2`
     </p>
 </form>
 ```
+**JS**
+```js
+export default {
+  name: 'radio-buttons-example',
+  data: () => ({
+    radio_group_2: '',
+  }),
+  methods: {
+    validateForm() {
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          // eslint-disable-next-line
+          alert('All Passes!');
+          return;
+        }
+        alert('Oh NO!');
+      });
+    }
+  }
+};
+```
 
+## Checkbox Example
+
+Vee-validate stöder också validering av kryssrutor. Men som radioknappar begränsas stödets omfattning av ingående naturen, men alla regler fungerar oavsett.
+
+Precis som för radioknappar behöver du bara bifoga valideringsdirektivet och attributen i kryssrutan under validering.
+
+If there are multiple checkboxes (group), you only have to add the directive on one of them. Om flera värden väljs väljer validatorn valideringarna i varje kryssruta.
+
+I följande exempel är den mest grundläggande användningen av kryssrutor, validering dav villkoravtal som ingen läser.
+
+**html**
+```html
+div>
+    <div class="terms">
+        <p>
+            {{ terms }}
+        </p>
+    </div>
+    <div>
+        <p class="control">
+            <label class="checkbox">
+                <input name="terms" v-validate="'required'" type="checkbox">
+                I agree to the terms and conditions.
+            </label>
+            <span class="help is-danger" v-show="errors.has('terms')">{{ errors.first('terms') }}</span>
+        </p>
+    </div>
+    <p class="control">
+        <button type="button" class="button is-primary" @click="nextStep">Next</button>
+    </p>
+</div>
+```
+
+**JS**
+```js
+const terms = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit ';
+
+export default {
+  name: 'checkbox-example',
+  data: () => ({
+    terms: terms.repeat(20)
+  }),
+  methods: {
+    nextStep() {
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          alert('You just agreed to conditions without reading it.');
+          return;
+        }
+        // eslint-disable-next-line
+        alert('You actually did not agree?');
+      });
+    }
+  }
+};
+```
 
 ## Tillgängliga regler
 

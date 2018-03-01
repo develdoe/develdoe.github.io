@@ -575,6 +575,105 @@ export default {
 };
 ```
 
+## Felväljare
+
+`errors.first` och `errors.has` metoderna ger dig inte bara ett sätt att hämta den första inmatningen för ett visst fält. De tillåter dig även att filtrera det vidare till en viss regel med följande syntax `field:rule`, ännu mer, de tillåter dig att filtrera det ner till ett specifikt omfång med `scope.field`, så om du vill visa det första felet för e-postfältet i nyhetsbrevet, men bara om regeln är e-post.
+
+```js
+errors.first('newsletter.email:email');
+```
+
+I exemplet nedan har du en samling fel och du kan använda inmatningen för att filtrera ner felen. Observera att det för närvarande inte är osannolikt att felpåsen kommer att ha flera fel av samma ingång eftersom den går ut tidigt efter det första felet.
+
+**html**
+```html
+<div class="columns is-multiline">
+    <div class="column is-12">
+        <label class="label">Type the selector</label>
+        <p class="control">
+            <input v-model="selector" class="input" type="text" placeholder="Rule Name">
+        </p>
+    </div>
+    <div class="column is-12">
+        <label><b>Selected Error</b></label>
+        <p>
+            {{ selectedError }}
+        </p>
+    </div>
+    <div class="column is-12">
+        <label><b>Available Errors:</b></label>
+        <pre>{{ errors }}</pre>
+    </div>
+</div>
+```
+
+**JS**
+```JS
+export default {
+  name: 'selectors-example',
+  data: () => ({
+    selector: ''
+  }),
+  computed: {
+    selectedError() {
+      if (! this.selector) {
+        return 'You did not select any error';
+      }
+
+      return this.errors.first(this.selector) || 'None Found';
+    }
+  },
+  created() {
+    this.errors.add('email', 'Newsletter Email is not valid', 'email', 'newsletter');
+    this.errors.add('email', 'Newsletter Email is required', 'required', 'newsletter');
+
+    this.errors.add('email', 'Email is not a valid email', 'email');
+    this.errors.add('name', 'name is required', 'required');
+  }
+};
+```
+ 
+## Custom Component validering
+
+Du kanske har en anpassad komponent som du vill behandla som en inmatning. Som ett eget inmatningsfält skulle det ha en egen validatorinstans, men du vill validera den i parent omfattningen eftersom det bara är en inmatning med några visselpipor på toppen.
+
+Du kan uppnå detta genom att använda direktivet normalt som om du skulle ha ett vanligt ingångselement, men du måste se till att din komponent uppfyller följande:
+
+Måste avge en input händelse när värdet ändras.
+Ska ha en `data-vv-name` eller ett `name` attribut definierat.
+Ska ha en `data-vv-value-path` attribut som anger hur man får tillgång till värdet från komponenten (Behövs för `validateAll` anrop)
+
+**HTML**
+```html
+<div class="columns is-multiline">
+    <div class="column is-12">
+        <custom-input v-validate="'required|email'" data-vv-value-path="innerValue" data-vv-name="custom" label="Email" :has-error="errors.has('custom')">
+        </custom-input>
+        <span v-show="errors.has('custom')" class="help is-danger">{{ errors.first('custom') }}</span>
+        <button @click="validate" type="button" class="button is-primary">Validate All</button>
+    </div>
+</div>
+```
+**JS**
+```js
+import CustomInput from '../CustomInput.vue';
+
+export default {
+  name: 'component-example',
+  components: {
+    CustomInput
+  },
+  methods: {
+    validate() {
+      this.$validator.validateAll().then((result) => {
+        // eslint-disable-next-line
+        alert(`Validation Result: ${result}`);
+      });
+    }
+  }
+};
+```
+
 ## Tillgängliga regler
 
 |:------------- |:-------------:| -----:|

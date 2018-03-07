@@ -34,3 +34,16 @@ module.exports = {
 ## Output
 
 Output berättar för webpack var buntarna hamnar och hur desssa ska namnges. Du kan konfigurera denna del av processen genom att ange ett `output` i din konfiguration:
+
+**webpack.config.js**
+```js
+const path = require('path')
+
+module.exports = {
+    entry: './path/to/my/entry/file.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'my-first-webpack.bundle.js'
+    }
+}
+```

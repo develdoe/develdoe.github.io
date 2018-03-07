@@ -47,3 +47,18 @@ module.exports = {
     }
 }
 ```
+
+I exemplet ovan använder vi `output.filename` och `output.path` för att berätta för webpack namnet på vårt paket och där vi vill att det ska skickas till.
+
+## Loaders
+
+Laddare gör det möjligt för webpack att bearbeta mer än bara JavaScript-filer (webpacken förstår bara JavaScript). De ger dig möjligheten att utnyttja webpacks samlingsfunktioner för alla typer av filer genom att konvertera dem till giltiga moduler som webpack kan hantera.
+
+I huvudsak omvandlar webpack-laddare alla typer av filer till moduler som kan ingå i applikationenens beroendegraf (och så småningom en bundle).
+
+*Observera att möjligheten att importera vilken typ av modul som helst, t.ex. .css-filer, är en funktion som är specifik för webpack och kanske inte stödjas av andra buntare eller uppgiftslöpare. Vi anser att denna förlängning av språket är motiverat eftersom det tillåter utvecklare att bygga en mer exakt beroendestruktur.*
+
+På hög nivå har laddare två ändamål i din webpackkonfiguration:
+
+1 `test` egenskapen identifierar vilken fil eller filer som ska transformeras.
+2 `use` egenskapen anger vilken laddare som ska användas för att göra transformationen.

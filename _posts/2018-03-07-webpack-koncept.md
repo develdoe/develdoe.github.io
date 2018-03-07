@@ -60,8 +60,8 @@ I huvudsak omvandlar webpack-laddare alla typer av filer till moduler som kan in
 
 På hög nivå har laddare två ändamål i din webpackkonfiguration:
 
-1 `test` egenskapen identifierar vilken fil eller filer som ska transformeras.
-2 `use` egenskapen anger vilken laddare som ska användas för att göra transformationen.
+1. `test` egenskapen identifierar vilken fil eller filer som ska transformeras.
+2. `use` egenskapen anger vilken laddare som ska användas för att göra transformationen.
 
 **webpack.config.js**
 ```js

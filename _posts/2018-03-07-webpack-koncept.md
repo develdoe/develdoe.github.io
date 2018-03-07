@@ -88,3 +88,43 @@ Konfigurationen ovan har definierat en `rules` egenskap för en enda modul med t
 Detta berättar för webpacks kompilator följande:
 
 > "Hej webpack-kompilator, när du stöter på en sökväg som löser en ".txt"-fil inuti ett `require()` / import-uttryck, använd raw-loader för att transformera den innan du lägger till den i bunten."
+
+**Det är viktigt att komma ihåg att när du definierar regler i din webpack-konfiguration definierar du dem under module.rules och inte rules.**
+
+*Det finns andra, mer specifika egenskaper att definiera på lastare som vi ännu inte har täckt.*
+
+## Plugins
+
+Medan loaders används för att omvandla vissa typer av moduler kan plugins användas för att utföra ett brett spektrum av uppgifter.
+
+Plugins sträcker sig från buntoptimering och minimering, hela vägen till att definiera miljöliknande variabler.
+
+För att kunna använda ett plugin måste du använda `require` och lägga till den till `plugins` arrayn. De flesta plugins kan anpassas via `options`. 
+
+Eftersom du kan använda en plugin flera gånger i en config för olika ändamål måste du skapa en instans av den genom att anropa den med `new`.
+
+**webpack.config.js**
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin') //installed via npm
+const webpack = require('webpack') //to access built-in plugins
+const path = require('path')
+
+const config = {
+    entry: './path/to/my/entry/file.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'my-first-webpack.bundle.js'
+    },
+    module: {
+        rules: [
+            { test: /\.txt$/, use: 'raw-loader' }
+        ]
+    },
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin(),
+        new HtmlWebpackPlugin({template: './src/index.html'})
+    ]
+}
+
+module.exports = config
+```

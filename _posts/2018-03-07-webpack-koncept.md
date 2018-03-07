@@ -62,3 +62,23 @@ På hög nivå har laddare två ändamål i din webpackkonfiguration:
 
 1 `test` egenskapen identifierar vilken fil eller filer som ska transformeras.
 2 `use` egenskapen anger vilken laddare som ska användas för att göra transformationen.
+
+**webpack.config.js**
+```js
+const path = require('path')
+
+const config = {
+    entry: './path/to/my/entry/file.js',
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: 'my-first-webpack.bundle.js'
+    },
+    module: {
+        rules: [
+            { test: /\.txt$/, use: 'raw-loader' }
+        ]
+    }
+}
+
+module.exports = config
+```

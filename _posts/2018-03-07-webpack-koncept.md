@@ -86,4 +86,5 @@ module.exports = config
 Konfigurationen ovan har definierat en `rules` egenskap för en enda modul med två erforderliga egenskaper, `test` och `use`.
 
 Detta berättar för webpacks kompilator följande:
+
 > "Hej webpack-kompilator, när du stöter på en sökväg som löser en ".txt"-fil inuti ett `require()` / import-uttryck, använd raw-loader för att transformera den innan du lägger till den i bunten."

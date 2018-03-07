@@ -128,3 +128,5 @@ const config = {
 
 module.exports = config
 ```
+
+Det finns många plugins som webpack kommer med. Att använda plugins i din webpackkonfiguration är enkelt - men det finns många användarfall som är värda att undersöka ytterligare.

@@ -14,3 +14,5 @@ $ npm install karma --save-dev
 # Install plugins that your project needs:
 $ npm install karma-jasmine karma-chrome-launcher jasmine-core --save-dev
 ```
+
+Detta kommer att installera `karma`, `karma-jasmine`, `karma-chrome-launcher` och `jasmine-core` packet till `node_modules` i din nuvarande arbetsmapp och spara dem som `devDependencies` i `package.json`, så att alla andra utvecklare som arbetar med projektet bara behöver göra `npm install` för att få alla dessa beroenden installerade.

@@ -16,3 +16,16 @@ $ npm install karma-jasmine karma-chrome-launcher jasmine-core --save-dev
 ```
 
 Detta kommer att installera `karma`, `karma-jasmine`, `karma-chrome-launcher` och `jasmine-core` packet till `node_modules` i din nuvarande arbetsmapp och spara dem som `devDependencies` i `package.json`, så att alla andra utvecklare som arbetar med projektet bara behöver göra `npm install` för att få alla dessa beroenden installerade.
+
+```bash
+# Run Karma:
+$ ./node_modules/karma/bin/karma start
+```
+
+Att skriva `./node_modules/karma/bin/karma start` suger så kanske du tycker att det är användbart att installera `karma-cli` globalt. Du måste göra detta om du vill köra Karma på Windows från kommandoraden.
+
+```bash
+$ npm install -g karma-cli
+```
+
+Då kan du köra Karma från var som helst med `karma` och den kommer alltid att köra den lokala versionen.

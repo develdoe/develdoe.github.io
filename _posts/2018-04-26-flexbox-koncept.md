@@ -82,4 +82,7 @@ För att skapa en flexcontainer ställer vi in värdet av områdets containers d
 
 Resultatet av detta är att dina barn föremål kommer alla att rada i rad, med storleken på innehållet som deras storlek i huvudaxeln. Om det finns fler föremål än vad som passar in i behållaren, kommer de inte att slingras men istället överflöda. Om vissa föremål är längre än andra sträcker sig alla objekt längs korsaxeln för att fylla sin fulla storlek.
 
-Du kan se i liveexemplet nedan hur det ser ut. Försök att redigera objekten eller lägga till ytterligare objekt för att testa flexboxens initiala beteende.
+Du kan se i exemplet nedan hur det ser ut.
+
+![]({{site.baseurl}}/img/posts/2018-04-27 08_10_37-Basic concepts of flexbox - CSS_ Cascading Style Sheets _ MDN.png)
+

@@ -97,3 +97,20 @@ I exemplet nedan visas `row-reverse`.
 ![reverse-row.png]({{site.baseurl}}/img/posts/reverse-row.png)
 
 ### Multi-line flex container med flex-wrap
+
+Medan flexbox är en endimensionell modell, är det möjligt att få våra flex-artiklar att slingras på flera linjer. När du gör så, bör du se varje rad som en ny flexbehållare. En eventuell rymdfördelning kommer att sker över den raden, utan hänvisning till raderna på båda sidor.
+
+För att orsaka omslagspraxis lägg till egenskapen flex-wrap med ett värde av wrap. Om dina föremål ska vara för stora för att alla ska visas i en rad, kommer de att sätta på en annan linje.
+
+Exemplet nedan innehåller objekt som har fått en bredd, varans totala bredd är för bred för flexbehållaren. Eftersom flex-wrap är inställd på wrap, används omslagspraxis på de objekt.
+
+Om du istället Ställ använder no-wrap, vilket också är det ursprungliga värdet,  kommer de istället att krympa för att passa containern, eftersom de använder initiala flexboxvärden som gör att objekten kan krympa. nowrap skulle orsaka overflow om objekten inte kunde krympa eller inte kunde krympa tillräckligt liten för att passa.
+
+![2018-04-27 19_56_41-Basic concepts of flexbox - CSS_ Cascading Style Sheets _ MDN.png]({{site.baseurl}}/img/posts/2018-04-27 19_56_41-Basic concepts of flexbox - CSS_ Cascading Style Sheets _ MDN.png)
+
+### Flex-flow 
+
+Du kan kombinera de två egenskaperna flex-direction och flex-wrap med flex-flow. Angivna första värdet är flex-direction och det andra värdet är flex-wrap.
+
+### Egenskaper som används för flex-objekt
+

@@ -86,3 +86,10 @@ Du kan se i exemplet nedan hur det ser ut.
 
 ![]({{site.baseurl}}/img/posts/2018-04-27 08_10_37-Basic concepts of flexbox - CSS_ Cascading Style Sheets _ MDN.png)
 
+#### Ändra flex-riktning
+
+Genom att lägga till flexriktningsegenskapen till flexbehållaren kan vi ändra riktningen på våra flex-föremål. Om man sätter `flex-direction: row-reverse`, kommer föremålen fortsatt att visas på rad,men kommer att börja ifrån motsatt riktning.
+
+Om vi istället ändrar `flex-direction` till `column` så ändras huvudaxeln och  våra föremål visas istället i kolumner. `column-reverse` byter så klart riktning på flödet, precis som med rader. 
+
+I exemplet nedan visas `row-reverse`.

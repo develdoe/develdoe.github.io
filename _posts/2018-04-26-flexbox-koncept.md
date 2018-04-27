@@ -93,3 +93,7 @@ Genom att lägga till flexriktningsegenskapen till flexbehållaren kan vi ändra
 Om vi istället ändrar `flex-direction` till `column` så ändras huvudaxeln och  våra föremål visas istället i kolumner. `column-reverse` byter så klart riktning på flödet, precis som med rader. 
 
 I exemplet nedan visas `row-reverse`.
+
+![reverse-row.png]({{site.baseurl}}/img/posts/reverse-row.png)
+
+### Multi-line flex container med flex-wrap

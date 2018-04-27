@@ -74,6 +74,16 @@ module.exports = merge(common, {
 })
 ```
 *webpack.prod.js*
+```js
+const merge = require('webpackmerge')
+const UglifyJSPlugin = require('uglifyjswebpackplugin')
+const common = require('./webpack.common.js')
+
+module.exports = merge(common, {
+    plugins: [
+        new UglifyJSPlugin()
+    ]
+})
 ```
 
 I webpack.common.js har vi nu vår inställning för `entry` och `output` konfigurerad och vi har inkluderat alla plugins som krävs för båda miljöerna.
@@ -85,3 +95,37 @@ Notera användningen av merge() i de miljöspecifika konfigurationerna för att 
 ### NPM Skripts
 
 Låt oss nu peka våra skript till de nya konfigurationerna. Vi använder development för vår webpack-dev-server, npm start, manus och produktion för vårt npm run build script:
+
+*package.json*
+```js
+  {
+    ...
+    "scripts": {
+     "start": "webpack-dev-server --open",
+     "start": "webpack-dev-server --open --config webpack.dev.js",
+     "build": "webpack"
+     "build": "webpack --config webpack.prod.js"
+    },
+    ...
+```
+
+### Källkartning
+
+Vi uppmuntrar dig att ha källkartor aktiverade i produktion, eftersom de är användbara för debugging och kör benchmarktest. Med det sagt bör du välja en med en ganska snabb bygghastighet som rekommenderas för produktionsanvändning. För den här guiden använder vi alternativet `source-map` i motsats till  `inline-source-map` vi använde under utveckling:
+
+*webpack.prod.js*
+```js
+const merge = require('webpackmerge')
+const UglifyJSPlugin = require('uglifyjswebpackplugin')
+const common = require('./webpack.common.js')
+
+module.exports = merge(common, {
+    devtool: 'sourcemap',
+    plugins: [
+        new UglifyJSPlugin()
+        new UglifyJSPlugin({
+            sourceMap: true
+        })
+    ]
+})
+```

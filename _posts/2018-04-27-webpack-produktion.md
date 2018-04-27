@@ -78,8 +78,6 @@ module.exports = merge(common, {
 
 I webpack.common.js har vi nu vår inställning för `entry` och `output` konfigurerad och vi har inkluderat alla plugins som krävs för båda miljöerna.
 
-I webpack.dev.js har vi lagt till den rekommenderade `devtool` för den miljön (stark källkartläggning), liksom vår enkla devServer-konfiguration.
+I webpack.dev.js har vi lagt till den rekommenderade `devtool` för den miljön (stark källkartläggning), liksom vår enkla devServer-konfiguration. Slutligen, i webpack.prod.js, inkluderade vi UglifyJSPlugin som minifierar  JavaScript.
 
-Slutligen, i webpack.prod.js, inkluderade vi UglifyJSPlugin som minifierar  JavaScript.
-
-Notera användningen av merge() i de miljöspecifika konfigurationerna för att enkelt inkludera vår gemensamma konfiguration i dev och prod.
+Notera användningen av merge() i de miljöspecifika konfigurationerna för att enkelt inkludera vår gemensamma konfiguration i dev och prod. Webpack-merge erbjuder en rad avancerade funktioner för sammanslagning men för vårt användningsområde behöver vi inte något av det.

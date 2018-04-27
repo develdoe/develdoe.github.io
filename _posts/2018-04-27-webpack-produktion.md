@@ -81,3 +81,7 @@ I webpack.common.js har vi nu vår inställning för `entry` och `output` konfig
 I webpack.dev.js har vi lagt till den rekommenderade `devtool` för den miljön (stark källkartläggning), liksom vår enkla devServer-konfiguration. Slutligen, i webpack.prod.js, inkluderade vi UglifyJSPlugin som minifierar  JavaScript.
 
 Notera användningen av merge() i de miljöspecifika konfigurationerna för att enkelt inkludera vår gemensamma konfiguration i dev och prod. Webpack-merge erbjuder en rad avancerade funktioner för sammanslagning men för vårt användningsområde behöver vi inte något av det.
+
+### NPM Skripts
+
+Låt oss nu peka våra skript till de nya konfigurationerna. Vi använder development för vår webpack-dev-server, npm start, manus och produktion för vårt npm run build script:

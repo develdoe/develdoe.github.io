@@ -37,7 +37,7 @@ webpack-demo
   |- /node_modules
 ```
 *webpack.common.js*
-```
+```js
 const path = require('path')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -59,7 +59,7 @@ module.exports = {
 }
 ```
 *webpack.dev.js*
-```
+```js
 const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
 
@@ -129,3 +129,27 @@ module.exports = merge(common, {
     ]
 })
 ```
+> Undervik `inline-***` och `eval-***` i produktion eftersom de ökar storleken och reducerar prestandan.
+
+### Ange miljö
+
+Många bibliotek tar nykeln `process.env.NODE_ENV` för att bestämma vad som ska inkluderas i biblioteket. Till exempel, när det inte är i produktion, kan vissa bibliotek lägga till ytterligare loggning och testning för att göra felsökning enklare. Men med `process.env.NODE_ENV == 'production'` kan de släppa eller lägga till betydande delar av koden för att optimera hur sakerna körs för dina faktiska användare. Vi kan använda webpacks inbyggda DefinePlugin för att definiera denna variabel för alla våra beroendeområden:
+
+*webpack.prod.js*
+```js
+const merge = require('webpackmerge')
+const UglifyJSPlugin = require('uglifyjswebpackplugin')
+const common = require('./webpack.common.js')
+
+module.exports = merge(common, {
+    plugins: [
+        new UglifyJSPlugin()
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        })
+    ]
+})
+```
+
+Tekniskt sett är `NODE_ENV` en systemmiljövariabel som Node.js utsätts för i löpande skript. Det används enligt konventionen för att bestämma dev-vs-prod-beteendet av serverns verktyg, skript bygg och klientsidebibliotek. I motsats till förväntningarna sätts inte `process.env.NODE_ENV` inom bygg skritet `webpack.config.js
+

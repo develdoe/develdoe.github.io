@@ -69,3 +69,14 @@ Efter ett tag blir tanken om start och slut i stället för vänster och höger 
 ---
 
 ### Flexbehållaren
+
+Ett område av ett dokument som läggs ut med flexbox kallas en flexcontainer. 
+
+För att skapa en flexcontainer ställer vi in värdet av områdets containers displayegenskap till flex eller inline-flex. Så snart vi gör det blir de direkta barnen i den containern, flexiga saker. Som med alla egenskaper i CSS definieras några initialvärden, så när man skapar en flexbehållare uppträder alla inbyggda flexobjekt på följande sätt:
+
+* Objekten visas i en rad (flex-riktningen initialvärde är rad).
+* Barn föremålen startar från huvudaxelns startkant.
+* Föremålen sträcker sig inte på huvuddimensionen, men kan krympa.
+* Föremålen sträcker sig för att fylla storleken på korsaxeln.
+* Flex-basegenskapen är inställd på auto.
+* Flex-wrap-egenskapen är inställd på nowrap.
